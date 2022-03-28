@@ -1,4 +1,4 @@
-package com.oldautumn.movie.data
+package com.oldautumn.movie.data.auth
 
 import com.oldautumn.movie.data.api.TraktApiService
 import com.oldautumn.movie.data.api.model.DeviceCode

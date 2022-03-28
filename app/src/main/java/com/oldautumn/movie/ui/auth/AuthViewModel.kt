@@ -2,7 +2,7 @@ package com.oldautumn.movie.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oldautumn.movie.data.AuthRepository
+import com.oldautumn.movie.data.auth.AuthRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

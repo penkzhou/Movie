@@ -2,13 +2,12 @@ package com.oldautumn.movie.ui.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oldautumn.movie.data.AuthRepository
+import com.oldautumn.movie.data.auth.AuthRepository
 import com.oldautumn.movie.data.api.model.DeviceCode
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.IOException
 

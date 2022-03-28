@@ -15,4 +15,11 @@ interface TmdbApiService {
         @Path("movie_id") movieId: Int,
         @Query("api_key") appKey: String = defaultAppKey
     ): TmdbImageModel
+
+
+    @GET("/3/tv/{tv_id}/images")
+    suspend fun fetchTvImageList(
+        @Path("tv_id") tvId: Int,
+        @Query("api_key") appKey: String = defaultAppKey
+    ): TmdbImageModel
 }

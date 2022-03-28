@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import com.oldautumn.movie.data.MovieRemoteDataSource
-import com.oldautumn.movie.data.MovieRepository
 import com.oldautumn.movie.data.api.ApiProvider
+import com.oldautumn.movie.data.media.MovieRemoteDataSource
+import com.oldautumn.movie.data.media.MovieRepository
 import com.oldautumn.movie.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 
@@ -39,13 +39,24 @@ class HomeFragment : Fragment() {
 
         val trendingListView: RecyclerView = binding.movieTrendingList
         val popularListView: RecyclerView = binding.moviePopularList
-        val trendingAdapter = MovieTrendingAdapter(mutableListOf())
+        val showTrendingListView: RecyclerView = binding.showTrendingList
+        val showPopularListView: RecyclerView = binding.showPopularList
+        val trendingAdapter = TrendingAdapter(mutableListOf())
+        val showTrendingAdapter = ShowTrendingAdapter(mutableListOf())
         val popularAdapter = MoviePopularAdapter(mutableListOf())
-        trendingListView.layoutManager = LinearLayoutManager(context)
+        val showPopularAdapter = MoviePopularAdapter(mutableListOf())
+        trendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         popularListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
+        showTrendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
+        showPopularListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         trendingListView.adapter = trendingAdapter
         popularListView.adapter = popularAdapter
+        showTrendingListView.adapter = showTrendingAdapter
+        showPopularListView.adapter = showPopularAdapter
         viewModel.fetchMovieData()
+        viewModel.fetchPopularMovie()
+        viewModel.fetchPopularShow()
+        viewModel.fetchTrendingShow()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
@@ -57,11 +68,17 @@ class HomeFragment : Fragment() {
                             BaseTransientBottomBar.LENGTH_SHORT
                         )
                     } else {
-                        if (uiState.trendingList.isNotEmpty()) {
-                            trendingAdapter.updateData(uiState.trendingList)
+                        if (uiState.trendingMovieList.isNotEmpty()) {
+                            trendingAdapter.updateData(uiState.trendingMovieList)
                         }
-                        if (uiState.popularList.isNotEmpty()) {
-                            popularAdapter.updateData(uiState.popularList)
+                        if (uiState.popularMovieList.isNotEmpty()) {
+                            popularAdapter.updateData(uiState.popularMovieList)
+                        }
+                        if (uiState.trendingShowList.isNotEmpty()) {
+                            showTrendingAdapter.updateData(uiState.trendingShowList)
+                        }
+                        if (uiState.popularShowList.isNotEmpty()) {
+                            showPopularAdapter.updateData(uiState.popularShowList)
                         }
                     }
 

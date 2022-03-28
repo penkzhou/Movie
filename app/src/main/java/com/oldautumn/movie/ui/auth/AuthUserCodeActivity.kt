@@ -9,12 +9,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.AuthLocalDataSource
-import com.oldautumn.movie.data.AuthRemoteDataSource
-import com.oldautumn.movie.data.AuthRepository
+import com.oldautumn.movie.data.auth.AuthLocalDataSource
+import com.oldautumn.movie.data.auth.AuthRemoteDataSource
+import com.oldautumn.movie.data.auth.AuthRepository
 import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.api.model.DeviceCode
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 

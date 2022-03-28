@@ -1,4 +1,4 @@
-package com.oldautumn.movie.data
+package com.oldautumn.movie.data.auth
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit

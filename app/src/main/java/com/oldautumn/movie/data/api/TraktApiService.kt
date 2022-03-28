@@ -1,9 +1,6 @@
 package com.oldautumn.movie.data.api
 
-import com.oldautumn.movie.data.api.model.DeviceCode
-import com.oldautumn.movie.data.api.model.DeviceToken
-import com.oldautumn.movie.data.api.model.Movie
-import com.oldautumn.movie.data.api.model.MovieTrendingItem
+import com.oldautumn.movie.data.api.model.*
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -28,6 +25,10 @@ interface TraktApiService {
     suspend fun fetchTrendingMovieList():List<MovieTrendingItem>
 
 
+    @GET("/shows/trending")
+    suspend fun fetchTrendingShowList():List<ShowTrendingItem>
+
+
 
     @GET("/movies/watched/weekly")
     suspend fun fetchWeeklyWatchedMovieList():List<MovieTrendingItem>
@@ -36,6 +37,10 @@ interface TraktApiService {
 
     @GET("/movies/popular")
     suspend fun fetchPopularMovieList():List<Movie>
+
+
+    @GET("/shows/popular")
+    suspend fun fetchPopularShowList():List<Movie>
 
 
 
