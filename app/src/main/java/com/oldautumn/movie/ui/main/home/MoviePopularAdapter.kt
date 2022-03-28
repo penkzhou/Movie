@@ -1,0 +1,51 @@
+package com.oldautumn.movie.ui.main.home
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.RoundedCornersTransformation
+import com.oldautumn.movie.R
+import com.oldautumn.movie.data.api.model.MovieWithImage
+import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
+
+class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>) :
+    RecyclerView.Adapter<MoviePopularAdapter.PopularViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
+
+        val rootView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_popular_movie, parent, false)
+        return PopularViewHolder(rootView)
+    }
+
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
+        if (position < 0 || position >= popularList.size) {
+            return
+        }
+        val movieTrendingItem = popularList[position]
+        holder.updateViewWithItem(movieTrendingItem)
+    }
+
+    fun updateData(newPopularList: List<MovieWithImage>) {
+        popularList.clear()
+        popularList.addAll(newPopularList)
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int {
+        return popularList.size
+    }
+
+    class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
+
+        fun updateViewWithItem(movieWithImage: MovieWithImage) {
+            moviePoster.load("https://image.tmdb.org/t/p/w500/${movieWithImage.image.posters[0].file_path}"){
+                transformations(RoundedCornersTransformation(16f))
+            }
+        }
+    }
+}
