@@ -35,6 +35,7 @@ class SplashActivity : AppCompatActivity() {
                     if (uiState.isAuthed) {
                         val intent = Intent(this@SplashActivity, IndexActivity::class.java)
                         startActivity(intent)
+                        finish()
                     } else if (uiState.deviceCode.user_code.isNotEmpty()) {
                         // 开始走授权流程，通过拿到的usercode 开始
                         val intent = Intent(this@SplashActivity, AuthUserCodeActivity::class.java)

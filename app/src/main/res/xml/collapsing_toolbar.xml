@@ -20,6 +20,7 @@
             <CustomAttribute
                 app:attributeName="imageAlpha"
                 app:customIntegerValue="255" />
+
         </Constraint>
         <Constraint
             android:id="@id/title"
