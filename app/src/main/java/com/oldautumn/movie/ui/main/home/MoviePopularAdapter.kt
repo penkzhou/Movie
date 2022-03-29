@@ -8,17 +8,27 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.oldautumn.movie.MovieUtils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.MovieWithImage
 import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
 
-class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>) :
+class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>,private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<MoviePopularAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
 
         val rootView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_popular_movie, parent, false)
-        return PopularViewHolder(rootView)
+
+        val holder = PopularViewHolder(rootView)
+        rootView.setOnClickListener {
+            val position = holder.adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val movie = popularList[position]
+                onItemClickListener.onItemClick(movie)
+            }
+        }
+        return holder
     }
 
     override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
@@ -39,11 +49,16 @@ class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>) 
         return popularList.size
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(movie: MovieWithImage)
+    }
+
     class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
 
         fun updateViewWithItem(movieWithImage: MovieWithImage) {
-            moviePoster.load("https://image.tmdb.org/t/p/w500/${movieWithImage.image.posters[0].file_path}"){
+            moviePoster.load(MovieUtils.getMoviePosterUrl(movieWithImage.image.posters[0].file_path)){
+                placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }
         }

@@ -1,8 +1,6 @@
 package com.oldautumn.movie.data.media
 
-import com.oldautumn.movie.data.api.model.MovieWithImage
-import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
-import com.oldautumn.movie.data.api.model.UnifyShowTrendingItem
+import com.oldautumn.movie.data.api.model.*
 
 class MovieRepository(
     private val remoteDataSource: MovieRemoteDataSource
@@ -35,13 +33,28 @@ class MovieRepository(
     }
 
 
-
     suspend fun getPopularShowList(): List<MovieWithImage> {
         val movieTrendingList = remoteDataSource.fetchPopularShowList()
         return movieTrendingList.map { it ->
             MovieWithImage(it, remoteDataSource.getTvImage(it.ids.tmdb))
         }
 
+    }
+
+    suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail {
+        return remoteDataSource.getMovieDetail(movieId)
+    }
+
+    suspend fun getShowDetail(showId: Int): TmdbTvDetail {
+        return remoteDataSource.getTvDetail(showId)
+    }
+
+    suspend fun getMovieCredits(movieId: Int): TmdbCreditList {
+        return remoteDataSource.getMovieCast(movieId)
+    }
+
+    suspend fun getShowCredits(showId: Int): TmdbCreditList {
+        return remoteDataSource.getTvCast(showId)
     }
 
 }

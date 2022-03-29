@@ -2,10 +2,7 @@ package com.oldautumn.movie.data.media
 
 import com.oldautumn.movie.data.api.TmdbApiService
 import com.oldautumn.movie.data.api.TraktApiService
-import com.oldautumn.movie.data.api.model.Movie
-import com.oldautumn.movie.data.api.model.MovieTrendingItem
-import com.oldautumn.movie.data.api.model.ShowTrendingItem
-import com.oldautumn.movie.data.api.model.TmdbImageModel
+import com.oldautumn.movie.data.api.model.*
 
 
 class MovieRemoteDataSource(
@@ -37,5 +34,16 @@ class MovieRemoteDataSource(
     suspend fun getTvImage(tvId:Int): TmdbImageModel =
         tmdbApiService.fetchTvImageList(tvId)
 
+    suspend fun getMovieDetail(movieId:Int): TmdbMovieDetail =
+        tmdbApiService.fetchMovieDetail(movieId)
+
+    suspend fun getTvDetail(tvId:Int): TmdbTvDetail =
+        tmdbApiService.fetchTvDetail(tvId)
+
+    suspend fun getMovieCast(movieId:Int): TmdbCreditList =
+        tmdbApiService.fetchMovieCredit(movieId)
+
+    suspend fun getTvCast(tvId:Int): TmdbCreditList =
+        tmdbApiService.fetchTvCredit(tvId)
 
 }
