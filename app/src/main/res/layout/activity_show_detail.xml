@@ -13,7 +13,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backdrop">
 
-
         <TextView
             android:id="@+id/movie_overview"
             android:layout_width="wrap_content"
@@ -28,13 +27,13 @@
         android:id="@+id/backdrop"
         android:layout_width="0dp"
         android:layout_height="240dp"
+        android:adjustViewBounds="true"
         android:fitsSystemWindows="true"
-        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@android:id/home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

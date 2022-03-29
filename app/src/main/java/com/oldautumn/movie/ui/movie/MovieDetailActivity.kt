@@ -1,12 +1,10 @@
 package com.oldautumn.movie.ui.movie
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import coil.load
 import com.oldautumn.movie.MovieUtils
-import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.media.MovieRemoteDataSource
 import com.oldautumn.movie.data.media.MovieRepository
@@ -27,11 +25,6 @@ class MovieDetailActivity : AppCompatActivity() {
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(findViewById(R.id.toolbar))
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val movieId = intent.getIntExtra("movieId", 0)
         if (movieId == 0) {
             finish()
@@ -47,7 +40,8 @@ class MovieDetailActivity : AppCompatActivity() {
                                 it.movieDetail.backdrop_path ?: ""
                             )
                         )
-                        binding.toolbarLayout.title = it.movieDetail.title
+                        binding.title.text = it.movieDetail.title
+                        binding.movieOverview.text = it.movieDetail.overview
 
                     }
 

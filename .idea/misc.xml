@@ -3,16 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../.gradle/caches/transforms-3/d2be0a07ac682004ffbddd9c163a1cf7/transformed/appcompat-1.4.1/res/drawable/abc_ic_ab_back_material.xml" value="0.215" />
         <entry key="../../../../../layout/custom_preview.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/drawable/bg_auth_btn.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/activity_auth_user_code.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/layout/activity_index.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_movie_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_show_detail.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/item_popular_movie.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/item_trending_movie.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/xml/collapsing_toolbar.xml" value="0.2078125" />
       </map>
     </option>
   </component>

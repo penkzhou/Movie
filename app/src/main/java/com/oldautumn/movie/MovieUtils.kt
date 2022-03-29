@@ -8,6 +8,6 @@ object MovieUtils {
 
     fun getMovieBackdropUrl(movieImagePath: String): String {
         //https://image.tmdb.org/t/p/w500/${movieWithImage.image.backdrops[0].file_path}"
-        return "https://image.tmdb.org/t/p/w1440$movieImagePath"
+        return "https://image.tmdb.org/t/p/w500$movieImagePath"
     }
 }
