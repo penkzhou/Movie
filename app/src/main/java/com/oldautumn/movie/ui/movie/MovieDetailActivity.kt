@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.google.android.material.chip.Chip
 import com.oldautumn.movie.MovieUtils
+import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
 import com.oldautumn.movie.data.media.MovieRemoteDataSource
@@ -33,6 +35,9 @@ class MovieDetailActivity : AppCompatActivity() {
 
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.home.setOnClickListener {
+            finish()
+        }
 
         val movieId = intent.getIntExtra("movieId", 0)
         if (movieId == 0) {
@@ -104,6 +109,17 @@ class MovieDetailActivity : AppCompatActivity() {
                         if (movieSlug.isBlank()) {
                             viewModel.fetchTraktMovieDetail(it.movieDetail.imdb_id ?: "")
                         }
+                        if (it.movieDetail.genres.isNotEmpty()) {
+                            binding.movieGenre.removeAllViews()
+                            it.movieDetail.genres.forEach() {
+                                binding.movieGenre.addView(
+                                    Chip(this@MovieDetailActivity).apply {
+                                        text = it.name
+                                        setChipBackgroundColorResource(R.color.purple_200);
+                                    }
+                                )
+                            }
+                        }
 
                         binding.movieReleaseValue.text = it.movieDetail.release_date
                         binding.movieLengthValue.text = "${it.movieDetail.runtime}m"
@@ -121,7 +137,7 @@ class MovieDetailActivity : AppCompatActivity() {
                     if (it.traktMovieDetail != null) {
                         binding.movieCertificateValue.text = it.traktMovieDetail.certification
                         binding.movieTraktRatingValue.text =
-                            "${DecimalFormat("##.##%").format(it.traktMovieDetail.rating)}\n${it.traktMovieDetail.votes}人评分"
+                            "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}\n${it.traktMovieDetail.votes}人评分"
                     }
 
                     if (it.recommendMovieList != null) {

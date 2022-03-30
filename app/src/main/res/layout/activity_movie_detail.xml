@@ -173,6 +173,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/movie_overview_title" />
 
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/movie_genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
+
 
             <TextView
                 android:id="@+id/movie_cast_title"
@@ -183,7 +190,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
+                app:layout_constraintTop_toBottomOf="@+id/movie_genre" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movie_cast_list"
