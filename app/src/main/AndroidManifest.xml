@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Movie">
         <activity
             android:name=".ui.movie.TraktReviewActivity"
+            android:theme="@style/Theme.Movie.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".ui.movie.MovieDetailActivity"

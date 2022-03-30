@@ -23,6 +23,9 @@ class TraktReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTraktReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         val traktMovieId = intent.getStringExtra("traktMovieId") ?: ""
         val adapter = MovieTraktReviewAdapter(mutableListOf(), null)
         binding.reviewList.layoutManager =
@@ -38,6 +41,11 @@ class TraktReviewActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 
