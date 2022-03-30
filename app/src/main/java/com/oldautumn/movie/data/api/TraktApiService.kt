@@ -42,4 +42,11 @@ interface TraktApiService {
     suspend fun fetchTraktMovieDetail(@Path("movie_id") movieId: String): TraktMovieDetail
 
 
+    @GET("movies/{movie_id}/comments/{sort_type}")
+    suspend fun fetchTraktMovieReviewList(
+        @Path("movie_id") movieId: String,
+        @Path("sort_type") sortType: String
+    ): List<TraktReview>
+
+
 }

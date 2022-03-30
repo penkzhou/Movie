@@ -70,4 +70,8 @@ class MovieRepository(
         return remoteDataSource.getSimilarMovieList(movieId)
     }
 
+    suspend fun getTraktReviewList(traktMovieId: String, sortType: String): List<TraktReview> {
+        return remoteDataSource.getTraktReviewList(traktMovieId, sortType)
+    }
+
 }

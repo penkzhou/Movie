@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/review_reply_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_comment_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/review_reply_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/review_reply_icon"
+        app:layout_constraintRight_toRightOf="@+id/review_reply_icon"
+        app:layout_constraintTop_toBottomOf="@+id/review_reply_icon"
+        tools:text="23" />
+
+
+    <TextView
+        android:id="@+id/review_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/review_reply_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="这是一条测试的评论" />
+
+    <TextView
+        android:id="@+id/review_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_avatar"
+        android:drawablePadding="4dp"
+        android:textAlignment="center"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@+id/review_content"
+        app:layout_constraintTop_toBottomOf="@+id/review_content"
+        tools:text="刘德华" />
+
+
+    <TextView
+        android:id="@+id/review_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:drawableLeft="@drawable/ic_thumb_up"
+        android:drawablePadding="4dp"
+        android:textAlignment="center"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/review_author"
+        app:layout_constraintTop_toBottomOf="@+id/review_content"
+        tools:text="12" />
+
+
+    <TextView
+        android:id="@+id/review_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:drawablePadding="4dp"
+        android:textAlignment="center"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/review_like"
+        app:layout_constraintTop_toBottomOf="@+id/review_content"
+        tools:text="12" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

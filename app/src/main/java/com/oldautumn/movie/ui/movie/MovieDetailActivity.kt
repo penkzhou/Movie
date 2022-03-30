@@ -139,9 +139,15 @@ class MovieDetailActivity : AppCompatActivity() {
                         crewAdapter.updateData(it.movieCreditList.crew ?: mutableListOf())
                     }
                     if (it.traktMovieDetail != null) {
+                        val traktMovieIds = it.traktMovieDetail.ids.trakt
                         binding.movieCertificateValue.text = it.traktMovieDetail.certification
                         binding.movieTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}\n${it.traktMovieDetail.votes}人评分"
+                        binding.movieTraktRatingValue.setOnClickListener {
+                            val intent = Intent(this@MovieDetailActivity, TraktReviewActivity::class.java)
+                            intent.putExtra("traktMovieId", traktMovieIds.toString())
+                            startActivity(intent)
+                        }
                     }
 
                     if (it.recommendMovieList != null) {

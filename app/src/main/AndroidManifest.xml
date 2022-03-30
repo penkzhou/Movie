@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Movie">
         <activity
+            android:name=".ui.movie.TraktReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.movie.MovieDetailActivity"
             android:exported="false"
             android:label="@string/title_activity_movie_detail"
