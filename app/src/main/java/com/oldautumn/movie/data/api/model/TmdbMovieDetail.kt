@@ -112,7 +112,7 @@ data class TmdbMovieDetail(
     val production_companies: List<Company>,
     val production_countries: List<Country>,
     val release_date: String,
-    val revenue: Int,
+    val revenue: Long,
     val runtime: Int?,
     val spoken_languages: List<SpokenLanguage>,
     val status: String,

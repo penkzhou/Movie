@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
 import com.oldautumn.movie.MovieUtils
 import com.oldautumn.movie.R
@@ -16,6 +17,7 @@ import com.oldautumn.movie.data.media.MovieRepository
 import com.oldautumn.movie.databinding.ActivityMovieDetailBinding
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -105,7 +107,9 @@ class MovieDetailActivity : AppCompatActivity() {
                             MovieUtils.getMoviePosterUrl(
                                 it.movieDetail.poster_path ?: ""
                             )
-                        )
+                        ){
+                            transformations(RoundedCornersTransformation(12f))
+                        }
                         if (movieSlug.isBlank()) {
                             viewModel.fetchTraktMovieDetail(it.movieDetail.imdb_id ?: "")
                         }
@@ -120,7 +124,7 @@ class MovieDetailActivity : AppCompatActivity() {
                                 )
                             }
                         }
-
+                        binding.movieRevenueValue.text = "$${NumberFormat.getIntegerInstance().format(it.movieDetail.revenue)}"
                         binding.movieReleaseValue.text = it.movieDetail.release_date
                         binding.movieLengthValue.text = "${it.movieDetail.runtime}m"
                         binding.movieStatusValue.text = it.movieDetail.status
