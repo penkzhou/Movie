@@ -57,4 +57,17 @@ class MovieRepository(
         return remoteDataSource.getTvCast(showId)
     }
 
+
+    suspend fun getTraktMovieDetail(movieSlug: String): TraktMovieDetail {
+        return remoteDataSource.getTraktMovieDetail(movieSlug)
+    }
+
+    suspend fun getRecommendMovieList(movieId: Int): TmdbSimpleMovieListModel {
+        return remoteDataSource.getRecommendMovieList(movieId)
+    }
+
+    suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleMovieListModel {
+        return remoteDataSource.getSimilarMovieList(movieId)
+    }
+
 }

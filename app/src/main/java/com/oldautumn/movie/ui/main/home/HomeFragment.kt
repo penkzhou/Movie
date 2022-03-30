@@ -48,20 +48,23 @@ class HomeFragment : Fragment() {
         val showPopularListView: RecyclerView = binding.showPopularList
         val trendingAdapter = TrendingAdapter(mutableListOf())
         val showTrendingAdapter = ShowTrendingAdapter(mutableListOf())
-        val popularAdapter = MoviePopularAdapter(mutableListOf(),object : MoviePopularAdapter.OnItemClickListener{
-            override fun onItemClick(movie: MovieWithImage) {
-                val intent = Intent(context, MovieDetailActivity::class.java)
-                intent.putExtra("movieId",movie.content.ids.tmdb)
-                startActivity(intent)
-            }
-        })
-        val showPopularAdapter = MoviePopularAdapter(mutableListOf(),object : MoviePopularAdapter.OnItemClickListener{
-            override fun onItemClick(movie: MovieWithImage) {
-                val intent = Intent(context, MovieDetailActivity::class.java)
-                intent.putExtra("movieId",movie.content.ids.tmdb)
-                startActivity(intent)
-            }
-        })
+        val popularAdapter =
+            MoviePopularAdapter(mutableListOf(), object : MoviePopularAdapter.OnItemClickListener {
+                override fun onItemClick(movie: MovieWithImage) {
+                    val intent = Intent(context, MovieDetailActivity::class.java)
+                    intent.putExtra("movieId", movie.content.ids.tmdb)
+                    intent.putExtra("movieSlug", movie.content.ids.slug)
+                    startActivity(intent)
+                }
+            })
+        val showPopularAdapter =
+            MoviePopularAdapter(mutableListOf(), object : MoviePopularAdapter.OnItemClickListener {
+                override fun onItemClick(movie: MovieWithImage) {
+                    val intent = Intent(context, MovieDetailActivity::class.java)
+                    intent.putExtra("movieId", movie.content.ids.tmdb)
+                    startActivity(intent)
+                }
+            })
         trendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         popularListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         showTrendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)

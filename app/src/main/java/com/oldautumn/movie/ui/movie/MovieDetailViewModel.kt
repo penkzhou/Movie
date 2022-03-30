@@ -24,6 +24,9 @@ class MovieDetailViewModel(
 
     private var fetchMovieDetailJob: Job? = null
     private var fetchMovieCreditJob: Job? = null
+    private var fetchTraktMovieDetailJob: Job? = null
+    private var fetchRecommendMovieListJob: Job? = null
+    private var fetchSimilarMovieListJob: Job? = null
 
     fun fetchMovieDetail(movieId: Int) {
         fetchMovieDetailJob?.cancel();
@@ -53,6 +56,49 @@ class MovieDetailViewModel(
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
 
+        }
+    }
+
+    fun fetchTraktMovieDetail(movieSlug: String) {
+        fetchTraktMovieDetailJob?.cancel()
+        fetchTraktMovieDetailJob = viewModelScope.launch {
+            try {
+                val traktMovieDetail = repository.getTraktMovieDetail(movieSlug)
+                _uiState.value = _uiState.value.copy(traktMovieDetail = traktMovieDetail)
+            } catch (e: IOException) {
+                _uiState.value = _uiState.value.copy(errorMessage = e.message)
+            } catch (hoe: HttpException) {
+                _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
+            }
+
+        }
+    }
+
+    fun fetchRecommendMovieList(movieId: Int){
+        fetchRecommendMovieListJob?.cancel()
+        fetchRecommendMovieListJob = viewModelScope.launch {
+            try {
+                val recommendMovieList = repository.getRecommendMovieList(movieId)
+                _uiState.value = _uiState.value.copy(recommendMovieList = recommendMovieList)
+            } catch (e: IOException) {
+                _uiState.value = _uiState.value.copy(errorMessage = e.message)
+            } catch (hoe: HttpException) {
+                _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
+            }
+        }
+    }
+
+    fun fetchSimilarMovieList(movieId: Int){
+        fetchSimilarMovieListJob?.cancel()
+        fetchSimilarMovieListJob = viewModelScope.launch {
+            try {
+                val similarMovieList = repository.getSimilarMovieList(movieId)
+                _uiState.value = _uiState.value.copy(similarMovieList = similarMovieList)
+            } catch (e: IOException) {
+                _uiState.value = _uiState.value.copy(errorMessage = e.message)
+            } catch (hoe: HttpException) {
+                _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
+            }
         }
     }
 

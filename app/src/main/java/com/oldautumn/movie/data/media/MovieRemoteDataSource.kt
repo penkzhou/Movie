@@ -13,7 +13,6 @@ class MovieRemoteDataSource(
         traktApiService.fetchTrendingMovieList()
 
 
-
     suspend fun getTrendingShowList(): List<ShowTrendingItem> =
         traktApiService.fetchTrendingShowList()
 
@@ -22,28 +21,37 @@ class MovieRemoteDataSource(
         traktApiService.fetchPopularShowList()
 
 
-
     suspend fun fetchPopularMovieList(): List<Movie> =
         traktApiService.fetchPopularMovieList()
 
 
-    suspend fun getMovieImage(movieId:Int): TmdbImageModel =
+    suspend fun getMovieImage(movieId: Int): TmdbImageModel =
         tmdbApiService.fetchMovieImageList(movieId)
 
 
-    suspend fun getTvImage(tvId:Int): TmdbImageModel =
+    suspend fun getTvImage(tvId: Int): TmdbImageModel =
         tmdbApiService.fetchTvImageList(tvId)
 
-    suspend fun getMovieDetail(movieId:Int): TmdbMovieDetail =
+    suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail =
         tmdbApiService.fetchMovieDetail(movieId)
 
-    suspend fun getTvDetail(tvId:Int): TmdbTvDetail =
+    suspend fun getTvDetail(tvId: Int): TmdbTvDetail =
         tmdbApiService.fetchTvDetail(tvId)
 
-    suspend fun getMovieCast(movieId:Int): TmdbCreditList =
+    suspend fun getMovieCast(movieId: Int): TmdbCreditList =
         tmdbApiService.fetchMovieCredit(movieId)
 
-    suspend fun getTvCast(tvId:Int): TmdbCreditList =
+    suspend fun getTvCast(tvId: Int): TmdbCreditList =
         tmdbApiService.fetchTvCredit(tvId)
+
+
+    suspend fun getTraktMovieDetail(movieSlug: String): TraktMovieDetail =
+        traktApiService.fetchTraktMovieDetail(movieSlug)
+
+    suspend fun getRecommendMovieList(movieId: Int): TmdbSimpleMovieListModel =
+        tmdbApiService.fetchRecommendMovieList(movieId)
+
+    suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleMovieListModel =
+        tmdbApiService.fetchSimilarMovieList(movieId)
 
 }
