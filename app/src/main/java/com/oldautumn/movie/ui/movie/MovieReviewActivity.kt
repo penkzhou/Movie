@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TraktReview
 import com.oldautumn.movie.databinding.ActivityTraktReviewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+
+@AndroidEntryPoint
 class MovieReviewActivity : AppCompatActivity() {
 
 
@@ -29,9 +32,6 @@ class MovieReviewActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        val traktMovieId = intent.getStringExtra("traktMovieId") ?: ""
-        val traktMovieTitle = intent.getStringExtra("traktMovieTitle") ?: ""
-        supportActionBar?.title = traktMovieTitle
         binding.reviewList.layoutManager =
             LinearLayoutManager(this)
 
@@ -45,6 +45,15 @@ class MovieReviewActivity : AppCompatActivity() {
             pagingData = viewModel.pagingDataFlow,
             uiActions = viewModel.accept
         )
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect {
+                    if (!it.title.isNullOrEmpty()) {
+                        supportActionBar?.title = it.title
+                    }
+                }
+            }
+        }
     }
 
     private fun ActivityTraktReviewBinding.bindState(
@@ -53,7 +62,9 @@ class MovieReviewActivity : AppCompatActivity() {
         uiActions: (MovieReviewViewModel.UiAction) -> Unit
     ) {
         val reviewAdapter = MovieTraktReviewPageAdapter()
-        binding.reviewList.adapter = reviewAdapter
+        binding.reviewList.adapter = reviewAdapter.withLoadStateFooter(
+            MovieTraktReviewPageAdapter.ReviewLoadStateAdapter { reviewAdapter.retry() }
+        )
 
         binding.reviewSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -76,10 +87,6 @@ class MovieReviewActivity : AppCompatActivity() {
             pagingData.collectLatest(reviewAdapter::submitData)
         }
     }
-    private fun ActivityTraktReviewBinding.bindList(){
-
-    }
-
 
 
     override fun onSupportNavigateUp(): Boolean {

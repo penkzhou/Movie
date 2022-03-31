@@ -1,6 +1,7 @@
 package com.oldautumn.movie.data.api
 
 import com.oldautumn.movie.data.api.model.*
+import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -65,5 +66,6 @@ interface TmdbApiService {
         @Query("api_key") appKey: String = "1fb9e261bd10339f78c0737494452323",
         @Query("page") page: Int = 1
     ): TmdbSimpleMovieListModel
+
 
 }

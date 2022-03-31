@@ -6,11 +6,13 @@ import com.oldautumn.movie.data.api.TraktApiService
 import com.oldautumn.movie.data.api.model.TraktReview
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
+import javax.inject.Named
 
 class TraktReviewPagingSource(
-    private val traktApiService: TraktApiService,
+    val traktApiService: TraktApiService,
     val query: String,
-    val sortType:String
+    val sortType: String
 ) : PagingSource<Int, TraktReview>() {
     override fun getRefreshKey(state: PagingState<Int, TraktReview>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -23,11 +25,16 @@ class TraktReviewPagingSource(
         try {
             // Start refresh at page 1 if undefined.
             val nextPageNumber = params.key ?: 1
-            val response = traktApiService.fetchTraktMovieReviewList(query, nextPageNumber,sortType, params.loadSize)
+            val response = traktApiService.fetchTraktMovieReviewList(
+                query,
+                sortType,
+                nextPageNumber,
+                params.loadSize
+            )
             return LoadResult.Page(
                 data = response,
                 prevKey = null, // Only paging forward.
-                nextKey = nextPageNumber
+                nextKey = nextPageNumber+1
             )
         } catch (e: IOException) {
             // IOException for network failures.

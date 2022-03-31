@@ -84,10 +84,10 @@ class MovieRepository(
         traktMovieId: String,
         sortType: String
     ): Flow<PagingData<TraktReview>> {
-        val traktApiService = ApiProvider.getApiService()
+        val traktApiService = ApiProvider.getAuthedApiService()
         return Pager(
             config = PagingConfig(
-                pageSize = 20,
+                pageSize = 10,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {

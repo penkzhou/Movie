@@ -1,7 +1,9 @@
 package com.oldautumn.movie.data.api
 
 import com.oldautumn.movie.data.api.model.*
+import retrofit2.Retrofit
 import retrofit2.http.*
+import javax.inject.Inject
 
 interface TraktApiService {
 
@@ -45,8 +47,8 @@ interface TraktApiService {
     @GET("movies/{movie_id}/comments/{sort_type}")
     suspend fun fetchTraktMovieReviewList(
         @Path("movie_id") movieId: String,
-        @Query("page") page: Int,
         @Path("sort_type") sortType: String,
+        @Query("page") page: Int,
         @Query("limit") limit: Int = 10
     ): List<TraktReview>
 

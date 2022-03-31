@@ -145,7 +145,7 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}\n${it.traktMovieDetail.votes}人评分"
                         binding.movieTraktRatingValue.setOnClickListener {
-                            val intent = Intent(this@MovieDetailActivity, TraktReviewActivity::class.java)
+                            val intent = Intent(this@MovieDetailActivity, MovieReviewActivity::class.java)
                             intent.putExtra("traktMovieId", traktMovieIds.toString())
                             intent.putExtra("traktMovieTitle", movieTitle)
                             startActivity(intent)

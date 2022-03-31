@@ -38,7 +38,6 @@ class MovieTraktReviewPageAdapter :
     }
 
 
-
     interface OnItemClickListener {
         fun onItemClick(movieItem: TraktReview)
     }
