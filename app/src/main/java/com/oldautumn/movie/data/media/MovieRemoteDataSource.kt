@@ -54,7 +54,7 @@ class MovieRemoteDataSource(
     suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleMovieListModel =
         tmdbApiService.fetchSimilarMovieList(movieId)
 
-    suspend fun getTraktReviewList(traktMovieId:String,sortType:String):List<TraktReview> =
-        traktApiService.fetchTraktMovieReviewList(traktMovieId,sortType)
+    suspend fun getTraktReviewList(traktMovieId: String, sortType: String): List<TraktReview> =
+        traktApiService.fetchTraktMovieReviewList(traktMovieId, 1, sortType)
 
 }

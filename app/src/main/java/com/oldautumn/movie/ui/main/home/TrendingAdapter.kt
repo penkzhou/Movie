@@ -4,13 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.MovieUtils
+import com.oldautumn.movie.utils.MovieUtils
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.MovieWithImage
 import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
 
 class TrendingAdapter(private val popularList: MutableList<UnifyMovieTrendingItem>) :

@@ -50,7 +50,7 @@ class SplashViewModel(
     }
 
     fun fetchDeviceCode() {
-        fetchDeviceCodeJob?.cancel();
+        fetchDeviceCodeJob?.cancel()
         fetchDeviceCodeJob = viewModelScope.launch {
             val deviceCode = repository.fetchDeviceCode()
             _uiState.value = _uiState.value.copy(deviceCode = deviceCode)
@@ -59,7 +59,7 @@ class SplashViewModel(
 
 
     fun fetchDeviceToken(deviceCode: String) {
-        fetchDeviceTokenJob?.cancel();
+        fetchDeviceTokenJob?.cancel()
         fetchDeviceTokenJob = viewModelScope.launch {
 
 

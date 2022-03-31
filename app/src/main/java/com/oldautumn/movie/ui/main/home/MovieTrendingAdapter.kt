@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.oldautumn.movie.MovieUtils
+import com.oldautumn.movie.utils.MovieUtils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
 

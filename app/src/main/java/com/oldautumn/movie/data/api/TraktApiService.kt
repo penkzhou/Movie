@@ -45,7 +45,9 @@ interface TraktApiService {
     @GET("movies/{movie_id}/comments/{sort_type}")
     suspend fun fetchTraktMovieReviewList(
         @Path("movie_id") movieId: String,
-        @Path("sort_type") sortType: String
+        @Query("page") page: Int,
+        @Path("sort_type") sortType: String,
+        @Query("limit") limit: Int = 10
     ): List<TraktReview>
 
 

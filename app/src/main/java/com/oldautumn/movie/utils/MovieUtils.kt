@@ -1,4 +1,4 @@
-package com.oldautumn.movie
+package com.oldautumn.movie.utils
 
 object MovieUtils {
     fun getMoviePosterUrl(movieImagePath: String): String {

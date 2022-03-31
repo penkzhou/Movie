@@ -51,17 +51,17 @@ class SplashActivity : AppCompatActivity() {
     }
 
 
-    val startActivityForResult =
+    private val startActivityForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            var authResult: Boolean = it.data?.getBooleanExtra("device_auth", false) ?: false
-            Log.e(TAG, "startActivityForResult back, authResult is : " + authResult)
+            val authResult: Boolean = it.data?.getBooleanExtra("device_auth", false) ?: false
+            Log.e(TAG, "startActivityForResult back, authResult is : $authResult")
             if (authResult) {
-                var deviceCode = it.data?.getParcelableExtra<DeviceCode>("device_code")
+                val deviceCode = it.data?.getParcelableExtra<DeviceCode>("device_code")
                 viewModel.fetchDeviceToken(deviceCode?.device_code ?: "")
             }
         }
 
-    var factory = object : ViewModelProvider.Factory {
+    private var factory = object : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return SplashViewModel(
                 AuthRepository(

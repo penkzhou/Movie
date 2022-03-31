@@ -8,11 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.MovieUtils
+import com.oldautumn.movie.utils.MovieUtils
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.MovieWithImage
 import com.oldautumn.movie.data.api.model.TmdbCast
-import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
 
 class MovieCastAdapter(
     private val popularList: MutableList<TmdbCast>,

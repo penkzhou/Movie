@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
-import com.oldautumn.movie.MovieUtils
+import com.oldautumn.movie.utils.MovieUtils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem

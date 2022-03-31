@@ -1,6 +1,11 @@
 package com.oldautumn.movie.data.media
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.api.model.*
+import kotlinx.coroutines.flow.Flow
 
 class MovieRepository(
     private val remoteDataSource: MovieRemoteDataSource
@@ -72,6 +77,27 @@ class MovieRepository(
 
     suspend fun getTraktReviewList(traktMovieId: String, sortType: String): List<TraktReview> {
         return remoteDataSource.getTraktReviewList(traktMovieId, sortType)
+    }
+
+
+    fun getTraktReviewPageList(
+        traktMovieId: String,
+        sortType: String
+    ): Flow<PagingData<TraktReview>> {
+        val traktApiService = ApiProvider.getApiService()
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                TraktReviewPagingSource(
+                    traktApiService,
+                    traktMovieId,
+                    sortType
+                )
+            }
+        ).flow
     }
 
 }
