@@ -35,7 +35,7 @@ class AuthUserCodeActivity : AppCompatActivity() {
         userCode = findViewById(R.id.user_code)
         authButton = findViewById(R.id.user_code_auth)
         completeButton = findViewById(R.id.back_to_splash)
-        userCode.setText(deviceCode?.user_code)
+        userCode.text = deviceCode.user_code
         authButton.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(deviceCode?.verification_url)
