@@ -67,6 +67,7 @@ class MovieCastAdapter(
                 placeholder(R.mipmap.default_cast)
                 transformations(RoundedCornersTransformation(16f))
             }
+            moviePoster.contentDescription = "${cast.character}\n由${cast.name}扮演"
             castName.text = cast.character
             realName.text = "由${cast.name}扮演"
         }

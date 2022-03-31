@@ -45,6 +45,8 @@ class ShowTrendingAdapter(private val popularList: MutableList<UnifyShowTrending
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
 
         fun updateViewWithItem(movieWithImage: UnifyShowTrendingItem) {
+
+            moviePoster.contentDescription = movieWithImage.show.show.title
             moviePoster.load(MovieUtils.getMoviePosterUrl(movieWithImage.image.posters[0].file_path)){
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))

@@ -61,6 +61,7 @@ class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>,p
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }
+            moviePoster.contentDescription = movieWithImage.content.title
         }
     }
 }

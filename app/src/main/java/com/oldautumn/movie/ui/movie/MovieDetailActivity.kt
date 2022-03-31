@@ -140,12 +140,14 @@ class MovieDetailActivity : AppCompatActivity() {
                     }
                     if (it.traktMovieDetail != null) {
                         val traktMovieIds = it.traktMovieDetail.ids.trakt
+                        val movieTitle = it.traktMovieDetail.title
                         binding.movieCertificateValue.text = it.traktMovieDetail.certification
                         binding.movieTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}\n${it.traktMovieDetail.votes}人评分"
                         binding.movieTraktRatingValue.setOnClickListener {
                             val intent = Intent(this@MovieDetailActivity, TraktReviewActivity::class.java)
                             intent.putExtra("traktMovieId", traktMovieIds.toString())
+                            intent.putExtra("traktMovieTitle", movieTitle)
                             startActivity(intent)
                         }
                     }
