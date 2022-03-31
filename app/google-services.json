@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "22508812949",
+    "project_id": "movie-dc411",
+    "storage_bucket": "movie-dc411.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22508812949:android:308c6f9c9ee5a3bae7b99c",
+        "android_client_info": {
+          "package_name": "com.oldautumn.movie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22508812949-d56bf29bqhm595aunvmh9e8ef3615oe4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJPwrHRwLMI6b8ahVtciwuti5R2jHA0YQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22508812949-d56bf29bqhm595aunvmh9e8ef3615oe4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
