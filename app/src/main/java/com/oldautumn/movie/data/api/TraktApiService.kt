@@ -1,9 +1,7 @@
 package com.oldautumn.movie.data.api
 
 import com.oldautumn.movie.data.api.model.*
-import retrofit2.Retrofit
 import retrofit2.http.*
-import javax.inject.Inject
 
 interface TraktApiService {
 

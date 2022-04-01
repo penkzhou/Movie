@@ -12,20 +12,25 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+const val DEFAULT_SORT_TYPE = "newest"
+
 @HiltViewModel
 class MovieReviewViewModel @Inject constructor(
     private val repository: MovieRepository,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(
-        MovieReviewUiState("")
 
+
+    private val traktMovieId = savedStateHandle.get<String>("traktMovieId") ?: ""
+    private val traktMovieTitle = savedStateHandle.get<String>("traktMovieTitle") ?: ""
+    private val _uiState = MutableStateFlow(
+        MovieReviewUiState(title = traktMovieTitle)
     )
 
     val uiState: StateFlow<MovieReviewUiState> = _uiState.asStateFlow()
 
-    private val traktMovieId = savedStateHandle.get<String>("traktMovieId") ?: ""
-    private val traktMovieTitle = savedStateHandle.get<String>("traktMovieTitle") ?: ""
+    val initialSortType: String = savedStateHandle.get("initialSortType") ?: DEFAULT_SORT_TYPE
+
 
     val pagingDataFlow: Flow<PagingData<TraktReview>>
 
@@ -33,8 +38,6 @@ class MovieReviewViewModel @Inject constructor(
 
     init {
 
-        val initialSortType = "newest"
-        _uiState.value = _uiState.value.copy(title = traktMovieTitle)
 
         val actionStateFlow = MutableSharedFlow<UiAction>()
 
@@ -42,27 +45,38 @@ class MovieReviewViewModel @Inject constructor(
             .filterIsInstance<UiAction.ChangeType>()
             .distinctUntilChanged()
             .onStart {
-                emit(UiAction.ChangeType(storyType = initialSortType))
+                emit(UiAction.ChangeType(sortType = initialSortType))
             }
+
         pagingDataFlow = changeType
-            .flatMapConcat { repository.getTraktReviewPageList(traktMovieId, it.storyType) }
+            .flatMapConcat {
+                repository.getTraktReviewPageList(traktMovieId, it.sortType)
+            }
             .cachedIn(viewModelScope)
 
+
+
+
+
         accept = { action ->
-            viewModelScope.launch { actionStateFlow.emit(action) }
+            viewModelScope.launch {
+                actionStateFlow.emit(action)
+            }
         }
     }
 
 
     override fun onCleared() {
-        savedStateHandle["traktMovieTitle"] = _uiState.value.title
+        savedStateHandle["traktMovieTitle"] = uiState.value.title
         savedStateHandle["traktMovieId"] = traktMovieId
+        savedStateHandle["initialSortType"] = initialSortType
         super.onCleared()
     }
 
     sealed class UiAction {
-        data class ChangeType(val storyType: String) : UiAction()
+        data class ChangeType(val sortType: String) : UiAction()
     }
 
 
 }
+

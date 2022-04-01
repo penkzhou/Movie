@@ -1,7 +1,6 @@
 package com.oldautumn.movie.data.api
 
 import com.oldautumn.movie.data.api.model.*
-import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
