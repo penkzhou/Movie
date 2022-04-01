@@ -22,7 +22,7 @@ class MovieCastAdapter(
 
         val holder = PopularViewHolder(parent)
         parent.setOnClickListener {
-            val position = holder.adapterPosition
+            val position = holder.bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val movie = popularList[position]
                 onItemClickListener?.onItemClick(movie)
