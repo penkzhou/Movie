@@ -9,7 +9,7 @@ data class MovieDetailUiState(
     val movieDetail: TmdbMovieDetail? = null,
     val traktMovieDetail: TraktMovieDetail? = null,
     val movieCreditList: TmdbCreditList? = null,
-    val recommendMovieList:TmdbSimpleMovieListModel?=null,
+    val recommendMovieList: TmdbSimpleMovieListModel? = null,
     val similarMovieList: TmdbSimpleMovieListModel? = null,
     val errorMessage: String? = null
 )

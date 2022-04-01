@@ -2,6 +2,7 @@ package com.oldautumn.movie.ui.movie
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,27 +11,19 @@ import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
 import com.oldautumn.movie.utils.MovieUtils
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
-import com.oldautumn.movie.data.media.MovieRemoteDataSource
-import com.oldautumn.movie.data.media.MovieRepository
 import com.oldautumn.movie.databinding.ActivityMovieDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
+@AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
 
-    private val viewModel: MovieDetailViewModel by lazy {
-        ViewModelProvider(this, factory)[MovieDetailViewModel::class.java]
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-
-    }
+    private val viewModel: MovieDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +33,6 @@ class MovieDetailActivity : AppCompatActivity() {
         binding.home.setOnClickListener {
             finish()
         }
-
-        val movieId = intent.getIntExtra("movieId", 0)
-        if (movieId == 0) {
-            finish()
-        }
-
-        val movieSlug = intent.getStringExtra("movieSlug") ?: ""
 
         val castAdapter = MovieCastAdapter(mutableListOf(), null)
         binding.movieCastList.layoutManager =
@@ -62,9 +48,9 @@ class MovieDetailActivity : AppCompatActivity() {
 
         val recommendAdapter = MovieRecommendAdapter(mutableListOf(), object :
             MovieRecommendAdapter.OnItemClickListener {
-            override fun onItemClick(movie: TmdbSimpleMovieItem) {
+            override fun onItemClick(movieItem: TmdbSimpleMovieItem) {
                 val intent = Intent(this@MovieDetailActivity, MovieDetailActivity::class.java)
-                intent.putExtra("movieId", movie.id)
+                intent.putExtra("movieId", movieItem.id)
                 startActivity(intent)
             }
         })
@@ -86,14 +72,7 @@ class MovieDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieSimilarList.adapter = similarAdapter
 
-        viewModel.fetchMovieDetail(movieId)
-        viewModel.fetchMovieCredit(movieId)
-        if (movieSlug.isBlank()) {
-            viewModel.fetchTraktMovieDetail(movieSlug)
-        }
-        viewModel.fetchTraktMovieDetail(movieSlug)
-        viewModel.fetchRecommendMovieList(movieId)
-        viewModel.fetchSimilarMovieList(movieId)
+        viewModel.fetchMovieDetailData()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
@@ -107,24 +86,22 @@ class MovieDetailActivity : AppCompatActivity() {
                             MovieUtils.getMoviePosterUrl(
                                 it.movieDetail.poster_path ?: ""
                             )
-                        ){
+                        ) {
                             transformations(RoundedCornersTransformation(12f))
-                        }
-                        if (movieSlug.isBlank()) {
-                            viewModel.fetchTraktMovieDetail(it.movieDetail.imdb_id ?: "")
                         }
                         if (it.movieDetail.genres.isNotEmpty()) {
                             binding.movieGenre.removeAllViews()
-                            it.movieDetail.genres.forEach() {
+                            it.movieDetail.genres.forEach {
                                 binding.movieGenre.addView(
                                     Chip(this@MovieDetailActivity).apply {
                                         text = it.name
-                                        setChipBackgroundColorResource(R.color.purple_200);
+                                        setChipBackgroundColorResource(R.color.purple_200)
                                     }
                                 )
                             }
                         }
-                        binding.movieRevenueValue.text = "$${NumberFormat.getIntegerInstance().format(it.movieDetail.revenue)}"
+                        binding.movieRevenueValue.text =
+                            "$${NumberFormat.getIntegerInstance().format(it.movieDetail.revenue)}"
                         binding.movieReleaseValue.text = it.movieDetail.release_date
                         binding.movieLengthValue.text = "${it.movieDetail.runtime}m"
                         binding.movieStatusValue.text = it.movieDetail.status
@@ -135,8 +112,12 @@ class MovieDetailActivity : AppCompatActivity() {
 
                     }
                     if (it.movieCreditList != null) {
-                        castAdapter.updateData(it.movieCreditList.cast ?: mutableListOf())
-                        crewAdapter.updateData(it.movieCreditList.crew ?: mutableListOf())
+                        if (it.movieCreditList.cast.isNotEmpty()) {
+                            castAdapter.updateData(it.movieCreditList.cast)
+                        }
+                        if (it.movieCreditList.crew.isNotEmpty()) {
+                            crewAdapter.updateData(it.movieCreditList.crew)
+                        }
                     }
                     if (it.traktMovieDetail != null) {
                         val traktMovieIds = it.traktMovieDetail.ids.trakt
@@ -145,7 +126,8 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}\n${it.traktMovieDetail.votes}人评分"
                         binding.movieTraktRatingValue.setOnClickListener {
-                            val intent = Intent(this@MovieDetailActivity, MovieReviewActivity::class.java)
+                            val intent =
+                                Intent(this@MovieDetailActivity, MovieReviewActivity::class.java)
                             intent.putExtra("traktMovieId", traktMovieIds.toString())
                             intent.putExtra("traktMovieTitle", movieTitle)
                             startActivity(intent)
@@ -163,19 +145,6 @@ class MovieDetailActivity : AppCompatActivity() {
 
                 }
             }
-        }
-    }
-
-    var factory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MovieDetailViewModel(
-                MovieRepository(
-                    MovieRemoteDataSource(
-                        ApiProvider.getAuthedApiService(),
-                        ApiProvider.getTmdbApiService()
-                    )
-                )
-            ) as T
         }
     }
 }

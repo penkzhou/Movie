@@ -7,10 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.transform.RoundedCornersTransformation
+import coil.transform.CircleCropTransformation
 import com.oldautumn.movie.utils.MovieUtils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbCast
+import com.oldautumn.movie.databinding.ItemMovieCastBinding
 
 class MovieCastAdapter(
     private val popularList: MutableList<TmdbCast>,
@@ -19,11 +20,8 @@ class MovieCastAdapter(
     RecyclerView.Adapter<MovieCastAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
 
-        val rootView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_movie_cast, parent, false)
-
-        val holder = PopularViewHolder(rootView)
-        rootView.setOnClickListener {
+        val holder = PopularViewHolder(parent)
+        parent.setOnClickListener {
             val position = holder.adapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val movie = popularList[position]
@@ -55,19 +53,37 @@ class MovieCastAdapter(
         fun onItemClick(cast: TmdbCast)
     }
 
-    class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val moviePoster: ImageView = view.findViewById(R.id.movie_cast_poster)
-        private val castName: TextView = view.findViewById(R.id.movie_cast_name)
-        private val realName: TextView = view.findViewById(R.id.movie_real_name)
+    class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
+        LayoutInflater.from(view.context)
+            .inflate(R.layout.item_movie_cast, view, false)
+    ) {
+
+        private val binding = ItemMovieCastBinding.bind(itemView)
+        private val moviePoster: ImageView = binding.movieCastPoster
+        private val castName: TextView = binding.movieCastName
+        private val realName: TextView = binding.movieRealName
+        private val profileDefaultName: TextView = binding.movieCastPosterName
 
         fun updateViewWithItem(cast: TmdbCast) {
-            moviePoster.load(MovieUtils.getMoviePosterUrl(cast.profile_path ?: "")) {
-                placeholder(R.mipmap.default_cast)
-                transformations(RoundedCornersTransformation(16f))
+            if (cast.profile_path?.isNotEmpty() == true) {
+                moviePoster.visibility = View.VISIBLE
+                profileDefaultName.visibility = View.GONE
+                moviePoster.load(MovieUtils.getMoviePosterUrl(cast.profile_path)) {
+                    transformations(
+                        CircleCropTransformation(),
+                    )
+                }
+            } else {
+                moviePoster.visibility = View.GONE
+                profileDefaultName.visibility = View.VISIBLE
+                profileDefaultName.text = cast.name.split(' ')
+                    .mapNotNull { it.firstOrNull()?.toString() }
+                    .take(2)
+                    .reduce { acc, s -> acc + s }
             }
             moviePoster.contentDescription = "${cast.character}\n由${cast.name}扮演"
             castName.text = cast.character
-            realName.text = "由${cast.name}扮演"
+            realName.text = cast.name
         }
     }
 }
