@@ -6,18 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object ApiProvider {
-    fun getApiService(): TraktApiService {
-        val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
-        val client = OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .build()
-        return Retrofit.Builder()
-            .baseUrl("https://api.trakt.tv")
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(client)
-            .build().create(TraktApiService::class.java)
-    }
+
 
     fun getAuthedApiService(): TraktApiService {
         val logging = HttpLoggingInterceptor()
