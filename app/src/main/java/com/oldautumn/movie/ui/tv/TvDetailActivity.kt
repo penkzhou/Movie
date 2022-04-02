@@ -2,6 +2,7 @@ package com.oldautumn.movie.ui.tv
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
@@ -115,10 +116,20 @@ class TvDetailActivity : AppCompatActivity() {
                     }
                     if (it.tvCreditList != null) {
                         if (it.tvCreditList.cast.isNotEmpty()) {
+                            binding.tvCastList.visibility = View.VISIBLE
+                            binding.tvCastTitle.visibility = View.VISIBLE
                             castAdapter.updateData(it.tvCreditList.cast)
+                        } else {
+                            binding.tvCastList.visibility = View.GONE
+                            binding.tvCastTitle.visibility = View.GONE
                         }
                         if (it.tvCreditList.crew.isNotEmpty()) {
+                            binding.tvCrewList.visibility = View.VISIBLE
+                            binding.tvCrewTitle.visibility = View.VISIBLE
                             crewAdapter.updateData(it.tvCreditList.crew)
+                        } else {
+                            binding.tvCrewList.visibility = View.GONE
+                            binding.tvCrewTitle.visibility = View.GONE
                         }
                     }
                     if (it.traktTvDetail != null) {
@@ -137,11 +148,25 @@ class TvDetailActivity : AppCompatActivity() {
                     }
 
                     if (it.recommendTvList != null) {
-                        recommendAdapter.updateData(it.recommendTvList.results)
+                        if (it.recommendTvList.results.isNotEmpty()) {
+                            binding.tvRecommendTitle.visibility = View.VISIBLE
+                            binding.tvRecommendList.visibility = View.VISIBLE
+                            recommendAdapter.updateData(it.recommendTvList.results)
+                        } else {
+                            binding.tvRecommendTitle.visibility = View.GONE
+                            binding.tvRecommendList.visibility = View.GONE
+                        }
                     }
 
                     if (it.similarTvList != null) {
-                        similarAdapter.updateData(it.similarTvList.results)
+                        if (it.similarTvList.results.isNotEmpty()) {
+                            binding.tvSimilarTitle.visibility = View.VISIBLE
+                            binding.tvSimilarList.visibility = View.VISIBLE
+                            similarAdapter.updateData(it.similarTvList.results)
+                        } else {
+                            binding.tvSimilarTitle.visibility = View.GONE
+                            binding.tvSimilarList.visibility = View.GONE
+                        }
                     }
 
 
