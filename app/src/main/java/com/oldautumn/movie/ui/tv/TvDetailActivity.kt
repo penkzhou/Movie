@@ -49,6 +49,12 @@ class TvDetailActivity : AppCompatActivity() {
         binding.tvCrewList.adapter = crewAdapter
 
 
+        val seasonAdapter = TvSeasonAdapter({}, mutableListOf())
+        binding.tvSeasonList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.tvSeasonList.adapter = seasonAdapter
+
+
         val recommendAdapter = TvRecommendAdapter(mutableListOf(), object :
             TvRecommendAdapter.OnItemClickListener {
             override fun onItemClick(tvItem: TmdbSimpleTvItem) {
@@ -85,6 +91,10 @@ class TvDetailActivity : AppCompatActivity() {
                                 it.tvDetail.backdrop_path ?: ""
                             )
                         )
+
+                        if (it.tvDetail.seasons.isNotEmpty()) {
+                            seasonAdapter.updateData(it.tvDetail.seasons.drop(1))
+                        }
                         binding.tvPoster.load(
                             MovieUtils.getMoviePosterUrl(
                                 it.tvDetail.poster_path ?: ""

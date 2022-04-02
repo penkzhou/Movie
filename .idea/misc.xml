@@ -36,6 +36,7 @@
         <entry key="app/src/main/res/layout/item_movie_trakt.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_popular_movie.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/item_trending_movie.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/layout/item_tv_season.xml" value="0.3220108695652174" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/menu/menu_movie_detail.xml" value="0.21822916666666667" />
       </map>
