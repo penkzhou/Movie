@@ -9,7 +9,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.oldautumn.movie.R
 import com.oldautumn.movie.databinding.ActivityIndexBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class IndexActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIndexBinding

@@ -1,6 +1,7 @@
 package com.oldautumn.movie.di
 
 import com.oldautumn.movie.data.api.AuthedInterceptor
+import com.oldautumn.movie.data.api.TmdbApiKeyInterceptor
 import com.oldautumn.movie.data.api.TmdbApiService
 import com.oldautumn.movie.data.api.TraktApiService
 import com.oldautumn.movie.data.media.MovieRemoteDataSource
@@ -51,6 +52,21 @@ object DataModule {
     }
 
 
+    @Singleton
+    @Provides
+    @Named("tmdbOkHttpClient")
+    fun provideTmdbOkHttpClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor()
+        val authedHeader = TmdbApiKeyInterceptor(
+            "1fb9e261bd10339f78c0737494452323"
+        )
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+        return OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .addInterceptor(authedHeader)
+            .build()
+    }
+
 
     @Singleton
     @Provides
@@ -79,7 +95,7 @@ object DataModule {
     @Singleton
     @Provides
     @Named("tmdbRetrofit")
-    fun provideTmdbRetrofit(@Named("normalOkhttpClient") okHttpClient: OkHttpClient): Retrofit {
+    fun provideTmdbRetrofit(@Named("tmdbOkHttpClient") okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org")
             .addConverterFactory(MoshiConverterFactory.create())

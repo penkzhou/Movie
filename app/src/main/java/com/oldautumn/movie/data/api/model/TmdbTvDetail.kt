@@ -245,9 +245,8 @@ data class TmdbTvDetail(
     val type: String,
     val tagline: String,
     val vote_average: Double,
-    val vote_count: Int
-
-
+    val vote_count: Int,
+    val external_ids: ExternalIds
 )
 
 data class Creator(

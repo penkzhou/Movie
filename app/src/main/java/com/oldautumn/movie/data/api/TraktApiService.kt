@@ -42,6 +42,10 @@ interface TraktApiService {
     suspend fun fetchTraktMovieDetail(@Path("movie_id") movieId: String): TraktMovieDetail
 
 
+    @GET("/shows/{tv_id}?extended=full")
+    suspend fun fetchTraktTvDetail(@Path("tv_id") tvId: String): TraktShowDetail
+
+
     @GET("movies/{movie_id}/comments/{sort_type}")
     suspend fun fetchTraktMovieReviewList(
         @Path("movie_id") movieId: String,
@@ -49,6 +53,22 @@ interface TraktApiService {
         @Query("page") page: Int,
         @Query("limit") limit: Int = 10
     ): List<TraktReview>
+
+
+    @GET("shows/{tv_id}/comments/{sort_type}")
+    suspend fun fetchTraktTvReviewList(
+        @Path("tv_id") tvId: String,
+        @Path("sort_type") sortType: String,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int = 10
+    ): List<TraktReview>
+
+
+
+    @GET("shows/{tv_id}/ratings")
+    suspend fun fetchTraktTvRate(
+        @Path("tv_id") tvId: String
+    ): TraktRating
 
 
 }

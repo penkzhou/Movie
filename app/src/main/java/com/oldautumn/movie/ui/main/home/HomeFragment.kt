@@ -7,23 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.api.model.MovieWithImage
 import com.oldautumn.movie.data.media.MovieRemoteDataSource
 import com.oldautumn.movie.data.media.MovieRepository
 import com.oldautumn.movie.databinding.FragmentHomeBinding
 import com.oldautumn.movie.ui.movie.MovieDetailActivity
+import com.oldautumn.movie.ui.tv.TvDetailActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -36,8 +38,6 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel =
-            ViewModelProvider(this, factory).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -60,8 +60,8 @@ class HomeFragment : Fragment() {
         val showPopularAdapter =
             MoviePopularAdapter(mutableListOf(), object : MoviePopularAdapter.OnItemClickListener {
                 override fun onItemClick(movie: MovieWithImage) {
-                    val intent = Intent(context, MovieDetailActivity::class.java)
-                    intent.putExtra("movieId", movie.content.ids.tmdb)
+                    val intent = Intent(context, TvDetailActivity::class.java)
+                    intent.putExtra("tvId", movie.content.ids.tmdb)
                     startActivity(intent)
                 }
             })

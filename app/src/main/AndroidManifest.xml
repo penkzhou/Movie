@@ -30,6 +30,12 @@
             android:exported="false"
             android:label="@string/title_activity_movie_detail"
             android:theme="@style/Theme.Movie.NoActionBar" />
+
+
+        <activity
+            android:name=".ui.tv.TvDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Movie.NoActionBar" />
         <activity
             android:name=".ui.main.IndexActivity"
             android:exported="false"

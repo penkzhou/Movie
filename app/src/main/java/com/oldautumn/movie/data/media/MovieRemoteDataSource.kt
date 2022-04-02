@@ -48,11 +48,26 @@ class MovieRemoteDataSource(
     suspend fun getTraktMovieDetail(movieSlug: String): TraktMovieDetail =
         traktApiService.fetchTraktMovieDetail(movieSlug)
 
-    suspend fun getRecommendMovieList(movieId: Int): TmdbSimpleMovieListModel =
+
+    suspend fun getTraktTvDetail(movieSlug: String): TraktShowDetail =
+        traktApiService.fetchTraktTvDetail(movieSlug)
+
+
+    suspend fun getTraktShowRate(movieSlug: String): TraktRating =
+        traktApiService.fetchTraktTvRate(movieSlug)
+
+    suspend fun getRecommendMovieList(movieId: Int): TmdbSimpleItemListModel<TmdbSimpleMovieItem> =
         tmdbApiService.fetchRecommendMovieList(movieId)
 
-    suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleMovieListModel =
+    suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleItemListModel<TmdbSimpleMovieItem> =
         tmdbApiService.fetchSimilarMovieList(movieId)
+
+
+    suspend fun getRecommendTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> =
+        tmdbApiService.fetchRecommendTvList(tvId)
+
+    suspend fun getSimilarTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> =
+        tmdbApiService.fetchSimilarTvList(tvId)
 
     suspend fun getTraktReviewList(traktMovieId: String, sortType: String): List<TraktReview> =
         traktApiService.fetchTraktMovieReviewList(traktMovieId, sortType,1 )

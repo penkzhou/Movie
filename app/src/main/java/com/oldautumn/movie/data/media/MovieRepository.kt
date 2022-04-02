@@ -67,12 +67,31 @@ class MovieRepository(
         return remoteDataSource.getTraktMovieDetail(movieSlug)
     }
 
-    suspend fun getRecommendMovieList(movieId: Int): TmdbSimpleMovieListModel {
+    suspend fun getRecommendMovieList(movieId: Int): TmdbSimpleItemListModel<TmdbSimpleMovieItem> {
         return remoteDataSource.getRecommendMovieList(movieId)
     }
 
-    suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleMovieListModel {
+    suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleItemListModel<TmdbSimpleMovieItem> {
         return remoteDataSource.getSimilarMovieList(movieId)
+    }
+
+
+    suspend fun getRecommendTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> {
+        return remoteDataSource.getRecommendTvList(tvId)
+    }
+
+    suspend fun getSimilarTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> {
+        return remoteDataSource.getSimilarTvList(tvId)
+    }
+
+
+    suspend fun getTraktTvRating(tvId: String): TraktRating {
+        return remoteDataSource.getTraktShowRate(tvId)
+    }
+
+
+    suspend fun getTraktTvDetail(tvId: String): TraktShowDetail {
+        return remoteDataSource.getTraktTvDetail(tvId)
     }
 
     suspend fun getTraktReviewList(traktMovieId: String, sortType: String): List<TraktReview> {
