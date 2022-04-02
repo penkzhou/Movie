@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.viewModels
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oldautumn.movie.R
@@ -12,16 +13,16 @@ import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.media.MovieRemoteDataSource
 import com.oldautumn.movie.data.media.MovieRepository
 import com.oldautumn.movie.databinding.ActivityTraktReviewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class TraktReviewActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityTraktReviewBinding
 
-    private val viewModel: MovieTraktReviewViewModel by lazy {
-        ViewModelProvider(this, factory)[MovieTraktReviewViewModel::class.java]
-    }
+    private val viewModel: MovieTraktReviewViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,17 +77,4 @@ class TraktReviewActivity : AppCompatActivity() {
         return true
     }
 
-
-    var factory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MovieTraktReviewViewModel(
-                MovieRepository(
-                    MovieRemoteDataSource(
-                        ApiProvider.getAuthedApiService(),
-                        ApiProvider.getTmdbApiService()
-                    )
-                )
-            ) as T
-        }
-    }
 }

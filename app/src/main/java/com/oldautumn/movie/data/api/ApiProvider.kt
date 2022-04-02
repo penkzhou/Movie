@@ -39,17 +39,4 @@ object ApiProvider {
 
     }
 
-    fun getTmdbApiService(): TmdbApiService {
-        val logging = HttpLoggingInterceptor()
-
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
-        val client = OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .build()
-        return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org")
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(client)
-            .build().create(TmdbApiService::class.java)
-    }
 }

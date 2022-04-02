@@ -108,17 +108,4 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    var factory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return HomeViewModel(
-                MovieRepository(
-                    MovieRemoteDataSource(
-                        ApiProvider.getAuthedApiService(),
-                        ApiProvider.getTmdbApiService()
-                    )
-                )
-            ) as T
-        }
-    }
 }

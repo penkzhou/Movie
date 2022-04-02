@@ -1,14 +1,19 @@
 package com.oldautumn.movie.di
 
+import android.content.Context
 import com.oldautumn.movie.data.api.AuthedInterceptor
 import com.oldautumn.movie.data.api.TmdbApiKeyInterceptor
 import com.oldautumn.movie.data.api.TmdbApiService
 import com.oldautumn.movie.data.api.TraktApiService
+import com.oldautumn.movie.data.auth.AuthLocalDataSource
+import com.oldautumn.movie.data.auth.AuthRemoteDataSource
+import com.oldautumn.movie.data.auth.AuthRepository
 import com.oldautumn.movie.data.media.MovieRemoteDataSource
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,7 +32,6 @@ object DataModule {
     @Named("normalOkhttpClient")
     fun provideOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
-
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
         return OkHttpClient.Builder()
             .addInterceptor(logging)
@@ -115,8 +119,32 @@ object DataModule {
 
     @Singleton
     @Provides
+    fun provideAuthRemoteDataSource(
+        @Named("traktApiService") traktApiService: TraktApiService,
+    ): AuthRemoteDataSource {
+        return AuthRemoteDataSource(traktApiService)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideAuthLocalDataSource(@ApplicationContext context: Context): AuthLocalDataSource {
+        return AuthLocalDataSource(context)
+    }
+
+
+
+    @Singleton
+    @Provides
     fun provideMovieRepository(@Named("movieRemoteDataSource") movieRemoteDataSource: MovieRemoteDataSource): MovieRepository {
         return MovieRepository(movieRemoteDataSource)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideAuthRepository(authRemoteDataSource: AuthRemoteDataSource,authLocalDataSource:AuthLocalDataSource): AuthRepository {
+        return AuthRepository(authRemoteDataSource,authLocalDataSource)
     }
 
 }

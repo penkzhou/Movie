@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.oldautumn.movie.R
@@ -14,16 +15,16 @@ import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.api.model.DeviceCode
 import com.oldautumn.movie.ui.auth.AuthUserCodeActivity
 import com.oldautumn.movie.ui.main.IndexActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
 const val TAG = "SplashActivity"
 
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
-    private val viewModel: SplashViewModel by lazy {
-        ViewModelProvider(this, factory)[SplashViewModel::class.java]
-    }
+    private val viewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,15 +61,4 @@ class SplashActivity : AppCompatActivity() {
                 viewModel.fetchDeviceToken(deviceCode?.device_code ?: "")
             }
         }
-
-    private var factory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return SplashViewModel(
-                AuthRepository(
-                    AuthRemoteDataSource(ApiProvider.getApiService()),
-                    AuthLocalDataSource(applicationContext)
-                )
-            ) as T
-        }
-    }
 }

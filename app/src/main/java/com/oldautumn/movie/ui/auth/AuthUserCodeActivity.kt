@@ -4,78 +4,61 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
-import com.oldautumn.movie.R
-import com.oldautumn.movie.data.auth.AuthLocalDataSource
-import com.oldautumn.movie.data.auth.AuthRemoteDataSource
-import com.oldautumn.movie.data.auth.AuthRepository
-import com.oldautumn.movie.data.api.ApiProvider
-import com.oldautumn.movie.data.api.model.DeviceCode
+import com.oldautumn.movie.databinding.ActivityAuthUserCodeBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class AuthUserCodeActivity : AppCompatActivity() {
-    lateinit var userCode: TextView
-    lateinit var authButton: Button
-    lateinit var completeButton: Button
-    lateinit var deviceCode: DeviceCode
+    private lateinit var binding: ActivityAuthUserCodeBinding
 
-    private val viewModel: AuthViewModel by lazy {
-        ViewModelProvider(this, factory)[AuthViewModel::class.java]
-    }
+    private val viewModel: AuthViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth_user_code)
-        deviceCode = intent.getParcelableExtra<DeviceCode>("device_code")!!
-        userCode = findViewById(R.id.user_code)
-        authButton = findViewById(R.id.user_code_auth)
-        completeButton = findViewById(R.id.back_to_splash)
-        userCode.text = deviceCode.user_code
-        authButton.setOnClickListener {
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse(deviceCode?.verification_url)
-            startActivity(i)
-        }
 
-        completeButton.setOnClickListener {
+        binding = ActivityAuthUserCodeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        binding.backToSplash.setOnClickListener {
             finish()
         }
 
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                if (deviceCode?.device_code.isNotEmpty()) {
-                    viewModel.fetchDeviceToken(deviceCode?.device_code)
-                }
                 viewModel.uiState.collect { uiState ->
+                    if (uiState.deviceCode != null) {
+                        if (uiState.deviceCode.user_code.isNotEmpty()) {
+                            binding.userCode.text = uiState.deviceCode.user_code
+                        }
+                        binding.userCodeAuth.setOnClickListener {
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = Uri.parse(uiState.deviceCode?.verification_url)
+                            startActivity(intent)
+                        }
+                    }
+
                     if (uiState.isDeviceAuthed) {
-                        completeButton.visibility = View.VISIBLE
-                        authButton.visibility = View.GONE
+                        binding.backToSplash.visibility = View.VISIBLE
+                        binding.userCodeAuth.visibility = View.GONE
                     } else {
-                        completeButton.visibility = View.GONE
-                        authButton.visibility = View.VISIBLE
+                        binding.backToSplash.visibility = View.GONE
+                        binding.userCodeAuth.visibility = View.VISIBLE
                         // 开始走授权流程，通过拿到的usercode 开始
+                        if (uiState.deviceCode != null && uiState.deviceCode.device_code.isNotEmpty()) {
+                            viewModel.fetchDeviceToken(uiState.deviceCode.device_code)
+                        }
                     }
 
                 }
             }
-        }
-    }
-
-
-    var factory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return AuthViewModel(
-                AuthRepository(
-                    AuthRemoteDataSource(ApiProvider.getApiService()),
-                    AuthLocalDataSource(applicationContext)
-                )
-            ) as T
         }
     }
 

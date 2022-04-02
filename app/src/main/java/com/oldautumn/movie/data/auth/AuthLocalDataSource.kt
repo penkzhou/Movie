@@ -28,7 +28,7 @@ class AuthLocalDataSource(private val context: Context) {
             preferences[authStringKey] ?: ""
         }
 
-    suspend fun updateAuthModel(authToken:DeviceToken) {
+    suspend fun updateAuthModel(authToken: DeviceToken) {
         context.authDataStore.edit { settings ->
             settings[authStringKey] = authToken.access_token
             settings[scope] = authToken.scope
