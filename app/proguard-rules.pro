@@ -19,3 +19,5 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keepattributes RuntimeVisibleAnnotations
+-keep class com.oldautumn.movie.data.api.model.** { *; }

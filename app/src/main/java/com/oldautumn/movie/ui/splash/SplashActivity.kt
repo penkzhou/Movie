@@ -8,10 +8,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.auth.AuthLocalDataSource
-import com.oldautumn.movie.data.auth.AuthRemoteDataSource
-import com.oldautumn.movie.data.auth.AuthRepository
-import com.oldautumn.movie.data.api.ApiProvider
 import com.oldautumn.movie.data.api.model.DeviceCode
 import com.oldautumn.movie.ui.auth.AuthUserCodeActivity
 import com.oldautumn.movie.ui.main.IndexActivity

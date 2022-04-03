@@ -50,15 +50,15 @@ class TvDetailViewModel @Inject constructor(
         fetchTraktTvRatingJob = viewModelScope.launch {
             try {
                 val rating = repository.getTraktTvRating(tvImdbId)
-                _uiState.value = _uiState.value?.copy(
+                _uiState.value = _uiState.value.copy(
                     traktRating = rating
                 )
             } catch (e: IOException) {
-                _uiState.value = _uiState.value?.copy(
+                _uiState.value = _uiState.value.copy(
                     errorMessage = e.message
                 )
             } catch (e: HttpException) {
-                _uiState.value = _uiState.value?.copy(
+                _uiState.value = _uiState.value.copy(
                     errorMessage = e.message
                 )
             }
@@ -71,9 +71,9 @@ class TvDetailViewModel @Inject constructor(
             try {
                 val tvDetail = repository.getShowDetail(tvId)
                 _uiState.value = _uiState.value.copy(tvDetail = tvDetail)
-                if (tvDetail?.external_ids?.imdb_id != null) {
-                    fetchTraktTvDetail(tvDetail?.external_ids?.imdb_id)
-                    fetchTraktTvRating(tvDetail?.external_ids?.imdb_id)
+                if (tvDetail.external_ids.imdb_id != null) {
+                    fetchTraktTvDetail(tvDetail.external_ids.imdb_id)
+                    fetchTraktTvRating(tvDetail.external_ids.imdb_id)
                 }
             } catch (e: IOException) {
                 _uiState.value = _uiState.value.copy(errorMessage = e.message)

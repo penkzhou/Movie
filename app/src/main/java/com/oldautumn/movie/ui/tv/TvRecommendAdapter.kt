@@ -62,7 +62,7 @@ class TvRecommendAdapter(
         private val tvRate: TextView = view.findViewById(R.id.movie_vote_average)
 
         fun updateViewWithItem(movieItem: TmdbSimpleTvItem) {
-            tvPoster.load(Utils.getImageFullUrl(movieItem.poster_path ?: "")) {
+            tvPoster.load(Utils.getImageFullUrl(movieItem.poster_path)) {
                 transformations(RoundedCornersTransformation(16f))
             }
             tvRate.text = "${DecimalFormat("##.#").format(movieItem.vote_average)}"

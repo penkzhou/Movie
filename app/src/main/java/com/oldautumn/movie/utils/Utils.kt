@@ -19,7 +19,16 @@ object Utils {
         val format = SimpleDateFormat(
             "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US
         )
-        return DateUtils.getRelativeTimeSpanString(format.parse(timeString).time).toString()
+        var date: Date? = null
+        try {
+            date = format.parse(timeString)
+        } catch (e: Exception) {
+
+        }
+        if (date == null) {
+            return ""
+        }
+        return DateUtils.getRelativeTimeSpanString(date.time).toString()
     }
 
     fun fetchFirstCharacter(str: String): String {

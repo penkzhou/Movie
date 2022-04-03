@@ -43,7 +43,7 @@ class TvSeasonAdapter(private val onDetailClick: () -> Unit, private val seasonL
 
         fun bind(season: Season) {
             if (season.poster_path?.isNotEmpty() == true){
-                binding.tvSeasonPoster.load(Utils.getImageFullUrl(season?.poster_path)) {
+                binding.tvSeasonPoster.load(Utils.getImageFullUrl(season.poster_path)) {
                     transformations(RoundedCornersTransformation(24f))
                 }
             }
