@@ -1,6 +1,6 @@
 package com.oldautumn.movie.data.api.model
 
-data class Movie(
+data class TraktSimpleContentItem(
     val title: String,
     val year: Int,
     val ids: MovieIds

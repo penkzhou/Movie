@@ -23,6 +23,7 @@ class HomeViewModel @Inject constructor(
         HomeUiState(
             mutableListOf(),
             mutableListOf(),
+            mutableListOf(),
             ""
         )
     )
@@ -30,6 +31,7 @@ class HomeViewModel @Inject constructor(
 
     private var fetchTrendingMovieListJob: Job? = null
     private var fetchPopularMovieListJob: Job? = null
+    private var fetchBoxOfficeMovieListJob: Job? = null
 
 
     fun fetchPopularMovie() {
@@ -39,6 +41,23 @@ class HomeViewModel @Inject constructor(
                 val popularMovieList = repository.getPopularMovieList()
                 _uiState.value = _uiState.value.copy(
                     popularMovieList = popularMovieList
+                )
+            } catch (ioe: IOException) {
+                // Handle the error and notify the UI when appropriate.
+                _uiState.value = _uiState.value.copy(errorMessage = "数据解析异常")
+            } catch (he: HttpException) {
+                _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
+            }
+        }
+    }
+
+    fun fetchBoxOfficeMovieList(){
+        fetchBoxOfficeMovieListJob?.cancel()
+        fetchBoxOfficeMovieListJob = viewModelScope.launch {
+            try {
+                val boxOfficeMovieList = repository.getTraktBoxOffice()
+                _uiState.value = _uiState.value.copy(
+                    revenueMovieList = boxOfficeMovieList
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
@@ -66,6 +85,7 @@ class HomeViewModel @Inject constructor(
         }
 
     }
+
 
 
 }

@@ -1,6 +1,6 @@
 package com.oldautumn.movie.data.api.model
 
-data class MovieTrendingItem(
-    val watchers:Int,
+data class MovieRevenueItem(
+    val revenue:Int,
     val movie:TraktSimpleContentItem,
 )

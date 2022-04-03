@@ -107,6 +107,7 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieStatusValue.text = it.movieDetail.status
                         binding.title.text = it.movieDetail.title
                         binding.movieOverview.text = it.movieDetail.overview
+                        binding.movieReleaseCountry.text = it.movieDetail.production_countries[0].name
                         binding.movieTmdbRatingValue.text =
                             "${it.movieDetail.vote_average}\n${it.movieDetail.vote_count}人评分"
 

@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/movie_poster"
                 android:layout_width="160dp"
-                android:layout_height="240dp"
+                android:layout_height="250dp"
                 android:layout_margin="16dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -32,7 +32,7 @@
                 android:id="@+id/movie_trakt_rating_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="12dp"
                 android:text="Trakt Rating"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -53,7 +53,7 @@
                 android:id="@+id/movie_tmdb_rating_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="12dp"
                 android:text="TMDB Rating"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -74,7 +74,7 @@
                 android:id="@+id/movie_release_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="12dp"
                 android:text="发行年份"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -95,7 +95,7 @@
                 android:id="@+id/movie_status_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="12dp"
                 android:text="当前状态"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -116,7 +116,7 @@
                 android:id="@+id/movie_certificate_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="12dp"
                 android:text="分级"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_certificate_text"
-                android:padding="4dp"
+                android:padding="2dp"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="@+id/movie_certificate_title"
@@ -141,7 +141,7 @@
                 android:id="@+id/movie_length_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="12dp"
                 android:text="电影时长"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -162,7 +162,7 @@
                 android:id="@+id/movie_revenue_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="12dp"
                 android:text="票房"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -177,6 +177,26 @@
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="@+id/movie_revenue_title"
                 app:layout_constraintTop_toBottomOf="@+id/movie_revenue_title" />
+
+            <TextView
+                android:id="@+id/movie_release_country_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="发行国家"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toRightOf="@+id/movie_poster"
+                app:layout_constraintTop_toBottomOf="@+id/movie_revenue_value" />
+
+
+            <TextView
+                android:id="@+id/movie_release_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                app:layout_constraintLeft_toLeftOf="@+id/movie_release_country_title"
+                app:layout_constraintTop_toBottomOf="@+id/movie_release_country_title" />
 
 
             <TextView

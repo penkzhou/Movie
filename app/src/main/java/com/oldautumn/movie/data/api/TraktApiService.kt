@@ -30,12 +30,16 @@ interface TraktApiService {
     suspend fun fetchWeeklyWatchedMovieList(): List<MovieTrendingItem>
 
 
+    @GET("movies/boxoffice")
+    suspend fun fetchWeeklyBoxOffice(): List<MovieRevenueItem>
+
+
     @GET("/movies/popular")
-    suspend fun fetchPopularMovieList(): List<Movie>
+    suspend fun fetchPopularMovieList(): List<TraktSimpleContentItem>
 
 
     @GET("/shows/popular")
-    suspend fun fetchPopularShowList(): List<Movie>
+    suspend fun fetchPopularShowList(): List<TraktSimpleContentItem>
 
 
     @GET("/movies/{movie_id}?extended=full")

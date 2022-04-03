@@ -32,6 +32,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_tv_home.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/item_load_state.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/item_movie_boxoffice.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/item_movie_cast.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_movie_recommend.xml" value="0.45" />
         <entry key="app/src/main/res/layout/item_movie_trakt.xml" value="0.5" />

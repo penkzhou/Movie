@@ -17,11 +17,11 @@ class MovieRemoteDataSource(
         traktApiService.fetchTrendingShowList()
 
 
-    suspend fun fetchPopularShowList(): List<Movie> =
+    suspend fun fetchPopularShowList(): List<TraktSimpleContentItem> =
         traktApiService.fetchPopularShowList()
 
 
-    suspend fun fetchPopularMovieList(): List<Movie> =
+    suspend fun fetchPopularMovieList(): List<TraktSimpleContentItem> =
         traktApiService.fetchPopularMovieList()
 
 
@@ -70,6 +70,9 @@ class MovieRemoteDataSource(
         tmdbApiService.fetchSimilarTvList(tvId)
 
     suspend fun getTraktReviewList(traktMovieId: String, sortType: String): List<TraktReview> =
-        traktApiService.fetchTraktMovieReviewList(traktMovieId, sortType,1 )
+        traktApiService.fetchTraktMovieReviewList(traktMovieId, sortType, 1)
+
+    suspend fun getTraktMovieBoxOffice(): List<MovieRevenueItem> =
+        traktApiService.fetchWeeklyBoxOffice()
 
 }

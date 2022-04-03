@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
 import com.oldautumn.movie.data.api.model.MovieWithImage
+import com.oldautumn.movie.data.api.model.UnifyMovieRevenueItem
 import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
 import com.oldautumn.movie.databinding.FragmentHomeBinding
 import com.oldautumn.movie.ui.movie.MovieDetailActivity
@@ -40,6 +41,7 @@ class HomeFragment : Fragment() {
 
         val trendingListView: RecyclerView = binding.movieTrendingList
         val popularListView: RecyclerView = binding.moviePopularList
+        val revenueListView = binding.movieBoxList
         val trendingAdapter =
             TrendingAdapter(mutableListOf(), object : (UnifyMovieTrendingItem) -> Unit {
                 override fun invoke(movie: UnifyMovieTrendingItem) {
@@ -60,13 +62,26 @@ class HomeFragment : Fragment() {
                 }
 
             })
+        val revenueAdapter =
+            MovieBoxofficeAdapter(mutableListOf(), object : (UnifyMovieRevenueItem) -> Unit {
+                override fun invoke(movie: UnifyMovieRevenueItem) {
+                    val intent = Intent(context, MovieDetailActivity::class.java)
+                    intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
+                    intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
+                    startActivity(intent)
+                }
+
+            })
         trendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         popularListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
+        revenueListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
 
         trendingListView.adapter = trendingAdapter
         popularListView.adapter = popularAdapter
+        revenueListView.adapter = revenueAdapter
         viewModel.fetchMovieData()
         viewModel.fetchPopularMovie()
+        viewModel.fetchBoxOfficeMovieList()
         lifecycleScope.launch {
             launchAndRepeatWithViewLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
@@ -79,6 +94,9 @@ class HomeFragment : Fragment() {
                         }
                         if (uiState.popularMovieList.isNotEmpty()) {
                             popularAdapter.updateData(uiState.popularMovieList)
+                        }
+                        if (uiState.revenueMovieList.isNotEmpty()) {
+                            revenueAdapter.updateData(uiState.revenueMovieList)
                         }
                     }
 
