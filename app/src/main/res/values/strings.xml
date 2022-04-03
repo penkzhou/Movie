@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Movie</string>
     <string name="title_activity_index">IndexActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_tv">TV</string>
+    <string name="title_explore">Explore</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_movie_detail">MovieDetailActivity</string>
     <string name="action_settings">Settings</string>

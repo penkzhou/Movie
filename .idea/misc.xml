@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/layout/activity_tv_detail.xml" value="0.17028985507246377" />
         <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/fragment_tv_home.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/item_load_state.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/item_movie_cast.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_movie_recommend.xml" value="0.45" />

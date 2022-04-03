@@ -20,10 +20,10 @@ class MovieRepository(
     }
 
 
-    suspend fun getTrendingShowList(): List<UnifyShowTrendingItem> {
+    suspend fun getTrendingShowList(): List<UnifyTvTrendingItem> {
         val movieTrendingList = remoteDataSource.getTrendingShowList()
         return movieTrendingList.map { it ->
-            UnifyShowTrendingItem(remoteDataSource.getTvImage(it.show.ids.tmdb), it)
+            UnifyTvTrendingItem(remoteDataSource.getTvImage(it.show.ids.tmdb), it)
         }
 
     }

@@ -1,4 +1,4 @@
-package com.oldautumn.movie.ui.main.home
+package com.oldautumn.movie.ui.main.tv
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,30 +15,32 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class TvMainViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
-        HomeUiState(
+        TvMainUiState(
             mutableListOf(),
             mutableListOf(),
             ""
         )
     )
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<TvMainUiState> = _uiState.asStateFlow()
 
-    private var fetchTrendingMovieListJob: Job? = null
-    private var fetchPopularMovieListJob: Job? = null
+    private var fetchPopularShowListJob: Job? = null
+    private var fetchTrendingShowListJob: Job? = null
 
 
-    fun fetchPopularMovie() {
-        fetchPopularMovieListJob?.cancel()
-        fetchPopularMovieListJob = viewModelScope.launch {
+
+
+    fun fetchPopularShow() {
+        fetchPopularShowListJob?.cancel()
+        fetchPopularShowListJob = viewModelScope.launch {
             try {
-                val popularMovieList = repository.getPopularMovieList()
+                val popularMovieList = repository.getPopularShowList()
                 _uiState.value = _uiState.value.copy(
-                    popularMovieList = popularMovieList
+                    popularShowList = popularMovieList
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
@@ -49,13 +51,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun fetchMovieData() {
-        fetchTrendingMovieListJob?.cancel()
-        fetchTrendingMovieListJob = viewModelScope.launch {
+    fun fetchTrendingShow() {
+        fetchTrendingShowListJob?.cancel()
+        fetchTrendingShowListJob = viewModelScope.launch {
             try {
-                val trendingMovieList = repository.getTrendingMovieList()
+                val trendingMovieList = repository.getTrendingShowList()
                 _uiState.value = _uiState.value.copy(
-                    trendingMovieList = trendingMovieList,
+                    trendingShowList = trendingMovieList
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
@@ -64,8 +66,6 @@ class HomeViewModel @Inject constructor(
                 _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
             }
         }
-
     }
-
 
 }

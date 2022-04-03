@@ -10,8 +10,10 @@ import coil.transform.RoundedCornersTransformation
 import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.MovieWithImage
+import com.oldautumn.movie.data.api.model.UnifyTvTrendingItem
 
-class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>,private val onItemClickListener: OnItemClickListener) :
+class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>,
+                          private val onItemClick: (item: MovieWithImage) -> Unit) :
     RecyclerView.Adapter<MoviePopularAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
 
@@ -20,10 +22,10 @@ class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>,p
 
         val holder = PopularViewHolder(rootView)
         rootView.setOnClickListener {
-            val position = holder.adapterPosition
+            val position = holder.bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val movie = popularList[position]
-                onItemClickListener.onItemClick(movie)
+                onItemClick(movie)
             }
         }
         return holder

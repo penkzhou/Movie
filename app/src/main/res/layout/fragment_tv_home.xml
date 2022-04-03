@@ -10,39 +10,39 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.home.HomeFragment">
 
+
         <TextView
-            android:id="@+id/movie_popular_title"
+            android:id="@+id/tv_popular_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="🎬当下流行的电影"
+            android:text="📺电视流行大势"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/movie_popular_list"
+            android:id="@+id/tv_popular_list"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/movie_popular_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_popular_title" />
 
 
         <TextView
-            android:id="@+id/movie_trending_title"
+            android:id="@+id/tv_trending_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="🎬电影趋势"
+            android:text="📺电视趋势"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/movie_popular_list" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_popular_list" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/movie_trending_list"
+            android:id="@+id/tv_trending_list"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/movie_trending_title" />
-
+            app:layout_constraintTop_toBottomOf="@+id/tv_trending_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

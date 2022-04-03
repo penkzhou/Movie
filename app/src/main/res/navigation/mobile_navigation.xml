@@ -3,18 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_movie">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_movie"
         android:name="com.oldautumn.movie.ui.main.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_movie"
         tools:layout="@layout/fragment_home" />
 
+
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_tv"
+        android:name="com.oldautumn.movie.ui.main.tv.TvMainFragment"
+        android:label="@string/title_tv"
+        tools:layout="@layout/fragment_tv_home" />
+
+    <fragment
+        android:id="@+id/navigation_discovery"
         android:name="com.oldautumn.movie.ui.main.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_explore"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment

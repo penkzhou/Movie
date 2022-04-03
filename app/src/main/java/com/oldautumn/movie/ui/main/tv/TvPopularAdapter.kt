@@ -1,4 +1,4 @@
-package com.oldautumn.movie.ui.main.home
+package com.oldautumn.movie.ui.main.tv
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,29 +9,28 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
+import com.oldautumn.movie.data.api.model.MovieWithImage
 
-class TrendingAdapter(
-    private val popularList: MutableList<UnifyMovieTrendingItem>,
-    private val onItemClick: (item: UnifyMovieTrendingItem) -> Unit
+class TvPopularAdapter(
+    private val popularList: MutableList<MovieWithImage>,
+    private val onItemClick: (item: MovieWithImage) -> Unit
 ) :
-    RecyclerView.Adapter<TrendingAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
+    RecyclerView.Adapter<TvPopularAdapter.TvPopularViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvPopularViewHolder {
 
         val rootView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_popular_movie, parent, false)
-        val holder = PopularViewHolder(rootView)
+        val holder = TvPopularViewHolder(rootView)
         rootView.setOnClickListener {
             val position = holder.bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                val movie = popularList[position]
-                onItemClick(movie)
+                onItemClick(popularList[position])
             }
         }
         return holder
     }
 
-    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TvPopularViewHolder, position: Int) {
         if (position < 0 || position >= popularList.size) {
             return
         }
@@ -39,7 +38,7 @@ class TrendingAdapter(
         holder.updateViewWithItem(movieTrendingItem)
     }
 
-    fun updateData(newPopularList: List<UnifyMovieTrendingItem>) {
+    fun updateData(newPopularList: List<MovieWithImage>) {
         popularList.clear()
         popularList.addAll(newPopularList)
         notifyDataSetChanged()
@@ -49,11 +48,13 @@ class TrendingAdapter(
         return popularList.size
     }
 
-    class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class TvPopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
 
-        fun updateViewWithItem(movieWithImage: UnifyMovieTrendingItem) {
-            moviePoster.contentDescription = movieWithImage.movie.movie.title
+
+        fun updateViewWithItem(movieWithImage: MovieWithImage) {
+
+            moviePoster.contentDescription = movieWithImage.content.title
             moviePoster.load(Utils.getImageFullUrl(movieWithImage.image.posters[0].file_path)) {
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
