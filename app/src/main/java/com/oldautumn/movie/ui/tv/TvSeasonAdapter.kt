@@ -42,8 +42,10 @@ class TvSeasonAdapter(private val onDetailClick: () -> Unit, private val seasonL
         private val binding = ItemTvSeasonBinding.bind(itemView)
 
         fun bind(season: Season) {
-            binding.tvSeasonPoster.load(Utils.getImageFullUrl(season.poster_path)) {
-                transformations(RoundedCornersTransformation(24f))
+            if (season.poster_path?.isNotEmpty() == true){
+                binding.tvSeasonPoster.load(Utils.getImageFullUrl(season?.poster_path)) {
+                    transformations(RoundedCornersTransformation(24f))
+                }
             }
             binding.tvSeasonOverview.text = season.overview
             binding.tvSeasonEpisodeCount.text = "${season.episode_count}集"

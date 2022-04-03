@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
-    fun getImageFullUrl(movieImagePath: String, width: Int = 500): String {
-        return "https://image.tmdb.org/t/p/w$width$movieImagePath"
+    fun getImageFullUrl(imagePath: String, width: Int = 500): String {
+        return "https://image.tmdb.org/t/p/w$width$imagePath"
     }
 
     fun getFormatTimeDisplay(timeString: String): String {
