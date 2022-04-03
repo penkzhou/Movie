@@ -1,5 +1,6 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/collapsing_toolbar">
@@ -127,9 +128,13 @@
                 android:id="@+id/movie_certificate_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_certificate_text"
+                android:padding="4dp"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="@+id/movie_certificate_title"
-                app:layout_constraintTop_toBottomOf="@+id/movie_certificate_title" />
+                app:layout_constraintTop_toBottomOf="@+id/movie_certificate_title"
+                tools:text="PG-13" />
 
 
             <TextView
