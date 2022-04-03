@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbSimpleTvItem
 import com.oldautumn.movie.databinding.ActivityTvDetailBinding
@@ -87,7 +87,7 @@ class TvDetailActivity : AppCompatActivity() {
                 viewModel.uiState.collect {
                     if (it.tvDetail != null) {
                         binding.backdrop.load(
-                            MovieUtils.getMovieBackdropUrl(
+                            Utils.getMovieBackdropUrl(
                                 it.tvDetail.backdrop_path ?: ""
                             )
                         )
@@ -96,7 +96,7 @@ class TvDetailActivity : AppCompatActivity() {
                             seasonAdapter.updateData(it.tvDetail.seasons.drop(1))
                         }
                         binding.tvPoster.load(
-                            MovieUtils.getMoviePosterUrl(
+                            Utils.getMoviePosterUrl(
                                 it.tvDetail.poster_path ?: ""
                             )
                         ) {
@@ -113,12 +113,20 @@ class TvDetailActivity : AppCompatActivity() {
                                 )
                             }
                         }
-                        binding.tvRevenueValue.text =
-                            "$"
+                        if ((it.tvDetail.networks.firstOrNull()?.logo_path ?: "").isNotEmpty()) {
+                            binding.tvNetworkIcon.load(
+                                Utils.getMoviePosterUrl(
+                                    it.tvDetail.networks.firstOrNull()?.logo_path ?: ""
+                                )
+                            )
+                        }
+
+                        binding.tvNetworkValue.text =
+                            it.tvDetail.networks.firstOrNull()?.name ?: ""
                         binding.tvReleaseValue.text = it.tvDetail.first_air_date
                         binding.tvLengthValue.text = "${it.tvDetail.episode_run_time[0]}m"
                         binding.tvStatusValue.text = it.tvDetail.status
-                        binding.title.text = it.tvDetail.name
+                        binding.title.text = it.tvDetail.original_name
                         binding.tvOverview.text = it.tvDetail.overview
                         binding.tvTmdbRatingValue.text =
                             "${it.tvDetail.vote_average}\n${it.tvDetail.vote_count}人评分"

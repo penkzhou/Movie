@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
 import com.oldautumn.movie.databinding.ActivityMovieDetailBinding
@@ -78,12 +78,12 @@ class MovieDetailActivity : AppCompatActivity() {
                 viewModel.uiState.collect {
                     if (it.movieDetail != null) {
                         binding.backdrop.load(
-                            MovieUtils.getMovieBackdropUrl(
+                            Utils.getMovieBackdropUrl(
                                 it.movieDetail.backdrop_path ?: ""
                             )
                         )
                         binding.moviePoster.load(
-                            MovieUtils.getMoviePosterUrl(
+                            Utils.getMoviePosterUrl(
                                 it.movieDetail.poster_path ?: ""
                             )
                         ) {

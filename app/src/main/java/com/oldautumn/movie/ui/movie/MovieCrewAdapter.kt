@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbCrew
 import com.oldautumn.movie.databinding.ItemMovieCastBinding
@@ -69,7 +68,7 @@ class MovieCrewAdapter(
             if (crew.profile_path?.isNotEmpty() == true) {
                 moviePoster.visibility = View.VISIBLE
                 profileDefaultName.visibility = View.GONE
-                moviePoster.load(MovieUtils.getMoviePosterUrl(crew.profile_path)) {
+                moviePoster.load(Utils.getMoviePosterUrl(crew.profile_path)) {
                     transformations(
                         CircleCropTransformation(),
                     )
@@ -77,10 +76,7 @@ class MovieCrewAdapter(
             } else {
                 moviePoster.visibility = View.GONE
                 profileDefaultName.visibility = View.VISIBLE
-                profileDefaultName.text = crew.name.split(' ')
-                    .mapNotNull { it.firstOrNull()?.toString() }
-                    .take(2)
-                    .reduce { acc, s -> acc + s }
+                profileDefaultName.text = Utils.fetchFirstCharacter(crew.name)
             }
             moviePoster.contentDescription = "${crew.job}\n${crew.name}"
             crewName.text = crew.job

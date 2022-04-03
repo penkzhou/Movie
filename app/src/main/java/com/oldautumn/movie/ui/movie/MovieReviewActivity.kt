@@ -40,15 +40,14 @@ class MovieReviewActivity : AppCompatActivity() {
             R.array.sort_type_array,
             android.R.layout.simple_spinner_item
         )
-        binding.bindState(
-            uiState = viewModel.uiState,
+        bindState(
             pagingData = viewModel.pagingDataFlow,
             uiActions = viewModel.accept
         )
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
-                    if (!it.title.isNullOrEmpty()) {
+                    if (it.title.isNotEmpty()) {
                         supportActionBar?.title = it.title
                     }
                 }
@@ -56,8 +55,7 @@ class MovieReviewActivity : AppCompatActivity() {
         }
     }
 
-    private fun ActivityTraktReviewBinding.bindState(
-        uiState: StateFlow<MovieReviewUiState>,
+    private fun bindState(
         pagingData: Flow<PagingData<TraktReview>>,
         uiActions: (MovieReviewViewModel.UiAction) -> Unit
     ) {

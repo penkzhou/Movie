@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.UnifyShowTrendingItem
 
@@ -44,7 +44,7 @@ class ShowTrendingAdapter(private val popularList: MutableList<UnifyShowTrending
         fun updateViewWithItem(movieWithImage: UnifyShowTrendingItem) {
 
             moviePoster.contentDescription = movieWithImage.show.show.title
-            moviePoster.load(MovieUtils.getMoviePosterUrl(movieWithImage.image.posters[0].file_path)){
+            moviePoster.load(Utils.getMoviePosterUrl(movieWithImage.image.posters[0].file_path)){
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }

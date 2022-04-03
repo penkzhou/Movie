@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbCast
 import com.oldautumn.movie.databinding.ItemMovieCastBinding
@@ -68,7 +68,7 @@ class MovieCastAdapter(
             if (cast.profile_path?.isNotEmpty() == true) {
                 moviePoster.visibility = View.VISIBLE
                 profileDefaultName.visibility = View.GONE
-                moviePoster.load(MovieUtils.getMoviePosterUrl(cast.profile_path)) {
+                moviePoster.load(Utils.getMoviePosterUrl(cast.profile_path)) {
                     transformations(
                         CircleCropTransformation(),
                     )
@@ -76,10 +76,7 @@ class MovieCastAdapter(
             } else {
                 moviePoster.visibility = View.GONE
                 profileDefaultName.visibility = View.VISIBLE
-                profileDefaultName.text = cast.name.split(' ')
-                    .mapNotNull { it.firstOrNull()?.toString() }
-                    .take(2)
-                    .reduce { acc, s -> acc + s }
+                profileDefaultName.text = Utils.fetchFirstCharacter(cast.name)
             }
             moviePoster.contentDescription = "${cast.character}\n由${cast.name}扮演"
             castName.text = cast.character

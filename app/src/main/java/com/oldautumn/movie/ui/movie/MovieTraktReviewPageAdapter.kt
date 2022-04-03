@@ -1,6 +1,5 @@
 package com.oldautumn.movie.ui.movie
 
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TraktReview
 import com.oldautumn.movie.databinding.ItemLoadStateBinding
-import java.text.SimpleDateFormat
-import java.util.*
+import com.oldautumn.movie.utils.Utils
 
 class MovieTraktReviewPageAdapter :
     PagingDataAdapter<TraktReview, MovieTraktReviewPageAdapter.MovieTraktReviewViewHolder>(
@@ -56,11 +54,7 @@ class MovieTraktReviewPageAdapter :
             reviewAuthor.text = traktReview.user.name
             reviewReply.text = traktReview.replies.toString()
             reviewContent.text = traktReview.comment
-            val format = SimpleDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US
-            )
-            reviewTime.text =
-                DateUtils.getRelativeTimeSpanString(format.parse(traktReview.created_at).time)
+            reviewTime.text = Utils.getFormatTimeDisplay(traktReview.created_at)
             reviewLike.text = traktReview.likes.toString()
         }
     }

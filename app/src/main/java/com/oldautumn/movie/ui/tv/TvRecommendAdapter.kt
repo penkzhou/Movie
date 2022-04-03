@@ -8,9 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
 import com.oldautumn.movie.data.api.model.TmdbSimpleTvItem
 import java.text.DecimalFormat
 
@@ -63,7 +62,7 @@ class TvRecommendAdapter(
         private val tvRate: TextView = view.findViewById(R.id.movie_vote_average)
 
         fun updateViewWithItem(movieItem: TmdbSimpleTvItem) {
-            tvPoster.load(MovieUtils.getMoviePosterUrl(movieItem.poster_path ?: "")) {
+            tvPoster.load(Utils.getMoviePosterUrl(movieItem.poster_path ?: "")) {
                 transformations(RoundedCornersTransformation(16f))
             }
             tvRate.text = "${DecimalFormat("##.#").format(movieItem.vote_average)}"

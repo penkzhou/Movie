@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
 
@@ -48,7 +48,7 @@ class MovieTrendingAdapter(private val trendingList: MutableList<UnifyMovieTrend
             movieName.setText(movieTrendingItem.movie.movie.title)
             movieYear.setText(movieTrendingItem.movie.movie.year.toString())
             movieWatcher.setText("${movieTrendingItem.movie.watchers}人在看")
-            moviePoster.load(MovieUtils.getMoviePosterUrl(movieTrendingItem.image.backdrops[0].file_path))
+            moviePoster.load(Utils.getMoviePosterUrl(movieTrendingItem.image.backdrops[0].file_path))
         }
     }
 }

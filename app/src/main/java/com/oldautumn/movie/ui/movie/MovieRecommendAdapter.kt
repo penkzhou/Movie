@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
 import java.text.DecimalFormat
@@ -62,7 +62,7 @@ class MovieRecommendAdapter(
         private val movieRate: TextView = view.findViewById(R.id.movie_vote_average)
 
         fun updateViewWithItem(movieItem: TmdbSimpleMovieItem) {
-            moviePoster.load(MovieUtils.getMoviePosterUrl(movieItem.poster_path ?: "")) {
+            moviePoster.load(Utils.getMoviePosterUrl(movieItem.poster_path ?: "")) {
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }

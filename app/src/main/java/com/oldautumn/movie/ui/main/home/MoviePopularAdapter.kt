@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.MovieWithImage
 
@@ -55,7 +55,7 @@ class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>,p
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
 
         fun updateViewWithItem(movieWithImage: MovieWithImage) {
-            moviePoster.load(MovieUtils.getMoviePosterUrl(movieWithImage.image.posters[0].file_path)){
+            moviePoster.load(Utils.getMoviePosterUrl(movieWithImage.image.posters[0].file_path)){
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }

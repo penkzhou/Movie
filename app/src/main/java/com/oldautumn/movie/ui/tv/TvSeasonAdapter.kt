@@ -9,7 +9,7 @@ import coil.transform.RoundedCornersTransformation
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.Season
 import com.oldautumn.movie.databinding.ItemTvSeasonBinding
-import com.oldautumn.movie.utils.MovieUtils
+import com.oldautumn.movie.utils.Utils
 
 class TvSeasonAdapter(private val onDetailClick: () -> Unit, private val seasonList: MutableList<Season>) :
     RecyclerView.Adapter<TvSeasonAdapter.SeasonViewHolder>() {
@@ -42,7 +42,7 @@ class TvSeasonAdapter(private val onDetailClick: () -> Unit, private val seasonL
         private val binding = ItemTvSeasonBinding.bind(itemView)
 
         fun bind(season: Season) {
-            binding.tvSeasonPoster.load(MovieUtils.getMoviePosterUrl(season.poster_path)) {
+            binding.tvSeasonPoster.load(Utils.getMoviePosterUrl(season.poster_path)) {
                 transformations(RoundedCornersTransformation(24f))
             }
             binding.tvSeasonOverview.text = season.overview
