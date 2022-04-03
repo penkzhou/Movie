@@ -78,12 +78,12 @@ class MovieDetailActivity : AppCompatActivity() {
                 viewModel.uiState.collect {
                     if (it.movieDetail != null) {
                         binding.backdrop.load(
-                            Utils.getMovieBackdropUrl(
+                            Utils.getImageFullUrl(
                                 it.movieDetail.backdrop_path ?: ""
                             )
                         )
                         binding.moviePoster.load(
-                            Utils.getMoviePosterUrl(
+                            Utils.getImageFullUrl(
                                 it.movieDetail.poster_path ?: ""
                             )
                         ) {

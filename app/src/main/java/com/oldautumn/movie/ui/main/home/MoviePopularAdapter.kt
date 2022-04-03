@@ -55,7 +55,7 @@ class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>,p
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
 
         fun updateViewWithItem(movieWithImage: MovieWithImage) {
-            moviePoster.load(Utils.getMoviePosterUrl(movieWithImage.image.posters[0].file_path)){
+            moviePoster.load(Utils.getImageFullUrl(movieWithImage.image.posters[0].file_path)){
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }

@@ -68,7 +68,7 @@ class MovieCrewAdapter(
             if (crew.profile_path?.isNotEmpty() == true) {
                 moviePoster.visibility = View.VISIBLE
                 profileDefaultName.visibility = View.GONE
-                moviePoster.load(Utils.getMoviePosterUrl(crew.profile_path)) {
+                moviePoster.load(Utils.getImageFullUrl(crew.profile_path)) {
                     transformations(
                         CircleCropTransformation(),
                     )

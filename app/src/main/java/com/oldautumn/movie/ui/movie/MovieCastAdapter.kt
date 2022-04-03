@@ -68,7 +68,7 @@ class MovieCastAdapter(
             if (cast.profile_path?.isNotEmpty() == true) {
                 moviePoster.visibility = View.VISIBLE
                 profileDefaultName.visibility = View.GONE
-                moviePoster.load(Utils.getMoviePosterUrl(cast.profile_path)) {
+                moviePoster.load(Utils.getImageFullUrl(cast.profile_path)) {
                     transformations(
                         CircleCropTransformation(),
                     )

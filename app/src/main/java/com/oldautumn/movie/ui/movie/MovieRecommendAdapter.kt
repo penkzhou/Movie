@@ -62,7 +62,7 @@ class MovieRecommendAdapter(
         private val movieRate: TextView = view.findViewById(R.id.movie_vote_average)
 
         fun updateViewWithItem(movieItem: TmdbSimpleMovieItem) {
-            moviePoster.load(Utils.getMoviePosterUrl(movieItem.poster_path ?: "")) {
+            moviePoster.load(Utils.getImageFullUrl(movieItem.poster_path ?: "")) {
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }

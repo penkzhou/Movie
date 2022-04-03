@@ -87,7 +87,7 @@ class TvDetailActivity : AppCompatActivity() {
                 viewModel.uiState.collect {
                     if (it.tvDetail != null) {
                         binding.backdrop.load(
-                            Utils.getMovieBackdropUrl(
+                            Utils.getImageFullUrl(
                                 it.tvDetail.backdrop_path ?: ""
                             )
                         )
@@ -96,7 +96,7 @@ class TvDetailActivity : AppCompatActivity() {
                             seasonAdapter.updateData(it.tvDetail.seasons.drop(1))
                         }
                         binding.tvPoster.load(
-                            Utils.getMoviePosterUrl(
+                            Utils.getImageFullUrl(
                                 it.tvDetail.poster_path ?: ""
                             )
                         ) {
@@ -115,10 +115,15 @@ class TvDetailActivity : AppCompatActivity() {
                         }
                         if ((it.tvDetail.networks.firstOrNull()?.logo_path ?: "").isNotEmpty()) {
                             binding.tvNetworkIcon.load(
-                                Utils.getMoviePosterUrl(
-                                    it.tvDetail.networks.firstOrNull()?.logo_path ?: ""
+                                Utils.getImageFullUrl(
+                                    it.tvDetail.networks.firstOrNull()?.logo_path ?: "", 200
                                 )
                             )
+                            binding.tvNetworkIcon.visibility = View.VISIBLE
+                            binding.tvNetworkValue.visibility = View.GONE
+                        } else {
+                            binding.tvNetworkIcon.visibility = View.GONE
+                            binding.tvNetworkValue.visibility = View.VISIBLE
                         }
 
                         binding.tvNetworkValue.text =
