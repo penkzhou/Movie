@@ -1,7 +1,5 @@
 package com.oldautumn.movie.data.api.model
 
-import org.intellij.lang.annotations.Language
-
 /*
 {
   "adult": false,
