@@ -54,23 +54,23 @@
             android:id="@+id/collection_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:drawableLeft="@drawable/ic_thumb_up"
+            android:layout_marginStart="16dp"
             android:drawablePadding="4dp"
             android:textAlignment="center"
             android:textColor="#999999"
             android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="@+id/collection_description"
             app:layout_constraintTop_toBottomOf="@+id/collection_description"
-            tools:text="12" />
+            tools:text="12"
+            app:drawableStartCompat="@drawable/ic_thumb_up" />
 
 
         <TextView
             android:id="@+id/collection_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:drawableLeft="@drawable/ic_comment_24"
+            android:layout_marginStart="16dp"
+            android:drawableStart="@drawable/ic_comment_24"
             android:drawablePadding="4dp"
             android:textAlignment="center"
             android:textColor="#999999"
