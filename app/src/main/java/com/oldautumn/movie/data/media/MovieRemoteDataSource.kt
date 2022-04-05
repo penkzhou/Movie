@@ -75,4 +75,8 @@ class MovieRemoteDataSource(
     suspend fun getTraktMovieBoxOffice(): List<MovieRevenueItem> =
         traktApiService.fetchWeeklyBoxOffice()
 
+
+    suspend fun getTraktPopularCollection(): List<TraktCollection> =
+        traktApiService.fetchTraktPopularCollection()
+
 }

@@ -68,11 +68,14 @@ interface TraktApiService {
     ): List<TraktReview>
 
 
-
     @GET("shows/{tv_id}/ratings")
     suspend fun fetchTraktTvRate(
         @Path("tv_id") tvId: String
     ): TraktRating
+
+    @GET("lists/popular")
+    suspend fun fetchTraktPopularCollection(
+    ): List<TraktCollection>
 
 
 }

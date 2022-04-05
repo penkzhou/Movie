@@ -20,9 +20,9 @@
 
     <fragment
         android:id="@+id/navigation_discovery"
-        android:name="com.oldautumn.movie.ui.main.dashboard.DashboardFragment"
+        android:name="com.oldautumn.movie.ui.main.explore.ExploreFragment"
         android:label="@string/title_explore"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_explore" />
 
     <fragment
         android:id="@+id/navigation_notifications"

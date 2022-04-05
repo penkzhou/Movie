@@ -105,6 +105,10 @@ class MovieRepository(
         }
     }
 
+    suspend fun getTraktPopularCollection():List<TraktCollection>{
+        return remoteDataSource.getTraktPopularCollection()
+    }
+
 
     fun getTraktReviewPageList(
         traktMovieId: String,
