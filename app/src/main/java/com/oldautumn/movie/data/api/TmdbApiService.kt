@@ -79,4 +79,16 @@ interface TmdbApiService {
     ): TmdbTvRateModel
 
 
+    @GET("/3/person/{person_id}")
+    suspend fun fetchTmdbPeopleDetail(
+        @Path("person_id") personId: Int
+    ): TmdbPeople
+
+
+    @GET("/3/person/{person_id}/combined_credits")
+    suspend fun fetchTmdbPeopleCredit(
+        @Path("person_id") personId: Int
+    ): TmdbCombinedCredit
+
+
 }

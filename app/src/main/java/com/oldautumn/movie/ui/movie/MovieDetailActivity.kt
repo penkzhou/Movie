@@ -11,8 +11,10 @@ import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
 import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
+import com.oldautumn.movie.data.api.model.TmdbCast
 import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
 import com.oldautumn.movie.databinding.ActivityMovieDetailBinding
+import com.oldautumn.movie.ui.people.PeopleDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
@@ -34,7 +36,14 @@ class MovieDetailActivity : AppCompatActivity() {
             finish()
         }
 
-        val castAdapter = MovieCastAdapter(mutableListOf(), null)
+        val castAdapter =
+            MovieCastAdapter(mutableListOf(), object : MovieCastAdapter.OnItemClickListener {
+                override fun onItemClick(item: TmdbCast) {
+                    val intent = Intent(this@MovieDetailActivity, PeopleDetailActivity::class.java)
+                    intent.putExtra("peopleId", item.id)
+                    startActivity(intent)
+                }
+            })
         binding.movieCastList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieCastList.adapter = castAdapter
@@ -107,7 +116,8 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieStatusValue.text = it.movieDetail.status
                         binding.title.text = it.movieDetail.title
                         binding.movieOverview.text = it.movieDetail.overview
-                        binding.movieReleaseCountry.text = it.movieDetail.production_countries[0].name
+                        binding.movieReleaseCountry.text =
+                            it.movieDetail.production_countries[0].name
                         binding.movieTmdbRatingValue.text =
                             "${it.movieDetail.vote_average}\n${it.movieDetail.vote_count}人评分"
 

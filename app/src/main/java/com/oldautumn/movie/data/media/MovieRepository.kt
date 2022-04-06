@@ -98,15 +98,24 @@ class MovieRepository(
         return remoteDataSource.getTraktReviewList(traktMovieId, sortType)
     }
 
-    suspend fun getTraktBoxOffice():List<UnifyMovieRevenueItem>{
-        val revenueList =  remoteDataSource.getTraktMovieBoxOffice()
+    suspend fun getTraktBoxOffice(): List<UnifyMovieRevenueItem> {
+        val revenueList = remoteDataSource.getTraktMovieBoxOffice()
         return revenueList.map { it ->
             UnifyMovieRevenueItem(remoteDataSource.getMovieImage(it.movie.ids.tmdb), it)
         }
     }
 
-    suspend fun getTraktPopularCollection():List<TraktCollection>{
+    suspend fun getTraktPopularCollection(): List<TraktCollection> {
         return remoteDataSource.getTraktPopularCollection()
+    }
+
+    suspend fun getPeopleDetail(peopleId: Int): TmdbPeople {
+        return remoteDataSource.getPeopleDetail(peopleId)
+    }
+
+
+    suspend fun getPeopleCredit(peopleId: Int): TmdbCombinedCredit {
+        return remoteDataSource.getPeopleCredit(peopleId)
     }
 
 

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/abc_ic_ab_back_material" />
+
+        <ImageView
+            android:id="@+id/people_poster"
+            android:layout_width="160dp"
+            android:layout_height="250dp"
+            android:layout_margin="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <TextView
+            android:id="@+id/people_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/people_poster"
+            app:layout_constraintTop_toTopOf="@+id/people_poster"
+            tools:text="Brat Pit" />
+
+
+        <TextView
+            android:id="@+id/people_birthday_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="出生日期"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/people_poster"
+            app:layout_constraintTop_toBottomOf="@+id/people_name" />
+
+
+        <TextView
+            android:id="@+id/people_birthday_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/people_birthday_title"
+            app:layout_constraintTop_toBottomOf="@+id/people_birthday_title" />
+
+
+        <TextView
+            android:id="@+id/people_sex_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="性别"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/people_birthday_title"
+            app:layout_constraintTop_toBottomOf="@+id/people_name" />
+
+
+        <TextView
+            android:id="@+id/people_sex_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/people_sex_title"
+            app:layout_constraintTop_toBottomOf="@+id/people_sex_title" />
+
+
+        <TextView
+            android:id="@+id/people_birthplace_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="出生地"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/people_poster"
+            app:layout_constraintTop_toBottomOf="@+id/people_birthday_value" />
+
+
+        <TextView
+            android:id="@+id/people_birthplace_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/people_birthplace_title"
+            app:layout_constraintTop_toBottomOf="@+id/people_birthplace_title"
+            tools:text="US" />
+
+
+        <TextView
+            android:id="@+id/people_age_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="年龄"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/people_birthplace_title"
+            app:layout_constraintTop_toBottomOf="@+id/people_birthday_value" />
+
+
+        <TextView
+            android:id="@+id/people_age_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/people_age_title"
+            app:layout_constraintTop_toBottomOf="@+id/people_age_title" />
+
+
+        <TextView
+            android:id="@+id/people_nickname_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="其他外号"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/people_poster"
+            app:layout_constraintTop_toBottomOf="@+id/people_birthplace_value" />
+
+
+        <TextView
+            android:id="@+id/people_nickname_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/people_nickname_title"
+            app:layout_constraintTop_toBottomOf="@+id/people_nickname_title" />
+
+        <TextView
+            android:id="@+id/people_homepage_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="个人主页"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/people_poster"
+            app:layout_constraintTop_toBottomOf="@+id/people_nickname_value" />
+
+
+        <TextView
+            android:id="@+id/people_homepage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@+id/people_homepage_title"
+            app:layout_constraintTop_toBottomOf="@+id/people_homepage_title" />
+
+
+        <TextView
+            android:id="@+id/people_overview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="个人简介"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/people_poster" />
+
+        <TextView
+            android:id="@+id/people_overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/people_overview_title" />
+
+
+        <TextView
+            android:id="@+id/people_cast_in_movie_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="参与演出的电影"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/people_overview" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/people_cast_in_movie_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/people_cast_in_movie_title" />
+
+
+        <TextView
+            android:id="@+id/people_crew_in_movie_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="参与制作的电影"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/people_cast_in_movie_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/people_crew_in_movie_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/people_crew_in_movie_title" />
+
+
+        <TextView
+            android:id="@+id/people_cast_in_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="参与演出的电视"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/people_crew_in_movie_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/people_cast_in_tv_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/people_cast_in_tv_title" />
+
+
+        <TextView
+            android:id="@+id/people_crew_in_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="参与制作的电视"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/people_cast_in_tv_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/people_crew_in_tv_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/people_crew_in_tv_title" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

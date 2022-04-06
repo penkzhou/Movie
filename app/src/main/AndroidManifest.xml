@@ -36,6 +36,11 @@
             android:name=".ui.tv.TvDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.Movie.NoActionBar" />
+
+        <activity
+            android:name=".ui.people.PeopleDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Movie.NoActionBar" />
         <activity
             android:name=".ui.main.IndexActivity"
             android:exported="false"

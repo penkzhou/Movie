@@ -79,4 +79,12 @@ class MovieRemoteDataSource(
     suspend fun getTraktPopularCollection(): List<TraktCollection> =
         traktApiService.fetchTraktPopularCollection()
 
+
+    suspend fun getPeopleDetail(peopleId: Int): TmdbPeople =
+        tmdbApiService.fetchTmdbPeopleDetail(peopleId)
+
+
+    suspend fun getPeopleCredit(peopleId: Int): TmdbCombinedCredit =
+        tmdbApiService.fetchTmdbPeopleCredit(peopleId)
+
 }

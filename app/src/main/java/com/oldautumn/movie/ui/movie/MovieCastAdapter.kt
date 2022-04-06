@@ -19,9 +19,10 @@ class MovieCastAdapter(
 ) :
     RecyclerView.Adapter<MovieCastAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-
-        val holder = PopularViewHolder(parent)
-        parent.setOnClickListener {
+        val rootView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_movie_cast, parent, false) as ViewGroup
+        val holder = PopularViewHolder(rootView)
+        rootView.setOnClickListener {
             val position = holder.bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val movie = popularList[position]
@@ -54,8 +55,7 @@ class MovieCastAdapter(
     }
 
     class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(view.context)
-            .inflate(R.layout.item_movie_cast, view, false)
+        view
     ) {
 
         private val binding = ItemMovieCastBinding.bind(itemView)
