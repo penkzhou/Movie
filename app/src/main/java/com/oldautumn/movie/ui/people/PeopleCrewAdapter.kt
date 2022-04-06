@@ -7,12 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbCombinedCrew
 import com.oldautumn.movie.databinding.ItemPeopleCreditBinding
+import com.oldautumn.movie.utils.Utils
 
 class PeopleCrewAdapter(
     private val list: MutableList<TmdbCombinedCrew>,
@@ -20,14 +19,12 @@ class PeopleCrewAdapter(
 ) :
     RecyclerView.Adapter<PeopleCrewAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
+        val rootView =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_people_credit, parent, false)
 
-        val holder = PopularViewHolder(parent)
-        parent.setOnClickListener {
-            val position = holder.bindingAdapterPosition
-            if (position != RecyclerView.NO_POSITION) {
-                val item = list[position]
-                onItemClick(item)
-            }
+        val holder = PopularViewHolder(rootView) {
+            onItemClick(list[it])
         }
         return holder
     }
@@ -50,10 +47,15 @@ class PeopleCrewAdapter(
         return list.size
     }
 
-    class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(view.context)
-            .inflate(R.layout.item_people_credit, view, false)
+    class PopularViewHolder(view: View, onItemClick: (Int) -> Unit) : RecyclerView.ViewHolder(
+        view
     ) {
+
+        init {
+            itemView.setOnClickListener {
+                onItemClick(bindingAdapterPosition)
+            }
+        }
 
         private val binding = ItemPeopleCreditBinding.bind(itemView)
         private val moviePoster: ImageView = binding.peopleCreditPoster

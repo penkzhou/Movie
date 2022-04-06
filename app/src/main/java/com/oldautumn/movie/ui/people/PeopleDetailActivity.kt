@@ -3,26 +3,25 @@ package com.oldautumn.movie.ui.people
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.View.inflate
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.google.android.material.chip.Chip
-import com.oldautumn.movie.utils.Utils
-import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbCombinedCast
 import com.oldautumn.movie.data.api.model.TmdbCombinedCrew
-import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
-import com.oldautumn.movie.databinding.ActivityMovieDetailBinding
 import com.oldautumn.movie.databinding.ActivityPeopleDetailBinding
-import com.oldautumn.movie.ui.movie.*
+import com.oldautumn.movie.databinding.ItemPeopleCreditBinding
+import com.oldautumn.movie.ui.base.setup
+import com.oldautumn.movie.ui.movie.MovieDetailActivity
 import com.oldautumn.movie.ui.tv.TvDetailActivity
+import com.oldautumn.movie.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
-import java.text.NumberFormat
 
 @AndroidEntryPoint
 class PeopleDetailActivity : AppCompatActivity() {
@@ -48,9 +47,38 @@ class PeopleDetailActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             })
-        binding.peopleCastInMovieList.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.peopleCastInMovieList.adapter = movieCastAdapter
+        val movieCastAdapter2 = binding.peopleCastInMovieList.setup(
+            mutableListOf<TmdbCombinedCast>(),
+            ItemPeopleCreditBinding::inflate,
+            onItemClick = {
+                val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
+                intent.putExtra("movieId", it.id)
+                startActivity(intent)
+            },
+            { binding, cast ->
+                if (cast.poster_path != null && cast.poster_path.isNotEmpty()) {
+                    binding?.peopleCreditPoster?.visibility = View.VISIBLE
+                    binding?.peopleCreditPosterName?.visibility = View.GONE
+                    binding?.peopleCreditPoster?.load(Utils.getImageFullUrl(cast.poster_path)) {
+                        transformations(
+                            RoundedCornersTransformation(16f)
+                        )
+                    }
+                } else {
+                    binding?.peopleCreditPoster?.visibility = View.GONE
+                    binding?.peopleCreditPosterName?.visibility = View.VISIBLE
+                    binding?.peopleCreditPosterName?.text = cast.name
+                }
+                binding?.peopleCreditPoster?.contentDescription = cast.name
+                binding?.peopleCreditName?.text = "扮演${cast.character}"
+            },
+
+            manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
+
+        )
+//        binding.peopleCastInMovieList.layoutManager =
+//            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        binding.peopleCastInMovieList.adapter = movieCastAdapter
 
 
         val movieCrewAdapter =
@@ -110,13 +138,14 @@ class PeopleDetailActivity : AppCompatActivity() {
                         binding.peopleBirthplaceValue.text = it.peopleDetail.place_of_birth
                         binding.peopleOverview.text = it.peopleDetail.biography
                         binding.peopleSexValue.text =
-                            if (it.peopleDetail.gender == 1) "Male" else "Female"
+                            if (it.peopleDetail.gender == 2) "Male" else "Female"
                         binding.peopleNicknameValue.text =
                             it.peopleDetail.also_known_as.joinToString(",")
 
                     }
                     if (it.peopleMovieCast != null && it.peopleMovieCast.size > 0) {
-                        movieCastAdapter.updateData(it.peopleMovieCast)
+//                        movieCastAdapter.updateData(it.peopleMovieCast)
+                        movieCastAdapter2.update(it.peopleMovieCast)
                         binding.peopleCastInMovieTitle.visibility = View.VISIBLE
                         binding.peopleCastInMovieList.visibility = View.VISIBLE
                     } else {
