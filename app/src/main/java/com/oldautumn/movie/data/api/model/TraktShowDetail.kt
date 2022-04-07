@@ -60,7 +60,7 @@ package com.oldautumn.movie.data.api.model
 * */
 data class TraktShowDetail(
     val title: String,
-    val year: Int,
+    val year: Int?,
     val ids: MovieIds,
     val overview: String,
     val first_aired: String,

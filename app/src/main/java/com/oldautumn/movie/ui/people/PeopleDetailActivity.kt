@@ -3,7 +3,6 @@ package com.oldautumn.movie.ui.people
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.View.inflate
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -39,15 +38,7 @@ class PeopleDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val movieCastAdapter =
-            PeopleCastAdapter(mutableListOf(), object : (TmdbCombinedCast) -> Unit {
-                override fun invoke(p1: TmdbCombinedCast) {
-                    val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
-                    intent.putExtra("movieId", p1.id)
-                    startActivity(intent)
-                }
-            })
-        val movieCastAdapter2 = binding.peopleCastInMovieList.setup(
+        val movieCastAdapter = binding.peopleCastInMovieList.setup(
             mutableListOf<TmdbCombinedCast>(),
             ItemPeopleCreditBinding::inflate,
             onItemClick = {
@@ -75,10 +66,7 @@ class PeopleDetailActivity : AppCompatActivity() {
 
             manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
 
-        )
-//        binding.peopleCastInMovieList.layoutManager =
-//            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//        binding.peopleCastInMovieList.adapter = movieCastAdapter
+            )
 
 
         val movieCrewAdapter =
@@ -144,8 +132,7 @@ class PeopleDetailActivity : AppCompatActivity() {
 
                     }
                     if (it.peopleMovieCast != null && it.peopleMovieCast.size > 0) {
-//                        movieCastAdapter.updateData(it.peopleMovieCast)
-                        movieCastAdapter2.update(it.peopleMovieCast)
+                        movieCastAdapter.update(it.peopleMovieCast)
                         binding.peopleCastInMovieTitle.visibility = View.VISIBLE
                         binding.peopleCastInMovieList.visibility = View.VISIBLE
                     } else {

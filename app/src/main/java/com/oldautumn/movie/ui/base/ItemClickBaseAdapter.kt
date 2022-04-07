@@ -17,6 +17,12 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
 
     var binding: VIEW_BINDING? = null
 
+    init {
+        update(list)
+        notifyDataSetChanged()
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder<T> {
         this.binding = parent.viewBinding(bindingClass)
 
@@ -36,19 +42,18 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     }
 
     fun update(items: List<T>) {
-//        updateAdapterWithDiffResult(calculateDiff(items))
         list.clear()
         list.addAll(items)
-        notifyDataSetChanged()
+        updateAdapterWithDiffResult(calculateDiff(items))
     }
 
     fun add(item: T) {
-        list.toMutableList().add(item)
+        list.add(item)
         notifyItemInserted(list.size)
     }
 
     fun remove(position: Int) {
-        list.toMutableList().removeAt(position)
+        list.removeAt(position)
         notifyItemRemoved(position)
     }
 

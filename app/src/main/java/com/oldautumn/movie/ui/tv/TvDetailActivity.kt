@@ -5,18 +5,20 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbSimpleTvItem
 import com.oldautumn.movie.databinding.ActivityTvDetailBinding
 import com.oldautumn.movie.ui.movie.MovieCastAdapter
 import com.oldautumn.movie.ui.movie.MovieCrewAdapter
 import com.oldautumn.movie.ui.movie.MovieReviewActivity
+import com.oldautumn.movie.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
@@ -86,11 +88,13 @@ class TvDetailActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
                     if (it.tvDetail != null) {
-                        binding.backdrop.load(
-                            Utils.getImageFullUrl(
-                                it.tvDetail.backdrop_path
+                        if (it.tvDetail.backdrop_path != null) {
+                            binding.backdrop.load(
+                                Utils.getImageFullUrl(
+                                    it.tvDetail.backdrop_path
+                                )
                             )
-                        )
+                        }
 
                         if (it.tvDetail.seasons.isNotEmpty()) {
                             seasonAdapter.updateData(it.tvDetail.seasons.drop(1))

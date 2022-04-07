@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="160dp"
     android:layout_height="wrap_content"
     android:layout_margin="4dp">
 
@@ -17,10 +17,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/people_credit_poster_name"
-        android:layout_width="180dp"
-        android:layout_height="240dp"
+        android:layout_width="160dp"
+        android:layout_height="250dp"
         android:gravity="center"
-        android:textSize="56sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -39,7 +39,10 @@
 
     <TextView
         android:id="@+id/people_credit_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:textColor="@color/black"

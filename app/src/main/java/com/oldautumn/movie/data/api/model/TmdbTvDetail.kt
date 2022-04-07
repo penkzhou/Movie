@@ -212,7 +212,7 @@ package com.oldautumn.movie.data.api.model
  */
 data class TmdbTvDetail(
     val adult: Boolean,
-    val backdrop_path: String,
+    val backdrop_path: String?,
     val created_by: List<Creator>,
     val genres: List<Genre>,
     val first_air_date: String,
