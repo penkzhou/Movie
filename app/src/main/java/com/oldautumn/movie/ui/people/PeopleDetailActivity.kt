@@ -82,15 +82,37 @@ class PeopleDetailActivity : AppCompatActivity() {
         binding.peopleCrewInMovieList.adapter = movieCrewAdapter
 
 
-        val tvCastAdapter = PeopleCastAdapter(mutableListOf(), object : (TmdbCombinedCast) -> Unit {
-            override fun invoke(p1: TmdbCombinedCast) {
+        val tvCastAdapter = binding.peopleCastInMovieList.setup(
+            mutableListOf<TmdbCombinedCast>(),
+            ItemPeopleCreditBinding::inflate,
+            onItemClick = {
                 val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
-                intent.putExtra("tvId", p1.id)
+                intent.putExtra("tvId", it.id)
                 startActivity(intent)
-            }
-        })
-        binding.peopleCastInTvList.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            },
+            { binding, cast ->
+                if (cast.poster_path != null && cast.poster_path.isNotEmpty()) {
+                    binding?.peopleCreditPoster?.visibility = View.VISIBLE
+                    binding?.peopleCreditPosterName?.visibility = View.GONE
+                    binding?.peopleCreditPoster?.load(Utils.getImageFullUrl(cast.poster_path)) {
+                        transformations(
+                            RoundedCornersTransformation(16f)
+                        )
+                    }
+                } else {
+                    binding?.peopleCreditPoster?.visibility = View.GONE
+                    binding?.peopleCreditPosterName?.visibility = View.VISIBLE
+                    binding?.peopleCreditPosterName?.text = cast.name
+                }
+                binding?.peopleCreditPoster?.contentDescription = cast.name
+                binding?.peopleCreditName?.text = "扮演${cast.character}"
+            },
+
+            manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
+
+            )
+
+
         binding.peopleCastInTvList.adapter = tvCastAdapter
 
 
@@ -162,7 +184,7 @@ class PeopleDetailActivity : AppCompatActivity() {
 
 
                     if (it.peopleTvCast != null && it.peopleTvCast.size > 0) {
-                        tvCastAdapter.updateData(it.peopleTvCast)
+                        tvCastAdapter.update(it.peopleTvCast)
                         binding.peopleCastInTvTitle.visibility = View.VISIBLE
                         binding.peopleCastInTvList.visibility = View.VISIBLE
                     } else {
