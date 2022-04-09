@@ -22,7 +22,7 @@ fun <T, VIEW_BINDING : ViewBinding> RecyclerView.setup(
     manager: RecyclerView.LayoutManager = LinearLayoutManager(this.context)
 ): ItemClickBaseAdapter<T, VIEW_BINDING> {
     val generalAdapter by lazy {
-        ItemClickBaseAdapter<T, VIEW_BINDING>(
+        ItemClickBaseAdapter(
             items,
             bindingClass,
             { item: T ->
