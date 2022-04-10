@@ -35,7 +35,7 @@ data class TmdbCombinedCast(
     val genre_ids: List<Int>,
     val name: String,
     val media_type: String,
-    val poster_path: String,
+    val poster_path: String?,
     val first_air_date: String,
     val vote_average: Double,
     val vote_count: Int,

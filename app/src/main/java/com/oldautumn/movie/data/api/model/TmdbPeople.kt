@@ -32,7 +32,7 @@ data class TmdbPeople(
     val biography: String,
     val popularity: Double,
     val place_of_birth: String,
-    val profile_path: String,
+    val profile_path: String?,
     val adult: Boolean,
     val imdb_id: String,
     val homepage: String?
