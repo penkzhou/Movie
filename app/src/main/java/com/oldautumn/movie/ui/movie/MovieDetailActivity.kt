@@ -4,17 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.TmdbCast
 import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
 import com.oldautumn.movie.databinding.ActivityMovieDetailBinding
 import com.oldautumn.movie.ui.people.PeopleDetailActivity
+import com.oldautumn.movie.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
@@ -37,19 +38,22 @@ class MovieDetailActivity : AppCompatActivity() {
         }
 
         val castAdapter =
-            MovieCastAdapter(mutableListOf(), object : MovieCastAdapter.OnItemClickListener {
-                override fun onItemClick(item: TmdbCast) {
-                    val intent = Intent(this@MovieDetailActivity, PeopleDetailActivity::class.java)
-                    intent.putExtra("peopleId", item.id)
-                    startActivity(intent)
-                }
-            })
+            MovieCastAdapter(mutableListOf()) {
+                val intent = Intent(this, PeopleDetailActivity::class.java)
+                intent.putExtra("peopleId", it.id)
+                startActivity(intent)
+            }
+
         binding.movieCastList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieCastList.adapter = castAdapter
 
 
-        val crewAdapter = MovieCrewAdapter(mutableListOf(), null)
+        val crewAdapter = MovieCrewAdapter(mutableListOf()) {
+            val intent = Intent(this, PeopleDetailActivity::class.java)
+            intent.putExtra("peopleId", it.id)
+            startActivity(intent)
+        }
         binding.movieCrewList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieCrewList.adapter = crewAdapter
@@ -117,7 +121,7 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.title.text = it.movieDetail.title
                         binding.movieOverview.text = it.movieDetail.overview
                         binding.movieReleaseCountry.text =
-                            it.movieDetail.production_countries[0].name
+                            it.movieDetail.production_countries.firstOrNull()?.name ?: ""
                         binding.movieTmdbRatingValue.text =
                             "${it.movieDetail.vote_average}\n${it.movieDetail.vote_count}人评分"
 

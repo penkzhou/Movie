@@ -68,18 +68,34 @@ class PeopleDetailActivity : AppCompatActivity() {
 
             )
 
-
-        val movieCrewAdapter =
-            PeopleCrewAdapter(mutableListOf(), object : (TmdbCombinedCrew) -> Unit {
-                override fun invoke(p1: TmdbCombinedCrew) {
-                    val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
-                    intent.putExtra("movieId", p1.id)
-                    startActivity(intent)
+        val movieCrewAdapter = binding.peopleCrewInMovieList.setup(
+            mutableListOf<TmdbCombinedCrew>(),
+            ItemPeopleCreditBinding::inflate,
+            onItemClick = {
+                val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
+                intent.putExtra("movieId", it.id)
+                startActivity(intent)
+            },
+            { binding, cast ->
+                if (cast.poster_path != null && cast.poster_path.isNotEmpty()) {
+                    binding?.peopleCreditPoster?.visibility = View.VISIBLE
+                    binding?.peopleCreditPosterName?.visibility = View.GONE
+                    binding?.peopleCreditPoster?.load(Utils.getImageFullUrl(cast.poster_path)) {
+                        transformations(
+                            RoundedCornersTransformation(16f)
+                        )
+                    }
+                } else {
+                    binding?.peopleCreditPoster?.visibility = View.GONE
+                    binding?.peopleCreditPosterName?.visibility = View.VISIBLE
+                    binding?.peopleCreditPosterName?.text = cast.title
                 }
-            })
-        binding.peopleCrewInMovieList.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.peopleCrewInMovieList.adapter = movieCrewAdapter
+                binding?.peopleCreditPoster?.contentDescription = cast.title
+                binding?.peopleCreditName?.text = "担任${cast.job}"
+            },
+            manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
+
+            )
 
 
         val tvCastAdapter = binding.peopleCastInMovieList.setup(
@@ -134,7 +150,7 @@ class PeopleDetailActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
                     if (it.peopleDetail != null) {
-
+                        title = it.peopleDetail.name
                         binding.peoplePoster.load(
                             Utils.getImageFullUrl(
                                 it.peopleDetail.profile_path ?: ""
@@ -164,7 +180,7 @@ class PeopleDetailActivity : AppCompatActivity() {
 
 
                     if (it.peopleMovieCrew != null && it.peopleMovieCrew.size > 0) {
-                        movieCrewAdapter.updateData(it.peopleMovieCrew)
+                        movieCrewAdapter.update(it.peopleMovieCrew)
                         binding.peopleCrewInMovieTitle.visibility = View.VISIBLE
                         binding.peopleCrewInMovieList.visibility = View.VISIBLE
                     } else {

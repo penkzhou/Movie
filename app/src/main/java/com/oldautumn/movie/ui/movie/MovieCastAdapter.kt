@@ -8,14 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbCast
 import com.oldautumn.movie.databinding.ItemMovieCastBinding
+import com.oldautumn.movie.utils.Utils
 
 class MovieCastAdapter(
     private val popularList: MutableList<TmdbCast>,
-    private val onItemClickListener: OnItemClickListener?
+    private val onItemClick: (TmdbCast) -> Unit
 ) :
     RecyclerView.Adapter<MovieCastAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
@@ -26,7 +26,7 @@ class MovieCastAdapter(
             val position = holder.bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val movie = popularList[position]
-                onItemClickListener?.onItemClick(movie)
+                onItemClick(movie)
             }
         }
         return holder

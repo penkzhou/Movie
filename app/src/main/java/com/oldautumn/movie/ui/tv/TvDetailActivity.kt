@@ -18,6 +18,7 @@ import com.oldautumn.movie.databinding.ActivityTvDetailBinding
 import com.oldautumn.movie.ui.movie.MovieCastAdapter
 import com.oldautumn.movie.ui.movie.MovieCrewAdapter
 import com.oldautumn.movie.ui.movie.MovieReviewActivity
+import com.oldautumn.movie.ui.people.PeopleDetailActivity
 import com.oldautumn.movie.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -39,13 +40,21 @@ class TvDetailActivity : AppCompatActivity() {
             finish()
         }
 
-        val castAdapter = MovieCastAdapter(mutableListOf(), null)
+        val castAdapter = MovieCastAdapter(mutableListOf()) {
+            val intent = Intent(this, PeopleDetailActivity::class.java)
+            intent.putExtra("peopleId", it.id)
+            startActivity(intent)
+        }
         binding.tvCastList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCastList.adapter = castAdapter
 
 
-        val crewAdapter = MovieCrewAdapter(mutableListOf(), null)
+        val crewAdapter = MovieCrewAdapter(mutableListOf()) {
+            val intent = Intent(this, PeopleDetailActivity::class.java)
+            intent.putExtra("peopleId", it.id)
+            startActivity(intent)
+        }
         binding.tvCrewList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCrewList.adapter = crewAdapter
@@ -97,7 +106,8 @@ class TvDetailActivity : AppCompatActivity() {
                         }
 
                         if (it.tvDetail.seasons.isNotEmpty()) {
-                            seasonAdapter.updateData(it.tvDetail.seasons.drop(1))
+
+                            seasonAdapter.updateData(it.tvDetail.seasons)
                         }
                         binding.tvPoster.load(
                             Utils.getImageFullUrl(

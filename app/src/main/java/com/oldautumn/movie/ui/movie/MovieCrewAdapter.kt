@@ -8,24 +8,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbCrew
 import com.oldautumn.movie.databinding.ItemMovieCastBinding
+import com.oldautumn.movie.utils.Utils
 
 class MovieCrewAdapter(
     private val popularList: MutableList<TmdbCrew>,
-    private val onItemClickListener: OnItemClickListener?
+    private val onItemClick: (TmdbCrew) -> Unit
 ) :
     RecyclerView.Adapter<MovieCrewAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
 
-        val holder = PopularViewHolder(parent)
-        parent.setOnClickListener {
+        val rootView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_movie_cast, parent, false) as ViewGroup
+        val holder = PopularViewHolder(rootView)
+        rootView.setOnClickListener {
             val position = holder.bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val movie = popularList[position]
-                onItemClickListener?.onItemClick(movie)
+                onItemClick(movie)
             }
         }
         return holder
@@ -49,14 +51,7 @@ class MovieCrewAdapter(
         return popularList.size
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(crew: TmdbCrew)
-    }
-
-    class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(view.context)
-            .inflate(R.layout.item_movie_cast, view, false)
-    ) {
+    class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(view) {
 
         private val binding = ItemMovieCastBinding.bind(itemView)
         private val moviePoster: ImageView = binding.movieCastPoster
