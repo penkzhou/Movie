@@ -40,6 +40,10 @@ android {
         viewBinding true
     }
     namespace 'com.oldautumn.movie'
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
