@@ -118,6 +118,10 @@ class MovieRepository(
         return remoteDataSource.getPeopleCredit(peopleId)
     }
 
+    suspend fun getPeopleImage(peopleId: Int): TmdbPeopleImage {
+        return remoteDataSource.getPeopleImage(peopleId)
+    }
+
 
     fun getTraktReviewPageList(
         traktMovieId: String,

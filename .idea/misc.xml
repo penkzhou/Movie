@@ -41,6 +41,7 @@
         <entry key="app/src/main/res/layout/item_movie_trakt_collection.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/item_movie_trakt_review.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/item_people_credit.xml" value="0.17864583333333334" />
+        <entry key="app/src/main/res/layout/item_people_image.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/item_popular_movie.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/item_trending_movie.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/item_tv_season.xml" value="0.3220108695652174" />

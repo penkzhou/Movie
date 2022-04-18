@@ -1,9 +1,6 @@
 package com.oldautumn.movie.ui.people
 
-import com.oldautumn.movie.data.api.model.TmdbCombinedCast
-import com.oldautumn.movie.data.api.model.TmdbCombinedCrew
-import com.oldautumn.movie.data.api.model.TmdbPeople
-import com.oldautumn.movie.data.api.model.TraktPeople
+import com.oldautumn.movie.data.api.model.*
 
 data class PeopleDetailUiState(
     val peopleDetail: TmdbPeople? = null,
@@ -12,5 +9,7 @@ data class PeopleDetailUiState(
     val peopleMovieCrew: MutableList<TmdbCombinedCrew>? = mutableListOf(),
     val peopleTvCast: MutableList<TmdbCombinedCast>? = mutableListOf(),
     val peopleTvCrew: MutableList<TmdbCombinedCrew>? = mutableListOf(),
+    val peopleImageList: MutableList<TmdbImageItem>? = mutableListOf(),
+    val peopleImageSize: Int = 0,
     val errorMessage: String? = null
 )

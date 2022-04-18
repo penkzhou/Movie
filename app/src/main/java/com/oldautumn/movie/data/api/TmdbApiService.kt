@@ -91,4 +91,10 @@ interface TmdbApiService {
     ): TmdbCombinedCredit
 
 
+    @GET("/3/person/{person_id}/images")
+    suspend fun fetchTmdbPeopleImage(
+        @Path("person_id") personId: Int
+    ): TmdbPeopleImage
+
+
 }

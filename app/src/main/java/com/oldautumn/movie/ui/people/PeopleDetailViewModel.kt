@@ -30,6 +30,8 @@ class PeopleDetailViewModel @Inject constructor(
             mutableListOf(),
             mutableListOf(),
             mutableListOf(),
+            mutableListOf(),
+            0,
             "",
         )
 
@@ -39,20 +41,23 @@ class PeopleDetailViewModel @Inject constructor(
 
     private var fetchPeopleDetailJob: Job? = null
     private var fetchPeopleCreditJob: Job? = null
+    private var fetchPeopleImageJob: Job? = null
     private var fetchTraktPeopleDetailJob: Job? = null
 
     fun fetchPeopleDetailData() {
         if (peopleId > 0) {
             fetchPeopleDetail(peopleId)
             fetchPeopleCredit(peopleId)
+            fetchPeopleImage(peopleId)
+
         }
     }
 
-    private fun fetchPeopleDetail(people: Int) {
-        fetchPeopleDetailJob?.cancel();
+    private fun fetchPeopleDetail(peopleId: Int) {
+        fetchPeopleDetailJob?.cancel()
         fetchPeopleDetailJob = viewModelScope.launch {
             try {
-                val peopleDetail = repository.getPeopleDetail(people)
+                val peopleDetail = repository.getPeopleDetail(peopleId)
                 _uiState.value = _uiState.value.copy(peopleDetail = peopleDetail)
 
             } catch (e: IOException) {
@@ -65,11 +70,11 @@ class PeopleDetailViewModel @Inject constructor(
     }
 
 
-    private fun fetchPeopleCredit(people: Int) {
-        fetchPeopleCreditJob?.cancel();
+    private fun fetchPeopleCredit(peopleId: Int) {
+        fetchPeopleCreditJob?.cancel()
         fetchPeopleCreditJob = viewModelScope.launch {
             try {
-                val movieCredit = repository.getPeopleCredit(people)
+                val movieCredit = repository.getPeopleCredit(peopleId)
                 val movieCrewList =
                     movieCredit.crew.filter { it.media_type == "movie" }.toMutableList()
                 val movieCastList =
@@ -81,6 +86,27 @@ class PeopleDetailViewModel @Inject constructor(
                     peopleMovieCrew = movieCrewList,
                     peopleTvCast = tvCastList,
                     peopleTvCrew = tvCrewList
+                )
+            } catch (e: IOException) {
+                _uiState.value = _uiState.value.copy(errorMessage = e.message)
+            } catch (hoe: HttpException) {
+                _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
+            }
+
+        }
+    }
+
+
+    private fun fetchPeopleImage(peopleId: Int) {
+        fetchPeopleImageJob?.cancel()
+        fetchPeopleImageJob = viewModelScope.launch {
+            try {
+                val peopleImage = repository.getPeopleImage(peopleId)
+                val peopleImageList = peopleImage.profiles.subList(0, 7)
+                val peopleImageSize = peopleImage.profiles.size
+                _uiState.value = _uiState.value.copy(
+                    peopleImageList = peopleImageList.toMutableList(),
+                    peopleImageSize = peopleImageSize
                 )
             } catch (e: IOException) {
                 _uiState.value = _uiState.value.copy(errorMessage = e.message)

@@ -87,4 +87,7 @@ class MovieRemoteDataSource(
     suspend fun getPeopleCredit(peopleId: Int): TmdbCombinedCredit =
         tmdbApiService.fetchTmdbPeopleCredit(peopleId)
 
+    suspend fun getPeopleImage(peopleId: Int):TmdbPeopleImage =
+        tmdbApiService.fetchTmdbPeopleImage(peopleId)
+
 }

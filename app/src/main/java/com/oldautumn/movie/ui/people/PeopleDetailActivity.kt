@@ -13,8 +13,10 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.oldautumn.movie.data.api.model.TmdbCombinedCast
 import com.oldautumn.movie.data.api.model.TmdbCombinedCrew
+import com.oldautumn.movie.data.api.model.TmdbImageItem
 import com.oldautumn.movie.databinding.ActivityPeopleDetailBinding
 import com.oldautumn.movie.databinding.ItemPeopleCreditBinding
+import com.oldautumn.movie.databinding.ItemPeopleImageBinding
 import com.oldautumn.movie.ui.base.setup
 import com.oldautumn.movie.ui.movie.MovieDetailActivity
 import com.oldautumn.movie.ui.tv.TvDetailActivity
@@ -144,6 +146,33 @@ class PeopleDetailActivity : AppCompatActivity() {
         binding.peopleCrewInTvList.adapter = tvCrewAdapter
 
 
+        // 人物相册
+        val peopleImageAdapter = binding.peopleImageList.setup(
+            mutableListOf<TmdbImageItem>(),
+            ItemPeopleImageBinding::inflate,
+            onItemClick = {
+//                val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
+//                intent.putExtra("tvId", it.id)
+//                startActivity(intent)
+            },
+            { binding, imageItem ->
+                if (imageItem.file_path != null && imageItem.file_path.isNotEmpty()) {
+                    binding?.peopleImage?.load(Utils.getImageFullUrl(imageItem.file_path)) {
+                        transformations(
+                            RoundedCornersTransformation(16f)
+                        )
+                    }
+                }
+            },
+
+            manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
+
+            )
+
+        binding.peopleImageList.adapter = peopleImageAdapter
+
+
+
 
         viewModel.fetchPeopleDetailData()
         lifecycleScope.launch {
@@ -206,6 +235,15 @@ class PeopleDetailActivity : AppCompatActivity() {
                     } else {
                         binding.peopleCastInTvTitle.visibility = View.GONE
                         binding.peopleCastInTvList.visibility = View.GONE
+                    }
+
+                    if (it.peopleImageList != null && it.peopleImageList.size > 0) {
+                        peopleImageAdapter.update(it.peopleImageList)
+                    }
+                    if (it.peopleImageSize > 0) {
+                        binding.peopleImageTitle.text = "个人相册(${it.peopleImageSize})"
+                    } else {
+                        binding.peopleImageTitle.text = "个人相册"
                     }
 
 
