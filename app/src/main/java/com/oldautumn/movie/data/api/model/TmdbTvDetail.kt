@@ -234,7 +234,7 @@ data class TmdbTvDetail(
     val original_name: String,
     val overview: String,
     val popularity: Double,
-    val poster_path: String,
+    val poster_path: String?,
     val production_companies: List<Company>,
     val production_countries: List<Country>,
     val seasons: List<Season>,

@@ -98,7 +98,7 @@ class PeopleDetailActivity : AppCompatActivity() {
             )
 
 
-        val tvCastAdapter = binding.peopleCastInMovieList.setup(
+        val tvCastAdapter = binding.peopleCastInTvList.setup(
             mutableListOf<TmdbCombinedCast>(),
             ItemPeopleCreditBinding::inflate,
             onItemClick = {

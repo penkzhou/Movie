@@ -22,7 +22,7 @@ class MovieTraktReviewAdapter(
 
         val holder = PopularViewHolder(rootView)
         rootView.setOnClickListener {
-            val position = holder.adapterPosition
+            val position = holder.bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 val movie = reviewList[position]
                 onItemClickListener?.onItemClick(movie)

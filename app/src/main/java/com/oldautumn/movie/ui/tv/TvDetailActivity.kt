@@ -111,7 +111,7 @@ class TvDetailActivity : AppCompatActivity() {
                         }
                         binding.tvPoster.load(
                             Utils.getImageFullUrl(
-                                it.tvDetail.poster_path
+                                it.tvDetail.poster_path?:""
                             )
                         ) {
                             transformations(RoundedCornersTransformation(12f))
