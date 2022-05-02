@@ -181,9 +181,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
+            android:ellipsize="end"
+            android:maxLines="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/people_overview_title" />
+
+
+        <TextView
+            android:id="@+id/people_overview_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="更多"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/people_overview" />
 
 
         <TextView
@@ -195,7 +209,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/people_overview" />
+            app:layout_constraintTop_toBottomOf="@+id/people_overview_more" />
 
 
         <TextView
@@ -207,7 +221,7 @@
             android:textColor="?attr/colorPrimary"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/people_overview" />
+            app:layout_constraintTop_toBottomOf="@+id/people_overview_more" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/people_image_list"

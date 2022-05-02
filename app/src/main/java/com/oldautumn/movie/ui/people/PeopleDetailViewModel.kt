@@ -102,7 +102,7 @@ class PeopleDetailViewModel @Inject constructor(
         fetchPeopleImageJob = viewModelScope.launch {
             try {
                 val peopleImage = repository.getPeopleImage(peopleId)
-                val peopleImageList = peopleImage.profiles.subList(0, 7)
+                val peopleImageList = peopleImage.profiles.subList(0, minOf(7,peopleImage.profiles.size))
                 val peopleImageSize = peopleImage.profiles.size
                 _uiState.value = _uiState.value.copy(
                     peopleImageList = peopleImageList.toMutableList(),

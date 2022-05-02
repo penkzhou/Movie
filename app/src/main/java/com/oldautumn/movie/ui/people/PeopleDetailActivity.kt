@@ -2,6 +2,7 @@ package com.oldautumn.movie.ui.people
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -171,6 +172,18 @@ class PeopleDetailActivity : AppCompatActivity() {
 
         binding.peopleImageList.adapter = peopleImageAdapter
 
+
+        binding.peopleOverviewMore.setOnClickListener {
+            if (binding.peopleOverview.maxLines == 3) {
+                binding.peopleOverview.maxLines = Integer.MAX_VALUE
+                binding.peopleOverview.ellipsize = null
+                binding.peopleOverviewMore.text = "收起"
+            } else {
+                binding.peopleOverview.maxLines = 3
+                binding.peopleOverview.ellipsize = TextUtils.TruncateAt.END
+                binding.peopleOverviewMore.text = "更多"
+            }
+        }
 
 
 
