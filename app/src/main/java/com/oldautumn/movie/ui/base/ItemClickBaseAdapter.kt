@@ -62,9 +62,9 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
 
         val item = list[position]
         holder.itemView.bind(item)
-        if (position == holder.bindingAdapterPosition) {
+//        if (position == holder.bindingAdapterPosition) {
             holder.itemView.bindHolder(binding, list[position])
-        }
+//        }
     }
 
     override fun getItemCount(): Int {
