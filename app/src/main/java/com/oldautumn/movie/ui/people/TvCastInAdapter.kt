@@ -15,13 +15,14 @@ import com.oldautumn.movie.utils.Utils
 
 class TvCastInAdapter(
     private val popularList: MutableList<TmdbCombinedCast>,
+    private val isTv: Boolean,
     private val onItemClick: (TmdbCombinedCast) -> Unit
 ) :
     RecyclerView.Adapter<TvCastInAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_people_credit, parent, false) as ViewGroup
-        val holder = PopularViewHolder(rootView)
+        val holder = PopularViewHolder(rootView, isTv)
         rootView.setOnClickListener {
             val position = holder.bindingAdapterPosition
             if (position != RecyclerView.NO_POSITION) {
@@ -54,9 +55,10 @@ class TvCastInAdapter(
         fun onItemClick(cast: TmdbCombinedCast)
     }
 
-    class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
+    class PopularViewHolder(view: ViewGroup, isTv: Boolean) : RecyclerView.ViewHolder(
         view
     ) {
+        private val isTv = isTv
 
         private val binding = ItemPeopleCreditBinding.bind(itemView)
         private val moviePoster: ImageView = binding.peopleCreditPoster
@@ -64,6 +66,7 @@ class TvCastInAdapter(
         private val realName: TextView = binding.peopleCreditName
 
         fun updateViewWithItem(cast: TmdbCombinedCast) {
+            val name = if (isTv) (cast.name) else cast.title
             if (cast.poster_path?.isNotEmpty() == true) {
                 moviePoster.visibility = View.VISIBLE
                 castName.visibility = View.GONE
@@ -75,11 +78,11 @@ class TvCastInAdapter(
             } else {
                 moviePoster.visibility = View.GONE
                 castName.visibility = View.VISIBLE
-                castName.text = Utils.fetchFirstCharacter(cast.name)
+                castName.text = Utils.fetchFirstCharacter(name)
             }
-            moviePoster.contentDescription = "${cast.character}\n由${cast.name}扮演"
+            moviePoster.contentDescription = "${cast.character}\n由${name}扮演"
             castName.text = cast.character
-            realName.text = "在${cast.name}中扮演\n${cast.character}"
+            realName.text = "在${name}中扮演\n${cast.character}"
         }
     }
 }

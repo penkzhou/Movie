@@ -12,11 +12,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.data.api.model.TmdbCombinedCast
 import com.oldautumn.movie.data.api.model.TmdbCombinedCrew
 import com.oldautumn.movie.data.api.model.TmdbImageItem
 import com.oldautumn.movie.databinding.ActivityPeopleDetailBinding
-import com.oldautumn.movie.databinding.ItemPeopleCreditBinding
 import com.oldautumn.movie.databinding.ItemPeopleImageBinding
 import com.oldautumn.movie.ui.base.setup
 import com.oldautumn.movie.ui.movie.MovieDetailActivity
@@ -41,7 +39,7 @@ class PeopleDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val movieCastAdapter = TvCastInAdapter(mutableListOf()) {
+        val movieCastAdapter = TvCastInAdapter(mutableListOf(),false) {
             val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
             intent.putExtra("movieId", it.id)
             startActivity(intent)
@@ -61,7 +59,7 @@ class PeopleDetailActivity : AppCompatActivity() {
 
 
 
-        val tvCastAdapter = TvCastInAdapter(mutableListOf()) {
+        val tvCastAdapter = TvCastInAdapter(mutableListOf(),true) {
             val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
             intent.putExtra("tvId", it.id)
             startActivity(intent)

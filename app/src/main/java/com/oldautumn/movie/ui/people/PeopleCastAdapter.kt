@@ -71,9 +71,9 @@ class PeopleCastAdapter(
             } else {
                 moviePoster.visibility = View.GONE
                 postName.visibility = View.VISIBLE
-                postName.text = cast.name
+                postName.text = cast.title
             }
-            moviePoster.contentDescription = cast.name
+            moviePoster.contentDescription = cast.title
             castName.text = "扮演${cast.character}"
         }
     }

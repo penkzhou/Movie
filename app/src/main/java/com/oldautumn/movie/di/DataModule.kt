@@ -64,7 +64,7 @@ object DataModule {
         val authedHeader = TmdbApiKeyInterceptor(
             "1fb9e261bd10339f78c0737494452323"
         )
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder()
             .addInterceptor(logging)
             .addInterceptor(authedHeader)
