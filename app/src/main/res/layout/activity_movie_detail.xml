@@ -228,6 +228,47 @@
 
 
             <TextView
+                android:id="@+id/movie_backdrop_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="电影剧照"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/movie_genre" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movie_backdrop_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                app:layout_constraintTop_toBottomOf="@+id/movie_backdrop_title" />
+
+
+
+            <TextView
+                android:id="@+id/movie_album_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="电影海报"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/movie_backdrop_list" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movie_album_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                app:layout_constraintTop_toBottomOf="@+id/movie_album_title" />
+
+
+            <TextView
                 android:id="@+id/movie_cast_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -236,12 +277,13 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_genre" />
+                app:layout_constraintTop_toBottomOf="@+id/movie_album_list" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movie_cast_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
                 app:layout_constraintTop_toBottomOf="@+id/movie_cast_title" />
 
 
@@ -260,6 +302,7 @@
                 android:id="@+id/movie_crew_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
                 app:layout_constraintTop_toBottomOf="@+id/movie_crew_title" />
 
 
@@ -278,6 +321,7 @@
                 android:id="@+id/movie_recommend_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
                 app:layout_constraintTop_toBottomOf="@+id/movie_recommend_title" />
 
 
@@ -296,6 +340,7 @@
                 android:id="@+id/movie_similar_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
                 app:layout_constraintTop_toBottomOf="@+id/movie_similar_title" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

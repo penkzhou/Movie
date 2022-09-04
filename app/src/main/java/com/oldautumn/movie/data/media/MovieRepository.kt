@@ -58,6 +58,12 @@ class MovieRepository(
         return remoteDataSource.getMovieCast(movieId)
     }
 
+
+
+    suspend fun getMovieAlbum(movieId: Int): TmdbImageModel {
+        return remoteDataSource.getMovieImage(movieId)
+    }
+
     suspend fun getShowCredits(showId: Int): TmdbCreditList {
         return remoteDataSource.getTvCast(showId)
     }

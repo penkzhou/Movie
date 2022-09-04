@@ -35,6 +35,7 @@ class MovieDetailViewModel @Inject constructor(
     private var fetchTraktMovieDetailJob: Job? = null
     private var fetchRecommendMovieListJob: Job? = null
     private var fetchSimilarMovieListJob: Job? = null
+    private var fetchMovieAlbumJob: Job? = null
 
     fun fetchMovieDetailData() {
         if (movieId > 0) {
@@ -54,6 +55,7 @@ class MovieDetailViewModel @Inject constructor(
             try {
                 val movieDetail = repository.getMovieDetail(movieId)
                 _uiState.value = _uiState.value.copy(movieDetail = movieDetail)
+                fetchMovieAlbum(movieDetail.id)
                 if (movieSlug.isNullOrEmpty()) {
                     movieSlug = movieDetail.imdb_id ?: ""
                     fetchTraktMovieDetail(movieSlug)
@@ -83,6 +85,22 @@ class MovieDetailViewModel @Inject constructor(
         }
     }
 
+
+    private fun fetchMovieAlbum(movieId: Int) {
+        fetchMovieAlbumJob?.cancel();
+        fetchMovieAlbumJob = viewModelScope.launch {
+            try {
+                val movieAlbum = repository.getMovieAlbum(movieId)
+                _uiState.value = _uiState.value.copy(movieAlbum = movieAlbum)
+            } catch (e: IOException) {
+                _uiState.value = _uiState.value.copy(errorMessage = e.message)
+            } catch (hoe: HttpException) {
+                _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
+            }
+
+        }
+    }
+
     private fun fetchTraktMovieDetail(movieSlug: String) {
         fetchTraktMovieDetailJob?.cancel()
         fetchTraktMovieDetailJob = viewModelScope.launch {
@@ -97,6 +115,8 @@ class MovieDetailViewModel @Inject constructor(
 
         }
     }
+
+
 
     private fun fetchRecommendMovieList(movieId: Int) {
         fetchRecommendMovieListJob?.cancel()

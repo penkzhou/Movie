@@ -59,6 +59,29 @@ class MovieDetailActivity : AppCompatActivity() {
         binding.movieCrewList.adapter = crewAdapter
 
 
+
+        val movieAlbumAdapter = MovieAlbumAdapter(mutableListOf()) {
+
+        }
+
+
+        binding.movieAlbumList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.movieAlbumList.adapter = movieAlbumAdapter
+
+
+
+
+        val movieBackdropAdapter = MovieAlbumAdapter(mutableListOf()) {
+
+        }
+
+
+        binding.movieBackdropList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.movieBackdropList.adapter = movieBackdropAdapter
+
+
         val recommendAdapter = MovieRecommendAdapter(mutableListOf(), object :
             MovieRecommendAdapter.OnItemClickListener {
             override fun onItemClick(movieItem: TmdbSimpleMovieItem) {
@@ -133,6 +156,15 @@ class MovieDetailActivity : AppCompatActivity() {
                         }
                         if (it.movieCreditList.crew.isNotEmpty()) {
                             crewAdapter.updateData(it.movieCreditList.crew)
+                        }
+                    }
+                    if(it.movieAlbum != null){
+                        if(it.movieAlbum.posters.isNotEmpty()){
+                            movieAlbumAdapter.updateData(it.movieAlbum.posters)
+                        }
+
+                        if(it.movieAlbum.backdrops.isNotEmpty()){
+                            movieBackdropAdapter.updateData(it.movieAlbum.backdrops)
                         }
                     }
                     if (it.traktMovieDetail != null) {
