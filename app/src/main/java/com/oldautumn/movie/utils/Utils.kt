@@ -31,7 +31,10 @@ object Utils {
         return DateUtils.getRelativeTimeSpanString(date.time).toString()
     }
 
-    fun fetchFirstCharacter(str: String): String {
+    fun fetchFirstCharacter(str: String?): String {
+        if (str == null || str.isEmpty()) {
+            return ""
+        }
         return str.split(' ')
             .mapNotNull { it.firstOrNull()?.toString() }
             .take(2)

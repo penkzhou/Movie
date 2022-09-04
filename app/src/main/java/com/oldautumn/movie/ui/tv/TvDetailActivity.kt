@@ -143,7 +143,7 @@ class TvDetailActivity : AppCompatActivity() {
                         binding.tvNetworkValue.text =
                             it.tvDetail.networks.firstOrNull()?.name ?: ""
                         binding.tvReleaseValue.text = it.tvDetail.first_air_date
-                        binding.tvLengthValue.text = "${it.tvDetail.episode_run_time[0]}m"
+                        binding.tvLengthValue.text =  "${it.tvDetail.episode_run_time?.get(0) ?: 0}m"
                         binding.tvStatusValue.text = it.tvDetail.status
                         binding.title.text = it.tvDetail.original_name
                         binding.tvOverview.text = it.tvDetail.overview

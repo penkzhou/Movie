@@ -216,7 +216,7 @@ data class TmdbTvDetail(
     val created_by: List<Creator>,
     val genres: List<Genre>,
     val first_air_date: String,
-    val episode_run_time: List<Int>,
+    val episode_run_time: List<Int>?,
     val homepage: String,
     val id: Int,
     val in_production: Boolean,

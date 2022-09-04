@@ -41,97 +41,33 @@ class PeopleDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val movieCastAdapter = binding.peopleCastInMovieList.setup(
-            mutableListOf<TmdbCombinedCast>(),
-            ItemPeopleCreditBinding::inflate,
-            onItemClick = {
-                val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
-                intent.putExtra("movieId", it.id)
-                startActivity(intent)
-            },
-            { binding, cast ->
-                if (cast.poster_path != null && cast.poster_path.isNotEmpty()) {
-                    binding?.peopleCreditPoster?.visibility = View.VISIBLE
-                    binding?.peopleCreditPosterName?.visibility = View.GONE
-                    binding?.peopleCreditPoster?.load(Utils.getImageFullUrl(cast.poster_path)) {
-                        transformations(
-                            RoundedCornersTransformation(16f)
-                        )
-                    }
-                } else {
-                    binding?.peopleCreditPoster?.visibility = View.GONE
-                    binding?.peopleCreditPosterName?.visibility = View.VISIBLE
-                    binding?.peopleCreditPosterName?.text = cast.name
-                }
-                binding?.peopleCreditPoster?.contentDescription = cast.name
-                binding?.peopleCreditName?.text = "扮演${cast.character}"
-            },
-
-            manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
-
-            )
-
-        val movieCrewAdapter = binding.peopleCrewInMovieList.setup(
-            mutableListOf<TmdbCombinedCrew>(),
-            ItemPeopleCreditBinding::inflate,
-            onItemClick = {
-                val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
-                intent.putExtra("movieId", it.id)
-                startActivity(intent)
-            },
-            { binding, cast ->
-                if (cast.poster_path != null && cast.poster_path.isNotEmpty()) {
-                    binding?.peopleCreditPoster?.visibility = View.VISIBLE
-                    binding?.peopleCreditPosterName?.visibility = View.GONE
-                    binding?.peopleCreditPoster?.load(Utils.getImageFullUrl(cast.poster_path)) {
-                        transformations(
-                            RoundedCornersTransformation(16f)
-                        )
-                    }
-                } else {
-                    binding?.peopleCreditPoster?.visibility = View.GONE
-                    binding?.peopleCreditPosterName?.visibility = View.VISIBLE
-                    binding?.peopleCreditPosterName?.text = cast.title
-                }
-                binding?.peopleCreditPoster?.contentDescription = cast.title
-                binding?.peopleCreditName?.text = "担任${cast.job}"
-            },
-            manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
-
-            )
+        val movieCastAdapter = TvCastInAdapter(mutableListOf()) {
+            val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
+            intent.putExtra("movieId", it.id)
+            startActivity(intent)
+        }
+        binding.peopleCastInMovieList.adapter = movieCastAdapter
+        binding.peopleCastInMovieList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
 
-        val tvCastAdapter = binding.peopleCastInTvList.setup(
-            mutableListOf<TmdbCombinedCast>(),
-            ItemPeopleCreditBinding::inflate,
-            onItemClick = {
-                val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
-                intent.putExtra("tvId", it.id)
-                startActivity(intent)
-            },
-            { binding, cast ->
-                if (cast.poster_path != null && cast.poster_path.isNotEmpty()) {
-                    binding?.peopleCreditPoster?.visibility = View.VISIBLE
-                    binding?.peopleCreditPosterName?.visibility = View.GONE
-                    binding?.peopleCreditPoster?.load(Utils.getImageFullUrl(cast.poster_path)) {
-                        transformations(
-                            RoundedCornersTransformation(16f)
-                        )
-                    }
-                } else {
-                    binding?.peopleCreditPoster?.visibility = View.GONE
-                    binding?.peopleCreditPosterName?.visibility = View.VISIBLE
-                    binding?.peopleCreditPosterName?.text = cast.name
-                }
-                binding?.peopleCreditPoster?.contentDescription = cast.name
-                binding?.peopleCreditName?.text = "扮演${cast.character}"
-            },
 
-            manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
-
-            )
+        val movieCrewAdapter = TvCrewInAdapter(mutableListOf()) {
+            val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
+            intent.putExtra("movieId", it.id)
+            startActivity(intent)
+        }
+        binding.peopleCrewInMovieList.adapter = movieCrewAdapter
+        binding.peopleCrewInMovieList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
 
+
+        val tvCastAdapter = TvCastInAdapter(mutableListOf()) {
+            val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
+            intent.putExtra("tvId", it.id)
+            startActivity(intent)
+        }
+
+        binding.peopleCastInTvList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.peopleCastInTvList.adapter = tvCastAdapter
 
 
@@ -211,8 +147,8 @@ class PeopleDetailActivity : AppCompatActivity() {
                             it.peopleDetail.also_known_as.joinToString(",")
 
                     }
-                    if (it.peopleMovieCast != null && it.peopleMovieCast.size > 0) {
-                        movieCastAdapter.update(it.peopleMovieCast)
+                    if (it.peopleMovieCast != null && it.peopleMovieCast.isNotEmpty()) {
+                        movieCastAdapter.updateData(it.peopleMovieCast)
                         binding.peopleCastInMovieTitle.visibility = View.VISIBLE
                         binding.peopleCastInMovieList.visibility = View.VISIBLE
                     } else {
@@ -221,8 +157,8 @@ class PeopleDetailActivity : AppCompatActivity() {
                     }
 
 
-                    if (it.peopleMovieCrew != null && it.peopleMovieCrew.size > 0) {
-                        movieCrewAdapter.update(it.peopleMovieCrew)
+                    if (it.peopleMovieCrew != null && it.peopleMovieCrew.isNotEmpty()) {
+                        movieCrewAdapter.updateData(it.peopleMovieCrew)
                         binding.peopleCrewInMovieTitle.visibility = View.VISIBLE
                         binding.peopleCrewInMovieList.visibility = View.VISIBLE
                     } else {
@@ -231,7 +167,7 @@ class PeopleDetailActivity : AppCompatActivity() {
                     }
 
 
-                    if (it.peopleTvCrew != null && it.peopleTvCrew.size > 0) {
+                    if (it.peopleTvCrew != null && it.peopleTvCrew.isNotEmpty()) {
                         tvCrewAdapter.updateData(it.peopleTvCrew)
                         binding.peopleCrewInTvTitle.visibility = View.VISIBLE
                         binding.peopleCrewInTvList.visibility = View.VISIBLE
@@ -241,8 +177,8 @@ class PeopleDetailActivity : AppCompatActivity() {
                     }
 
 
-                    if (it.peopleTvCast != null && it.peopleTvCast.size > 0) {
-                        tvCastAdapter.update(it.peopleTvCast)
+                    if (it.peopleTvCast != null && it.peopleTvCast.isNotEmpty()) {
+                        tvCastAdapter.updateData(it.peopleTvCast)
                         binding.peopleCastInTvTitle.visibility = View.VISIBLE
                         binding.peopleCastInTvList.visibility = View.VISIBLE
                     } else {
@@ -250,7 +186,7 @@ class PeopleDetailActivity : AppCompatActivity() {
                         binding.peopleCastInTvList.visibility = View.GONE
                     }
 
-                    if (it.peopleImageList != null && it.peopleImageList.size > 0) {
+                    if (it.peopleImageList != null && it.peopleImageList.isNotEmpty()) {
                         peopleImageAdapter.update(it.peopleImageList)
                     }
                     if (it.peopleImageSize > 0) {

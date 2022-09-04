@@ -41,7 +41,6 @@
         android:id="@+id/people_credit_name"
         android:layout_width="match_parent"
         android:gravity="center"
-        android:maxLines="1"
         android:ellipsize="end"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"

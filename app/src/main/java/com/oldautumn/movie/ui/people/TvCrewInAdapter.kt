@@ -1,0 +1,86 @@
+package com.oldautumn.movie.ui.people
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.RoundedCornersTransformation
+import com.oldautumn.movie.R
+import com.oldautumn.movie.data.api.model.TmdbCombinedCast
+import com.oldautumn.movie.data.api.model.TmdbCombinedCrew
+import com.oldautumn.movie.databinding.ItemPeopleCreditBinding
+import com.oldautumn.movie.utils.Utils
+
+class TvCrewInAdapter(
+    private val popularList: MutableList<TmdbCombinedCrew>,
+    private val onItemClick: (TmdbCombinedCrew) -> Unit
+) :
+    RecyclerView.Adapter<TvCrewInAdapter.PopularViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
+        val rootView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_people_credit, parent, false) as ViewGroup
+        val holder = PopularViewHolder(rootView)
+        rootView.setOnClickListener {
+            val position = holder.bindingAdapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val movie = popularList[position]
+                onItemClick(movie)
+            }
+        }
+        return holder
+    }
+
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
+        if (position < 0 || position >= popularList.size) {
+            return
+        }
+        val movieTrendingItem = popularList[position]
+        holder.updateViewWithItem(movieTrendingItem)
+    }
+
+    fun updateData(castList: List<TmdbCombinedCrew>) {
+        popularList.clear()
+        popularList.addAll(castList)
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int {
+        return popularList.size
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(cast: TmdbCombinedCrew)
+    }
+
+    class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
+        view
+    ) {
+
+        private val binding = ItemPeopleCreditBinding.bind(itemView)
+        private val moviePoster: ImageView = binding.peopleCreditPoster
+        private val castName: TextView = binding.peopleCreditPosterName
+        private val realName: TextView = binding.peopleCreditName
+
+        fun updateViewWithItem(cast: TmdbCombinedCrew) {
+            if (cast.poster_path?.isNotEmpty() == true) {
+                moviePoster.visibility = View.VISIBLE
+                castName.visibility = View.GONE
+                moviePoster.load(Utils.getImageFullUrl(cast.poster_path)) {
+                    transformations(
+                        RoundedCornersTransformation(16f)
+                    )
+                }
+            } else {
+                moviePoster.visibility = View.GONE
+                castName.visibility = View.VISIBLE
+                castName.text = Utils.fetchFirstCharacter(cast.title)
+            }
+            moviePoster.contentDescription = "在${cast.title}中担任\n${cast.job}"
+            castName.text = cast.job
+            realName.text = "在${cast.title}中担任\n${cast.job}"
+        }
+    }
+}
