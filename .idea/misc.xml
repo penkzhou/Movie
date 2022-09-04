@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/activity_auth_user_code.xml" value="0.21614583333333334" />
         <entry key="app/src/main/res/layout/activity_index.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/activity_movie_detail.xml" value="0.10249307479224377" />
+        <entry key="app/src/main/res/layout/activity_movie_detail.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_people_detail.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_show_detail.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/activity_trakt_review.xml" value="0.21822916666666667" />

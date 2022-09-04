@@ -121,7 +121,8 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.title.text = it.movieDetail.title
                         binding.movieOverview.text = it.movieDetail.overview
                         binding.movieReleaseCountry.text =
-                            it.movieDetail.production_countries.firstOrNull()?.name ?: ""
+                            it.movieDetail.production_countries?.joinToString(",") { country -> country.name }
+                                ?: ""
                         binding.movieTmdbRatingValue.text =
                             "${it.movieDetail.vote_average}\n${it.movieDetail.vote_count}人评分"
 
