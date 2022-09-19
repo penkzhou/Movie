@@ -1,10 +1,22 @@
 package com.oldautumn.movie.utils
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.text.format.DateUtils
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.palette.graphics.Palette
+import coil.ImageLoader
+import coil.imageLoader
+import coil.load
+import coil.request.Disposable
+import coil.request.ImageRequest
+import coil.size.Size
+import coil.target.ImageViewTarget
+import coil.transform.Transformation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -13,6 +25,36 @@ import java.util.*
 object Utils {
     fun getImageFullUrl(imagePath: String, width: Int = 500): String {
         return "https://image.tmdb.org/t/p/w$width$imagePath"
+    }
+
+    inline fun ImageView.loadWithPattle(
+        data: Any?,
+        imageLoader: ImageLoader = context.imageLoader,
+        builder: ImageRequest.Builder.() -> Unit = {},
+        crossinline paletteCallback:(Palette) -> Unit
+    ): Disposable {
+        val request = ImageRequest.Builder(context)
+            .apply(builder)
+            .data(data)
+            .target(this)
+            .transformations(object: Transformation {
+
+
+                override val cacheKey: String
+                    get() =  "paletteTransformer"
+
+                override suspend fun transform(input: Bitmap, size: Size): Bitmap {
+                    val p = Palette.from(input).generate()
+
+                    paletteCallback(p)
+
+                    return input
+                }
+
+            }
+            )
+            .build()
+        return imageLoader.enqueue(request)
     }
 
     fun getFormatTimeDisplay(timeString: String): String {
