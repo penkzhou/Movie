@@ -169,6 +169,8 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieTmdbRatingValue.text =
                             "${it.movieDetail.vote_average}\n${it.movieDetail.vote_count}人评分"
 
+                        
+
                     }
                     if (it.movieCreditList != null) {
                         if (it.movieCreditList.cast.isNotEmpty()) {
@@ -193,6 +195,8 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieCertificateValue.text = it.traktMovieDetail.certification
                         binding.movieTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}\n${it.traktMovieDetail.votes}人评分"
+
+
                         binding.movieTraktRatingValue.setOnClickListener {
                             val intent =
                                 Intent(this@MovieDetailActivity, MovieReviewActivity::class.java)

@@ -28,47 +28,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/movie_trakt_rating_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:text="Trakt Rating"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintLeft_toRightOf="@+id/movie_poster"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/movie_trakt_rating_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toLeftOf="@+id/movie_trakt_rating_title"
-                app:layout_constraintTop_toBottomOf="@+id/movie_trakt_rating_title" />
-
-
-            <TextView
-                android:id="@+id/movie_tmdb_rating_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:text="TMDB Rating"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintLeft_toRightOf="@+id/movie_trakt_rating_title"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/movie_tmdb_rating_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toLeftOf="@+id/movie_tmdb_rating_title"
-                app:layout_constraintTop_toBottomOf="@+id/movie_tmdb_rating_title" />
-
 
             <TextView
                 android:id="@+id/movie_release_title"
@@ -79,7 +38,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintLeft_toRightOf="@+id/movie_poster"
-                app:layout_constraintTop_toBottomOf="@+id/movie_trakt_rating_value" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
@@ -100,7 +59,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintLeft_toRightOf="@+id/movie_release_title"
-                app:layout_constraintTop_toBottomOf="@+id/movie_trakt_rating_value" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
@@ -198,6 +157,56 @@
                 app:layout_constraintLeft_toLeftOf="@+id/movie_release_country_title"
                 app:layout_constraintTop_toBottomOf="@+id/movie_release_country_title" />
 
+            <TextView
+                android:id="@+id/movie_trakt_rating_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="Trakt Rating"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/movie_tmdb_rating_title"
+                app:layout_constraintTop_toBottomOf="@+id/movie_poster" />
+
+
+            <TextView
+                android:id="@+id/movie_trakt_rating_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@+id/movie_trakt_rating_title"
+                app:layout_constraintTop_toBottomOf="@+id/movie_trakt_rating_title" />
+
+
+
+
+            <TextView
+                android:id="@+id/movie_tmdb_rating_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="TMDB Rating"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toRightOf="@+id/movie_trakt_rating_title"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/movie_poster" />
+
+
+            <TextView
+                android:id="@+id/movie_tmdb_rating_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@+id/movie_tmdb_rating_title"
+                app:layout_constraintTop_toBottomOf="@+id/movie_tmdb_rating_title" />
+
+
+
+
 
             <TextView
                 android:id="@+id/movie_overview_title"
@@ -208,7 +217,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_poster" />
+                app:layout_constraintTop_toBottomOf="@+id/movie_trakt_rating_value" />
 
             <TextView
                 android:id="@+id/movie_overview"
@@ -245,7 +254,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
                 app:layout_constraintTop_toBottomOf="@+id/movie_backdrop_title" />
-
 
 
             <TextView

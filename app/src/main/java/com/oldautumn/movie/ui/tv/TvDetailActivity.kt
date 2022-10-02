@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -20,6 +21,7 @@ import com.oldautumn.movie.ui.movie.MovieCrewAdapter
 import com.oldautumn.movie.ui.movie.MovieReviewActivity
 import com.oldautumn.movie.ui.people.PeopleDetailActivity
 import com.oldautumn.movie.utils.Utils
+import com.oldautumn.movie.utils.Utils.loadWithPattle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
@@ -30,6 +32,8 @@ class TvDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTvDetailBinding
 
     private val viewModel: TvDetailViewModel by viewModels()
+
+    private var chipColor:Int = R.color.purple_200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,6 +107,30 @@ class TvDetailActivity : AppCompatActivity() {
                                     it.tvDetail.backdrop_path
                                 )
                             )
+                            binding.backdrop.loadWithPattle(
+                                Utils.getImageFullUrl(
+                                    it.tvDetail.backdrop_path ?: ""
+                                ),
+                                paletteCallback = { palette ->
+                                    val swatch = palette.vibrantSwatch
+                                    if (swatch != null) {
+                                        binding.backdrop.setBackgroundColor(swatch.rgb)
+                                        binding.title.setTextColor(swatch.titleTextColor)
+                                        binding.home.setColorFilter(
+                                            swatch.titleTextColor,
+                                            android.graphics.PorterDuff.Mode.MULTIPLY
+                                        )
+                                        chipColor = swatch.rgb
+                                        binding.tvGenre.children?.forEach { chip ->
+                                            if (chip is Chip) {
+                                                chip.setBackgroundColor(swatch.rgb)
+                                                chip.setTextColor(swatch.titleTextColor)
+                                            }
+                                        }
+
+                                    }
+                                }
+                            )
                         }
 
                         if (it.tvDetail.seasons.isNotEmpty()) {
@@ -149,6 +177,7 @@ class TvDetailActivity : AppCompatActivity() {
                         binding.tvOverview.text = it.tvDetail.overview
                         binding.tvTmdbRatingValue.text =
                             "${it.tvDetail.vote_average}\n${it.tvDetail.vote_count}人评分"
+
 
                     }
                     if (it.tvCreditList != null) {
