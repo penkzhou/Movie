@@ -1,6 +1,10 @@
 package com.oldautumn.movie.di
 
 import android.content.Context
+import android.util.Log
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.oldautumn.movie.data.api.AuthedInterceptor
 import com.oldautumn.movie.data.api.TmdbApiKeyInterceptor
 import com.oldautumn.movie.data.api.TmdbApiService
@@ -15,6 +19,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -51,6 +58,32 @@ object DataModule {
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
         return OkHttpClient.Builder()
             .addInterceptor(logging)
+            .addInterceptor(authedHeader)
+            .build()
+    }
+
+
+    @Singleton
+    @Provides
+    @Named("loginAuthedOkHttpClient")
+    fun provideLoginAuthedOkHttpClient(dataStore: DataStore<Preferences>): OkHttpClient {
+        val token = runBlocking {
+            dataStore.data.map {
+                it[stringPreferencesKey("auth_string_key")] ?: ""
+            }.first()
+        }
+        Log.i("loginAuthedOkHttpClient", token)
+        val logging = HttpLoggingInterceptor()
+        val authedHeader = AuthedInterceptor(
+            token,
+            "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
+        )
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        return OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+            .writeTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
+            .connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
             .addInterceptor(authedHeader)
             .build()
     }
@@ -98,6 +131,18 @@ object DataModule {
 
     @Singleton
     @Provides
+    @Named("loginAuthedTraktRetrofit")
+    fun provideLoginAuthedTraktRetrofit(@Named("loginAuthedOkHttpClient") okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://api.trakt.tv")
+            .addConverterFactory(MoshiConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+    }
+
+
+    @Singleton
+    @Provides
     @Named("tmdbRetrofit")
     fun provideTmdbRetrofit(@Named("tmdbOkHttpClient") okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -113,6 +158,17 @@ object DataModule {
     fun provideMovieRemoteDataSource(
         tmdbApiService: TmdbApiService,
         @Named("authedTraktApiService") traktApiService: TraktApiService,
+    ): MovieRemoteDataSource {
+        return MovieRemoteDataSource(traktApiService, tmdbApiService)
+    }
+
+
+    @Singleton
+    @Provides
+    @Named("loginMovieRemoteDataSource")
+    fun provideLoginMovieRemoteDataSource(
+        tmdbApiService: TmdbApiService,
+        @Named("loginAuthedTraktApiService") traktApiService: TraktApiService,
     ): MovieRemoteDataSource {
         return MovieRemoteDataSource(traktApiService, tmdbApiService)
     }
@@ -136,15 +192,22 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideMovieRepository(@Named("movieRemoteDataSource") movieRemoteDataSource: MovieRemoteDataSource): MovieRepository {
-        return MovieRepository(movieRemoteDataSource)
+    fun provideMovieRepository(
+        @Named("movieRemoteDataSource") movieRemoteDataSource: MovieRemoteDataSource,
+        @Named("loginMovieRemoteDataSource") loginMovieRemoteDataSource: MovieRemoteDataSource,
+        @Named("authedTraktApiService") traktApiService: TraktApiService
+    ): MovieRepository {
+        return MovieRepository(movieRemoteDataSource, loginMovieRemoteDataSource, traktApiService)
     }
 
 
     @Singleton
     @Provides
-    fun provideAuthRepository(authRemoteDataSource: AuthRemoteDataSource,authLocalDataSource:AuthLocalDataSource): AuthRepository {
-        return AuthRepository(authRemoteDataSource,authLocalDataSource)
+    fun provideAuthRepository(
+        authRemoteDataSource: AuthRemoteDataSource,
+        authLocalDataSource: AuthLocalDataSource
+    ): AuthRepository {
+        return AuthRepository(authRemoteDataSource, authLocalDataSource)
     }
 
 }

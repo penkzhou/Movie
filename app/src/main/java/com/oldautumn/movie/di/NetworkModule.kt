@@ -34,6 +34,17 @@ object NetworkModule {
     }
 
 
+
+    @Singleton
+    @Provides
+    @Named("loginAuthedTraktApiService")
+    fun provideLoginAuthedTraktApiService(
+        @Named("loginAuthedTraktRetrofit") retrofit: Retrofit
+    ): TraktApiService {
+        return retrofit.create(TraktApiService::class.java)
+    }
+
+
     @Singleton
     @Provides
     @Named("traktApiService")

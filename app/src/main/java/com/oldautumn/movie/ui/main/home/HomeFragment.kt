@@ -2,26 +2,34 @@ package com.oldautumn.movie.ui.main.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.oldautumn.movie.data.api.model.MovieWithImage
 import com.oldautumn.movie.data.api.model.UnifyMovieRevenueItem
 import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
 import com.oldautumn.movie.databinding.FragmentHomeBinding
 import com.oldautumn.movie.ui.movie.MovieDetailActivity
 import com.oldautumn.movie.utils.Utils.launchAndRepeatWithViewLifecycle
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.lang.ref.WeakReference
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
 
     private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
@@ -31,16 +39,15 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val trendingListView: RecyclerView = binding.movieTrendingList
-        val popularListView: RecyclerView = binding.moviePopularList
+        val popularPager: ViewPager2 = binding.moviePopularPager
+        val pagerIndicator: DotsIndicator = binding.dotsIndicator
         val revenueListView = binding.movieBoxList
         val trendingAdapter =
             TrendingAdapter(mutableListOf(), object : (UnifyMovieTrendingItem) -> Unit {
@@ -52,8 +59,10 @@ class HomeFragment : Fragment() {
                 }
 
             })
-        val popularAdapter =
-            MoviePopularAdapter(mutableListOf(), object : (MovieWithImage) -> Unit {
+
+
+        val popularPagerAdapter =
+            MoviePopularPagerAdapter(object : (MovieWithImage) -> Unit {
                 override fun invoke(movie: MovieWithImage) {
                     val intent = Intent(context, MovieDetailActivity::class.java)
                     intent.putExtra("movieId", movie.content.ids.tmdb)
@@ -73,12 +82,15 @@ class HomeFragment : Fragment() {
 
             })
         trendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
-        popularListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         revenueListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
 
         trendingListView.adapter = trendingAdapter
-        popularListView.adapter = popularAdapter
         revenueListView.adapter = revenueAdapter
+
+        popularPager.adapter = popularPagerAdapter
+        popularPager.offscreenPageLimit = 1
+        popularPager.setPageTransformer(OffsetPageTransformer(50, 15))
+        pagerIndicator.attachTo(popularPager)
         viewModel.fetchMovieData()
         viewModel.fetchPopularMovie()
         viewModel.fetchBoxOfficeMovieList()
@@ -93,7 +105,7 @@ class HomeFragment : Fragment() {
                             trendingAdapter.updateData(uiState.trendingMovieList)
                         }
                         if (uiState.popularMovieList.isNotEmpty()) {
-                            popularAdapter.updateData(uiState.popularMovieList)
+                            popularPagerAdapter.differ.submitList(uiState.popularMovieList)
                         }
                         if (uiState.revenueMovieList.isNotEmpty()) {
                             revenueAdapter.updateData(uiState.revenueMovieList)
@@ -109,5 +121,9 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    class TimerHandler(private val weakReference: WeakReference<HomeFragment>) : Handler(Looper.getMainLooper()) {
+
     }
 }

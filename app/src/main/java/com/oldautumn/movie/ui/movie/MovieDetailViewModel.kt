@@ -20,7 +20,7 @@ class MovieDetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val movieId = savedStateHandle.get("movieId") ?: 0
+    val movieId = savedStateHandle.get("movieId") ?: 0
     private var movieSlug = savedStateHandle.get("movieSlug") ?: ""
 
     private val _uiState = MutableStateFlow(
@@ -36,11 +36,13 @@ class MovieDetailViewModel @Inject constructor(
     private var fetchRecommendMovieListJob: Job? = null
     private var fetchSimilarMovieListJob: Job? = null
     private var fetchMovieAlbumJob: Job? = null
+    private var fetchMovieVideoJob: Job? = null
 
     fun fetchMovieDetailData() {
         if (movieId > 0) {
             fetchMovieDetail(movieId)
             fetchMovieCredit(movieId)
+            fetchMovieVideo(movieId)
             fetchRecommendMovieList(movieId)
             fetchSimilarMovieList(movieId)
         }
@@ -70,8 +72,24 @@ class MovieDetailViewModel @Inject constructor(
     }
 
 
+    private fun fetchMovieVideo(movieId: Int) {
+        fetchMovieVideoJob?.cancel()
+        fetchMovieVideoJob = viewModelScope.launch {
+            try {
+                val movieVideo = repository.getMovieVideo(movieId)
+                _uiState.value = _uiState.value.copy(movieVideo = movieVideo)
+            } catch (e: IOException) {
+                _uiState.value = _uiState.value.copy(errorMessage = e.message)
+            } catch (hoe: HttpException) {
+                _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
+            }
+
+        }
+    }
+
+
     private fun fetchMovieCredit(movieId: Int) {
-        fetchMovieCreditJob?.cancel();
+        fetchMovieCreditJob?.cancel()
         fetchMovieCreditJob = viewModelScope.launch {
             try {
                 val movieCredit = repository.getMovieCredits(movieId)
@@ -115,7 +133,6 @@ class MovieDetailViewModel @Inject constructor(
 
         }
     }
-
 
 
     private fun fetchRecommendMovieList(movieId: Int) {

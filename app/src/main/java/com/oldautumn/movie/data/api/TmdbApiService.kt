@@ -27,6 +27,12 @@ interface TmdbApiService {
     ): TmdbMovieDetail
 
 
+    @GET("/3/movie/{movie_id}/videos")
+    suspend fun fetchMovieVideo(
+        @Path("movie_id") movieId: Int
+    ): MovieVideo
+
+
     @GET("/3/tv/{tv_id}?append_to_response=external_ids")
     suspend fun fetchTvDetail(
         @Path("tv_id") tvId: Int

@@ -35,6 +35,15 @@ class MovieRemoteDataSource(
     suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail =
         tmdbApiService.fetchMovieDetail(movieId)
 
+
+    suspend fun getMovieVideo(movieId: Int): MovieVideo =
+        tmdbApiService.fetchMovieVideo(movieId)
+
+
+
+    suspend fun getUserSettings(token:String): UserSettings =
+        traktApiService.fetchUserInfo(mapOf(Pair("Authorization", "Bearer $token")))
+
     suspend fun getTvDetail(tvId: Int): TmdbTvDetail =
         tmdbApiService.fetchTvDetail(tvId)
 

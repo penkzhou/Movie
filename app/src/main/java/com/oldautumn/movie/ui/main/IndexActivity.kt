@@ -1,12 +1,12 @@
 package com.oldautumn.movie.ui.main
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.oldautumn.movie.R
 import com.oldautumn.movie.databinding.ActivityIndexBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +31,7 @@ class IndexActivity : AppCompatActivity() {
                 R.id.navigation_movie,
                 R.id.navigation_tv,
                 R.id.navigation_discovery,
-                R.id.navigation_notifications
+                R.id.navigation_me
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

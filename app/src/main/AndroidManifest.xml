@@ -43,21 +43,23 @@
             android:theme="@style/Theme.Movie.NoActionBar" />
         <activity
             android:name=".ui.main.IndexActivity"
-            android:exported="false"
-            android:label="@string/title_activity_index" />
+            android:exported="true"
+            android:label="@string/title_activity_index">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.auth.AuthUserCodeActivity"
             android:exported="false"
             android:launchMode="singleTask" />
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.Movie.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

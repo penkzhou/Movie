@@ -1,10 +1,12 @@
 package com.oldautumn.movie.ui.movie
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.core.view.children
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -24,6 +26,7 @@ import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
+
 @AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -31,7 +34,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private val viewModel: MovieDetailViewModel by viewModels()
 
-    private var chipColor:Int = R.color.purple_200
+    private var chipColor: Int = R.color.purple_200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,8 +72,18 @@ class MovieDetailActivity : AppCompatActivity() {
         }
 
 
+        val movieVideoAdapter =
+            MovieVideoAdapter()
+        binding.movieVideoList.adapter = movieVideoAdapter
+
+        binding.movieVideoList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+
+
         binding.movieAlbumList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
         binding.movieAlbumList.adapter = movieAlbumAdapter
 
 
@@ -128,6 +141,7 @@ class MovieDetailActivity : AppCompatActivity() {
                                         swatch.titleTextColor,
                                         android.graphics.PorterDuff.Mode.MULTIPLY
                                     )
+                                    updateStatusBarBg(swatch.rgb)
                                     chipColor = swatch.rgb
                                     binding.movieGenre.children?.forEach { chip ->
                                         if (chip is Chip) {
@@ -138,6 +152,7 @@ class MovieDetailActivity : AppCompatActivity() {
                                 }
                             }
                         )
+
                         binding.moviePoster.load(
                             Utils.getImageFullUrl(
                                 it.movieDetail.poster_path ?: ""
@@ -151,7 +166,8 @@ class MovieDetailActivity : AppCompatActivity() {
                                 binding.movieGenre.addView(
                                     Chip(this@MovieDetailActivity).apply {
                                         text = it.name
-                                        chipBackgroundColor = ColorStateList.valueOf(chipColor)
+//                                        chipBackgroundColor = getColorStateList(chipColor)
+//                                        setChipBackgroundColorResource(chipColor)
                                     }
                                 )
                             }
@@ -169,7 +185,6 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieTmdbRatingValue.text =
                             "${it.movieDetail.vote_average}\n${it.movieDetail.vote_count}人评分"
 
-                        
 
                     }
                     if (it.movieCreditList != null) {
@@ -180,6 +195,14 @@ class MovieDetailActivity : AppCompatActivity() {
                             crewAdapter.updateData(it.movieCreditList.crew)
                         }
                     }
+                    if (it.movieVideo!= null && it.movieVideo.results.isNotEmpty()){
+                        binding.movieVideoTitle.visibility = View.VISIBLE
+                        binding.movieVideoList.visibility = View.VISIBLE
+                        movieVideoAdapter.differ.submitList(it.movieVideo.results)
+                    } else {
+                        binding.movieVideoTitle.visibility = View.GONE
+                        binding.movieVideoList.visibility = View.GONE
+                    }
                     if (it.movieAlbum != null) {
                         if (it.movieAlbum.posters.isNotEmpty()) {
                             movieAlbumAdapter.updateData(it.movieAlbum.posters)
@@ -189,6 +212,8 @@ class MovieDetailActivity : AppCompatActivity() {
                             movieBackdropAdapter.updateData(it.movieAlbum.backdrops)
                         }
                     }
+                    var s = ""
+                    s.length
                     if (it.traktMovieDetail != null) {
                         val traktMovieIds = it.traktMovieDetail.ids.trakt
                         val movieTitle = it.traktMovieDetail.title
@@ -218,5 +243,41 @@ class MovieDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        initSystemBarsByAndroidX()
+    }
+
+    private fun initSystemBarsByAndroidX() {
+        var controller = WindowCompat.getInsetsController(window, window.decorView)
+        // 设置状态栏反色
+//        controller?.isAppearanceLightStatusBars = true
+//        controller?.hide(WindowInsetsCompat.Type.statusBars())
+        // 隐藏状态栏
+//        controller?.hide(WindowInsets.Type.statusBars())
+//        // 显示状态栏
+//        controller?.show(WindowInsets.Type.statusBars())
+//        // 隐藏导航栏
+//        controller?.hide(WindowInsets.Type.navigationBars())
+//        // 显示导航栏
+//        controller?.show(WindowInsets.Type.navigationBars())
+        // 同时隐藏状态栏和导航栏
+//        controller?.hide(WindowInsetsCompat.Type.statusBars())
+        // 同时隐藏状态栏和导航栏
+//        controller?.show(WindowInsets.Type.systemBars())
+    }
+
+
+    fun updateStatusBarBg(customStatusBarColor: Int) {
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+        // finally change the color
+//        window.setStatusBarColor(ContextCompat.getColor(this, customStatusBarColor))
     }
 }

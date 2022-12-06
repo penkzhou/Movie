@@ -1,17 +1,16 @@
 package com.oldautumn.movie.ui.movie
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
-import androidx.lifecycle.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.ApiProvider
-import com.oldautumn.movie.data.media.MovieRemoteDataSource
-import com.oldautumn.movie.data.media.MovieRepository
 import com.oldautumn.movie.databinding.ActivityTraktReviewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

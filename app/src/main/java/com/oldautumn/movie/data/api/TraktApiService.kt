@@ -22,6 +22,10 @@ interface TraktApiService {
     suspend fun fetchTrendingMovieList(): List<MovieTrendingItem>
 
 
+    @GET("/users/settings")
+    suspend fun fetchUserInfo(@HeaderMap headers:Map<String, String> ): UserSettings
+
+
     @GET("/shows/trending")
     suspend fun fetchTrendingShowList(): List<ShowTrendingItem>
 

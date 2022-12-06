@@ -3,12 +3,14 @@ package com.oldautumn.movie.data.media
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.oldautumn.movie.data.api.ApiProvider
+import com.oldautumn.movie.data.api.TraktApiService
 import com.oldautumn.movie.data.api.model.*
 import kotlinx.coroutines.flow.Flow
 
 class MovieRepository(
-    private val remoteDataSource: MovieRemoteDataSource
+    private val remoteDataSource: MovieRemoteDataSource,
+    private val loginRemoteDataSource: MovieRemoteDataSource,
+    private val traktApiService: TraktApiService
 ) {
 
     suspend fun getTrendingMovieList(): List<UnifyMovieTrendingItem> {
@@ -48,6 +50,15 @@ class MovieRepository(
 
     suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail {
         return remoteDataSource.getMovieDetail(movieId)
+    }
+
+
+    suspend fun getMovieVideo(movieId: Int): MovieVideo {
+        return remoteDataSource.getMovieVideo(movieId)
+    }
+
+    suspend fun getUserInfo(token:String): UserSettings {
+        return loginRemoteDataSource.getUserSettings(token)
     }
 
     suspend fun getShowDetail(showId: Int): TmdbTvDetail {
@@ -133,7 +144,6 @@ class MovieRepository(
         traktMovieId: String,
         sortType: String
     ): Flow<PagingData<TraktReview>> {
-        val traktApiService = ApiProvider.getAuthedApiService()
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
