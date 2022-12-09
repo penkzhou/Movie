@@ -1,4 +1,4 @@
-package com.oldautumn.movie.ui.main.notifications
+package com.oldautumn.movie.ui.main.me
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

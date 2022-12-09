@@ -1,4 +1,4 @@
-package com.oldautumn.movie.ui.main.notifications
+package com.oldautumn.movie.ui.main.me
 
 import com.oldautumn.movie.data.api.model.DeviceCode
 import com.oldautumn.movie.data.api.model.UserSettings

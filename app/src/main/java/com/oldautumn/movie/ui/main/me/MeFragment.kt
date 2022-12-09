@@ -1,18 +1,20 @@
-package com.oldautumn.movie.ui.main.notifications
+package com.oldautumn.movie.ui.main.me
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.DeviceCode
 import com.oldautumn.movie.databinding.FragmentMeBinding
 import com.oldautumn.movie.ui.auth.AuthUserCodeActivity
@@ -31,6 +33,14 @@ class MeFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var menuHost: MenuHost
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        menuHost = requireActivity()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,8 +48,13 @@ class MeFragment : Fragment() {
     ): View? {
 
 
+
         _binding = FragmentMeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        binding.setting.setOnClickListener {
+            val intent = Intent(context,SettingsActivity::class.java)
+            startActivity(intent)
+        }
 
         lifecycleScope.launch {
             launchAndRepeatWithViewLifecycle(Lifecycle.State.STARTED) {
@@ -62,7 +77,7 @@ class MeFragment : Fragment() {
                         binding.desc.visibility = View.VISIBLE
                         binding.avatar.visibility = View.VISIBLE
                         binding.avatar.load(uiState.userSettings.user.images.avatar.full){
-                            CircleCropTransformation()
+                            transformations(CircleCropTransformation())
                         }
                         binding.follow.visibility = View.VISIBLE
                         binding.follow.text = "关注 ${uiState.userSettings.limits.list.count}"
@@ -71,7 +86,31 @@ class MeFragment : Fragment() {
                 }
             }
         }
+
         return root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                // Add menu items here
+                menuInflater.inflate(R.menu.menu_me, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Handle the menu selection
+                return when (menuItem.itemId) {
+                    R.id.action_settings -> {
+                        val intent = Intent(context,SettingsActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     override fun onDestroyView() {

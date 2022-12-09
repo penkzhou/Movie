@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/navigation_me"
-        android:name="com.oldautumn.movie.ui.main.notifications.MeFragment"
+        android:name="com.oldautumn.movie.ui.main.me.MeFragment"
         android:label="@string/title_me"
         tools:layout="@layout/fragment_me" />
 </navigation>
