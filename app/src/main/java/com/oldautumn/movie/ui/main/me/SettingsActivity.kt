@@ -33,7 +33,7 @@ class SettingsActivity : AppCompatActivity() {
             savedInstanceState: Bundle?
         ): View? {
             val root = inflater.inflate(R.layout.modal_bottom_sheet_content, container, false)
-            
+
             return root
         }
 
