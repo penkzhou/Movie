@@ -2,7 +2,6 @@ package com.oldautumn.movie.ui.movie
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -71,13 +70,6 @@ class MovieDetailActivity : AppCompatActivity() {
 
         }
 
-
-        val movieVideoAdapter =
-            MovieVideoAdapter()
-        binding.movieVideoList.adapter = movieVideoAdapter
-
-        binding.movieVideoList.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
 
 
@@ -195,14 +187,7 @@ class MovieDetailActivity : AppCompatActivity() {
                             crewAdapter.updateData(it.movieCreditList.crew)
                         }
                     }
-                    if (it.movieVideo!= null && it.movieVideo.results.isNotEmpty()){
-                        binding.movieVideoTitle.visibility = View.VISIBLE
-                        binding.movieVideoList.visibility = View.VISIBLE
-                        movieVideoAdapter.differ.submitList(it.movieVideo.results)
-                    } else {
-                        binding.movieVideoTitle.visibility = View.GONE
-                        binding.movieVideoList.visibility = View.GONE
-                    }
+
                     if (it.movieAlbum != null) {
                         if (it.movieAlbum.posters.isNotEmpty()) {
                             movieAlbumAdapter.updateData(it.movieAlbum.posters)
