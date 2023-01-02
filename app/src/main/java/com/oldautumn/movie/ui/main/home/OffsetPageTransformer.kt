@@ -24,11 +24,12 @@ class OffsetPageTransformer(
                 marginEnd = totalMargin
             }
 
-            page.translationX = if (ViewCompat.getLayoutDirection(viewPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                -offset
-            } else {
-                offset
-            }
+            page.translationX =
+                if (ViewCompat.getLayoutDirection(viewPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                    -offset
+                } else {
+                    offset
+                }
         } else {
             page.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 topMargin = totalMargin

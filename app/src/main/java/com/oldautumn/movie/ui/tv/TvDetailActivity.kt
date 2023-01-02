@@ -72,7 +72,11 @@ class TvDetailActivity : AppCompatActivity() {
             object :
                 TvRecommendAdapter.OnItemClickListener {
                 override fun onItemClick(tvItem: TmdbSimpleTvItem) {
-                    val intent = Intent(this@TvDetailActivity, TvDetailActivity::class.java)
+                    val intent =
+                        Intent(
+                            this@TvDetailActivity,
+                            TvDetailActivity::class.java
+                        )
                     intent.putExtra("tvId", tvItem.id)
                     startActivity(intent)
                 }
@@ -88,7 +92,11 @@ class TvDetailActivity : AppCompatActivity() {
             object :
                 TvRecommendAdapter.OnItemClickListener {
                 override fun onItemClick(tv: TmdbSimpleTvItem) {
-                    val intent = Intent(this@TvDetailActivity, TvDetailActivity::class.java)
+                    val intent =
+                        Intent(
+                            this@TvDetailActivity,
+                            TvDetailActivity::class.java
+                        )
                     intent.putExtra("tvId", tv.id)
                     startActivity(intent)
                 }
@@ -159,7 +167,8 @@ class TvDetailActivity : AppCompatActivity() {
                         if ((it.tvDetail.networks.firstOrNull()?.logo_path ?: "").isNotEmpty()) {
                             binding.tvNetworkIcon.load(
                                 Utils.getImageFullUrl(
-                                    it.tvDetail.networks.firstOrNull()?.logo_path ?: "", 200
+                                    it.tvDetail.networks.firstOrNull()?.logo_path
+                                        ?: "", 200
                                 )
                             )
                             binding.tvNetworkIcon.visibility = View.VISIBLE
@@ -172,7 +181,8 @@ class TvDetailActivity : AppCompatActivity() {
                         binding.tvNetworkValue.text =
                             it.tvDetail.networks.firstOrNull()?.name ?: ""
                         binding.tvReleaseValue.text = it.tvDetail.first_air_date
-                        binding.tvLengthValue.text = "${it.tvDetail.episode_run_time?.firstOrNull() ?: 0}m"
+                        binding.tvLengthValue.text =
+                            "${it.tvDetail.episode_run_time?.firstOrNull() ?: 0}m"
                         binding.tvStatusValue.text = it.tvDetail.status
                         binding.title.text = it.tvDetail.original_name
                         binding.tvOverview.text = it.tvDetail.overview
@@ -202,10 +212,15 @@ class TvDetailActivity : AppCompatActivity() {
                         val tvTitle = it.traktTvDetail.title
                         binding.tvCertificateValue.text = it.traktTvDetail.certification
                         binding.tvTraktRatingValue.text =
-                            "${DecimalFormat("##.#").format(it.traktTvDetail.rating)}\n${it.traktTvDetail.votes}人评分"
+                            "${DecimalFormat("##.#").format(it.traktTvDetail.rating)}" +
+                                    "\n" +
+                                    "${it.traktTvDetail.votes}人评分"
                         binding.tvTraktRatingValue.setOnClickListener {
                             val intent =
-                                Intent(this@TvDetailActivity, MovieReviewActivity::class.java)
+                                Intent(
+                                    this@TvDetailActivity,
+                                    MovieReviewActivity::class.java
+                                )
                             intent.putExtra("traktMovieId", traktTvIds.toString())
                             intent.putExtra("traktMovieTitle", tvTitle)
                             startActivity(intent)

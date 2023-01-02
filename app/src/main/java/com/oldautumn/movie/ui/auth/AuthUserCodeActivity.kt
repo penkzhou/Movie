@@ -51,7 +51,9 @@ class AuthUserCodeActivity : AppCompatActivity() {
                         binding.backToSplash.visibility = View.GONE
                         binding.userCodeAuth.visibility = View.VISIBLE
                         // 开始走授权流程，通过拿到的usercode 开始
-                        if (uiState.deviceCode != null && uiState.deviceCode.device_code.isNotEmpty()) {
+                        if (uiState.deviceCode != null &&
+                            uiState.deviceCode.device_code.isNotEmpty()
+                        ) {
                             viewModel.fetchDeviceToken(uiState.deviceCode.device_code)
                         }
                     }

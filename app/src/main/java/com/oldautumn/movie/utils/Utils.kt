@@ -17,7 +17,8 @@ import coil.request.ImageRequest
 import coil.size.Size
 import coil.transform.Transformation
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -45,9 +46,7 @@ object Utils {
 
                 override suspend fun transform(input: Bitmap, size: Size): Bitmap {
                     val p = Palette.from(input).generate()
-
                     paletteCallback(p)
-
                     return input
                 }
             }
@@ -68,6 +67,7 @@ object Utils {
         if (date == null) {
             return ""
         }
+
         return DateUtils.getRelativeTimeSpanString(date.time).toString()
     }
 

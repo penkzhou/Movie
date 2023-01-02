@@ -37,9 +37,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -50,40 +48,34 @@ class HomeFragment : Fragment() {
         val pagerIndicator: DotsIndicator = binding.dotsIndicator
         val revenueListView = binding.movieBoxList
         val trendingAdapter =
-            TrendingAdapter(
-                mutableListOf(),
-                object : (UnifyMovieTrendingItem) -> Unit {
-                    override fun invoke(movie: UnifyMovieTrendingItem) {
-                        val intent = Intent(context, MovieDetailActivity::class.java)
-                        intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
-                        intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
-                        startActivity(intent)
-                    }
-                }
-            )
-
-        val popularPagerAdapter =
-            MoviePopularPagerAdapter(object : (MovieWithImage) -> Unit {
-                override fun invoke(movie: MovieWithImage) {
+            TrendingAdapter(mutableListOf(), object : (UnifyMovieTrendingItem) -> Unit {
+                override fun invoke(movie: UnifyMovieTrendingItem) {
                     val intent = Intent(context, MovieDetailActivity::class.java)
-                    intent.putExtra("movieId", movie.content.ids.tmdb)
-                    intent.putExtra("movieSlug", movie.content.ids.slug)
+                    intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
+                    intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
                     startActivity(intent)
                 }
             })
+
+        val popularPagerAdapter = MoviePopularPagerAdapter(object : (MovieWithImage) -> Unit {
+            override fun invoke(movie: MovieWithImage) {
+                val intent = Intent(context, MovieDetailActivity::class.java)
+                intent.putExtra("movieId", movie.content.ids.tmdb)
+                intent.putExtra("movieSlug", movie.content.ids.slug)
+                startActivity(intent)
+            }
+        })
         val revenueAdapter =
-            MovieBoxofficeAdapter(
-                mutableListOf(),
-                object : (UnifyMovieRevenueItem) -> Unit {
-                    override fun invoke(movie: UnifyMovieRevenueItem) {
-                        val intent = Intent(context, MovieDetailActivity::class.java)
-                        intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
-                        intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
-                        startActivity(intent)
-                    }
+            MovieBoxofficeAdapter(mutableListOf(), object : (UnifyMovieRevenueItem) -> Unit {
+                override fun invoke(movie: UnifyMovieRevenueItem) {
+                    val intent = Intent(context, MovieDetailActivity::class.java)
+                    intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
+                    intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
+                    startActivity(intent)
                 }
-            )
-        trendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
+            })
+        trendingListView.layoutManager =
+            LinearLayoutManager(context, HORIZONTAL, false)
         revenueListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
 
         trendingListView.adapter = trendingAdapter
@@ -123,5 +115,6 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    class TimerHandler(private val weakReference: WeakReference<HomeFragment>) : Handler(Looper.getMainLooper())
+    class TimerHandler(private val weakReference: WeakReference<HomeFragment>) :
+        Handler(Looper.getMainLooper())
 }

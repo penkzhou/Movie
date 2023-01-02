@@ -17,7 +17,11 @@ class TvSeasonAdapter(
 ) :
     RecyclerView.Adapter<TvSeasonAdapter.SeasonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
-        val root = LayoutInflater.from(parent.context).inflate(R.layout.item_tv_season, parent, false)
+        val root =
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_tv_season,
+                parent, false
+            )
         return SeasonViewHolder(
             root, onDetailClick
         )

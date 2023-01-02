@@ -83,7 +83,11 @@ class MovieDetailActivity : AppCompatActivity() {
             object :
                 MovieRecommendAdapter.OnItemClickListener {
                 override fun onItemClick(movieItem: TmdbSimpleMovieItem) {
-                    val intent = Intent(this@MovieDetailActivity, MovieDetailActivity::class.java)
+                    val intent =
+                        Intent(
+                            this@MovieDetailActivity,
+                            MovieDetailActivity::class.java
+                        )
                     intent.putExtra("movieId", movieItem.id)
                     startActivity(intent)
                 }
@@ -99,7 +103,11 @@ class MovieDetailActivity : AppCompatActivity() {
             object :
                 MovieRecommendAdapter.OnItemClickListener {
                 override fun onItemClick(movie: TmdbSimpleMovieItem) {
-                    val intent = Intent(this@MovieDetailActivity, MovieDetailActivity::class.java)
+                    val intent =
+                        Intent(
+                            this@MovieDetailActivity,
+                            MovieDetailActivity::class.java
+                        )
                     intent.putExtra("movieId", movie.id)
                     startActivity(intent)
                 }
@@ -165,8 +173,8 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.title.text = it.movieDetail.title
                         binding.movieOverview.text = it.movieDetail.overview
                         binding.movieReleaseCountry.text =
-                            it.movieDetail.production_countries?.joinToString(",") { country -> country.name }
-                                ?: ""
+                            it.movieDetail.production_countries?.joinToString(",")
+                            { country -> country.name }
                         binding.movieTmdbRatingValue.text =
                             "${it.movieDetail.vote_average}\n${it.movieDetail.vote_count}人评分"
                     }
@@ -195,11 +203,16 @@ class MovieDetailActivity : AppCompatActivity() {
                         val movieTitle = it.traktMovieDetail.title
                         binding.movieCertificateValue.text = it.traktMovieDetail.certification
                         binding.movieTraktRatingValue.text =
-                            "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}\n${it.traktMovieDetail.votes}人评分"
+                            "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}" +
+                                    "\n" +
+                                    "${it.traktMovieDetail.votes}人评分"
 
                         binding.movieTraktRatingValue.setOnClickListener {
                             val intent =
-                                Intent(this@MovieDetailActivity, MovieReviewActivity::class.java)
+                                Intent(
+                                    this@MovieDetailActivity,
+                                    MovieReviewActivity::class.java
+                                )
                             intent.putExtra("traktMovieId", traktMovieIds.toString())
                             intent.putExtra("traktMovieTitle", movieTitle)
                             startActivity(intent)

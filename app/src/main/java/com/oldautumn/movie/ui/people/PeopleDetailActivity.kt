@@ -40,35 +40,54 @@ class PeopleDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         val movieCastAdapter = TvCastInAdapter(mutableListOf(), false) {
-            val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
+            val intent =
+                Intent(
+                    this@PeopleDetailActivity,
+                    MovieDetailActivity::class.java
+                )
             intent.putExtra("movieId", it.id)
             startActivity(intent)
         }
         binding.peopleCastInMovieList.adapter = movieCastAdapter
-        binding.peopleCastInMovieList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.peopleCastInMovieList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val movieCrewAdapter = TvCrewInAdapter(mutableListOf()) {
-            val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
+            val intent =
+                Intent(
+                    this@PeopleDetailActivity,
+                    MovieDetailActivity::class.java
+                )
             intent.putExtra("movieId", it.id)
             startActivity(intent)
         }
         binding.peopleCrewInMovieList.adapter = movieCrewAdapter
-        binding.peopleCrewInMovieList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.peopleCrewInMovieList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val tvCastAdapter = TvCastInAdapter(mutableListOf(), true) {
-            val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
+            val intent =
+                Intent(
+                    this@PeopleDetailActivity,
+                    TvDetailActivity::class.java
+                )
             intent.putExtra("tvId", it.id)
             startActivity(intent)
         }
 
-        binding.peopleCastInTvList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.peopleCastInTvList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.peopleCastInTvList.adapter = tvCastAdapter
 
         val tvCrewAdapter = PeopleCrewAdapter(
             mutableListOf(),
             object : (TmdbCombinedCrew) -> Unit {
                 override fun invoke(p1: TmdbCombinedCrew) {
-                    val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
+                    val intent =
+                        Intent(
+                            this@PeopleDetailActivity,
+                            TvDetailActivity::class.java
+                        )
                     intent.putExtra("tvId", p1.id)
                     startActivity(intent)
                 }
@@ -97,9 +116,10 @@ class PeopleDetailActivity : AppCompatActivity() {
                 }
             },
 
-            manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
+            manager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
 
-        )
+            )
 
         binding.peopleImageList.adapter = peopleImageAdapter
 

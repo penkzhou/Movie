@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,7 @@ class TvMainFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentTvHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -62,7 +63,8 @@ class TvMainFragment : Fragment() {
                     }
                 }
             )
-        trendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
+        trendingListView.layoutManager =
+            LinearLayoutManager(context, HORIZONTAL, false)
         popularListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         trendingListView.adapter = tvTrendingAdapter
         popularListView.adapter = popularAdapter

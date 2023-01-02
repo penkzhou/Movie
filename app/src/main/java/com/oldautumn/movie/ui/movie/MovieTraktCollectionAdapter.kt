@@ -56,7 +56,8 @@ class MovieTraktCollectionAdapter(
             binding.collectionComment.text = collection.comment_count.toString()
             binding.collectionLike.text = "${collection.like_count}"
             binding.collectionCreatedAt.text =
-                "${collection.list.user.name}·${Utils.getFormatTimeDisplay(collection.list.created_at)}"
+                "${collection.list.user.name}" +
+                        "·${Utils.getFormatTimeDisplay(collection.list.created_at)}"
             binding.collectionDescription.text = collection.list.description
             binding.collectionTitle.text = collection.list.name
         }
