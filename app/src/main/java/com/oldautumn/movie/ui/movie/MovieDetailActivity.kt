@@ -21,10 +21,9 @@ import com.oldautumn.movie.ui.people.PeopleDetailActivity
 import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.utils.Utils.loadWithPattle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.NumberFormat
-
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
@@ -55,7 +54,6 @@ class MovieDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieCastList.adapter = castAdapter
 
-
         val crewAdapter = MovieCrewAdapter(mutableListOf()) {
             val intent = Intent(this, PeopleDetailActivity::class.java)
             intent.putExtra("peopleId", it.id)
@@ -65,52 +63,48 @@ class MovieDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieCrewList.adapter = crewAdapter
 
-
         val movieAlbumAdapter = MovieAlbumAdapter(mutableListOf()) {
-
         }
-
-
-
 
         binding.movieAlbumList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         binding.movieAlbumList.adapter = movieAlbumAdapter
 
-
         val movieBackdropAdapter = MovieAlbumAdapter(mutableListOf()) {
-
         }
-
 
         binding.movieBackdropList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieBackdropList.adapter = movieBackdropAdapter
 
-
-        val recommendAdapter = MovieRecommendAdapter(mutableListOf(), object :
-            MovieRecommendAdapter.OnItemClickListener {
-            override fun onItemClick(movieItem: TmdbSimpleMovieItem) {
-                val intent = Intent(this@MovieDetailActivity, MovieDetailActivity::class.java)
-                intent.putExtra("movieId", movieItem.id)
-                startActivity(intent)
+        val recommendAdapter = MovieRecommendAdapter(
+            mutableListOf(),
+            object :
+                MovieRecommendAdapter.OnItemClickListener {
+                override fun onItemClick(movieItem: TmdbSimpleMovieItem) {
+                    val intent = Intent(this@MovieDetailActivity, MovieDetailActivity::class.java)
+                    intent.putExtra("movieId", movieItem.id)
+                    startActivity(intent)
+                }
             }
-        })
+        )
 
         binding.movieRecommendList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieRecommendList.adapter = recommendAdapter
 
-
-        val similarAdapter = MovieRecommendAdapter(mutableListOf(), object :
-            MovieRecommendAdapter.OnItemClickListener {
-            override fun onItemClick(movie: TmdbSimpleMovieItem) {
-                val intent = Intent(this@MovieDetailActivity, MovieDetailActivity::class.java)
-                intent.putExtra("movieId", movie.id)
-                startActivity(intent)
+        val similarAdapter = MovieRecommendAdapter(
+            mutableListOf(),
+            object :
+                MovieRecommendAdapter.OnItemClickListener {
+                override fun onItemClick(movie: TmdbSimpleMovieItem) {
+                    val intent = Intent(this@MovieDetailActivity, MovieDetailActivity::class.java)
+                    intent.putExtra("movieId", movie.id)
+                    startActivity(intent)
+                }
             }
-        })
+        )
         binding.movieSimilarList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieSimilarList.adapter = similarAdapter
@@ -140,7 +134,6 @@ class MovieDetailActivity : AppCompatActivity() {
                                             chip.setBackgroundColor(swatch.rgb)
                                         }
                                     }
-
                                 }
                             }
                         )
@@ -176,8 +169,6 @@ class MovieDetailActivity : AppCompatActivity() {
                                 ?: ""
                         binding.movieTmdbRatingValue.text =
                             "${it.movieDetail.vote_average}\n${it.movieDetail.vote_count}人评分"
-
-
                     }
                     if (it.movieCreditList != null) {
                         if (it.movieCreditList.cast.isNotEmpty()) {
@@ -206,7 +197,6 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}\n${it.traktMovieDetail.votes}人评分"
 
-
                         binding.movieTraktRatingValue.setOnClickListener {
                             val intent =
                                 Intent(this@MovieDetailActivity, MovieReviewActivity::class.java)
@@ -223,13 +213,10 @@ class MovieDetailActivity : AppCompatActivity() {
                     if (it.similarMovieList != null) {
                         similarAdapter.updateData(it.similarMovieList.results)
                     }
-
-
                 }
             }
         }
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -254,7 +241,6 @@ class MovieDetailActivity : AppCompatActivity() {
         // 同时隐藏状态栏和导航栏
 //        controller?.show(WindowInsets.Type.systemBars())
     }
-
 
     fun updateStatusBarBg(customStatusBarColor: Int) {
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window

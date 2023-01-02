@@ -6,14 +6,14 @@ import com.oldautumn.movie.data.api.model.DeviceCode
 import com.oldautumn.movie.data.auth.AuthRepository
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
 
 @HiltViewModel
 class MeViewModel @Inject constructor(
@@ -29,12 +29,10 @@ class MeViewModel @Inject constructor(
     )
     val uiState: StateFlow<MeUiState> = _uiState.asStateFlow()
 
-
     private var fetchJob: Job? = null
 
     private var fetchDeviceTokenJob: Job? = null
     private var fetchUserInfoJob: Job? = null
-
 
     fun fetchAuthString() {
         fetchJob?.cancel()
@@ -55,14 +53,12 @@ class MeViewModel @Inject constructor(
         }
     }
 
-
-    fun fetchUserInfo(token:String) {
+    fun fetchUserInfo(token: String) {
         fetchUserInfoJob?.cancel()
         fetchUserInfoJob = viewModelScope.launch {
             try {
                 val userInfo = movieRepository.getUserInfo(token)
                 _uiState.value = _uiState.value.copy(userSettings = userInfo)
-
             } catch (
                 ioe: IOException
             ) {
@@ -77,15 +73,12 @@ class MeViewModel @Inject constructor(
                     )
                 }
             }
-
         }
     }
-
 
     fun fetchDeviceToken(deviceCode: String) {
         fetchDeviceTokenJob?.cancel()
         fetchDeviceTokenJob = viewModelScope.launch {
-
 
             try {
                 val deviceToken = repository.fetchAccessCode(deviceCode)

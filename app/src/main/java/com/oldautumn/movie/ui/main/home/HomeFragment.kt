@@ -23,13 +23,11 @@ import com.oldautumn.movie.ui.movie.MovieDetailActivity
 import com.oldautumn.movie.utils.Utils.launchAndRepeatWithViewLifecycle
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
-
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
 
     private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
@@ -39,7 +37,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -50,16 +50,17 @@ class HomeFragment : Fragment() {
         val pagerIndicator: DotsIndicator = binding.dotsIndicator
         val revenueListView = binding.movieBoxList
         val trendingAdapter =
-            TrendingAdapter(mutableListOf(), object : (UnifyMovieTrendingItem) -> Unit {
-                override fun invoke(movie: UnifyMovieTrendingItem) {
-                    val intent = Intent(context, MovieDetailActivity::class.java)
-                    intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
-                    intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
-                    startActivity(intent)
+            TrendingAdapter(
+                mutableListOf(),
+                object : (UnifyMovieTrendingItem) -> Unit {
+                    override fun invoke(movie: UnifyMovieTrendingItem) {
+                        val intent = Intent(context, MovieDetailActivity::class.java)
+                        intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
+                        intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
+                        startActivity(intent)
+                    }
                 }
-
-            })
-
+            )
 
         val popularPagerAdapter =
             MoviePopularPagerAdapter(object : (MovieWithImage) -> Unit {
@@ -69,18 +70,19 @@ class HomeFragment : Fragment() {
                     intent.putExtra("movieSlug", movie.content.ids.slug)
                     startActivity(intent)
                 }
-
             })
         val revenueAdapter =
-            MovieBoxofficeAdapter(mutableListOf(), object : (UnifyMovieRevenueItem) -> Unit {
-                override fun invoke(movie: UnifyMovieRevenueItem) {
-                    val intent = Intent(context, MovieDetailActivity::class.java)
-                    intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
-                    intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
-                    startActivity(intent)
+            MovieBoxofficeAdapter(
+                mutableListOf(),
+                object : (UnifyMovieRevenueItem) -> Unit {
+                    override fun invoke(movie: UnifyMovieRevenueItem) {
+                        val intent = Intent(context, MovieDetailActivity::class.java)
+                        intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
+                        intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
+                        startActivity(intent)
+                    }
                 }
-
-            })
+            )
         trendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         revenueListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
 
@@ -98,8 +100,7 @@ class HomeFragment : Fragment() {
             launchAndRepeatWithViewLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
                     if (uiState.errorMessage.isNotEmpty()) {
-                        //展示异常toast
-
+                        // 展示异常toast
                     } else {
                         if (uiState.trendingMovieList.isNotEmpty()) {
                             trendingAdapter.updateData(uiState.trendingMovieList)
@@ -111,7 +112,6 @@ class HomeFragment : Fragment() {
                             revenueAdapter.updateData(uiState.revenueMovieList)
                         }
                     }
-
                 }
             }
         }
@@ -123,7 +123,5 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    class TimerHandler(private val weakReference: WeakReference<HomeFragment>) : Handler(Looper.getMainLooper()) {
-
-    }
+    class TimerHandler(private val weakReference: WeakReference<HomeFragment>) : Handler(Looper.getMainLooper())
 }

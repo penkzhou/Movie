@@ -41,21 +41,27 @@ class TvMainFragment : Fragment() {
         val trendingListView: RecyclerView = binding.tvTrendingList
         val popularListView: RecyclerView = binding.tvPopularList
         val tvTrendingAdapter =
-            TvTrendingAdapter(mutableListOf(), object : (UnifyTvTrendingItem) -> Unit {
-                override fun invoke(movieWithImage: UnifyTvTrendingItem) {
-                    val intent = Intent(requireContext(), TvDetailActivity::class.java)
-                    intent.putExtra("tvId", movieWithImage.show.show.ids.tmdb)
-                    startActivity(intent)
+            TvTrendingAdapter(
+                mutableListOf(),
+                object : (UnifyTvTrendingItem) -> Unit {
+                    override fun invoke(movieWithImage: UnifyTvTrendingItem) {
+                        val intent = Intent(requireContext(), TvDetailActivity::class.java)
+                        intent.putExtra("tvId", movieWithImage.show.show.ids.tmdb)
+                        startActivity(intent)
+                    }
                 }
-            })
+            )
         val popularAdapter =
-            TvPopularAdapter(mutableListOf(), object : (MovieWithImage) -> Unit {
-                override fun invoke(movie: MovieWithImage) {
-                    val intent = Intent(context, TvDetailActivity::class.java)
-                    intent.putExtra("tvId", movie.content.ids.tmdb)
-                    startActivity(intent)
+            TvPopularAdapter(
+                mutableListOf(),
+                object : (MovieWithImage) -> Unit {
+                    override fun invoke(movie: MovieWithImage) {
+                        val intent = Intent(context, TvDetailActivity::class.java)
+                        intent.putExtra("tvId", movie.content.ids.tmdb)
+                        startActivity(intent)
+                    }
                 }
-            })
+            )
         trendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         popularListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         trendingListView.adapter = tvTrendingAdapter
@@ -67,8 +73,7 @@ class TvMainFragment : Fragment() {
             launchAndRepeatWithViewLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
                     if (uiState.errorMessage.isNotEmpty()) {
-                        //展示异常toast
-
+                        // 展示异常toast
                     } else {
                         if (uiState.trendingShowList.isNotEmpty()) {
                             tvTrendingAdapter.updateData(uiState.trendingShowList)
@@ -77,7 +82,6 @@ class TvMainFragment : Fragment() {
                             popularAdapter.updateData(uiState.popularShowList)
                         }
                     }
-
                 }
             }
         }

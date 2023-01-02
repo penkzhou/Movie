@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
@@ -28,7 +28,6 @@ class MovieDetailViewModel @Inject constructor(
 
     )
     val uiState: StateFlow<MovieDetailUiState> = _uiState.asStateFlow()
-
 
     private var fetchMovieDetailJob: Job? = null
     private var fetchMovieCreditJob: Job? = null
@@ -52,7 +51,7 @@ class MovieDetailViewModel @Inject constructor(
     }
 
     private fun fetchMovieDetail(movieId: Int) {
-        fetchMovieDetailJob?.cancel();
+        fetchMovieDetailJob?.cancel()
         fetchMovieDetailJob = viewModelScope.launch {
             try {
                 val movieDetail = repository.getMovieDetail(movieId)
@@ -67,10 +66,8 @@ class MovieDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
-
 
     private fun fetchMovieVideo(movieId: Int) {
         fetchMovieVideoJob?.cancel()
@@ -83,10 +80,8 @@ class MovieDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
-
 
     private fun fetchMovieCredit(movieId: Int) {
         fetchMovieCreditJob?.cancel()
@@ -99,13 +94,11 @@ class MovieDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
 
-
     private fun fetchMovieAlbum(movieId: Int) {
-        fetchMovieAlbumJob?.cancel();
+        fetchMovieAlbumJob?.cancel()
         fetchMovieAlbumJob = viewModelScope.launch {
             try {
                 val movieAlbum = repository.getMovieAlbum(movieId)
@@ -115,7 +108,6 @@ class MovieDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
 
@@ -130,10 +122,8 @@ class MovieDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
-
 
     private fun fetchRecommendMovieList(movieId: Int) {
         fetchRecommendMovieListJob?.cancel()
@@ -168,5 +158,4 @@ class MovieDetailViewModel @Inject constructor(
         savedStateHandle["movieSlug"] = movieSlug
         super.onCleared()
     }
-
 }

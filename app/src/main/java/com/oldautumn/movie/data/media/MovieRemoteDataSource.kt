@@ -4,7 +4,6 @@ import com.oldautumn.movie.data.api.TmdbApiService
 import com.oldautumn.movie.data.api.TraktApiService
 import com.oldautumn.movie.data.api.model.*
 
-
 class MovieRemoteDataSource(
     private val traktApiService: TraktApiService,
     private val tmdbApiService: TmdbApiService,
@@ -12,22 +11,17 @@ class MovieRemoteDataSource(
     suspend fun getTrendingMovieList(): List<MovieTrendingItem> =
         traktApiService.fetchTrendingMovieList()
 
-
     suspend fun getTrendingShowList(): List<ShowTrendingItem> =
         traktApiService.fetchTrendingShowList()
-
 
     suspend fun fetchPopularShowList(): List<TraktSimpleContentItem> =
         traktApiService.fetchPopularShowList()
 
-
     suspend fun fetchPopularMovieList(): List<TraktSimpleContentItem> =
         traktApiService.fetchPopularMovieList()
 
-
     suspend fun getMovieImage(movieId: Int): TmdbImageModel =
         tmdbApiService.fetchMovieImageList(movieId)
-
 
     suspend fun getTvImage(tvId: Int): TmdbImageModel =
         tmdbApiService.fetchTvImageList(tvId)
@@ -35,13 +29,10 @@ class MovieRemoteDataSource(
     suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail =
         tmdbApiService.fetchMovieDetail(movieId)
 
-
     suspend fun getMovieVideo(movieId: Int): MovieVideo =
         tmdbApiService.fetchMovieVideo(movieId)
 
-
-
-    suspend fun getUserSettings(token:String): UserSettings =
+    suspend fun getUserSettings(token: String): UserSettings =
         traktApiService.fetchUserInfo(mapOf(Pair("Authorization", "Bearer $token")))
 
     suspend fun getTvDetail(tvId: Int): TmdbTvDetail =
@@ -53,14 +44,11 @@ class MovieRemoteDataSource(
     suspend fun getTvCast(tvId: Int): TmdbCreditList =
         tmdbApiService.fetchTvCredit(tvId)
 
-
     suspend fun getTraktMovieDetail(movieSlug: String): TraktMovieDetail =
         traktApiService.fetchTraktMovieDetail(movieSlug)
 
-
     suspend fun getTraktTvDetail(movieSlug: String): TraktShowDetail =
         traktApiService.fetchTraktTvDetail(movieSlug)
-
 
     suspend fun getTraktShowRate(movieSlug: String): TraktRating =
         traktApiService.fetchTraktTvRate(movieSlug)
@@ -70,7 +58,6 @@ class MovieRemoteDataSource(
 
     suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleItemListModel<TmdbSimpleMovieItem> =
         tmdbApiService.fetchSimilarMovieList(movieId)
-
 
     suspend fun getRecommendTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> =
         tmdbApiService.fetchRecommendTvList(tvId)
@@ -84,19 +71,15 @@ class MovieRemoteDataSource(
     suspend fun getTraktMovieBoxOffice(): List<MovieRevenueItem> =
         traktApiService.fetchWeeklyBoxOffice()
 
-
     suspend fun getTraktPopularCollection(): List<TraktCollection> =
         traktApiService.fetchTraktPopularCollection()
-
 
     suspend fun getPeopleDetail(peopleId: Int): TmdbPeople =
         tmdbApiService.fetchTmdbPeopleDetail(peopleId)
 
-
     suspend fun getPeopleCredit(peopleId: Int): TmdbCombinedCredit =
         tmdbApiService.fetchTmdbPeopleCredit(peopleId)
 
-    suspend fun getPeopleImage(peopleId: Int):TmdbPeopleImage =
+    suspend fun getPeopleImage(peopleId: Int): TmdbPeopleImage =
         tmdbApiService.fetchTmdbPeopleImage(peopleId)
-
 }

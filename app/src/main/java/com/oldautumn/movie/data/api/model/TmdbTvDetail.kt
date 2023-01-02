@@ -262,7 +262,6 @@ data class Creator(
     val profile_path: String,
 )
 
-
 data class Genre(
     /*
     * "id": 9813,

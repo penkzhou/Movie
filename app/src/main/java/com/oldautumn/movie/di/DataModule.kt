@@ -19,6 +19,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
+import javax.inject.Singleton
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
@@ -26,9 +28,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Named
-import javax.inject.Singleton
-
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -45,7 +44,6 @@ object DataModule {
             .build()
     }
 
-
     @Singleton
     @Provides
     @Named("authedOkHttpClient")
@@ -61,7 +59,6 @@ object DataModule {
             .addInterceptor(authedHeader)
             .build()
     }
-
 
     @Singleton
     @Provides
@@ -88,7 +85,6 @@ object DataModule {
             .build()
     }
 
-
     @Singleton
     @Provides
     @Named("tmdbOkHttpClient")
@@ -104,7 +100,6 @@ object DataModule {
             .build()
     }
 
-
     @Singleton
     @Provides
     @Named("traktRetrofit")
@@ -115,7 +110,6 @@ object DataModule {
             .client(okHttpClient)
             .build()
     }
-
 
     @Singleton
     @Provides
@@ -128,18 +122,18 @@ object DataModule {
             .build()
     }
 
-
     @Singleton
     @Provides
     @Named("loginAuthedTraktRetrofit")
-    fun provideLoginAuthedTraktRetrofit(@Named("loginAuthedOkHttpClient") okHttpClient: OkHttpClient): Retrofit {
+    fun provideLoginAuthedTraktRetrofit(
+        @Named("loginAuthedOkHttpClient") okHttpClient: OkHttpClient
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.trakt.tv")
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
             .build()
     }
-
 
     @Singleton
     @Provides
@@ -162,7 +156,6 @@ object DataModule {
         return MovieRemoteDataSource(traktApiService, tmdbApiService)
     }
 
-
     @Singleton
     @Provides
     @Named("loginMovieRemoteDataSource")
@@ -181,14 +174,11 @@ object DataModule {
         return AuthRemoteDataSource(traktApiService)
     }
 
-
     @Singleton
     @Provides
     fun provideAuthLocalDataSource(@ApplicationContext context: Context): AuthLocalDataSource {
         return AuthLocalDataSource(context)
     }
-
-
 
     @Singleton
     @Provides
@@ -200,7 +190,6 @@ object DataModule {
         return MovieRepository(movieRemoteDataSource, loginMovieRemoteDataSource, traktApiService)
     }
 
-
     @Singleton
     @Provides
     fun provideAuthRepository(
@@ -209,5 +198,4 @@ object DataModule {
     ): AuthRepository {
         return AuthRepository(authRemoteDataSource, authLocalDataSource)
     }
-
 }

@@ -8,9 +8,9 @@ import androidx.paging.cachedIn
 import com.oldautumn.movie.data.api.model.TraktReview
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 const val DEFAULT_SORT_TYPE = "newest"
 
@@ -19,7 +19,6 @@ class MovieReviewViewModel @Inject constructor(
     private val repository: MovieRepository,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-
 
     private val traktMovieId = savedStateHandle.get<String>("traktMovieId") ?: ""
     private val traktMovieTitle = savedStateHandle.get<String>("traktMovieTitle") ?: ""
@@ -31,13 +30,11 @@ class MovieReviewViewModel @Inject constructor(
 
     val initialSortType: String = savedStateHandle.get("initialSortType") ?: DEFAULT_SORT_TYPE
 
-
     val pagingDataFlow: Flow<PagingData<TraktReview>>
 
     val accept: (UiAction) -> Unit
 
     init {
-
 
         val actionStateFlow = MutableSharedFlow<UiAction>()
 
@@ -54,17 +51,12 @@ class MovieReviewViewModel @Inject constructor(
             }
             .cachedIn(viewModelScope)
 
-
-
-
-
         accept = { action ->
             viewModelScope.launch {
                 actionStateFlow.emit(action)
             }
         }
     }
-
 
     override fun onCleared() {
         savedStateHandle["traktMovieTitle"] = uiState.value.title
@@ -76,7 +68,4 @@ class MovieReviewViewModel @Inject constructor(
     sealed class UiAction {
         data class ChangeType(val sortType: String) : UiAction()
     }
-
-
 }
-

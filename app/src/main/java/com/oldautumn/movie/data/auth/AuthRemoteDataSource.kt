@@ -13,8 +13,6 @@ class AuthRemoteDataSource(
     suspend fun fetchDeviceCode(): DeviceCode =
         traktApiService.fetchDeviceCode(client_id)
 
-
     suspend fun fetchDeviceAccessToken(deviceCode: String): DeviceToken =
         traktApiService.fetchAccessToken(client_id, client_secret, deviceCode)
-
 }

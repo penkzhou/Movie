@@ -49,7 +49,6 @@ class MovieTraktCollectionAdapter(
         return itemList.size
     }
 
-
     class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemMovieTraktCollectionBinding.bind(view)
 

@@ -14,7 +14,6 @@ import com.oldautumn.movie.ui.main.IndexActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 const val TAG = "SplashActivity"
 
 @AndroidEntryPoint
@@ -41,12 +40,10 @@ class SplashActivity : AppCompatActivity() {
                     } else {
                         viewModel.fetchDeviceCode()
                     }
-
                 }
             }
         }
     }
-
 
     private val startActivityForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

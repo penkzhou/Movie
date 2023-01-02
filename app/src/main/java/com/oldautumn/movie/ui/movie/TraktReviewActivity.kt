@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TraktReviewActivity : AppCompatActivity() {
 
-
     private lateinit var binding: ActivityTraktReviewBinding
 
     private val viewModel: MovieTraktReviewViewModel by viewModels()
@@ -56,7 +55,6 @@ class TraktReviewActivity : AppCompatActivity() {
                 val lines = resources.getStringArray(R.array.sort_type_array).toList()
                 val sortType = lines[position]
                 viewModel.fetchTraktReviewList(traktMovieId, sortType)
-
             }
         }
         viewModel.fetchTraktReviewList(traktMovieId)
@@ -75,5 +73,4 @@ class TraktReviewActivity : AppCompatActivity() {
         onBackPressed()
         return true
     }
-
 }

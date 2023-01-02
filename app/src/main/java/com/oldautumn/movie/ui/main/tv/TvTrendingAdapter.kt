@@ -7,9 +7,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.UnifyTvTrendingItem
+import com.oldautumn.movie.utils.Utils
 
 class TvTrendingAdapter(
     private val trendingList: MutableList<UnifyTvTrendingItem>,

@@ -4,10 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.oldautumn.movie.data.api.TraktApiService
 import com.oldautumn.movie.data.api.model.TraktReview
-import retrofit2.HttpException
 import java.io.IOException
-import javax.inject.Inject
-import javax.inject.Named
+import retrofit2.HttpException
 
 class TraktReviewPagingSource(
     val traktApiService: TraktApiService,
@@ -34,7 +32,7 @@ class TraktReviewPagingSource(
             return LoadResult.Page(
                 data = response,
                 prevKey = null, // Only paging forward.
-                nextKey = nextPageNumber+1
+                nextKey = nextPageNumber + 1
             )
         } catch (e: IOException) {
             // IOException for network failures.

@@ -18,46 +18,38 @@ class MovieRepository(
         return movieTrendingList.map { it ->
             UnifyMovieTrendingItem(remoteDataSource.getMovieImage(it.movie.ids.tmdb), it)
         }
-
     }
-
 
     suspend fun getTrendingShowList(): List<UnifyTvTrendingItem> {
         val movieTrendingList = remoteDataSource.getTrendingShowList()
         return movieTrendingList.map { it ->
             UnifyTvTrendingItem(remoteDataSource.getTvImage(it.show.ids.tmdb), it)
         }
-
     }
-
 
     suspend fun getPopularMovieList(): List<MovieWithImage> {
         val movieTrendingList = remoteDataSource.fetchPopularMovieList()
         return movieTrendingList.map { it ->
             MovieWithImage(it, remoteDataSource.getMovieImage(it.ids.tmdb))
         }
-
     }
-
 
     suspend fun getPopularShowList(): List<MovieWithImage> {
         val movieTrendingList = remoteDataSource.fetchPopularShowList()
         return movieTrendingList.map { it ->
             MovieWithImage(it, remoteDataSource.getTvImage(it.ids.tmdb))
         }
-
     }
 
     suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail {
         return remoteDataSource.getMovieDetail(movieId)
     }
 
-
     suspend fun getMovieVideo(movieId: Int): MovieVideo {
         return remoteDataSource.getMovieVideo(movieId)
     }
 
-    suspend fun getUserInfo(token:String): UserSettings {
+    suspend fun getUserInfo(token: String): UserSettings {
         return loginRemoteDataSource.getUserSettings(token)
     }
 
@@ -69,8 +61,6 @@ class MovieRepository(
         return remoteDataSource.getMovieCast(movieId)
     }
 
-
-
     suspend fun getMovieAlbum(movieId: Int): TmdbImageModel {
         return remoteDataSource.getMovieImage(movieId)
     }
@@ -78,7 +68,6 @@ class MovieRepository(
     suspend fun getShowCredits(showId: Int): TmdbCreditList {
         return remoteDataSource.getTvCast(showId)
     }
-
 
     suspend fun getTraktMovieDetail(movieSlug: String): TraktMovieDetail {
         return remoteDataSource.getTraktMovieDetail(movieSlug)
@@ -92,7 +81,6 @@ class MovieRepository(
         return remoteDataSource.getSimilarMovieList(movieId)
     }
 
-
     suspend fun getRecommendTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> {
         return remoteDataSource.getRecommendTvList(tvId)
     }
@@ -101,11 +89,9 @@ class MovieRepository(
         return remoteDataSource.getSimilarTvList(tvId)
     }
 
-
     suspend fun getTraktTvRating(tvId: String): TraktRating {
         return remoteDataSource.getTraktShowRate(tvId)
     }
-
 
     suspend fun getTraktTvDetail(tvId: String): TraktShowDetail {
         return remoteDataSource.getTraktTvDetail(tvId)
@@ -130,7 +116,6 @@ class MovieRepository(
         return remoteDataSource.getPeopleDetail(peopleId)
     }
 
-
     suspend fun getPeopleCredit(peopleId: Int): TmdbCombinedCredit {
         return remoteDataSource.getPeopleCredit(peopleId)
     }
@@ -138,7 +123,6 @@ class MovieRepository(
     suspend fun getPeopleImage(peopleId: Int): TmdbPeopleImage {
         return remoteDataSource.getPeopleImage(peopleId)
     }
-
 
     fun getTraktReviewPageList(
         traktMovieId: String,
@@ -158,5 +142,4 @@ class MovieRepository(
             }
         ).flow
     }
-
 }

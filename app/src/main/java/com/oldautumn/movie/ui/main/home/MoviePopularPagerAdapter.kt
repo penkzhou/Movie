@@ -36,27 +36,24 @@ class MoviePopularPagerAdapter(
     }
 
     override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
-        if (position < 0 || position >=  differ.currentList.size) {
+        if (position < 0 || position >= differ.currentList.size) {
             return
         }
-        val movieTrendingItem =  differ.currentList[position]
+        val movieTrendingItem = differ.currentList[position]
         holder.updateViewWithItem(movieTrendingItem)
     }
 
-    private val differCallback = object : DiffUtil.ItemCallback<MovieWithImage>(){
+    private val differCallback = object : DiffUtil.ItemCallback<MovieWithImage>() {
         override fun areItemsTheSame(oldItem: MovieWithImage, newItem: MovieWithImage): Boolean {
-            return  oldItem.content.ids.trakt == newItem.content.ids.trakt
+            return oldItem.content.ids.trakt == newItem.content.ids.trakt
         }
 
         override fun areContentsTheSame(oldItem: MovieWithImage, newItem: MovieWithImage): Boolean {
             return oldItem.equals(newItem)
         }
-
     }
 
-    val differ = AsyncListDiffer(this,differCallback)
-
-
+    val differ = AsyncListDiffer(this, differCallback)
 
     override fun getItemCount(): Int {
         return differ.currentList.size

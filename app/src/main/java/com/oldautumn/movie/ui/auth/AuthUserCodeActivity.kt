@@ -13,20 +13,17 @@ import com.oldautumn.movie.databinding.ActivityAuthUserCodeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class AuthUserCodeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthUserCodeBinding
 
     private val viewModel: AuthViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityAuthUserCodeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         binding.backToSplash.setOnClickListener {
             finish()
@@ -58,10 +55,8 @@ class AuthUserCodeActivity : AppCompatActivity() {
                             viewModel.fetchDeviceToken(uiState.deviceCode.device_code)
                         }
                     }
-
                 }
             }
         }
     }
-
 }

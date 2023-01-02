@@ -3,7 +3,6 @@ package com.oldautumn.movie.ui.tv
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
@@ -12,7 +11,10 @@ import com.oldautumn.movie.data.api.model.Season
 import com.oldautumn.movie.databinding.ItemTvSeasonBinding
 import com.oldautumn.movie.utils.Utils
 
-class TvSeasonAdapter(private val onDetailClick: () -> Unit, private val seasonList: MutableList<Season>) :
+class TvSeasonAdapter(
+    private val onDetailClick: () -> Unit,
+    private val seasonList: MutableList<Season>
+) :
     RecyclerView.Adapter<TvSeasonAdapter.SeasonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
         val root = LayoutInflater.from(parent.context).inflate(R.layout.item_tv_season, parent, false)
@@ -43,7 +45,7 @@ class TvSeasonAdapter(private val onDetailClick: () -> Unit, private val seasonL
         private val binding = ItemTvSeasonBinding.bind(itemView)
 
         fun bind(season: Season) {
-            if (season.poster_path?.isNotEmpty() == true){
+            if (season.poster_path?.isNotEmpty() == true) {
                 binding.tvSeasonPoster.load(Utils.getImageFullUrl(season.poster_path)) {
                     transformations(RoundedCornersTransformation(24f))
                 }
@@ -53,12 +55,7 @@ class TvSeasonAdapter(private val onDetailClick: () -> Unit, private val seasonL
             binding.tvSeasonReleaseDate.text = "${season.air_date}开播"
             binding.tvSeasonName.text = season.name
             binding.tvSeasonDetail.setOnClickListener {
-
             }
-
         }
-
     }
-
-
 }
