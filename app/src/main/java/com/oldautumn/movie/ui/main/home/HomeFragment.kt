@@ -37,7 +37,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -48,14 +50,17 @@ class HomeFragment : Fragment() {
         val pagerIndicator: DotsIndicator = binding.dotsIndicator
         val revenueListView = binding.movieBoxList
         val trendingAdapter =
-            TrendingAdapter(mutableListOf(), object : (UnifyMovieTrendingItem) -> Unit {
-                override fun invoke(movie: UnifyMovieTrendingItem) {
-                    val intent = Intent(context, MovieDetailActivity::class.java)
-                    intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
-                    intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
-                    startActivity(intent)
+            TrendingAdapter(
+                mutableListOf(),
+                object : (UnifyMovieTrendingItem) -> Unit {
+                    override fun invoke(movie: UnifyMovieTrendingItem) {
+                        val intent = Intent(context, MovieDetailActivity::class.java)
+                        intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
+                        intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
+                        startActivity(intent)
+                    }
                 }
-            })
+            )
 
         val popularPagerAdapter = MoviePopularPagerAdapter(object : (MovieWithImage) -> Unit {
             override fun invoke(movie: MovieWithImage) {
@@ -66,14 +71,17 @@ class HomeFragment : Fragment() {
             }
         })
         val revenueAdapter =
-            MovieBoxofficeAdapter(mutableListOf(), object : (UnifyMovieRevenueItem) -> Unit {
-                override fun invoke(movie: UnifyMovieRevenueItem) {
-                    val intent = Intent(context, MovieDetailActivity::class.java)
-                    intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
-                    intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
-                    startActivity(intent)
+            MovieBoxofficeAdapter(
+                mutableListOf(),
+                object : (UnifyMovieRevenueItem) -> Unit {
+                    override fun invoke(movie: UnifyMovieRevenueItem) {
+                        val intent = Intent(context, MovieDetailActivity::class.java)
+                        intent.putExtra("movieId", movie.movie.movie.ids.tmdb)
+                        intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
+                        startActivity(intent)
+                    }
                 }
-            })
+            )
         trendingListView.layoutManager =
             LinearLayoutManager(context, HORIZONTAL, false)
         revenueListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)

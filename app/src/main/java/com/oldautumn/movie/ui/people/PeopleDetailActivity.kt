@@ -119,7 +119,7 @@ class PeopleDetailActivity : AppCompatActivity() {
             manager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
 
-            )
+        )
 
         binding.peopleImageList.adapter = peopleImageAdapter
 

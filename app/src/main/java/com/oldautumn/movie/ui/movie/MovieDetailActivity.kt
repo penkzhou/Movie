@@ -173,8 +173,10 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.title.text = it.movieDetail.title
                         binding.movieOverview.text = it.movieDetail.overview
                         binding.movieReleaseCountry.text =
-                            it.movieDetail.production_countries?.joinToString(",")
-                            { country -> country.name }
+                            it.movieDetail.production_countries?.joinToString(",") {
+                                country ->
+                                country.name
+                            }
                         binding.movieTmdbRatingValue.text =
                             "${it.movieDetail.vote_average}\n${it.movieDetail.vote_count}人评分"
                     }
@@ -204,8 +206,8 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieCertificateValue.text = it.traktMovieDetail.certification
                         binding.movieTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktMovieDetail.rating)}" +
-                                    "\n" +
-                                    "${it.traktMovieDetail.votes}人评分"
+                            "\n" +
+                            "${it.traktMovieDetail.votes}人评分"
 
                         binding.movieTraktRatingValue.setOnClickListener {
                             val intent =

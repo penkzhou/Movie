@@ -39,7 +39,7 @@ class ExploreFragment : Fragment() {
                 object : (TraktCollection) -> Unit {
                     override fun invoke(p1: TraktCollection) {
                         TODO("not implemented")
-                    // To change body of created functions use File | Settings | File Templates.
+                        // To change body of created functions use File | Settings | File Templates.
                     }
                 }
             )
