@@ -37,10 +37,7 @@ class ExploreFragment : Fragment() {
             MovieTraktCollectionAdapter(
                 mutableListOf(),
                 object : (TraktCollection) -> Unit {
-                    override fun invoke(p1: TraktCollection) {
-
-
-                    }
+                    override fun invoke(p1: TraktCollection) {}
                 }
             )
         binding.collectionList.adapter = adapter
