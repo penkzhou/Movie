@@ -1,5 +1,17 @@
 package com.oldautumn.movie.data.api
 
+import com.oldautumn.movie.data.api.model.MovieVideo
+import com.oldautumn.movie.data.api.model.TmdbCombinedCredit
+import com.oldautumn.movie.data.api.model.TmdbCreditList
+import com.oldautumn.movie.data.api.model.TmdbImageModel
+import com.oldautumn.movie.data.api.model.TmdbMovieDetail
+import com.oldautumn.movie.data.api.model.TmdbPeople
+import com.oldautumn.movie.data.api.model.TmdbPeopleImage
+import com.oldautumn.movie.data.api.model.TmdbSimpleItemListModel
+import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
+import com.oldautumn.movie.data.api.model.TmdbSimpleTvItem
+import com.oldautumn.movie.data.api.model.TmdbTvDetail
+import com.oldautumn.movie.data.api.model.TmdbTvRateModel
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
