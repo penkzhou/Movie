@@ -34,29 +34,26 @@ class ExploreFragment : Fragment() {
         _binding = FragmentExploreBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val adapter =
-            MovieTraktCollectionAdapter(mutableListOf(), object : (TraktCollection) -> Unit {
-                override fun invoke(p1: TraktCollection) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            MovieTraktCollectionAdapter(
+                mutableListOf(),
+                object : (TraktCollection) -> Unit {
+                    override fun invoke(p1: TraktCollection) {}
                 }
-            })
+            )
         binding.collectionList.adapter = adapter
         binding.collectionList.layoutManager = GridLayoutManager(context, 2)
-
 
         viewModel.fetchPopularCollection()
         lifecycleScope.launch {
             launchAndRepeatWithViewLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
                     if (uiState.errorMessage.isNotEmpty()) {
-                        //展示异常toast
-
+                        // 展示异常toast
                     } else {
                         if (uiState.collectionList.isNotEmpty()) {
                             adapter.updateData(uiState.collectionList)
                         }
-
                     }
-
                 }
             }
         }

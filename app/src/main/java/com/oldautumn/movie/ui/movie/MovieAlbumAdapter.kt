@@ -4,15 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.TmdbCombinedCast
 import com.oldautumn.movie.data.api.model.TmdbImageItem
 import com.oldautumn.movie.databinding.ItemMoviePosterBinding
-import com.oldautumn.movie.databinding.ItemPeopleCreditBinding
 import com.oldautumn.movie.utils.Utils
 
 class MovieAlbumAdapter(

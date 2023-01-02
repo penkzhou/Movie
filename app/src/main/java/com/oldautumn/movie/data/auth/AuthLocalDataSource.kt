@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.map
 
 val Context.authDataStore by preferencesDataStore("settings")
 
-
 class AuthLocalDataSource(private val context: Context) {
 
     private val authStringKey = stringPreferencesKey("auth_string_key")

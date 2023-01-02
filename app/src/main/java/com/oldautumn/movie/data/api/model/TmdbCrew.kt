@@ -1,6 +1,5 @@
 package com.oldautumn.movie.data.api.model
 
-
 /*
 *
 {

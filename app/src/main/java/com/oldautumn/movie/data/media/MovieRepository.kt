@@ -4,7 +4,27 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.oldautumn.movie.data.api.TraktApiService
-import com.oldautumn.movie.data.api.model.*
+import com.oldautumn.movie.data.api.model.MovieVideo
+import com.oldautumn.movie.data.api.model.MovieWithImage
+import com.oldautumn.movie.data.api.model.TmdbCombinedCredit
+import com.oldautumn.movie.data.api.model.TmdbCreditList
+import com.oldautumn.movie.data.api.model.TmdbImageModel
+import com.oldautumn.movie.data.api.model.TmdbMovieDetail
+import com.oldautumn.movie.data.api.model.TmdbPeople
+import com.oldautumn.movie.data.api.model.TmdbPeopleImage
+import com.oldautumn.movie.data.api.model.TmdbSimpleItemListModel
+import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
+import com.oldautumn.movie.data.api.model.TmdbSimpleTvItem
+import com.oldautumn.movie.data.api.model.TmdbTvDetail
+import com.oldautumn.movie.data.api.model.TraktCollection
+import com.oldautumn.movie.data.api.model.TraktMovieDetail
+import com.oldautumn.movie.data.api.model.TraktRating
+import com.oldautumn.movie.data.api.model.TraktReview
+import com.oldautumn.movie.data.api.model.TraktShowDetail
+import com.oldautumn.movie.data.api.model.UnifyMovieRevenueItem
+import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
+import com.oldautumn.movie.data.api.model.UnifyTvTrendingItem
+import com.oldautumn.movie.data.api.model.UserSettings
 import kotlinx.coroutines.flow.Flow
 
 class MovieRepository(
@@ -15,49 +35,41 @@ class MovieRepository(
 
     suspend fun getTrendingMovieList(): List<UnifyMovieTrendingItem> {
         val movieTrendingList = remoteDataSource.getTrendingMovieList()
-        return movieTrendingList.map { it ->
+        return movieTrendingList.map {
             UnifyMovieTrendingItem(remoteDataSource.getMovieImage(it.movie.ids.tmdb), it)
         }
-
     }
-
 
     suspend fun getTrendingShowList(): List<UnifyTvTrendingItem> {
         val movieTrendingList = remoteDataSource.getTrendingShowList()
-        return movieTrendingList.map { it ->
+        return movieTrendingList.map {
             UnifyTvTrendingItem(remoteDataSource.getTvImage(it.show.ids.tmdb), it)
         }
-
     }
-
 
     suspend fun getPopularMovieList(): List<MovieWithImage> {
         val movieTrendingList = remoteDataSource.fetchPopularMovieList()
-        return movieTrendingList.map { it ->
+        return movieTrendingList.map {
             MovieWithImage(it, remoteDataSource.getMovieImage(it.ids.tmdb))
         }
-
     }
-
 
     suspend fun getPopularShowList(): List<MovieWithImage> {
         val movieTrendingList = remoteDataSource.fetchPopularShowList()
-        return movieTrendingList.map { it ->
+        return movieTrendingList.map {
             MovieWithImage(it, remoteDataSource.getTvImage(it.ids.tmdb))
         }
-
     }
 
     suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail {
         return remoteDataSource.getMovieDetail(movieId)
     }
 
-
     suspend fun getMovieVideo(movieId: Int): MovieVideo {
         return remoteDataSource.getMovieVideo(movieId)
     }
 
-    suspend fun getUserInfo(token:String): UserSettings {
+    suspend fun getUserInfo(token: String): UserSettings {
         return loginRemoteDataSource.getUserSettings(token)
     }
 
@@ -69,8 +81,6 @@ class MovieRepository(
         return remoteDataSource.getMovieCast(movieId)
     }
 
-
-
     suspend fun getMovieAlbum(movieId: Int): TmdbImageModel {
         return remoteDataSource.getMovieImage(movieId)
     }
@@ -78,7 +88,6 @@ class MovieRepository(
     suspend fun getShowCredits(showId: Int): TmdbCreditList {
         return remoteDataSource.getTvCast(showId)
     }
-
 
     suspend fun getTraktMovieDetail(movieSlug: String): TraktMovieDetail {
         return remoteDataSource.getTraktMovieDetail(movieSlug)
@@ -92,7 +101,6 @@ class MovieRepository(
         return remoteDataSource.getSimilarMovieList(movieId)
     }
 
-
     suspend fun getRecommendTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> {
         return remoteDataSource.getRecommendTvList(tvId)
     }
@@ -101,11 +109,9 @@ class MovieRepository(
         return remoteDataSource.getSimilarTvList(tvId)
     }
 
-
     suspend fun getTraktTvRating(tvId: String): TraktRating {
         return remoteDataSource.getTraktShowRate(tvId)
     }
-
 
     suspend fun getTraktTvDetail(tvId: String): TraktShowDetail {
         return remoteDataSource.getTraktTvDetail(tvId)
@@ -117,7 +123,7 @@ class MovieRepository(
 
     suspend fun getTraktBoxOffice(): List<UnifyMovieRevenueItem> {
         val revenueList = remoteDataSource.getTraktMovieBoxOffice()
-        return revenueList.map { it ->
+        return revenueList.map {
             UnifyMovieRevenueItem(remoteDataSource.getMovieImage(it.movie.ids.tmdb), it)
         }
     }
@@ -130,7 +136,6 @@ class MovieRepository(
         return remoteDataSource.getPeopleDetail(peopleId)
     }
 
-
     suspend fun getPeopleCredit(peopleId: Int): TmdbCombinedCredit {
         return remoteDataSource.getPeopleCredit(peopleId)
     }
@@ -138,7 +143,6 @@ class MovieRepository(
     suspend fun getPeopleImage(peopleId: Int): TmdbPeopleImage {
         return remoteDataSource.getPeopleImage(peopleId)
     }
-
 
     fun getTraktReviewPageList(
         traktMovieId: String,
@@ -158,5 +162,4 @@ class MovieRepository(
             }
         ).flow
     }
-
 }

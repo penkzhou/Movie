@@ -1,6 +1,5 @@
 package com.oldautumn.movie.data.api.model
 
-
 /**
 
 用于接收tmdb的简单电影信息，比如电影推荐列表或者电影相似列表，一般用于电影详情页面

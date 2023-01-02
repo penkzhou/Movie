@@ -1,25 +1,26 @@
 package com.oldautumn.movie.ui.movie
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
-import androidx.lifecycle.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TraktReview
 import com.oldautumn.movie.databinding.ActivityTraktReviewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class MovieReviewActivity : AppCompatActivity() {
-
 
     private lateinit var binding: ActivityTraktReviewBinding
 
@@ -77,7 +78,6 @@ class MovieReviewActivity : AppCompatActivity() {
                 val lines = resources.getStringArray(R.array.sort_type_array).toList()
                 val sortType = lines[position]
                 uiActions(MovieReviewViewModel.UiAction.ChangeType(sortType))
-
             }
         }
 
@@ -86,10 +86,8 @@ class MovieReviewActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
-
 }

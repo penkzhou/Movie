@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
+import com.oldautumn.movie.utils.Utils
 import java.text.DecimalFormat
 
 class MovieRecommendAdapter(

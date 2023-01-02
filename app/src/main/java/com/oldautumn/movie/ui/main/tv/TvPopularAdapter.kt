@@ -7,9 +7,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.MovieWithImage
+import com.oldautumn.movie.utils.Utils
 
 class TvPopularAdapter(
     private val popularList: MutableList<MovieWithImage>,
@@ -50,7 +50,6 @@ class TvPopularAdapter(
 
     class TvPopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
-
 
         fun updateViewWithItem(movieWithImage: MovieWithImage) {
 

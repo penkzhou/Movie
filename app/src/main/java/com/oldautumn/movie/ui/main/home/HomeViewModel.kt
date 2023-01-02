@@ -4,15 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
-
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -33,7 +32,6 @@ class HomeViewModel @Inject constructor(
     private var fetchPopularMovieListJob: Job? = null
     private var fetchBoxOfficeMovieListJob: Job? = null
 
-
     fun fetchPopularMovie() {
         fetchPopularMovieListJob?.cancel()
         fetchPopularMovieListJob = viewModelScope.launch {
@@ -51,7 +49,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun fetchBoxOfficeMovieList(){
+    fun fetchBoxOfficeMovieList() {
         fetchBoxOfficeMovieListJob?.cancel()
         fetchBoxOfficeMovieListJob = viewModelScope.launch {
             try {
@@ -83,9 +81,5 @@ class HomeViewModel @Inject constructor(
                 _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
             }
         }
-
     }
-
-
-
 }

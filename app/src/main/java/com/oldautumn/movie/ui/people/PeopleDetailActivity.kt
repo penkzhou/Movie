@@ -39,47 +39,63 @@ class PeopleDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val movieCastAdapter = TvCastInAdapter(mutableListOf(),false) {
-            val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
+        val movieCastAdapter = TvCastInAdapter(mutableListOf(), false) {
+            val intent =
+                Intent(
+                    this@PeopleDetailActivity,
+                    MovieDetailActivity::class.java
+                )
             intent.putExtra("movieId", it.id)
             startActivity(intent)
         }
         binding.peopleCastInMovieList.adapter = movieCastAdapter
-        binding.peopleCastInMovieList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
-
+        binding.peopleCastInMovieList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val movieCrewAdapter = TvCrewInAdapter(mutableListOf()) {
-            val intent = Intent(this@PeopleDetailActivity, MovieDetailActivity::class.java)
+            val intent =
+                Intent(
+                    this@PeopleDetailActivity,
+                    MovieDetailActivity::class.java
+                )
             intent.putExtra("movieId", it.id)
             startActivity(intent)
         }
         binding.peopleCrewInMovieList.adapter = movieCrewAdapter
-        binding.peopleCrewInMovieList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.peopleCrewInMovieList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-
-
-        val tvCastAdapter = TvCastInAdapter(mutableListOf(),true) {
-            val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
+        val tvCastAdapter = TvCastInAdapter(mutableListOf(), true) {
+            val intent =
+                Intent(
+                    this@PeopleDetailActivity,
+                    TvDetailActivity::class.java
+                )
             intent.putExtra("tvId", it.id)
             startActivity(intent)
         }
 
-        binding.peopleCastInTvList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.peopleCastInTvList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.peopleCastInTvList.adapter = tvCastAdapter
 
-
-        val tvCrewAdapter = PeopleCrewAdapter(mutableListOf(), object : (TmdbCombinedCrew) -> Unit {
-            override fun invoke(p1: TmdbCombinedCrew) {
-                val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
-                intent.putExtra("tvId", p1.id)
-                startActivity(intent)
+        val tvCrewAdapter = PeopleCrewAdapter(
+            mutableListOf(),
+            object : (TmdbCombinedCrew) -> Unit {
+                override fun invoke(p1: TmdbCombinedCrew) {
+                    val intent =
+                        Intent(
+                            this@PeopleDetailActivity,
+                            TvDetailActivity::class.java
+                        )
+                    intent.putExtra("tvId", p1.id)
+                    startActivity(intent)
+                }
             }
-        })
+        )
         binding.peopleCrewInTvList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.peopleCrewInTvList.adapter = tvCrewAdapter
-
 
         // 人物相册
         val peopleImageAdapter = binding.peopleImageList.setup(
@@ -100,12 +116,12 @@ class PeopleDetailActivity : AppCompatActivity() {
                 }
             },
 
-            manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
+            manager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
 
-            )
+        )
 
         binding.peopleImageList.adapter = peopleImageAdapter
-
 
         binding.peopleOverviewMore.setOnClickListener {
             if (binding.peopleOverview.maxLines == 3) {
@@ -118,8 +134,6 @@ class PeopleDetailActivity : AppCompatActivity() {
                 binding.peopleOverviewMore.text = "更多"
             }
         }
-
-
 
         viewModel.fetchPeopleDetailData()
         lifecycleScope.launch {
@@ -143,7 +157,6 @@ class PeopleDetailActivity : AppCompatActivity() {
                             if (it.peopleDetail.gender == 2) "Male" else "Female"
                         binding.peopleNicknameValue.text =
                             it.peopleDetail.also_known_as.joinToString(",")
-
                     }
                     if (it.peopleMovieCast != null && it.peopleMovieCast.isNotEmpty()) {
                         movieCastAdapter.updateData(it.peopleMovieCast)
@@ -154,7 +167,6 @@ class PeopleDetailActivity : AppCompatActivity() {
                         binding.peopleCastInMovieList.visibility = View.GONE
                     }
 
-
                     if (it.peopleMovieCrew != null && it.peopleMovieCrew.isNotEmpty()) {
                         movieCrewAdapter.updateData(it.peopleMovieCrew)
                         binding.peopleCrewInMovieTitle.visibility = View.VISIBLE
@@ -164,7 +176,6 @@ class PeopleDetailActivity : AppCompatActivity() {
                         binding.peopleCrewInMovieList.visibility = View.GONE
                     }
 
-
                     if (it.peopleTvCrew != null && it.peopleTvCrew.isNotEmpty()) {
                         tvCrewAdapter.updateData(it.peopleTvCrew)
                         binding.peopleCrewInTvTitle.visibility = View.VISIBLE
@@ -173,7 +184,6 @@ class PeopleDetailActivity : AppCompatActivity() {
                         binding.peopleCrewInTvTitle.visibility = View.GONE
                         binding.peopleCrewInTvList.visibility = View.GONE
                     }
-
 
                     if (it.peopleTvCast != null && it.peopleTvCast.isNotEmpty()) {
                         tvCastAdapter.updateData(it.peopleTvCast)
@@ -192,13 +202,10 @@ class PeopleDetailActivity : AppCompatActivity() {
                     } else {
                         binding.peopleImageTitle.text = "个人相册"
                     }
-
-
                 }
             }
         }
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

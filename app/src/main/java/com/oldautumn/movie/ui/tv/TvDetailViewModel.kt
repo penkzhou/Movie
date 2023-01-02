@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
 
 @HiltViewModel
 class TvDetailViewModel @Inject constructor(
@@ -27,7 +27,6 @@ class TvDetailViewModel @Inject constructor(
 
     )
     val uiState: StateFlow<TvDetailUiState> = _uiState.asStateFlow()
-
 
     private var fetchTvDetailJob: Job? = null
     private var fetchTvCreditJob: Job? = null
@@ -80,13 +79,11 @@ class TvDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
 
-
     private fun fetchTvCredit(tvId: Int) {
-        fetchTvCreditJob?.cancel();
+        fetchTvCreditJob?.cancel()
         fetchTvCreditJob = viewModelScope.launch {
             try {
                 val tvCredit = repository.getShowCredits(tvId)
@@ -96,7 +93,6 @@ class TvDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
 
@@ -111,7 +107,6 @@ class TvDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
 
@@ -147,5 +142,4 @@ class TvDetailViewModel @Inject constructor(
         savedStateHandle["tvId"] = tvId
         super.onCleared()
     }
-
 }

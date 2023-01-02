@@ -10,7 +10,9 @@ import androidx.viewbinding.ViewBinding
 /**
  * Create the ViewGroup binding delegation
  */
-inline fun <T : ViewBinding> ViewGroup.viewBinding(binding: (LayoutInflater, ViewGroup, Boolean) -> T): T {
+inline fun <T : ViewBinding> ViewGroup.viewBinding(
+    binding: (LayoutInflater, ViewGroup, Boolean) -> T
+): T {
     return binding(LayoutInflater.from(context), this, false)
 }
 

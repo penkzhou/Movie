@@ -3,7 +3,6 @@ package com.oldautumn.movie.data.api
 import okhttp3.Interceptor
 import okhttp3.Response
 
-
 class TmdbApiKeyInterceptor(private val apiKey: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()

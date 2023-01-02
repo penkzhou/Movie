@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
 
 @HiltViewModel
 class PeopleDetailViewModel @Inject constructor(
@@ -38,7 +38,6 @@ class PeopleDetailViewModel @Inject constructor(
     )
     val uiState: StateFlow<PeopleDetailUiState> = _uiState.asStateFlow()
 
-
     private var fetchPeopleDetailJob: Job? = null
     private var fetchPeopleCreditJob: Job? = null
     private var fetchPeopleImageJob: Job? = null
@@ -49,7 +48,6 @@ class PeopleDetailViewModel @Inject constructor(
             fetchPeopleDetail(peopleId)
             fetchPeopleCredit(peopleId)
             fetchPeopleImage(peopleId)
-
         }
     }
 
@@ -59,16 +57,13 @@ class PeopleDetailViewModel @Inject constructor(
             try {
                 val peopleDetail = repository.getPeopleDetail(peopleId)
                 _uiState.value = _uiState.value.copy(peopleDetail = peopleDetail)
-
             } catch (e: IOException) {
                 _uiState.value = _uiState.value.copy(errorMessage = e.message)
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
-
 
     private fun fetchPeopleCredit(peopleId: Int) {
         fetchPeopleCreditJob?.cancel()
@@ -92,10 +87,8 @@ class PeopleDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
-
 
     private fun fetchPeopleImage(peopleId: Int) {
         fetchPeopleImageJob?.cancel()
@@ -114,14 +107,11 @@ class PeopleDetailViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
-
 
     override fun onCleared() {
         savedStateHandle["peopleId"] = peopleId
         super.onCleared()
     }
-
 }

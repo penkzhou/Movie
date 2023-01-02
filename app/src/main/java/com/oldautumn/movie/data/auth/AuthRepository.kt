@@ -8,15 +8,13 @@ class AuthRepository(
     private val remoteDataSource: AuthRemoteDataSource,
     private val localDataSource: AuthLocalDataSource
 ) {
-    val authString:Flow<String> = localDataSource.authFlow
+    val authString: Flow<String> = localDataSource.authFlow
 
-    suspend fun updateLocalToken(authToken: DeviceToken) = localDataSource.updateAuthModel(authToken)
+    suspend fun updateLocalToken(authToken: DeviceToken) =
+        localDataSource.updateAuthModel(authToken)
 
+    suspend fun fetchDeviceCode(): DeviceCode = remoteDataSource.fetchDeviceCode()
 
-
-
-    suspend fun fetchDeviceCode():DeviceCode = remoteDataSource.fetchDeviceCode()
-
-
-    suspend fun fetchAccessCode(deviceCode:String):DeviceToken = remoteDataSource.fetchDeviceAccessToken(deviceCode)
+    suspend fun fetchAccessCode(deviceCode: String): DeviceToken =
+        remoteDataSource.fetchDeviceAccessToken(deviceCode)
 }

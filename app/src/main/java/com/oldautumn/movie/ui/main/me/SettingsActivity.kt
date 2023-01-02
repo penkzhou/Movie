@@ -48,7 +48,6 @@ class SettingsActivity : AppCompatActivity() {
             val preference = findPreference<Preference>("about")
             preference?.title = "Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
 
-
             val logoutPreference = findPreference<Preference>("logout")
             logoutPreference?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
                 // do something

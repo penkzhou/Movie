@@ -4,14 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
 
 @HiltViewModel
 class MovieTraktReviewViewModel @Inject constructor(
@@ -24,11 +24,10 @@ class MovieTraktReviewViewModel @Inject constructor(
     )
     val uiState: StateFlow<TraktReviewUiState> = _uiState.asStateFlow()
 
-
     private var fetchTraktReviewListJob: Job? = null
 
     fun fetchTraktReviewList(traktMovieId: String, sortType: String = "newest") {
-        fetchTraktReviewListJob?.cancel();
+        fetchTraktReviewListJob?.cancel()
         fetchTraktReviewListJob = viewModelScope.launch {
             try {
                 val traktReviewList = repository.getTraktReviewList(traktMovieId, sortType)
@@ -38,9 +37,6 @@ class MovieTraktReviewViewModel @Inject constructor(
             } catch (hoe: HttpException) {
                 _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
             }
-
         }
     }
-
-
 }

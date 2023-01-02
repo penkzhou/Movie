@@ -4,15 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
-import javax.inject.Inject
-
 
 @HiltViewModel
 class TvMainViewModel @Inject constructor(
@@ -30,9 +29,6 @@ class TvMainViewModel @Inject constructor(
 
     private var fetchPopularShowListJob: Job? = null
     private var fetchTrendingShowListJob: Job? = null
-
-
-
 
     fun fetchPopularShow() {
         fetchPopularShowListJob?.cancel()
@@ -67,5 +63,4 @@ class TvMainViewModel @Inject constructor(
             }
         }
     }
-
 }
