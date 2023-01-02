@@ -39,9 +39,7 @@ object DataModule {
     fun provideOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
-        return OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .build()
+        return OkHttpClient.Builder().addInterceptor(logging).build()
     }
 
     @Singleton
@@ -50,14 +48,10 @@ object DataModule {
     fun provideAuthedOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         val authedHeader = AuthedInterceptor(
-            "",
-            "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
+            "", "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
         )
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
-        return OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .addInterceptor(authedHeader)
-            .build()
+        return OkHttpClient.Builder().addInterceptor(logging).addInterceptor(authedHeader).build()
     }
 
     @Singleton
@@ -72,16 +66,13 @@ object DataModule {
         Log.i("loginAuthedOkHttpClient", token)
         val logging = HttpLoggingInterceptor()
         val authedHeader = AuthedInterceptor(
-            token,
-            "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
+            token, "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
         )
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        return OkHttpClient.Builder()
-            .addInterceptor(logging)
+        return OkHttpClient.Builder().addInterceptor(logging)
             .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
             .writeTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
-            .connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
-            .addInterceptor(authedHeader)
+            .connectTimeout(10, java.util.concurrent.TimeUnit.SECONDS).addInterceptor(authedHeader)
             .build()
     }
 
@@ -94,32 +85,25 @@ object DataModule {
             "1fb9e261bd10339f78c0737494452323"
         )
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        return OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .addInterceptor(authedHeader)
-            .build()
+        return OkHttpClient.Builder().addInterceptor(logging).addInterceptor(authedHeader).build()
     }
 
     @Singleton
     @Provides
     @Named("traktRetrofit")
     fun provideTraktRetrofit(@Named("normalOkhttpClient") okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.trakt.tv")
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(okHttpClient)
-            .build()
+        return Retrofit.Builder().baseUrl("https://api.trakt.tv")
+            .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
     }
 
     @Singleton
     @Provides
     @Named("authedTraktRetrofit")
-    fun provideAuthedTraktRetrofit(@Named("authedOkHttpClient") okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.trakt.tv")
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(okHttpClient)
-            .build()
+    fun provideAuthedTraktRetrofit(
+        @Named("authedOkHttpClient") okHttpClient: OkHttpClient
+    ): Retrofit {
+        return Retrofit.Builder().baseUrl("https://api.trakt.tv")
+            .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
     }
 
     @Singleton
@@ -128,22 +112,16 @@ object DataModule {
     fun provideLoginAuthedTraktRetrofit(
         @Named("loginAuthedOkHttpClient") okHttpClient: OkHttpClient
     ): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.trakt.tv")
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(okHttpClient)
-            .build()
+        return Retrofit.Builder().baseUrl("https://api.trakt.tv")
+            .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
     }
 
     @Singleton
     @Provides
     @Named("tmdbRetrofit")
     fun provideTmdbRetrofit(@Named("tmdbOkHttpClient") okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org")
-            .addConverterFactory(MoshiConverterFactory.create())
-            .client(okHttpClient)
-            .build()
+        return Retrofit.Builder().baseUrl("https://api.themoviedb.org")
+            .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
     }
 
     @Singleton

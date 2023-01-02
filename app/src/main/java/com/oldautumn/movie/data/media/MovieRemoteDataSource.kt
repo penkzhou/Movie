@@ -2,7 +2,27 @@ package com.oldautumn.movie.data.media
 
 import com.oldautumn.movie.data.api.TmdbApiService
 import com.oldautumn.movie.data.api.TraktApiService
-import com.oldautumn.movie.data.api.model.*
+import com.oldautumn.movie.data.api.model.MovieRevenueItem
+import com.oldautumn.movie.data.api.model.MovieTrendingItem
+import com.oldautumn.movie.data.api.model.MovieVideo
+import com.oldautumn.movie.data.api.model.ShowTrendingItem
+import com.oldautumn.movie.data.api.model.TmdbCombinedCredit
+import com.oldautumn.movie.data.api.model.TmdbCreditList
+import com.oldautumn.movie.data.api.model.TmdbImageModel
+import com.oldautumn.movie.data.api.model.TmdbMovieDetail
+import com.oldautumn.movie.data.api.model.TmdbPeople
+import com.oldautumn.movie.data.api.model.TmdbPeopleImage
+import com.oldautumn.movie.data.api.model.TmdbSimpleItemListModel
+import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
+import com.oldautumn.movie.data.api.model.TmdbSimpleTvItem
+import com.oldautumn.movie.data.api.model.TmdbTvDetail
+import com.oldautumn.movie.data.api.model.TraktCollection
+import com.oldautumn.movie.data.api.model.TraktMovieDetail
+import com.oldautumn.movie.data.api.model.TraktRating
+import com.oldautumn.movie.data.api.model.TraktReview
+import com.oldautumn.movie.data.api.model.TraktShowDetail
+import com.oldautumn.movie.data.api.model.TraktSimpleContentItem
+import com.oldautumn.movie.data.api.model.UserSettings
 
 class MovieRemoteDataSource(
     private val traktApiService: TraktApiService,
