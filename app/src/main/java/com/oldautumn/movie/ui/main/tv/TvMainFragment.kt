@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,7 @@ class TvMainFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentTvHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -41,22 +42,29 @@ class TvMainFragment : Fragment() {
         val trendingListView: RecyclerView = binding.tvTrendingList
         val popularListView: RecyclerView = binding.tvPopularList
         val tvTrendingAdapter =
-            TvTrendingAdapter(mutableListOf(), object : (UnifyTvTrendingItem) -> Unit {
-                override fun invoke(movieWithImage: UnifyTvTrendingItem) {
-                    val intent = Intent(requireContext(), TvDetailActivity::class.java)
-                    intent.putExtra("tvId", movieWithImage.show.show.ids.tmdb)
-                    startActivity(intent)
+            TvTrendingAdapter(
+                mutableListOf(),
+                object : (UnifyTvTrendingItem) -> Unit {
+                    override fun invoke(movieWithImage: UnifyTvTrendingItem) {
+                        val intent = Intent(requireContext(), TvDetailActivity::class.java)
+                        intent.putExtra("tvId", movieWithImage.show.show.ids.tmdb)
+                        startActivity(intent)
+                    }
                 }
-            })
+            )
         val popularAdapter =
-            TvPopularAdapter(mutableListOf(), object : (MovieWithImage) -> Unit {
-                override fun invoke(movie: MovieWithImage) {
-                    val intent = Intent(context, TvDetailActivity::class.java)
-                    intent.putExtra("tvId", movie.content.ids.tmdb)
-                    startActivity(intent)
+            TvPopularAdapter(
+                mutableListOf(),
+                object : (MovieWithImage) -> Unit {
+                    override fun invoke(movie: MovieWithImage) {
+                        val intent = Intent(context, TvDetailActivity::class.java)
+                        intent.putExtra("tvId", movie.content.ids.tmdb)
+                        startActivity(intent)
+                    }
                 }
-            })
-        trendingListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
+            )
+        trendingListView.layoutManager =
+            LinearLayoutManager(context, HORIZONTAL, false)
         popularListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
         trendingListView.adapter = tvTrendingAdapter
         popularListView.adapter = popularAdapter
@@ -67,8 +75,7 @@ class TvMainFragment : Fragment() {
             launchAndRepeatWithViewLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
                     if (uiState.errorMessage.isNotEmpty()) {
-                        //展示异常toast
-
+                        // 展示异常toast
                     } else {
                         if (uiState.trendingShowList.isNotEmpty()) {
                             tvTrendingAdapter.updateData(uiState.trendingShowList)
@@ -77,7 +84,6 @@ class TvMainFragment : Fragment() {
                             popularAdapter.updateData(uiState.popularShowList)
                         }
                     }
-
                 }
             }
         }

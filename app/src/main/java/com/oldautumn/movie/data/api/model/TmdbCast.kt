@@ -1,6 +1,5 @@
 package com.oldautumn.movie.data.api.model
 
-
 /*
 *
 {
@@ -21,8 +20,8 @@ package com.oldautumn.movie.data.api.model
 * */
 data class TmdbCast(
     val adult: Boolean,
-    val gender:Int?,
-    val known_for_department:String,
+    val gender: Int?,
+    val known_for_department: String,
     val id: Int,
     val name: String,
     val original_name: String,

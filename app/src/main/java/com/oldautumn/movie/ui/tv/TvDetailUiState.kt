@@ -1,6 +1,11 @@
 package com.oldautumn.movie.ui.tv
 
-import com.oldautumn.movie.data.api.model.*
+import com.oldautumn.movie.data.api.model.TmdbCreditList
+import com.oldautumn.movie.data.api.model.TmdbSimpleItemListModel
+import com.oldautumn.movie.data.api.model.TmdbSimpleTvItem
+import com.oldautumn.movie.data.api.model.TmdbTvDetail
+import com.oldautumn.movie.data.api.model.TraktRating
+import com.oldautumn.movie.data.api.model.TraktShowDetail
 
 data class TvDetailUiState(
     val tvDetail: TmdbTvDetail? = null,

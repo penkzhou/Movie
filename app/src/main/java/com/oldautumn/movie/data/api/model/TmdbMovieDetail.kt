@@ -133,7 +133,6 @@ data class ExternalIds(
     val twitter_id: String?
 )
 
-
 data class Collection(
     val id: Int,
     val name: String,

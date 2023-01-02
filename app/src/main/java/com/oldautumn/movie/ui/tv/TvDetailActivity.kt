@@ -23,8 +23,8 @@ import com.oldautumn.movie.ui.people.PeopleDetailActivity
 import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.utils.Utils.loadWithPattle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.text.DecimalFormat
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TvDetailActivity : AppCompatActivity() {
@@ -33,7 +33,7 @@ class TvDetailActivity : AppCompatActivity() {
 
     private val viewModel: TvDetailViewModel by viewModels()
 
-    private var chipColor:Int = R.color.purple_200
+    private var chipColor: Int = R.color.purple_200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +53,6 @@ class TvDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCastList.adapter = castAdapter
 
-
         val crewAdapter = MovieCrewAdapter(mutableListOf()) {
             val intent = Intent(this, PeopleDetailActivity::class.java)
             intent.putExtra("peopleId", it.id)
@@ -63,35 +62,46 @@ class TvDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCrewList.adapter = crewAdapter
 
-
         val seasonAdapter = TvSeasonAdapter({}, mutableListOf())
         binding.tvSeasonList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvSeasonList.adapter = seasonAdapter
 
-
-        val recommendAdapter = TvRecommendAdapter(mutableListOf(), object :
-            TvRecommendAdapter.OnItemClickListener {
-            override fun onItemClick(tvItem: TmdbSimpleTvItem) {
-                val intent = Intent(this@TvDetailActivity, TvDetailActivity::class.java)
-                intent.putExtra("tvId", tvItem.id)
-                startActivity(intent)
+        val recommendAdapter = TvRecommendAdapter(
+            mutableListOf(),
+            object :
+                TvRecommendAdapter.OnItemClickListener {
+                override fun onItemClick(tvItem: TmdbSimpleTvItem) {
+                    val intent =
+                        Intent(
+                            this@TvDetailActivity,
+                            TvDetailActivity::class.java
+                        )
+                    intent.putExtra("tvId", tvItem.id)
+                    startActivity(intent)
+                }
             }
-        })
+        )
 
         binding.tvRecommendList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvRecommendList.adapter = recommendAdapter
 
-
-        val similarAdapter = TvRecommendAdapter(mutableListOf(), object :
-            TvRecommendAdapter.OnItemClickListener {
-            override fun onItemClick(tv: TmdbSimpleTvItem) {
-                val intent = Intent(this@TvDetailActivity, TvDetailActivity::class.java)
-                intent.putExtra("tvId", tv.id)
-                startActivity(intent)
+        val similarAdapter = TvRecommendAdapter(
+            mutableListOf(),
+            object :
+                TvRecommendAdapter.OnItemClickListener {
+                override fun onItemClick(tv: TmdbSimpleTvItem) {
+                    val intent =
+                        Intent(
+                            this@TvDetailActivity,
+                            TvDetailActivity::class.java
+                        )
+                    intent.putExtra("tvId", tv.id)
+                    startActivity(intent)
+                }
             }
-        })
+        )
         binding.tvSimilarList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvSimilarList.adapter = similarAdapter
@@ -127,7 +137,6 @@ class TvDetailActivity : AppCompatActivity() {
                                                 chip.setTextColor(swatch.titleTextColor)
                                             }
                                         }
-
                                     }
                                 }
                             )
@@ -139,7 +148,7 @@ class TvDetailActivity : AppCompatActivity() {
                         }
                         binding.tvPoster.load(
                             Utils.getImageFullUrl(
-                                it.tvDetail.poster_path?:""
+                                it.tvDetail.poster_path ?: ""
                             )
                         ) {
                             transformations(RoundedCornersTransformation(12f))
@@ -158,7 +167,9 @@ class TvDetailActivity : AppCompatActivity() {
                         if ((it.tvDetail.networks.firstOrNull()?.logo_path ?: "").isNotEmpty()) {
                             binding.tvNetworkIcon.load(
                                 Utils.getImageFullUrl(
-                                    it.tvDetail.networks.firstOrNull()?.logo_path ?: "", 200
+                                    it.tvDetail.networks.firstOrNull()?.logo_path
+                                        ?: "",
+                                    200
                                 )
                             )
                             binding.tvNetworkIcon.visibility = View.VISIBLE
@@ -171,14 +182,13 @@ class TvDetailActivity : AppCompatActivity() {
                         binding.tvNetworkValue.text =
                             it.tvDetail.networks.firstOrNull()?.name ?: ""
                         binding.tvReleaseValue.text = it.tvDetail.first_air_date
-                        binding.tvLengthValue.text =  "${it.tvDetail.episode_run_time?.firstOrNull() ?: 0}m"
+                        binding.tvLengthValue.text =
+                            "${it.tvDetail.episode_run_time?.firstOrNull() ?: 0}m"
                         binding.tvStatusValue.text = it.tvDetail.status
                         binding.title.text = it.tvDetail.original_name
                         binding.tvOverview.text = it.tvDetail.overview
                         binding.tvTmdbRatingValue.text =
                             "${it.tvDetail.vote_average}\n${it.tvDetail.vote_count}人评分"
-
-
                     }
                     if (it.tvCreditList != null) {
                         if (it.tvCreditList.cast.isNotEmpty()) {
@@ -203,10 +213,15 @@ class TvDetailActivity : AppCompatActivity() {
                         val tvTitle = it.traktTvDetail.title
                         binding.tvCertificateValue.text = it.traktTvDetail.certification
                         binding.tvTraktRatingValue.text =
-                            "${DecimalFormat("##.#").format(it.traktTvDetail.rating)}\n${it.traktTvDetail.votes}人评分"
+                            "${DecimalFormat("##.#").format(it.traktTvDetail.rating)}" +
+                            "\n" +
+                            "${it.traktTvDetail.votes}人评分"
                         binding.tvTraktRatingValue.setOnClickListener {
                             val intent =
-                                Intent(this@TvDetailActivity, MovieReviewActivity::class.java)
+                                Intent(
+                                    this@TvDetailActivity,
+                                    MovieReviewActivity::class.java
+                                )
                             intent.putExtra("traktMovieId", traktTvIds.toString())
                             intent.putExtra("traktMovieTitle", tvTitle)
                             startActivity(intent)
@@ -234,8 +249,6 @@ class TvDetailActivity : AppCompatActivity() {
                             binding.tvSimilarList.visibility = View.GONE
                         }
                     }
-
-
                 }
             }
         }

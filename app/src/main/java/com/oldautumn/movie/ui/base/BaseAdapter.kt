@@ -11,7 +11,6 @@ abstract class BaseAdapter<T>(
     val onItemClick: (T) -> Unit,
 ) : RecyclerView.Adapter<BaseAdapter.BaseViewHolder<T>>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
         val rootView = LayoutInflater.from(parent.context).inflate(getItemLayoutId(), parent, false)
         val viewHolder = BaseViewHolder(rootView, onItemClick)
@@ -34,7 +33,6 @@ abstract class BaseAdapter<T>(
 
     @LayoutRes
     abstract fun getItemLayoutId(): Int
-
 
     class BaseViewHolder<T>(view: View, onItemClick: (T) -> Unit) : RecyclerView.ViewHolder(
         view

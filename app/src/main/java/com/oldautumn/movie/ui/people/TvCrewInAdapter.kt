@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.TmdbCombinedCast
 import com.oldautumn.movie.data.api.model.TmdbCombinedCrew
 import com.oldautumn.movie.databinding.ItemPeopleCreditBinding
 import com.oldautumn.movie.utils.Utils

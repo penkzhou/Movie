@@ -11,7 +11,6 @@ import com.oldautumn.movie.R
 import com.oldautumn.movie.databinding.ActivityIndexBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class IndexActivity : AppCompatActivity() {
 

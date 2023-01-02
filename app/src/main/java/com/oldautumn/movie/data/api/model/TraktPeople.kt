@@ -43,4 +43,4 @@ data class SocialIds(
     val instagram: String?,
     val wikipedia: String?,
 
-    )
+)

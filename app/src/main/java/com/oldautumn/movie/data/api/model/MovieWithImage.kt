@@ -4,4 +4,3 @@ data class MovieWithImage(
     val content: TraktSimpleContentItem,
     val image: TmdbImageModel
 )
-

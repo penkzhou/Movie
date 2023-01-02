@@ -35,7 +35,6 @@ class MovieTraktReviewPageAdapter :
         holder.updateViewWithItem(movieTrendingItem)
     }
 
-
     interface OnItemClickListener {
         fun onItemClick(movieItem: TraktReview)
     }

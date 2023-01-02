@@ -8,12 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.MovieRevenueItem
-import com.oldautumn.movie.data.api.model.MovieWithImage
 import com.oldautumn.movie.data.api.model.UnifyMovieRevenueItem
-import com.oldautumn.movie.data.api.model.UnifyTvTrendingItem
+import com.oldautumn.movie.utils.Utils
 import java.text.NumberFormat
 
 class MovieBoxofficeAdapter(
@@ -55,7 +52,6 @@ class MovieBoxofficeAdapter(
     override fun getItemCount(): Int {
         return popularList.size
     }
-
 
     class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)

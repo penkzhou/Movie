@@ -4,7 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -23,18 +28,15 @@ import com.oldautumn.movie.utils.Utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class MeFragment : Fragment() {
 
     private val viewModel: MeViewModel by viewModels()
     private var _binding: FragmentMeBinding? = null
 
-
     private val binding get() = _binding!!
 
     private lateinit var menuHost: MenuHost
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -45,14 +47,12 @@ class MeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-
+    ): View {
 
         _binding = FragmentMeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.setting.setOnClickListener {
-            val intent = Intent(context,SettingsActivity::class.java)
+            val intent = Intent(context, SettingsActivity::class.java)
             startActivity(intent)
         }
 
@@ -70,19 +70,18 @@ class MeFragment : Fragment() {
                             startActivityForResult.launch(intent)
                         }
                     }
-                    if (uiState.isAuthed && uiState.userSettings != null){
+                    if (uiState.isAuthed && uiState.userSettings != null) {
                         binding.username.text = uiState.userSettings.user.username
                         binding.desc.text = uiState.userSettings.user.about
                         binding.username.visibility = View.VISIBLE
                         binding.desc.visibility = View.VISIBLE
                         binding.avatar.visibility = View.VISIBLE
-                        binding.avatar.load(uiState.userSettings.user.images.avatar.full){
+                        binding.avatar.load(uiState.userSettings.user.images.avatar.full) {
                             transformations(CircleCropTransformation())
                         }
                         binding.follow.visibility = View.VISIBLE
                         binding.follow.text = "关注 ${uiState.userSettings.limits.list.count}"
                     }
-
                 }
             }
         }
@@ -90,35 +89,35 @@ class MeFragment : Fragment() {
         return root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                // Add menu items here
-                menuInflater.inflate(R.menu.menu_me, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                // Handle the menu selection
-                return when (menuItem.itemId) {
-                    R.id.action_settings -> {
-                        val intent = Intent(context,SettingsActivity::class.java)
-                        startActivity(intent)
-                        true
-                    }
-                    else -> false
+        menuHost.addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    // Add menu items here
+                    menuInflater.inflate(R.menu.menu_me, menu)
                 }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    // Handle the menu selection
+                    return when (menuItem.itemId) {
+                        R.id.action_settings -> {
+                            val intent = Intent(context, SettingsActivity::class.java)
+                            startActivity(intent)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            },
+            viewLifecycleOwner, Lifecycle.State.RESUMED
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 
     private val startActivityForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

@@ -7,13 +7,14 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.MovieWithImage
-import com.oldautumn.movie.data.api.model.UnifyTvTrendingItem
+import com.oldautumn.movie.utils.Utils
 
-class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>,
-                          private val onItemClick: (item: MovieWithImage) -> Unit) :
+class MoviePopularAdapter(
+    private val popularList: MutableList<MovieWithImage>,
+    private val onItemClick: (item: MovieWithImage) -> Unit
+) :
     RecyclerView.Adapter<MoviePopularAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
 
@@ -57,7 +58,7 @@ class MoviePopularAdapter(private val popularList: MutableList<MovieWithImage>,
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
 
         fun updateViewWithItem(movieWithImage: MovieWithImage) {
-            moviePoster.load(Utils.getImageFullUrl(movieWithImage.image.posters[0].file_path)){
+            moviePoster.load(Utils.getImageFullUrl(movieWithImage.image.posters[0].file_path)) {
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }

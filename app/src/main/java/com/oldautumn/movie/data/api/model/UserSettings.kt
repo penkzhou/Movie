@@ -70,20 +70,19 @@ data class UserSettings(
 data class User(
     val username: String,
     val private: Boolean,
-    val name:String,
+    val name: String,
     val vip: Boolean,
     val vip_ep: Boolean,
     val ids: Ids,
     val joined_at: String,
     val location: String,
-    val about:String,
-    val gender:String,
-    val age:Int?,
+    val about: String,
+    val gender: String,
+    val age: Int?,
     val images: Images,
     val vip_og: Boolean,
     val vip_years: Int
 )
-
 
 data class Ids(
     val slug: String,

@@ -22,7 +22,6 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder<T> {
         this.binding = parent.viewBinding(bindingClass)
 
@@ -31,7 +30,6 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
         }
         return holder
     }
-
 
     private fun updateAdapterWithDiffResult(result: DiffUtil.DiffResult) {
         result.dispatchUpdatesTo(this)
@@ -57,13 +55,12 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
         notifyItemRemoved(position)
     }
 
-
     override fun onBindViewHolder(holder: ItemViewHolder<T>, position: Int) {
 
         val item = list[position]
         holder.itemView.bind(item)
 //        if (position == holder.bindingAdapterPosition) {
-            holder.itemView.bindHolder(binding, list[position])
+        holder.itemView.bindHolder(binding, list[position])
 //        }
     }
 

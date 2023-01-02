@@ -1,6 +1,12 @@
 package com.oldautumn.movie.ui.movie
 
-import com.oldautumn.movie.data.api.model.*
+import com.oldautumn.movie.data.api.model.MovieVideo
+import com.oldautumn.movie.data.api.model.TmdbCreditList
+import com.oldautumn.movie.data.api.model.TmdbImageModel
+import com.oldautumn.movie.data.api.model.TmdbMovieDetail
+import com.oldautumn.movie.data.api.model.TmdbSimpleItemListModel
+import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
+import com.oldautumn.movie.data.api.model.TraktMovieDetail
 
 data class MovieDetailUiState(
     val movieDetail: TmdbMovieDetail? = null,
