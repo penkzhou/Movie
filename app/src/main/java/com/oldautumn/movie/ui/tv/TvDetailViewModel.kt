@@ -44,6 +44,8 @@ class TvDetailViewModel @Inject constructor(
         }
     }
 
+    fun currentTvId() = tvId
+
     private fun fetchTraktTvRating(tvImdbId: String) {
         fetchTraktTvRatingJob?.cancel()
         fetchTraktTvRatingJob = viewModelScope.launch {

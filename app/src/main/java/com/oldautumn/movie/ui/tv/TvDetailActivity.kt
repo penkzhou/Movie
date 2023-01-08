@@ -62,7 +62,12 @@ class TvDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCrewList.adapter = crewAdapter
 
-        val seasonAdapter = TvSeasonAdapter({}, mutableListOf())
+        val seasonAdapter = TvSeasonAdapter {
+            val intent = Intent(this, TvSeasonDetailActivity::class.java)
+            intent.putExtra("seasonNumber", it.season_number)
+            intent.putExtra("tvId", viewModel.currentTvId())
+            startActivity(intent)
+        }
         binding.tvSeasonList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvSeasonList.adapter = seasonAdapter

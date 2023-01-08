@@ -3,6 +3,8 @@ package com.oldautumn.movie.ui.tv
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
@@ -12,8 +14,7 @@ import com.oldautumn.movie.databinding.ItemTvSeasonBinding
 import com.oldautumn.movie.utils.Utils
 
 class TvSeasonAdapter(
-    private val onDetailClick: () -> Unit,
-    private val seasonList: MutableList<Season>
+    private val onDetailClick: (Season) -> Unit
 ) :
     RecyclerView.Adapter<TvSeasonAdapter.SeasonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
@@ -22,26 +23,40 @@ class TvSeasonAdapter(
                 R.layout.item_tv_season,
                 parent, false
             )
-        return SeasonViewHolder(
-            root, onDetailClick
-        )
+        return SeasonViewHolder(root,onDetailClick)
     }
 
     override fun onBindViewHolder(holder: SeasonViewHolder, position: Int) {
-        holder.bind(seasonList[position])
+        if (position < 0 || position >= differ.currentList.size) {
+            return
+        }
+        val movieTrendingItem = differ.currentList[position]
+        holder.bind(movieTrendingItem)
     }
 
     override fun getItemCount(): Int {
-        return seasonList.size
+        return differ.currentList.size
     }
 
     fun updateData(seasonList: List<Season>) {
-        this.seasonList.clear()
-        this.seasonList.addAll(seasonList)
-        notifyDataSetChanged()
+        this.differ.submitList(seasonList)
+
     }
 
-    class SeasonViewHolder(itemView: View, onDetailClick: () -> Unit) :
+
+    private val differCallback = object : DiffUtil.ItemCallback<Season>() {
+        override fun areItemsTheSame(oldItem: Season, newItem: Season): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Season, newItem: Season): Boolean {
+            return oldItem.equals(newItem)
+        }
+    }
+
+    private val differ = AsyncListDiffer(this, differCallback)
+
+    class SeasonViewHolder(itemView: View, private val onDetailClick: (Season) -> Unit) :
         RecyclerView.ViewHolder(
             itemView
         ) {
@@ -59,6 +74,7 @@ class TvSeasonAdapter(
             binding.tvSeasonReleaseDate.text = "${season.air_date}开播"
             binding.tvSeasonName.text = season.name
             binding.tvSeasonDetail.setOnClickListener {
+                onDetailClick(season)
             }
         }
     }
