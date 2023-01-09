@@ -15,15 +15,11 @@ import com.oldautumn.movie.utils.Utils
 
 class TvEpisodeAdapter(
     private val onDetailClick: () -> Unit
-) :
-    RecyclerView.Adapter<TvEpisodeAdapter.EpisodeViewHolder>() {
+) : RecyclerView.Adapter<TvEpisodeAdapter.EpisodeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
-        val root =
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_tv_episode
-                ,
-                parent, false
-            )
+        val root = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_tv_episode, parent, false
+        )
         return EpisodeViewHolder(
             root, onDetailClick
         )
@@ -45,7 +41,6 @@ class TvEpisodeAdapter(
         this.differ.submitList(seasonList)
 
     }
-
 
     private val differCallback = object : DiffUtil.ItemCallback<Episode>() {
         override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean {

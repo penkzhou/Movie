@@ -291,7 +291,7 @@ data class Episode(
     val episode_number: Int,
     val id: Int,
     val name: String,
-    val runtime:Int,
+    val runtime: Int,
     val overview: String,
     val crew: List<TmdbCrew>,
     val guest_stars: List<TmdbCast>,

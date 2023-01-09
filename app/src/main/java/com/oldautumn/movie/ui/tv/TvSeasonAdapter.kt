@@ -23,7 +23,7 @@ class TvSeasonAdapter(
                 R.layout.item_tv_season,
                 parent, false
             )
-        return SeasonViewHolder(root,onDetailClick)
+        return SeasonViewHolder(root, onDetailClick)
     }
 
     override fun onBindViewHolder(holder: SeasonViewHolder, position: Int) {
@@ -40,9 +40,7 @@ class TvSeasonAdapter(
 
     fun updateData(seasonList: List<Season>) {
         this.differ.submitList(seasonList)
-
     }
-
 
     private val differCallback = object : DiffUtil.ItemCallback<Season>() {
         override fun areItemsTheSame(oldItem: Season, newItem: Season): Boolean {

@@ -88,6 +88,15 @@ class TvDetailActivity : AppCompatActivity() {
             }
         )
 
+
+        val companyAdapter = ProductCompanyAdapter(mutableListOf()) {
+
+        }
+        binding.tvProductCompanyList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.tvProductCompanyList.adapter = companyAdapter
+
+
         binding.tvRecommendList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvRecommendList.adapter = recommendAdapter
@@ -150,6 +159,14 @@ class TvDetailActivity : AppCompatActivity() {
                         if (it.tvDetail.seasons.isNotEmpty()) {
 
                             seasonAdapter.updateData(it.tvDetail.seasons)
+                        }
+                        if (it.tvDetail.production_companies.isNotEmpty()) {
+                            companyAdapter.updateData(it.tvDetail.production_companies)
+                            binding.tvProductCompany.visibility = View.VISIBLE
+                            binding.tvProductCompanyList.visibility = View.VISIBLE
+                        } else {
+                            binding.tvProductCompany.visibility = View.GONE
+                            binding.tvProductCompanyList.visibility = View.GONE
                         }
                         binding.tvPoster.load(
                             Utils.getImageFullUrl(
@@ -219,8 +236,8 @@ class TvDetailActivity : AppCompatActivity() {
                         binding.tvCertificateValue.text = it.traktTvDetail.certification
                         binding.tvTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktTvDetail.rating)}" +
-                            "\n" +
-                            "${it.traktTvDetail.votes}人评分"
+                                    "\n" +
+                                    "${it.traktTvDetail.votes}人评分"
                         binding.tvTraktRatingValue.setOnClickListener {
                             val intent =
                                 Intent(

@@ -78,9 +78,8 @@ class MovieRepository(
         return remoteDataSource.getTvDetail(showId)
     }
 
-
-    suspend fun getShowSeasonDetail(showId: Int,seasonNumber:Int): TvSeasonDetail {
-        return remoteDataSource.getTvSeasonDetail(showId,seasonNumber)
+    suspend fun getShowSeasonDetail(showId: Int, seasonNumber: Int): TvSeasonDetail {
+        return remoteDataSource.getTvSeasonDetail(showId, seasonNumber)
     }
 
     suspend fun getMovieCredits(movieId: Int): TmdbCreditList {
@@ -151,21 +150,14 @@ class MovieRepository(
     }
 
     fun getTraktReviewPageList(
-        traktMovieId: String,
-        sortType: String
+        traktMovieId: String, sortType: String
     ): Flow<PagingData<TraktReview>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 10,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = {
-                TraktReviewPagingSource(
-                    traktApiService,
-                    traktMovieId,
-                    sortType
-                )
-            }
-        ).flow
+        return Pager(config = PagingConfig(
+            pageSize = 10, enablePlaceholders = false
+        ), pagingSourceFactory = {
+            TraktReviewPagingSource(
+                traktApiService, traktMovieId, sortType
+            )
+        }).flow
     }
 }

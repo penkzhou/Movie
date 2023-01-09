@@ -59,7 +59,6 @@ class MovieRemoteDataSource(
     suspend fun getTvDetail(tvId: Int): TmdbTvDetail =
         tmdbApiService.fetchTvDetail(tvId)
 
-
     suspend fun getTvSeasonDetail(tvId: Int, seasonNumber: Int): TvSeasonDetail =
         tmdbApiService.fetchTvSeasonDetail(tvId, seasonNumber)
 

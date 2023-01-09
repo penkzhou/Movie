@@ -26,7 +26,6 @@ class TvSeasonDetailActivity : AppCompatActivity() {
 
     private val viewModel: TvSeasonDetailViewModel by viewModels()
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
@@ -37,16 +36,12 @@ class TvSeasonDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityTvSeasonDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         setSupportActionBar(binding.toolbar)
         binding.toolbar.title = "Season Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-
 
         val castAdapter = MovieCastAdapter(mutableListOf()) {
             val intent = Intent(this, PeopleDetailActivity::class.java)
@@ -76,17 +71,11 @@ class TvSeasonDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvEpisodeList.adapter = episodeAdapter
 
-
-
-
-
         viewModel.fetchTvSeasonDetail()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
                     if (it.tvSeasonDetail != null) {
-
-
 
                         if (it.tvSeasonDetail.episodes.isNotEmpty()) {
                             episodeAdapter.updateData(it.tvSeasonDetail.episodes)
@@ -108,21 +97,10 @@ class TvSeasonDetailActivity : AppCompatActivity() {
                         ) {
                             transformations(RoundedCornersTransformation(12f))
                         }
-
                         binding.tvOverview.text = it.tvSeasonDetail.overview
                         binding.toolbar.title = it.tvSeasonDetail.name
-
-
-
-
                         binding.tvReleaseValue.text = it.tvSeasonDetail.air_date
-
-
                     }
-
-
-
-
                 }
             }
         }

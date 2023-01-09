@@ -44,8 +44,6 @@ interface TmdbApiService {
         @Path("tv_id") tvId: Int
     ): TmdbTvDetail
 
-
-
     @GET("/3/tv/{tv_id}/season/{season_number}")
     suspend fun fetchTvSeasonDetail(
         @Path("tv_id") tvId: Int,
