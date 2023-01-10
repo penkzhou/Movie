@@ -22,15 +22,12 @@ class TvSeasonDetailViewModel @Inject constructor(
 
     private val tvId = savedStateHandle["tvId"] ?: 0
     private val seasonNumber = savedStateHandle["seasonNumber"] ?: 0
-
     private val _uiState = MutableStateFlow(
         TvSeasonDetailUiState()
-
     )
     val uiState: StateFlow<TvSeasonDetailUiState> = _uiState.asStateFlow()
 
     private var fetchTvSeasonDetailJob: Job? = null
-
 
     fun fetchTvSeasonDetail() {
         if (tvId > 0 && seasonNumber > 0) {
@@ -38,15 +35,12 @@ class TvSeasonDetailViewModel @Inject constructor(
         }
     }
 
-
     private fun fetchTvSeasonDetail(tvId: Int, seasonNumber: Int) {
         fetchTvSeasonDetailJob?.cancel()
         fetchTvSeasonDetailJob = viewModelScope.launch {
             try {
                 val tvDetail = repository.getShowSeasonDetail(tvId, seasonNumber)
                 _uiState.value = _uiState.value.copy(tvSeasonDetail = tvDetail)
-
-
             } catch (e: IOException) {
                 _uiState.value = _uiState.value.copy(errorMessage = e.message)
             } catch (hoe: HttpException) {

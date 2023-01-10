@@ -39,7 +39,6 @@ class TvEpisodeAdapter(
 
     fun updateData(seasonList: List<Episode>) {
         this.differ.submitList(seasonList)
-
     }
 
     private val differCallback = object : DiffUtil.ItemCallback<Episode>() {

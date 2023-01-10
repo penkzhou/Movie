@@ -87,16 +87,10 @@ class TvDetailActivity : AppCompatActivity() {
                 }
             }
         )
-
-
-        val companyAdapter = ProductCompanyAdapter(mutableListOf()) {
-
-        }
+        val companyAdapter = ProductCompanyAdapter(mutableListOf()) {}
         binding.tvProductCompanyList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvProductCompanyList.adapter = companyAdapter
-
-
         binding.tvRecommendList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvRecommendList.adapter = recommendAdapter
@@ -105,13 +99,13 @@ class TvDetailActivity : AppCompatActivity() {
             mutableListOf(),
             object :
                 TvRecommendAdapter.OnItemClickListener {
-                override fun onItemClick(tv: TmdbSimpleTvItem) {
+                override fun onItemClick(tvItem: TmdbSimpleTvItem) {
                     val intent =
                         Intent(
                             this@TvDetailActivity,
                             TvDetailActivity::class.java
                         )
-                    intent.putExtra("tvId", tv.id)
+                    intent.putExtra("tvId", tvItem.id)
                     startActivity(intent)
                 }
             }
@@ -133,7 +127,7 @@ class TvDetailActivity : AppCompatActivity() {
                             )
                             binding.backdrop.loadWithPattle(
                                 Utils.getImageFullUrl(
-                                    it.tvDetail.backdrop_path ?: ""
+                                    it.tvDetail.backdrop_path
                                 ),
                                 paletteCallback = { palette ->
                                     val swatch = palette.vibrantSwatch
