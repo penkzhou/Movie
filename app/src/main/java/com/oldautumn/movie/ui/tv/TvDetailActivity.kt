@@ -230,8 +230,8 @@ class TvDetailActivity : AppCompatActivity() {
                         binding.tvCertificateValue.text = it.traktTvDetail.certification
                         binding.tvTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktTvDetail.rating)}" +
-                                    "\n" +
-                                    "${it.traktTvDetail.votes}人评分"
+                            "\n" +
+                            "${it.traktTvDetail.votes}人评分"
                         binding.tvTraktRatingValue.setOnClickListener {
                             val intent =
                                 Intent(
