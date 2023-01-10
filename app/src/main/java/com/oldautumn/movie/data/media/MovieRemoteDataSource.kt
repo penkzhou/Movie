@@ -22,6 +22,7 @@ import com.oldautumn.movie.data.api.model.TraktRating
 import com.oldautumn.movie.data.api.model.TraktReview
 import com.oldautumn.movie.data.api.model.TraktShowDetail
 import com.oldautumn.movie.data.api.model.TraktSimpleContentItem
+import com.oldautumn.movie.data.api.model.TvSeasonDetail
 import com.oldautumn.movie.data.api.model.UserSettings
 
 class MovieRemoteDataSource(
@@ -57,6 +58,9 @@ class MovieRemoteDataSource(
 
     suspend fun getTvDetail(tvId: Int): TmdbTvDetail =
         tmdbApiService.fetchTvDetail(tvId)
+
+    suspend fun getTvSeasonDetail(tvId: Int, seasonNumber: Int): TvSeasonDetail =
+        tmdbApiService.fetchTvSeasonDetail(tvId, seasonNumber)
 
     suspend fun getMovieCast(movieId: Int): TmdbCreditList =
         tmdbApiService.fetchMovieCredit(movieId)

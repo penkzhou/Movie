@@ -21,6 +21,7 @@ import com.oldautumn.movie.data.api.model.TraktMovieDetail
 import com.oldautumn.movie.data.api.model.TraktRating
 import com.oldautumn.movie.data.api.model.TraktReview
 import com.oldautumn.movie.data.api.model.TraktShowDetail
+import com.oldautumn.movie.data.api.model.TvSeasonDetail
 import com.oldautumn.movie.data.api.model.UnifyMovieRevenueItem
 import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
 import com.oldautumn.movie.data.api.model.UnifyTvTrendingItem
@@ -75,6 +76,10 @@ class MovieRepository(
 
     suspend fun getShowDetail(showId: Int): TmdbTvDetail {
         return remoteDataSource.getTvDetail(showId)
+    }
+
+    suspend fun getShowSeasonDetail(showId: Int, seasonNumber: Int): TvSeasonDetail {
+        return remoteDataSource.getTvSeasonDetail(showId, seasonNumber)
     }
 
     suspend fun getMovieCredits(movieId: Int): TmdbCreditList {
@@ -155,9 +160,7 @@ class MovieRepository(
             ),
             pagingSourceFactory = {
                 TraktReviewPagingSource(
-                    traktApiService,
-                    traktMovieId,
-                    sortType
+                    traktApiService, traktMovieId, sortType
                 )
             }
         ).flow

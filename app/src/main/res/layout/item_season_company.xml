@@ -2,26 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
+    android:layout_width="80dp"
     android:layout_height="wrap_content"
     android:layout_margin="4dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/movie_cast_poster"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:id="@+id/product_company_poster"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/movie_cast_poster_name"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:id="@+id/product_company_poster_name"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:background="@drawable/bg_profile_name"
         android:gravity="center"
-        android:textSize="56sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -31,36 +31,22 @@
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/movie_cast_poster_barrier"
+        android:id="@+id/product_company_poster_barrier"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="movie_cast_poster,movie_cast_poster_name" />
+        app:constraint_referenced_ids="product_company_poster,product_company_poster_name" />
 
 
     <TextView
-        android:id="@+id/movie_real_name"
+        android:id="@+id/product_company_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_cast_poster_barrier"
-        tools:text="Chris Rock" />
-
-
-    <TextView
-        android:id="@+id/movie_cast_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:textColor="#444444"
         android:textSize="10sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_real_name"
+        app:layout_constraintTop_toBottomOf="@+id/product_company_poster_barrier"
         tools:text="Jack" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

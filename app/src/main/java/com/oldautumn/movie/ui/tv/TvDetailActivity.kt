@@ -62,7 +62,12 @@ class TvDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCrewList.adapter = crewAdapter
 
-        val seasonAdapter = TvSeasonAdapter({}, mutableListOf())
+        val seasonAdapter = TvSeasonAdapter {
+            val intent = Intent(this, TvSeasonDetailActivity::class.java)
+            intent.putExtra("seasonNumber", it.season_number)
+            intent.putExtra("tvId", viewModel.currentTvId())
+            startActivity(intent)
+        }
         binding.tvSeasonList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvSeasonList.adapter = seasonAdapter
@@ -82,7 +87,10 @@ class TvDetailActivity : AppCompatActivity() {
                 }
             }
         )
-
+        val companyAdapter = ProductCompanyAdapter(mutableListOf()) {}
+        binding.tvProductCompanyList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.tvProductCompanyList.adapter = companyAdapter
         binding.tvRecommendList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvRecommendList.adapter = recommendAdapter
@@ -91,13 +99,13 @@ class TvDetailActivity : AppCompatActivity() {
             mutableListOf(),
             object :
                 TvRecommendAdapter.OnItemClickListener {
-                override fun onItemClick(tv: TmdbSimpleTvItem) {
+                override fun onItemClick(tvItem: TmdbSimpleTvItem) {
                     val intent =
                         Intent(
                             this@TvDetailActivity,
                             TvDetailActivity::class.java
                         )
-                    intent.putExtra("tvId", tv.id)
+                    intent.putExtra("tvId", tvItem.id)
                     startActivity(intent)
                 }
             }
@@ -119,7 +127,7 @@ class TvDetailActivity : AppCompatActivity() {
                             )
                             binding.backdrop.loadWithPattle(
                                 Utils.getImageFullUrl(
-                                    it.tvDetail.backdrop_path ?: ""
+                                    it.tvDetail.backdrop_path
                                 ),
                                 paletteCallback = { palette ->
                                     val swatch = palette.vibrantSwatch
@@ -145,6 +153,14 @@ class TvDetailActivity : AppCompatActivity() {
                         if (it.tvDetail.seasons.isNotEmpty()) {
 
                             seasonAdapter.updateData(it.tvDetail.seasons)
+                        }
+                        if (it.tvDetail.production_companies.isNotEmpty()) {
+                            companyAdapter.updateData(it.tvDetail.production_companies)
+                            binding.tvProductCompany.visibility = View.VISIBLE
+                            binding.tvProductCompanyList.visibility = View.VISIBLE
+                        } else {
+                            binding.tvProductCompany.visibility = View.GONE
+                            binding.tvProductCompanyList.visibility = View.GONE
                         }
                         binding.tvPoster.load(
                             Utils.getImageFullUrl(

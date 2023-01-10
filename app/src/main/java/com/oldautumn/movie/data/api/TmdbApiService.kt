@@ -12,6 +12,7 @@ import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
 import com.oldautumn.movie.data.api.model.TmdbSimpleTvItem
 import com.oldautumn.movie.data.api.model.TmdbTvDetail
 import com.oldautumn.movie.data.api.model.TmdbTvRateModel
+import com.oldautumn.movie.data.api.model.TvSeasonDetail
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -43,7 +44,13 @@ interface TmdbApiService {
         @Path("tv_id") tvId: Int
     ): TmdbTvDetail
 
-    @GET("/3/tv/{tv_id}/credits")
+    @GET("/3/tv/{tv_id}/season/{season_number}")
+    suspend fun fetchTvSeasonDetail(
+        @Path("tv_id") tvId: Int,
+        @Path("season_number") seasonNumber: Int
+    ): TvSeasonDetail
+
+    @GET("/3/tv/{tv_id}/aggregate_credits")
     suspend fun fetchTvCredit(
         @Path("tv_id") tvId: Int
     ): TmdbCreditList
