@@ -150,7 +150,8 @@ class MovieRepository(
     }
 
     fun getTraktReviewPageList(
-        traktMovieId: String, sortType: String
+        traktMovieId: String,
+        sortType: String
     ): Flow<PagingData<TraktReview>> {
         return Pager(
             config = PagingConfig(
