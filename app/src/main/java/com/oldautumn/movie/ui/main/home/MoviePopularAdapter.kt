@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.MovieWithImage
+import com.oldautumn.movie.data.api.model.MediaWithImage
 import com.oldautumn.movie.utils.Utils
 
 class MoviePopularAdapter(
-    private val popularList: MutableList<MovieWithImage>,
-    private val onItemClick: (item: MovieWithImage) -> Unit
+    private val popularList: MutableList<MediaWithImage>,
+    private val onItemClick: (item: MediaWithImage) -> Unit
 ) :
     RecyclerView.Adapter<MoviePopularAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
@@ -40,7 +40,7 @@ class MoviePopularAdapter(
         holder.updateViewWithItem(movieTrendingItem)
     }
 
-    fun updateData(newPopularList: List<MovieWithImage>) {
+    fun updateData(newPopularList: List<MediaWithImage>) {
         popularList.clear()
         popularList.addAll(newPopularList)
         notifyDataSetChanged()
@@ -51,18 +51,18 @@ class MoviePopularAdapter(
     }
 
     interface OnItemClickListener {
-        fun onItemClick(movie: MovieWithImage)
+        fun onItemClick(movie: MediaWithImage)
     }
 
     class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
 
-        fun updateViewWithItem(movieWithImage: MovieWithImage) {
-            moviePoster.load(Utils.getImageFullUrl(movieWithImage.image.posters[0].file_path)) {
+        fun updateViewWithItem(mediaWithImage: MediaWithImage) {
+            moviePoster.load(Utils.getImageFullUrl(mediaWithImage.image.posters[0].file_path)) {
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }
-            moviePoster.contentDescription = movieWithImage.content.title
+            moviePoster.contentDescription = mediaWithImage.content.title
         }
     }
 }

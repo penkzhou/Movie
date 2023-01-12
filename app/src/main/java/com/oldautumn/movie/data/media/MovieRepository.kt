@@ -4,8 +4,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.oldautumn.movie.data.api.TraktApiService
+import com.oldautumn.movie.data.api.model.MediaWithImage
+import com.oldautumn.movie.data.api.model.ModelWithImage
 import com.oldautumn.movie.data.api.model.MovieVideo
-import com.oldautumn.movie.data.api.model.MovieWithImage
+import com.oldautumn.movie.data.api.model.ShowPlayedItem
+import com.oldautumn.movie.data.api.model.ShowRecommendItem
 import com.oldautumn.movie.data.api.model.TmdbCombinedCredit
 import com.oldautumn.movie.data.api.model.TmdbCreditList
 import com.oldautumn.movie.data.api.model.TmdbImageModel
@@ -48,17 +51,31 @@ class MovieRepository(
         }
     }
 
-    suspend fun getPopularMovieList(): List<MovieWithImage> {
-        val movieTrendingList = remoteDataSource.fetchPopularMovieList()
-        return movieTrendingList.map {
-            MovieWithImage(it, remoteDataSource.getMovieImage(it.ids.tmdb))
+    suspend fun getMostRecommendShowList(period: String): List<ModelWithImage<ShowRecommendItem>> {
+        val mostRecommendShowList = remoteDataSource.getMostRecommendShowList(period)
+        return mostRecommendShowList.map {
+            ModelWithImage(remoteDataSource.getTvImage(it.show.ids.tmdb), it)
         }
     }
 
-    suspend fun getPopularShowList(): List<MovieWithImage> {
+    suspend fun getMostPlayedShowList(period: String): List<ModelWithImage<ShowPlayedItem>> {
+        val mostPlayedShowList = remoteDataSource.getMostPlayedShowList(period)
+        return mostPlayedShowList.map {
+            ModelWithImage(remoteDataSource.getTvImage(it.show.ids.tmdb), it)
+        }
+    }
+
+    suspend fun getPopularMovieList(): List<MediaWithImage> {
+        val movieTrendingList = remoteDataSource.fetchPopularMovieList()
+        return movieTrendingList.map {
+            MediaWithImage(it, remoteDataSource.getMovieImage(it.ids.tmdb))
+        }
+    }
+
+    suspend fun getPopularShowList(): List<MediaWithImage> {
         val movieTrendingList = remoteDataSource.fetchPopularShowList()
         return movieTrendingList.map {
-            MovieWithImage(it, remoteDataSource.getTvImage(it.ids.tmdb))
+            MediaWithImage(it, remoteDataSource.getTvImage(it.ids.tmdb))
         }
     }
 

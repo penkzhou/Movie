@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.oldautumn.movie.data.api.model.MovieWithImage
+import com.oldautumn.movie.data.api.model.MediaWithImage
 import com.oldautumn.movie.data.api.model.UnifyMovieRevenueItem
 import com.oldautumn.movie.data.api.model.UnifyMovieTrendingItem
 import com.oldautumn.movie.databinding.FragmentHomeBinding
@@ -62,8 +62,8 @@ class HomeFragment : Fragment() {
                 }
             )
 
-        val popularPagerAdapter = MoviePopularPagerAdapter(object : (MovieWithImage) -> Unit {
-            override fun invoke(movie: MovieWithImage) {
+        val popularPagerAdapter = MoviePopularPagerAdapter(object : (MediaWithImage) -> Unit {
+            override fun invoke(movie: MediaWithImage) {
                 val intent = Intent(context, MovieDetailActivity::class.java)
                 intent.putExtra("movieId", movie.content.ids.tmdb)
                 intent.putExtra("movieSlug", movie.content.ids.slug)

@@ -4,6 +4,8 @@ import com.oldautumn.movie.data.api.model.DeviceCode
 import com.oldautumn.movie.data.api.model.DeviceToken
 import com.oldautumn.movie.data.api.model.MovieRevenueItem
 import com.oldautumn.movie.data.api.model.MovieTrendingItem
+import com.oldautumn.movie.data.api.model.ShowPlayedItem
+import com.oldautumn.movie.data.api.model.ShowRecommendItem
 import com.oldautumn.movie.data.api.model.ShowTrendingItem
 import com.oldautumn.movie.data.api.model.TraktCollection
 import com.oldautumn.movie.data.api.model.TraktMovieDetail
@@ -42,6 +44,11 @@ interface TraktApiService {
 
     @GET("/shows/trending")
     suspend fun fetchTrendingShowList(): List<ShowTrendingItem>
+    @GET("/shows/recommended/{period}")
+    suspend fun fetchMostRecommendShowList(@Path("period") period: String): List<ShowRecommendItem>
+
+    @GET("/shows/played/{period}")
+    suspend fun fetchMostPlayedShowList(@Path("period") period: String): List<ShowPlayedItem>
 
     @GET("/movies/watched/weekly")
     suspend fun fetchWeeklyWatchedMovieList(): List<MovieTrendingItem>

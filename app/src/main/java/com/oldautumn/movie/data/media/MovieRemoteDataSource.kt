@@ -5,6 +5,8 @@ import com.oldautumn.movie.data.api.TraktApiService
 import com.oldautumn.movie.data.api.model.MovieRevenueItem
 import com.oldautumn.movie.data.api.model.MovieTrendingItem
 import com.oldautumn.movie.data.api.model.MovieVideo
+import com.oldautumn.movie.data.api.model.ShowPlayedItem
+import com.oldautumn.movie.data.api.model.ShowRecommendItem
 import com.oldautumn.movie.data.api.model.ShowTrendingItem
 import com.oldautumn.movie.data.api.model.TmdbCombinedCredit
 import com.oldautumn.movie.data.api.model.TmdbCreditList
@@ -34,6 +36,12 @@ class MovieRemoteDataSource(
 
     suspend fun getTrendingShowList(): List<ShowTrendingItem> =
         traktApiService.fetchTrendingShowList()
+
+    suspend fun getMostRecommendShowList(period: String): List<ShowRecommendItem> =
+        traktApiService.fetchMostRecommendShowList(period)
+
+    suspend fun getMostPlayedShowList(period: String): List<ShowPlayedItem> =
+        traktApiService.fetchMostPlayedShowList(period)
 
     suspend fun fetchPopularShowList(): List<TraktSimpleContentItem> =
         traktApiService.fetchPopularShowList()
