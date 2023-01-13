@@ -11,12 +11,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
-import androidx.recyclerview.widget.RecyclerView
-import com.oldautumn.movie.data.api.model.MovieWithImage
+import androidx.viewpager2.widget.ViewPager2
+import com.oldautumn.movie.data.api.model.ModelWithImage
+import com.oldautumn.movie.data.api.model.ShowPlayedItem
+import com.oldautumn.movie.data.api.model.ShowRecommendItem
 import com.oldautumn.movie.data.api.model.UnifyTvTrendingItem
 import com.oldautumn.movie.databinding.FragmentTvHomeBinding
+import com.oldautumn.movie.ui.main.home.OffsetPageTransformer
 import com.oldautumn.movie.ui.tv.TvDetailActivity
 import com.oldautumn.movie.utils.Utils.launchAndRepeatWithViewLifecycle
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -38,9 +42,8 @@ class TvMainFragment : Fragment() {
 
         _binding = FragmentTvHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val trendingListView: RecyclerView = binding.tvTrendingList
-        val popularListView: RecyclerView = binding.tvPopularList
+        val popularPager: ViewPager2 = binding.tvPopularPager
+        val pagerIndicator: DotsIndicator = binding.tvDotsIndicator
         val tvTrendingAdapter =
             TvTrendingAdapter(
                 mutableListOf(),
@@ -52,25 +55,56 @@ class TvMainFragment : Fragment() {
                     }
                 }
             )
-        val popularAdapter =
-            TvPopularAdapter(
+
+        val tvMostPlayedAdapter =
+            TvMostPlayedAdapter(
                 mutableListOf(),
-                object : (MovieWithImage) -> Unit {
-                    override fun invoke(movie: MovieWithImage) {
-                        val intent = Intent(context, TvDetailActivity::class.java)
-                        intent.putExtra("tvId", movie.content.ids.tmdb)
+                object : (ModelWithImage<ShowPlayedItem>) -> Unit {
+                    override fun invoke(movieWithImage: ModelWithImage<ShowPlayedItem>) {
+                        val intent = Intent(requireContext(), TvDetailActivity::class.java)
+                        intent.putExtra("tvId", movieWithImage.show.show.ids.tmdb)
                         startActivity(intent)
                     }
                 }
             )
-        trendingListView.layoutManager =
+
+        val tvMostRecommendAdapter =
+            TvMostRecommendAdapter(
+                mutableListOf(),
+                object : (ModelWithImage<ShowRecommendItem>) -> Unit {
+                    override fun invoke(movieWithImage: ModelWithImage<ShowRecommendItem>) {
+                        val intent = Intent(requireContext(), TvDetailActivity::class.java)
+                        intent.putExtra("tvId", movieWithImage.show.show.ids.tmdb)
+                        startActivity(intent)
+                    }
+                }
+            )
+
+        val popularPagerAdapter = TvPopularPagerAdapter(object : (UnifyTvTrendingItem) -> Unit {
+            override fun invoke(trendingItem: UnifyTvTrendingItem) {
+                val intent = Intent(context, TvDetailActivity::class.java)
+                intent.putExtra("tvId", trendingItem.show.show.ids.tmdb)
+                startActivity(intent)
+            }
+        })
+        binding.tvRecommendList.layoutManager =
             LinearLayoutManager(context, HORIZONTAL, false)
-        popularListView.layoutManager = LinearLayoutManager(context, HORIZONTAL, false)
-        trendingListView.adapter = tvTrendingAdapter
-        popularListView.adapter = popularAdapter
+        binding.tvRecommendList.adapter = tvMostRecommendAdapter
+
+        binding.tvMostPlayedList.layoutManager =
+            LinearLayoutManager(context, HORIZONTAL, false)
+        binding.tvMostPlayedList.adapter = tvMostPlayedAdapter
+
+        popularPager.adapter = popularPagerAdapter
+
+        popularPager.offscreenPageLimit = 1
+        popularPager.setPageTransformer(OffsetPageTransformer(50, 15))
+        pagerIndicator.attachTo(popularPager)
 
         viewModel.fetchPopularShow()
         viewModel.fetchTrendingShow()
+        viewModel.fetchMostPlayedShowList("weekly")
+        viewModel.fetchMostRecommendShowList("weekly")
         lifecycleScope.launch {
             launchAndRepeatWithViewLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
@@ -80,8 +114,14 @@ class TvMainFragment : Fragment() {
                         if (uiState.trendingShowList.isNotEmpty()) {
                             tvTrendingAdapter.updateData(uiState.trendingShowList)
                         }
-                        if (uiState.popularShowList.isNotEmpty()) {
-                            popularAdapter.updateData(uiState.popularShowList)
+                        if (uiState.trendingShowList.isNotEmpty()) {
+                            popularPagerAdapter.submitList(uiState.trendingShowList)
+                        }
+                        if (uiState.mostPlayedShowList.isNotEmpty()) {
+                            tvMostPlayedAdapter.updateData(uiState.mostPlayedShowList)
+                        }
+                        if (uiState.mostRecommendShowList.isNotEmpty()) {
+                            tvMostRecommendAdapter.updateData(uiState.mostRecommendShowList)
                         }
                     }
                 }

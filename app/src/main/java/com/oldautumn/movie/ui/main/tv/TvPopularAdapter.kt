@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.oldautumn.movie.R
-import com.oldautumn.movie.data.api.model.MovieWithImage
+import com.oldautumn.movie.data.api.model.MediaWithImage
 import com.oldautumn.movie.utils.Utils
 
 class TvPopularAdapter(
-    private val popularList: MutableList<MovieWithImage>,
-    private val onItemClick: (item: MovieWithImage) -> Unit
+    private val popularList: MutableList<MediaWithImage>,
+    private val onItemClick: (item: MediaWithImage) -> Unit
 ) :
     RecyclerView.Adapter<TvPopularAdapter.TvPopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvPopularViewHolder {
@@ -38,7 +38,7 @@ class TvPopularAdapter(
         holder.updateViewWithItem(movieTrendingItem)
     }
 
-    fun updateData(newPopularList: List<MovieWithImage>) {
+    fun updateData(newPopularList: List<MediaWithImage>) {
         popularList.clear()
         popularList.addAll(newPopularList)
         notifyDataSetChanged()
@@ -51,10 +51,10 @@ class TvPopularAdapter(
     class TvPopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
 
-        fun updateViewWithItem(movieWithImage: MovieWithImage) {
+        fun updateViewWithItem(mediaWithImage: MediaWithImage) {
 
-            moviePoster.contentDescription = movieWithImage.content.title
-            moviePoster.load(Utils.getImageFullUrl(movieWithImage.image.posters[0].file_path)) {
+            moviePoster.contentDescription = mediaWithImage.content.title
+            moviePoster.load(Utils.getImageFullUrl(mediaWithImage.image.posters[0].file_path)) {
                 placeholder(R.mipmap.default_poster)
                 transformations(RoundedCornersTransformation(16f))
             }

@@ -22,6 +22,8 @@ class TvMainViewModel @Inject constructor(
         TvMainUiState(
             mutableListOf(),
             mutableListOf(),
+            mutableListOf(),
+            mutableListOf(),
             ""
         )
     )
@@ -29,6 +31,8 @@ class TvMainViewModel @Inject constructor(
 
     private var fetchPopularShowListJob: Job? = null
     private var fetchTrendingShowListJob: Job? = null
+    private var fetchMostRecommendShowListJob: Job? = null
+    private var fetchMostPlayedShowListJob: Job? = null
 
     fun fetchPopularShow() {
         fetchPopularShowListJob?.cancel()
@@ -54,6 +58,40 @@ class TvMainViewModel @Inject constructor(
                 val trendingMovieList = repository.getTrendingShowList()
                 _uiState.value = _uiState.value.copy(
                     trendingShowList = trendingMovieList
+                )
+            } catch (ioe: IOException) {
+                // Handle the error and notify the UI when appropriate.
+                _uiState.value = _uiState.value.copy(errorMessage = "数据解析异常")
+            } catch (he: HttpException) {
+                _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
+            }
+        }
+    }
+
+    fun fetchMostRecommendShowList(period: String) {
+        fetchMostRecommendShowListJob?.cancel()
+        fetchMostRecommendShowListJob = viewModelScope.launch {
+            try {
+                val mostRecommendShowList = repository.getMostRecommendShowList(period)
+                _uiState.value = _uiState.value.copy(
+                    mostRecommendShowList = mostRecommendShowList
+                )
+            } catch (ioe: IOException) {
+                // Handle the error and notify the UI when appropriate.
+                _uiState.value = _uiState.value.copy(errorMessage = "数据解析异常")
+            } catch (he: HttpException) {
+                _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
+            }
+        }
+    }
+
+    fun fetchMostPlayedShowList(period: String) {
+        fetchMostPlayedShowListJob?.cancel()
+        fetchMostPlayedShowListJob = viewModelScope.launch {
+            try {
+                val mostPlayedShowList = repository.getMostPlayedShowList(period)
+                _uiState.value = _uiState.value.copy(
+                    mostPlayedShowList = mostPlayedShowList
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
