@@ -1,6 +1,5 @@
 package com.oldautumn.movie.data.api.model
 
-
 /**
  * {
 "watcher_count": 155291,

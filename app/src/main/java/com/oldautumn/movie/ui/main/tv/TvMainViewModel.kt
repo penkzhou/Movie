@@ -68,7 +68,7 @@ class TvMainViewModel @Inject constructor(
         }
     }
 
-    fun fetchMostRecommendShowList(period:String) {
+    fun fetchMostRecommendShowList(period: String) {
         fetchMostRecommendShowListJob?.cancel()
         fetchMostRecommendShowListJob = viewModelScope.launch {
             try {
@@ -85,7 +85,7 @@ class TvMainViewModel @Inject constructor(
         }
     }
 
-    fun fetchMostPlayedShowList(period:String) {
+    fun fetchMostPlayedShowList(period: String) {
         fetchMostPlayedShowListJob?.cancel()
         fetchMostPlayedShowListJob = viewModelScope.launch {
             try {

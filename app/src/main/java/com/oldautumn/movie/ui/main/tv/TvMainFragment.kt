@@ -91,7 +91,6 @@ class TvMainFragment : Fragment() {
             LinearLayoutManager(context, HORIZONTAL, false)
         binding.tvRecommendList.adapter = tvMostRecommendAdapter
 
-
         binding.tvMostPlayedList.layoutManager =
             LinearLayoutManager(context, HORIZONTAL, false)
         binding.tvMostPlayedList.adapter = tvMostPlayedAdapter

@@ -19,8 +19,11 @@ class TvMostPlayedAdapter(
     RecyclerView.Adapter<TvMostPlayedAdapter.TvRecommendViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvRecommendViewHolder {
         var bindView =
-            ItemShowWithInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
+            ItemShowWithInfoBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
 
         val holder = TvRecommendViewHolder(bindView)
         bindView.root.setOnClickListener {
