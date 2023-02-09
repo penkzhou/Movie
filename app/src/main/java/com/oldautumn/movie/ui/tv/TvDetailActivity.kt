@@ -3,9 +3,14 @@ package com.oldautumn.movie.ui.tv
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
+import androidx.core.view.updateLayoutParams
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -37,11 +42,20 @@ class TvDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         binding = ActivityTvDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.home.setOnClickListener {
             finish()
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.backdrop) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = insets.top
+            }
+            WindowInsetsCompat.CONSUMED
         }
 
         val castAdapter = MovieCastAdapter(mutableListOf()) {
@@ -230,8 +244,8 @@ class TvDetailActivity : AppCompatActivity() {
                         binding.tvCertificateValue.text = it.traktTvDetail.certification
                         binding.tvTraktRatingValue.text =
                             "${DecimalFormat("##.#").format(it.traktTvDetail.rating)}" +
-                            "\n" +
-                            "${it.traktTvDetail.votes}人评分"
+                                    "\n" +
+                                    "${it.traktTvDetail.votes}人评分"
                         binding.tvTraktRatingValue.setOnClickListener {
                             val intent =
                                 Intent(
