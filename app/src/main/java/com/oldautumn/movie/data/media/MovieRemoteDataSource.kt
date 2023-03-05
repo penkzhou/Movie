@@ -106,6 +106,10 @@ class MovieRemoteDataSource(
     suspend fun getTraktPopularCollection(): List<TraktCollection> =
         traktApiService.fetchTraktPopularCollection()
 
+
+    suspend fun getTraktTrendingCollection(): List<TraktCollection> =
+        traktApiService.fetchTraktTrendingCollection()
+
     suspend fun getPeopleDetail(peopleId: Int): TmdbPeople =
         tmdbApiService.fetchTmdbPeopleDetail(peopleId)
 

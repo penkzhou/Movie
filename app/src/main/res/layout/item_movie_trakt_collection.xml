@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,11 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="这是一条测试的评论" />
+            tools:text="集合列表" />
 
 
         <TextView
@@ -33,7 +34,7 @@
             android:textColor="#999999"
             android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/collection_title"
+            app:layout_constraintTop_toBottomOf="@+id/collection_description"
             tools:text="12" />
 
 
@@ -42,11 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="3"
             android:padding="8dp"
             android:textColor="#999999"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@+id/collection_created_at"
+            app:layout_constraintTop_toBottomOf="@+id/collection_title"
             tools:text="这是一条测试的评论" />
 
 
@@ -56,13 +56,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:drawablePadding="4dp"
+            android:padding="8dp"
             android:textAlignment="center"
             android:textColor="#999999"
             android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="@+id/collection_description"
+            app:drawableStartCompat="@drawable/ic_thumb_up"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/collection_description"
-            tools:text="12"
-            app:drawableStartCompat="@drawable/ic_thumb_up" />
+            tools:text="12" />
 
 
         <TextView
@@ -72,10 +73,11 @@
             android:layout_marginStart="16dp"
             android:drawableStart="@drawable/ic_comment_24"
             android:drawablePadding="4dp"
+            android:padding="8dp"
             android:textAlignment="center"
             android:textColor="#999999"
             android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="@+id/collection_like"
+            app:layout_constraintEnd_toStartOf="@+id/collection_like"
             app:layout_constraintTop_toBottomOf="@+id/collection_description"
             tools:text="12" />
 

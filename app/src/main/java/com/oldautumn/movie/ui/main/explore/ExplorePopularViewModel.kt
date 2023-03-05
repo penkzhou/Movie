@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 @HiltViewModel
-class ExploreViewModel @Inject constructor(
+class ExplorePopularViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
 

@@ -154,6 +154,10 @@ class MovieRepository(
         return remoteDataSource.getTraktPopularCollection()
     }
 
+    suspend fun getTraktTrendingCollection(): List<TraktCollection> {
+        return remoteDataSource.getTraktTrendingCollection()
+    }
+
     suspend fun getPeopleDetail(peopleId: Int): TmdbPeople {
         return remoteDataSource.getPeopleDetail(peopleId)
     }
