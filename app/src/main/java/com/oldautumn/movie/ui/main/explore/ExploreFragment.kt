@@ -14,7 +14,6 @@ class ExploreFragment : Fragment() {
 
     private var _binding: FragmentExploreBinding? = null
 
-
     private val binding get() = _binding!!
 
     override fun onCreateView(

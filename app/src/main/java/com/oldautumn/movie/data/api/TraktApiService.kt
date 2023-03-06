@@ -44,6 +44,7 @@ interface TraktApiService {
 
     @GET("/shows/trending")
     suspend fun fetchTrendingShowList(): List<ShowTrendingItem>
+
     @GET("/shows/recommended/{period}")
     suspend fun fetchMostRecommendShowList(@Path("period") period: String): List<ShowRecommendItem>
 
@@ -93,13 +94,11 @@ interface TraktApiService {
     suspend fun fetchTraktPopularCollection(): List<TraktCollection>
 
 
-
     @GET("lists/trending")
     suspend fun fetchTraktTrendingCollection(): List<TraktCollection>
 
     @GET("lists/{list_id}")
     suspend fun fetchTraktCollectionDetail(): List<TraktCollection>
-
 
 
     @GET("lists/{list_id}/items/{type}")

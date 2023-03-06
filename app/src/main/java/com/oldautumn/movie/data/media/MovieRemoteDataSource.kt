@@ -52,20 +52,17 @@ class MovieRemoteDataSource(
     suspend fun getMovieImage(movieId: Int): TmdbImageModel =
         tmdbApiService.fetchMovieImageList(movieId)
 
-    suspend fun getTvImage(tvId: Int): TmdbImageModel =
-        tmdbApiService.fetchTvImageList(tvId)
+    suspend fun getTvImage(tvId: Int): TmdbImageModel = tmdbApiService.fetchTvImageList(tvId)
 
     suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail =
         tmdbApiService.fetchMovieDetail(movieId)
 
-    suspend fun getMovieVideo(movieId: Int): MovieVideo =
-        tmdbApiService.fetchMovieVideo(movieId)
+    suspend fun getMovieVideo(movieId: Int): MovieVideo = tmdbApiService.fetchMovieVideo(movieId)
 
     suspend fun getUserSettings(token: String): UserSettings =
         traktApiService.fetchUserInfo(mapOf(Pair("Authorization", "Bearer $token")))
 
-    suspend fun getTvDetail(tvId: Int): TmdbTvDetail =
-        tmdbApiService.fetchTvDetail(tvId)
+    suspend fun getTvDetail(tvId: Int): TmdbTvDetail = tmdbApiService.fetchTvDetail(tvId)
 
     suspend fun getTvSeasonDetail(tvId: Int, seasonNumber: Int): TvSeasonDetail =
         tmdbApiService.fetchTvSeasonDetail(tvId, seasonNumber)
@@ -73,8 +70,7 @@ class MovieRemoteDataSource(
     suspend fun getMovieCast(movieId: Int): TmdbCreditList =
         tmdbApiService.fetchMovieCredit(movieId)
 
-    suspend fun getTvCast(tvId: Int): TmdbCreditList =
-        tmdbApiService.fetchTvCredit(tvId)
+    suspend fun getTvCast(tvId: Int): TmdbCreditList = tmdbApiService.fetchTvCredit(tvId)
 
     suspend fun getTraktMovieDetail(movieSlug: String): TraktMovieDetail =
         traktApiService.fetchTraktMovieDetail(movieSlug)
@@ -105,7 +101,6 @@ class MovieRemoteDataSource(
 
     suspend fun getTraktPopularCollection(): List<TraktCollection> =
         traktApiService.fetchTraktPopularCollection()
-
 
     suspend fun getTraktTrendingCollection(): List<TraktCollection> =
         traktApiService.fetchTraktTrendingCollection()

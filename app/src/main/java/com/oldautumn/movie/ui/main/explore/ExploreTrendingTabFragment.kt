@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import com.oldautumn.movie.data.api.model.TraktCollection
-import com.oldautumn.movie.databinding.FragmentExploreBinding
 import com.oldautumn.movie.databinding.FragmentExploreContentBinding
 import com.oldautumn.movie.utils.Utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
