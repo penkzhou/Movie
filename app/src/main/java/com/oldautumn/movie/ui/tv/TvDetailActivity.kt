@@ -26,7 +26,7 @@ import com.oldautumn.movie.ui.movie.MovieCrewAdapter
 import com.oldautumn.movie.ui.movie.MovieReviewActivity
 import com.oldautumn.movie.ui.people.PeopleDetailActivity
 import com.oldautumn.movie.utils.Utils
-import com.oldautumn.movie.utils.Utils.loadWithPattle
+import com.oldautumn.movie.utils.Utils.loadWithPalette
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
 import kotlinx.coroutines.launch
@@ -139,7 +139,7 @@ class TvDetailActivity : AppCompatActivity() {
                                     it.tvDetail.backdrop_path
                                 )
                             )
-                            binding.backdrop.loadWithPattle(
+                            binding.backdrop.loadWithPalette(
                                 Utils.getImageFullUrl(
                                     it.tvDetail.backdrop_path
                                 ),
