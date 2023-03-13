@@ -51,45 +51,41 @@ dependencies {
 
 
     // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.0")
+    implementation libs.lifecycle.viewmodel.ktx
+    implementation libs.lifecycle.livedata.ktx
+    implementation libs.lifecycle.runtime.ktx
+    implementation libs.lifecycle.viewmodel.savedstate
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.fragment:fragment-ktx:1.5.5'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation libs.constraintlayout
+    implementation libs.datastore
+    implementation libs.navigation.fragment.ktx
+    implementation libs.navigation.ui.ktx
+    implementation libs.androidx.core
 
+    implementation libs.appCompat
+    implementation libs.fragment
+    implementation libs.preference
+    implementation libs.paging
+    implementation libs.palette
+    implementation libs.material
 
-    implementation('com.google.dagger:hilt-android:2.45')
-    implementation 'androidx.preference:preference-ktx:1.2.0'
-    kapt('com.google.dagger:hilt-android-compiler:2.45')
+    implementation libs.hiltdagger
+    kapt libs.hiltdagger.compiler
 
-    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
-    implementation 'androidx.palette:palette-ktx:1.0.0'
+    implementation libs.dotsindicator
+    implementation libs.retrofit2.converter.moshi
+    implementation libs.okhttp.logging.interceptor
 
+    implementation platform(libs.deps.firebase.bom)
+    implementation libs.deps.firebase.crashlytics
+    implementation libs.deps.firebase.analytics
+    implementation libs.deps.firebase.perf
 
-    implementation 'com.tbuonomo:dotsindicator:4.3'
+    implementation libs.coil
 
-
-
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0'
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
-    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation platform('com.google.firebase:firebase-bom:31.2.2')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx'
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-perf-ktx'
-    implementation("io.coil-kt:coil:2.2.2")
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation libs.junit
+    androidTestImplementation libs.androidxTest
+    androidTestImplementation libs.androidxEspresso
 }
 
 ktlint {
