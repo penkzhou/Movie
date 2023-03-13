@@ -93,13 +93,11 @@ interface TraktApiService {
     @GET("lists/popular")
     suspend fun fetchTraktPopularCollection(): List<TraktCollection>
 
-
     @GET("lists/trending")
     suspend fun fetchTraktTrendingCollection(): List<TraktCollection>
 
     @GET("lists/{list_id}")
     suspend fun fetchTraktCollectionDetail(): List<TraktCollection>
-
 
     @GET("lists/{list_id}/items/{type}")
     suspend fun fetchTraktCollectionListByType(): List<TraktCollection>
