@@ -1,4 +1,4 @@
-package com.oldautumn.movie.ui.movie
+package com.oldautumn.movie.ui.main.explore
 
 import android.view.LayoutInflater
 import android.view.View

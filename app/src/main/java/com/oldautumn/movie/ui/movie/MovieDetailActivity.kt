@@ -19,7 +19,7 @@ import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
 import com.oldautumn.movie.databinding.ActivityMovieDetailBinding
 import com.oldautumn.movie.ui.people.PeopleDetailActivity
 import com.oldautumn.movie.utils.Utils
-import com.oldautumn.movie.utils.Utils.loadWithPattle
+import com.oldautumn.movie.utils.Utils.loadWithPalette
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -122,7 +122,7 @@ class MovieDetailActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
                     if (it.movieDetail != null) {
-                        binding.backdrop.loadWithPattle(
+                        binding.backdrop.loadWithPalette(
                             Utils.getImageFullUrl(
                                 it.movieDetail.backdrop_path ?: ""
                             ),

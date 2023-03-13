@@ -2,11 +2,9 @@ package com.oldautumn.movie.utils
 
 import android.graphics.Bitmap
 import android.text.format.DateUtils
-import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewTreeLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.palette.graphics.Palette
@@ -27,9 +25,7 @@ object Utils {
         return "https://image.tmdb.org/t/p/w$width$imagePath"
     }
 
-    val View.lifecycleOwner get() = ViewTreeLifecycleOwner.get(this)
-
-    inline fun ImageView.loadWithPattle(
+    inline fun ImageView.loadWithPalette(
         data: Any?,
         imageLoader: ImageLoader = context.imageLoader,
         builder: ImageRequest.Builder.() -> Unit = {},
