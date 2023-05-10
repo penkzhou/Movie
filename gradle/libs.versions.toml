@@ -1,6 +1,6 @@
 [versions]
 fragment = "1.5.5"
-androidxCore = "1.9.0"
+androidxCore = "1.10.1"
 androidxEspresso = "3.5.1"
 androidxTest = "1.1.5"
 androidGradlePlugin = "7.3.1"
