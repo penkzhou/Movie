@@ -24,4 +24,5 @@
     <style name="Theme.Movie.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Movie.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
