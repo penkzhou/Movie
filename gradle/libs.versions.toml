@@ -22,7 +22,7 @@ hiltdagger = "2.46.1"
 dotsindicator = "4.3"
 retrofit2 = "2.9.0"
 logging-interceptor= "4.11.0"
-coil = "2.3.0"
+coil = "2.4.0"
 
 kotlin = "1.8.21"
 
