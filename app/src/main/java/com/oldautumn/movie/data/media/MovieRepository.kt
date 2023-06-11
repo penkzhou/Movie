@@ -181,7 +181,9 @@ class MovieRepository(
             ),
             pagingSourceFactory = {
                 TraktReviewPagingSource(
-                    traktApiService, traktMovieId, sortType
+                    traktApiService,
+                    traktMovieId,
+                    sortType
                 )
             }
         ).flow

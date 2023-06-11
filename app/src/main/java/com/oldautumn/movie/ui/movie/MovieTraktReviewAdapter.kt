@@ -15,7 +15,6 @@ class MovieTraktReviewAdapter(
 ) :
     RecyclerView.Adapter<MovieTraktReviewAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_trakt_review, parent, false)

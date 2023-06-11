@@ -3,7 +3,7 @@ package com.oldautumn.movie.data.api.model
 data class TmdbImageModel(
     val id: Int,
     val backdrops: List<TmdbImageItem>,
-    val posters: List<TmdbImageItem>,
+    val posters: List<TmdbImageItem>
 )
 
 data class TmdbImageItem(
@@ -13,5 +13,5 @@ data class TmdbImageItem(
     val widtb: Int,
     val vote_average: Double,
     val vote_count: Int,
-    val iso_639_1: String?,
+    val iso_639_1: String?
 )

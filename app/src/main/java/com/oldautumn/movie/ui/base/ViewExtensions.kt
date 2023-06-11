@@ -32,7 +32,7 @@ fun <T, VIEW_BINDING : ViewBinding> RecyclerView.setup(
             },
             { binding: VIEW_BINDING?, item: T ->
                 bindHolder(binding, item)
-            },
+            }
         )
     }
 

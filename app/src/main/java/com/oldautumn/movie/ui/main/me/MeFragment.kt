@@ -48,7 +48,6 @@ class MeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentMeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.setting.setOnClickListener {
@@ -110,7 +109,8 @@ class MeFragment : Fragment() {
                     }
                 }
             },
-            viewLifecycleOwner, Lifecycle.State.RESUMED
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED
         )
     }
 

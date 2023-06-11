@@ -35,17 +35,18 @@ object Utils {
             .apply(builder)
             .data(data)
             .target(this)
-            .transformations(object : Transformation {
+            .transformations(
+                object : Transformation {
 
-                override val cacheKey: String
-                    get() = "paletteTransformer"
+                    override val cacheKey: String
+                        get() = "paletteTransformer"
 
-                override suspend fun transform(input: Bitmap, size: Size): Bitmap {
-                    val p = Palette.from(input).generate()
-                    paletteCallback(p)
-                    return input
+                    override suspend fun transform(input: Bitmap, size: Size): Bitmap {
+                        val p = Palette.from(input).generate()
+                        paletteCallback(p)
+                        return input
+                    }
                 }
-            }
             )
             .build()
         return imageLoader.enqueue(request)
@@ -53,7 +54,8 @@ object Utils {
 
     fun getFormatTimeDisplay(timeString: String): String {
         val format = SimpleDateFormat(
-            "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US
+            "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+            Locale.US
         )
         var date: Date? = null
         try {

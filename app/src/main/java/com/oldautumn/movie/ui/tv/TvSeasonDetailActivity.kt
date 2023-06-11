@@ -76,7 +76,6 @@ class TvSeasonDetailActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect {
                     if (it.tvSeasonDetail != null) {
-
                         if (it.tvSeasonDetail.episodes.isNotEmpty()) {
                             episodeAdapter.updateData(it.tvSeasonDetail.episodes)
                             it.tvSeasonDetail.episodes.map { episode ->

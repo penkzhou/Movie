@@ -10,5 +10,5 @@ data class DeviceToken(
     val refresh_token: String,
     val scope: String,
     val created_at: Long,
-    val expires_in: Int,
+    val expires_in: Int
 ) : Parcelable

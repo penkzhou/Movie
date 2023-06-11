@@ -11,5 +11,5 @@ data class MovieIds(
     val slug: String,
     val imdb: String,
     val tmdb: Int,
-    val tvdb: Int,
+    val tvdb: Int
 )

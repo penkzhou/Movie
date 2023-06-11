@@ -259,7 +259,7 @@ data class Creator(
     val credit_id: String,
     val name: String,
     val gender: Int,
-    val profile_path: String,
+    val profile_path: String
 )
 
 data class Genre(
@@ -271,7 +271,7 @@ data class Genre(
       "profile_path": "/xvNN5huL0X8yJ7h3IZfGG4O2zBD.jpg"
     * */
     val id: Int,
-    val name: String,
+    val name: String
 )
 
 data class Episode(

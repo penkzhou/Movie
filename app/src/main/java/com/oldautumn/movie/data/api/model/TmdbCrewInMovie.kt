@@ -43,5 +43,5 @@ data class TmdbCrewInMovie(
     val vote_average: Double,
     val adult: Boolean,
     val release_date: String,
-    val credit_id: String,
+    val credit_id: String
 )

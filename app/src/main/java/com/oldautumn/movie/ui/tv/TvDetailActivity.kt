@@ -165,7 +165,6 @@ class TvDetailActivity : AppCompatActivity() {
                         }
 
                         if (it.tvDetail.seasons.isNotEmpty()) {
-
                             seasonAdapter.updateData(it.tvDetail.seasons)
                         }
                         if (it.tvDetail.production_companies.isNotEmpty()) {

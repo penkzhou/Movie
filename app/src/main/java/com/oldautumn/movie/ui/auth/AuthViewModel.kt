@@ -15,7 +15,7 @@ import retrofit2.HttpException
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val repository: AuthRepository,
+    private val repository: AuthRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -32,7 +32,6 @@ class AuthViewModel @Inject constructor(
     fun fetchDeviceCode() {
         fetchDeviceCodeJob?.cancel()
         fetchDeviceCodeJob = viewModelScope.launch {
-
             try {
                 val deviceCode = repository.fetchDeviceCode()
 
@@ -50,7 +49,6 @@ class AuthViewModel @Inject constructor(
     fun fetchDeviceToken(deviceCode: String) {
         fetchDeviceTokenJob?.cancel()
         fetchDeviceTokenJob = viewModelScope.launch {
-
             try {
                 val deviceToken = repository.fetchAccessCode(deviceCode)
                 _uiState.value =

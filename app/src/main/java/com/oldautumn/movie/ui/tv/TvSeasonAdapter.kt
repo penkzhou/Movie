@@ -21,7 +21,8 @@ class TvSeasonAdapter(
         val root =
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_tv_season,
-                parent, false
+                parent,
+                false
             )
         return SeasonViewHolder(root, onDetailClick)
     }

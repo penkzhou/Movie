@@ -69,7 +69,7 @@ class ProductCompanyAdapter(
                 companyPosterName.visibility = View.GONE
                 companyPoster.load(Utils.getImageFullUrl(cast.logo_path)) {
                     transformations(
-                        CircleCropTransformation(),
+                        CircleCropTransformation()
                     )
                 }
             } else {

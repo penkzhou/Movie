@@ -56,7 +56,6 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder<T>, position: Int) {
-
         val item = list[position]
         holder.itemView.bind(item)
 //        if (position == holder.bindingAdapterPosition) {

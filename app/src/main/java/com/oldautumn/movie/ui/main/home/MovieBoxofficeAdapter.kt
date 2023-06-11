@@ -19,7 +19,6 @@ class MovieBoxofficeAdapter(
 ) :
     RecyclerView.Adapter<MovieBoxofficeAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_boxoffice, parent, false)

@@ -25,7 +25,7 @@ const val DEFAULT_SORT_TYPE = "newest"
 @HiltViewModel
 class MovieReviewViewModel @Inject constructor(
     private val repository: MovieRepository,
-    private val savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val traktMovieId = savedStateHandle.get<String>("traktMovieId") ?: ""

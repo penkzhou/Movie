@@ -39,7 +39,7 @@ data class TraktReview(
     val replies: Int,
     val likes: Int,
     val user_stats: TraktUserStats,
-    val user: TraktUser,
+    val user: TraktUser
 )
 
 data class TraktUserStats(

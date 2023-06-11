@@ -17,7 +17,6 @@ class TrendingAdapter(
 ) :
     RecyclerView.Adapter<TrendingAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-
         val rootView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_popular_movie, parent, false)
         val holder = PopularViewHolder(rootView)

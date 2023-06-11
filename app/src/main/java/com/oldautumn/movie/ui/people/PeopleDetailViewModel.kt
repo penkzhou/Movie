@@ -32,7 +32,7 @@ class PeopleDetailViewModel @Inject constructor(
             listOf(),
             listOf(),
             0,
-            "",
+            ""
         )
 
     )

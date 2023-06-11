@@ -48,7 +48,8 @@ object DataModule {
     fun provideAuthedOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         val authedHeader = AuthedInterceptor(
-            "", "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
+            "",
+            "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
         )
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
         return OkHttpClient.Builder().addInterceptor(logging).addInterceptor(authedHeader).build()
@@ -66,7 +67,8 @@ object DataModule {
         Log.i("loginAuthedOkHttpClient", token)
         val logging = HttpLoggingInterceptor()
         val authedHeader = AuthedInterceptor(
-            token, "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
+            token,
+            "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
         )
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder().addInterceptor(logging)
@@ -129,7 +131,7 @@ object DataModule {
     @Named("movieRemoteDataSource")
     fun provideMovieRemoteDataSource(
         tmdbApiService: TmdbApiService,
-        @Named("authedTraktApiService") traktApiService: TraktApiService,
+        @Named("authedTraktApiService") traktApiService: TraktApiService
     ): MovieRemoteDataSource {
         return MovieRemoteDataSource(traktApiService, tmdbApiService)
     }
@@ -139,7 +141,7 @@ object DataModule {
     @Named("loginMovieRemoteDataSource")
     fun provideLoginMovieRemoteDataSource(
         tmdbApiService: TmdbApiService,
-        @Named("loginAuthedTraktApiService") traktApiService: TraktApiService,
+        @Named("loginAuthedTraktApiService") traktApiService: TraktApiService
     ): MovieRemoteDataSource {
         return MovieRemoteDataSource(traktApiService, tmdbApiService)
     }
@@ -147,7 +149,7 @@ object DataModule {
     @Singleton
     @Provides
     fun provideAuthRemoteDataSource(
-        @Named("traktApiService") traktApiService: TraktApiService,
+        @Named("traktApiService") traktApiService: TraktApiService
     ): AuthRemoteDataSource {
         return AuthRemoteDataSource(traktApiService)
     }

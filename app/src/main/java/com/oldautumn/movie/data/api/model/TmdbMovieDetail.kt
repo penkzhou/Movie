@@ -121,7 +121,7 @@ data class TmdbMovieDetail(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int,
-    val external_ids: ExternalIds,
+    val external_ids: ExternalIds
 )
 
 data class ExternalIds(

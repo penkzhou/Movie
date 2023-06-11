@@ -23,7 +23,10 @@ class MeViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(
         MeUiState(
-            false, "", false, null,
+            false,
+            "",
+            false,
+            null,
             DeviceCode("", "", "", 0, 0)
         )
     )
@@ -79,7 +82,6 @@ class MeViewModel @Inject constructor(
     fun fetchDeviceToken(deviceCode: String) {
         fetchDeviceTokenJob?.cancel()
         fetchDeviceTokenJob = viewModelScope.launch {
-
             try {
                 val deviceToken = repository.fetchAccessCode(deviceCode)
                 _uiState.value =

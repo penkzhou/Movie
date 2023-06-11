@@ -19,7 +19,9 @@ class SplashViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(
         SplashUiState(
-            false, "", false,
+            false,
+            "",
+            false,
             DeviceCode("", "", "", 0, 0)
         )
     )
@@ -60,7 +62,6 @@ class SplashViewModel @Inject constructor(
     fun fetchDeviceToken(deviceCode: String) {
         fetchDeviceTokenJob?.cancel()
         fetchDeviceTokenJob = viewModelScope.launch {
-
             try {
                 val deviceToken = repository.fetchAccessCode(deviceCode)
                 _uiState.value =

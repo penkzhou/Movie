@@ -17,7 +17,6 @@ class TvTrendingAdapter(
 ) :
     RecyclerView.Adapter<TvTrendingAdapter.TvTrendingViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvTrendingViewHolder {
-
         val rootView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_popular_movie, parent, false)
         val holder = TvTrendingViewHolder(rootView)
@@ -52,7 +51,6 @@ class TvTrendingAdapter(
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
 
         fun updateViewWithItem(movieWithImage: UnifyTvTrendingItem) {
-
             moviePoster.contentDescription = movieWithImage.show.show.title
             moviePoster.load(Utils.getImageFullUrl(movieWithImage.image.posters[0].file_path)) {
                 placeholder(R.mipmap.default_poster)

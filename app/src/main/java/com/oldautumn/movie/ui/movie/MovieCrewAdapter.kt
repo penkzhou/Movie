@@ -19,7 +19,6 @@ class MovieCrewAdapter(
 ) :
     RecyclerView.Adapter<MovieCrewAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_movie_cast, parent, false) as ViewGroup
         val holder = PopularViewHolder(rootView)
@@ -65,7 +64,7 @@ class MovieCrewAdapter(
                 profileDefaultName.visibility = View.GONE
                 moviePoster.load(Utils.getImageFullUrl(crew.profile_path)) {
                     transformations(
-                        CircleCropTransformation(),
+                        CircleCropTransformation()
                     )
                 }
             } else {

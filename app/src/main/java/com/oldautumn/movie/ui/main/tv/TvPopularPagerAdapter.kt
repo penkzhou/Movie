@@ -19,7 +19,6 @@ class TvPopularPagerAdapter(
 ) :
     RecyclerView.Adapter<TvPopularPagerAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_popular_pager_tv, parent, false)

@@ -22,7 +22,6 @@ class MovieTraktReviewPageAdapter :
         TraktReviewComparator
     ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieTraktReviewViewHolder {
-
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_trakt_review, parent, false)

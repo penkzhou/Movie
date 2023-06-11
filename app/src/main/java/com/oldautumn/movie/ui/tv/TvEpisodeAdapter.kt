@@ -18,10 +18,13 @@ class TvEpisodeAdapter(
 ) : RecyclerView.Adapter<TvEpisodeAdapter.EpisodeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         val root = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_tv_episode, parent, false
+            R.layout.item_tv_episode,
+            parent,
+            false
         )
         return EpisodeViewHolder(
-            root, onDetailClick
+            root,
+            onDetailClick
         )
     }
 

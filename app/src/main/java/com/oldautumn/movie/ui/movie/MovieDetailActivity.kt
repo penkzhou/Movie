@@ -174,7 +174,7 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.movieOverview.text = it.movieDetail.overview
                         binding.movieReleaseCountry.text =
                             it.movieDetail.production_countries?.joinToString(",") {
-                                country ->
+                                    country ->
                                 country.name
                             }
                         binding.movieTmdbRatingValue.text =

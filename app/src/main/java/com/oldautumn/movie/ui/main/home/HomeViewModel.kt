@@ -72,7 +72,7 @@ class HomeViewModel @Inject constructor(
             try {
                 val trendingMovieList = repository.getTrendingMovieList()
                 _uiState.value = _uiState.value.copy(
-                    trendingMovieList = trendingMovieList,
+                    trendingMovieList = trendingMovieList
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.

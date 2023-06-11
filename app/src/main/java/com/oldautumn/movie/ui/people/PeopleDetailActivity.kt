@@ -117,7 +117,7 @@ class PeopleDetailActivity : AppCompatActivity() {
             },
 
             manager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         )
 

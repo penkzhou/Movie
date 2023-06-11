@@ -39,7 +39,6 @@ class TvMainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentTvHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val popularPager: ViewPager2 = binding.tvPopularPager
