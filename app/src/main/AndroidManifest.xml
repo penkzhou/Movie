@@ -55,7 +55,7 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="false"
-            android:theme="@style/Theme.Movie.NoActionBar"></activity>
+            android:theme="@style/Theme.Movie.NoActionBar" />
         <activity android:name=".ui.main.me.SettingsActivity" android:label="@string/action_settings" android:theme="@style/Theme.Movie"/>
         <activity android:name=".ui.tv.TvSeasonDetailActivity"/>
     </application>

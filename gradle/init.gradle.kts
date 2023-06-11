@@ -1,6 +1,7 @@
 val ktlintVersion = "0.48.1"
 
 initscript {
+    println("initscript start")
     val spotlessVersion = "6.18.0"
 
     repositories {
