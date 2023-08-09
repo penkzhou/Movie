@@ -4,13 +4,13 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.oldautumn.movie.data.api.TraktApiService
 import com.oldautumn.movie.data.api.model.TraktReview
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class TraktReviewPagingSource(
     val traktApiService: TraktApiService,
     val query: String,
-    val sortType: String
+    val sortType: String,
 ) : PagingSource<Int, TraktReview>() {
     override fun getRefreshKey(state: PagingState<Int, TraktReview>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -27,12 +27,12 @@ class TraktReviewPagingSource(
                 query,
                 sortType,
                 nextPageNumber,
-                params.loadSize
+                params.loadSize,
             )
             return LoadResult.Page(
                 data = response,
                 prevKey = null, // Only paging forward.
-                nextKey = nextPageNumber + 1
+                nextKey = nextPageNumber + 1,
             )
         } catch (e: IOException) {
             // IOException for network failures.

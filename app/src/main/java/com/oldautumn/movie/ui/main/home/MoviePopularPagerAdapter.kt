@@ -15,7 +15,7 @@ import com.oldautumn.movie.data.api.model.MediaWithImage
 import com.oldautumn.movie.utils.Utils
 
 class MoviePopularPagerAdapter(
-    private val onItemClick: (item: MediaWithImage) -> Unit
+    private val onItemClick: (item: MediaWithImage) -> Unit,
 ) :
     RecyclerView.Adapter<MoviePopularPagerAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {

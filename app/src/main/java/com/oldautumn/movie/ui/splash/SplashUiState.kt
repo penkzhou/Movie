@@ -6,5 +6,5 @@ data class SplashUiState(
     val isAuthed: Boolean,
     val authString: String,
     val isDeviceAuthed: Boolean,
-    val deviceCode: DeviceCode
+    val deviceCode: DeviceCode,
 )

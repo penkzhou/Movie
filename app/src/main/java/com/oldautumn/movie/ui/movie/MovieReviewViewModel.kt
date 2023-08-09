@@ -8,7 +8,6 @@ import androidx.paging.cachedIn
 import com.oldautumn.movie.data.api.model.TraktReview
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,19 +18,20 @@ import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 const val DEFAULT_SORT_TYPE = "newest"
 
 @HiltViewModel
 class MovieReviewViewModel @Inject constructor(
     private val repository: MovieRepository,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val traktMovieId = savedStateHandle.get<String>("traktMovieId") ?: ""
     private val traktMovieTitle = savedStateHandle.get<String>("traktMovieTitle") ?: ""
     private val _uiState = MutableStateFlow(
-        MovieReviewUiState(title = traktMovieTitle)
+        MovieReviewUiState(title = traktMovieTitle),
     )
 
     val uiState: StateFlow<MovieReviewUiState> = _uiState.asStateFlow()

@@ -27,7 +27,7 @@ class ExploreTrendingTabFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentExploreContentBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -36,7 +36,7 @@ class ExploreTrendingTabFragment : Fragment() {
                 mutableListOf(),
                 object : (TraktCollection) -> Unit {
                     override fun invoke(p1: TraktCollection) {}
-                }
+                },
             )
         binding.exploreList.adapter = adapter
 

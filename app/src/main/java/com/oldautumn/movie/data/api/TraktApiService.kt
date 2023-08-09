@@ -33,7 +33,7 @@ interface TraktApiService {
     suspend fun fetchAccessToken(
         @Field("client_id") clientId: String,
         @Field("client_secret") clientSecret: String,
-        @Field("code") code: String
+        @Field("code") code: String,
     ): DeviceToken
 
     @GET("/movies/trending")
@@ -74,7 +74,7 @@ interface TraktApiService {
         @Path("movie_id") movieId: String,
         @Path("sort_type") sortType: String,
         @Query("page") page: Int,
-        @Query("limit") limit: Int = 10
+        @Query("limit") limit: Int = 10,
     ): List<TraktReview>
 
     @GET("shows/{tv_id}/comments/{sort_type}")
@@ -82,12 +82,12 @@ interface TraktApiService {
         @Path("tv_id") tvId: String,
         @Path("sort_type") sortType: String,
         @Query("page") page: Int,
-        @Query("limit") limit: Int = 10
+        @Query("limit") limit: Int = 10,
     ): List<TraktReview>
 
     @GET("shows/{tv_id}/ratings")
     suspend fun fetchTraktTvRate(
-        @Path("tv_id") tvId: String
+        @Path("tv_id") tvId: String,
     ): TraktRating
 
     @GET("lists/popular")

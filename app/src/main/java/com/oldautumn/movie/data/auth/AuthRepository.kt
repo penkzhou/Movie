@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class AuthRepository(
     private val remoteDataSource: AuthRemoteDataSource,
-    private val localDataSource: AuthLocalDataSource
+    private val localDataSource: AuthLocalDataSource,
 ) {
     val authString: Flow<String> = localDataSource.authFlow
 

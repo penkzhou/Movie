@@ -5,19 +5,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
 
 @HiltViewModel
 class PeopleDetailViewModel @Inject constructor(
     private val repository: MovieRepository,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val peopleId = savedStateHandle.get("peopleId") ?: 0
@@ -32,8 +32,8 @@ class PeopleDetailViewModel @Inject constructor(
             listOf(),
             listOf(),
             0,
-            ""
-        )
+            "",
+        ),
 
     )
     val uiState: StateFlow<PeopleDetailUiState> = _uiState.asStateFlow()
@@ -80,7 +80,7 @@ class PeopleDetailViewModel @Inject constructor(
                     peopleMovieCast = movieCastList,
                     peopleMovieCrew = movieCrewList,
                     peopleTvCast = tvCastList,
-                    peopleTvCrew = tvCrewList
+                    peopleTvCrew = tvCrewList,
                 )
             } catch (e: IOException) {
                 _uiState.value = _uiState.value.copy(errorMessage = e.message)
@@ -100,7 +100,7 @@ class PeopleDetailViewModel @Inject constructor(
                 val peopleImageSize = peopleImage.profiles.size
                 _uiState.value = _uiState.value.copy(
                     peopleImageList = peopleImageList.toMutableList(),
-                    peopleImageSize = peopleImageSize
+                    peopleImageSize = peopleImageSize,
                 )
             } catch (e: IOException) {
                 _uiState.value = _uiState.value.copy(errorMessage = e.message)

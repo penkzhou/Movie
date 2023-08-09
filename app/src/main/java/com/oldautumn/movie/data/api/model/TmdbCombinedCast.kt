@@ -44,5 +44,5 @@ data class TmdbCombinedCast(
     val character: String,
     val backdrop_path: String,
     val popularity: Double,
-    val credit_id: String
+    val credit_id: String,
 )

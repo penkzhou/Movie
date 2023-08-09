@@ -28,8 +28,8 @@ import com.oldautumn.movie.ui.people.PeopleDetailActivity
 import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.utils.Utils.loadWithPalette
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.DecimalFormat
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class TvDetailActivity : AppCompatActivity() {
@@ -94,12 +94,12 @@ class TvDetailActivity : AppCompatActivity() {
                     val intent =
                         Intent(
                             this@TvDetailActivity,
-                            TvDetailActivity::class.java
+                            TvDetailActivity::class.java,
                         )
                     intent.putExtra("tvId", tvItem.id)
                     startActivity(intent)
                 }
-            }
+            },
         )
         val companyAdapter = ProductCompanyAdapter(mutableListOf()) {}
         binding.tvProductCompanyList.layoutManager =
@@ -117,12 +117,12 @@ class TvDetailActivity : AppCompatActivity() {
                     val intent =
                         Intent(
                             this@TvDetailActivity,
-                            TvDetailActivity::class.java
+                            TvDetailActivity::class.java,
                         )
                     intent.putExtra("tvId", tvItem.id)
                     startActivity(intent)
                 }
-            }
+            },
         )
         binding.tvSimilarList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -136,12 +136,12 @@ class TvDetailActivity : AppCompatActivity() {
                         if (it.tvDetail.backdrop_path != null) {
                             binding.backdrop.load(
                                 Utils.getImageFullUrl(
-                                    it.tvDetail.backdrop_path
-                                )
+                                    it.tvDetail.backdrop_path,
+                                ),
                             )
                             binding.backdrop.loadWithPalette(
                                 Utils.getImageFullUrl(
-                                    it.tvDetail.backdrop_path
+                                    it.tvDetail.backdrop_path,
                                 ),
                                 paletteCallback = { palette ->
                                     val swatch = palette.vibrantSwatch
@@ -150,7 +150,7 @@ class TvDetailActivity : AppCompatActivity() {
                                         binding.title.setTextColor(swatch.titleTextColor)
                                         binding.home.setColorFilter(
                                             swatch.titleTextColor,
-                                            android.graphics.PorterDuff.Mode.MULTIPLY
+                                            android.graphics.PorterDuff.Mode.MULTIPLY,
                                         )
                                         chipColor = swatch.rgb
                                         binding.tvGenre.children?.forEach { chip ->
@@ -160,7 +160,7 @@ class TvDetailActivity : AppCompatActivity() {
                                             }
                                         }
                                     }
-                                }
+                                },
                             )
                         }
 
@@ -177,8 +177,8 @@ class TvDetailActivity : AppCompatActivity() {
                         }
                         binding.tvPoster.load(
                             Utils.getImageFullUrl(
-                                it.tvDetail.poster_path ?: ""
-                            )
+                                it.tvDetail.poster_path ?: "",
+                            ),
                         ) {
                             transformations(RoundedCornersTransformation(12f))
                         }
@@ -189,7 +189,7 @@ class TvDetailActivity : AppCompatActivity() {
                                     Chip(this@TvDetailActivity).apply {
                                         text = it.name
                                         setChipBackgroundColorResource(R.color.purple_200)
-                                    }
+                                    },
                                 )
                             }
                         }
@@ -198,8 +198,8 @@ class TvDetailActivity : AppCompatActivity() {
                                 Utils.getImageFullUrl(
                                     it.tvDetail.networks.firstOrNull()?.logo_path
                                         ?: "",
-                                    200
-                                )
+                                    200,
+                                ),
                             )
                             binding.tvNetworkIcon.visibility = View.VISIBLE
                             binding.tvNetworkValue.visibility = View.GONE
@@ -249,7 +249,7 @@ class TvDetailActivity : AppCompatActivity() {
                             val intent =
                                 Intent(
                                     this@TvDetailActivity,
-                                    MovieReviewActivity::class.java
+                                    MovieReviewActivity::class.java,
                                 )
                             intent.putExtra("traktMovieId", traktTvIds.toString())
                             intent.putExtra("traktMovieTitle", tvTitle)

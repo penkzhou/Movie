@@ -19,7 +19,7 @@ import com.oldautumn.movie.utils.Utils
 
 class MovieTraktReviewPageAdapter :
     PagingDataAdapter<TraktReview, MovieTraktReviewPageAdapter.MovieTraktReviewViewHolder>(
-        TraktReviewComparator
+        TraktReviewComparator,
     ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieTraktReviewViewHolder {
         val rootView =
@@ -59,10 +59,10 @@ class MovieTraktReviewPageAdapter :
 
     class LoadStateViewHolder(
         parent: ViewGroup,
-        retry: () -> Unit
+        retry: () -> Unit,
     ) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_load_state, parent, false)
+            .inflate(R.layout.item_load_state, parent, false),
     ) {
         private val binding = ItemLoadStateBinding.bind(itemView)
         private val progressBar: ProgressBar = binding.loadingItem
@@ -84,17 +84,17 @@ class MovieTraktReviewPageAdapter :
     }
 
     class ReviewLoadStateAdapter(
-        private val retry: () -> Unit
+        private val retry: () -> Unit,
     ) : LoadStateAdapter<LoadStateViewHolder>() {
 
         override fun onCreateViewHolder(
             parent: ViewGroup,
-            loadState: LoadState
+            loadState: LoadState,
         ) = LoadStateViewHolder(parent, retry)
 
         override fun onBindViewHolder(
             holder: LoadStateViewHolder,
-            loadState: LoadState
+            loadState: LoadState,
         ) = holder.bind(loadState)
     }
 

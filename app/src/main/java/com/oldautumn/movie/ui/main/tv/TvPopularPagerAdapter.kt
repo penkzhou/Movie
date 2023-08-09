@@ -15,7 +15,7 @@ import com.oldautumn.movie.data.api.model.UnifyTvTrendingItem
 import com.oldautumn.movie.utils.Utils
 
 class TvPopularPagerAdapter(
-    private val onItemClick: (item: UnifyTvTrendingItem) -> Unit
+    private val onItemClick: (item: UnifyTvTrendingItem) -> Unit,
 ) :
     RecyclerView.Adapter<TvPopularPagerAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
@@ -45,14 +45,14 @@ class TvPopularPagerAdapter(
     private val differCallback = object : DiffUtil.ItemCallback<UnifyTvTrendingItem>() {
         override fun areItemsTheSame(
             oldItem: UnifyTvTrendingItem,
-            newItem: UnifyTvTrendingItem
+            newItem: UnifyTvTrendingItem,
         ): Boolean {
             return oldItem.show.show.ids.trakt == newItem.show.show.ids.trakt
         }
 
         override fun areContentsTheSame(
             oldItem: UnifyTvTrendingItem,
-            newItem: UnifyTvTrendingItem
+            newItem: UnifyTvTrendingItem,
         ): Boolean {
             return oldItem.equals(newItem)
         }

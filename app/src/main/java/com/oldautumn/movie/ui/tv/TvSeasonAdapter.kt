@@ -14,7 +14,7 @@ import com.oldautumn.movie.databinding.ItemTvSeasonBinding
 import com.oldautumn.movie.utils.Utils
 
 class TvSeasonAdapter(
-    private val onDetailClick: (Season) -> Unit
+    private val onDetailClick: (Season) -> Unit,
 ) :
     RecyclerView.Adapter<TvSeasonAdapter.SeasonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
@@ -22,7 +22,7 @@ class TvSeasonAdapter(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_tv_season,
                 parent,
-                false
+                false,
             )
         return SeasonViewHolder(root, onDetailClick)
     }
@@ -57,7 +57,7 @@ class TvSeasonAdapter(
 
     class SeasonViewHolder(itemView: View, private val onDetailClick: (Season) -> Unit) :
         RecyclerView.ViewHolder(
-            itemView
+            itemView,
         ) {
 
         private val binding = ItemTvSeasonBinding.bind(itemView)

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseAdapter<T>(
     val list: List<T> = listOf(),
-    val onItemClick: (T) -> Unit
+    val onItemClick: (T) -> Unit,
 ) : RecyclerView.Adapter<BaseAdapter.BaseViewHolder<T>>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
@@ -35,7 +35,7 @@ abstract class BaseAdapter<T>(
     abstract fun getItemLayoutId(): Int
 
     class BaseViewHolder<T>(view: View, onItemClick: (T) -> Unit) : RecyclerView.ViewHolder(
-        view
+        view,
     ) {
 
         init {

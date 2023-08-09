@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
                         val intent =
                             Intent(
                                 this@SplashActivity,
-                                IndexActivity::class.java
+                                IndexActivity::class.java,
                             )
                         startActivity(intent)
                         finish()
@@ -43,7 +43,7 @@ class SplashActivity : AppCompatActivity() {
                         val intent =
                             Intent(
                                 this@SplashActivity,
-                                AuthUserCodeActivity::class.java
+                                AuthUserCodeActivity::class.java,
                             )
                         intent.putExtra("device_code", uiState.deviceCode)
                         startActivityForResult.launch(intent)

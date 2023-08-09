@@ -34,13 +34,13 @@ data class TraktPeople(
     val birthplace: String,
     val homepage: String?,
     val gender: String,
-    val known_for_department: String
+    val known_for_department: String,
 )
 
 data class SocialIds(
     val twitter: String?,
     val facebook: String?,
     val instagram: String?,
-    val wikipedia: String?
+    val wikipedia: String?,
 
 )

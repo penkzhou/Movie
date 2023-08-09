@@ -19,8 +19,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Named
-import javax.inject.Singleton
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
@@ -28,6 +26,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Named
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -49,7 +49,7 @@ object DataModule {
         val logging = HttpLoggingInterceptor()
         val authedHeader = AuthedInterceptor(
             "",
-            "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
+            "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08",
         )
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
         return OkHttpClient.Builder().addInterceptor(logging).addInterceptor(authedHeader).build()
@@ -68,7 +68,7 @@ object DataModule {
         val logging = HttpLoggingInterceptor()
         val authedHeader = AuthedInterceptor(
             token,
-            "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08"
+            "759304793d0a51c6f3164c9e3cc6bebd22402bb0f6442a0bf22cc196e1759b08",
         )
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder().addInterceptor(logging)
@@ -84,7 +84,7 @@ object DataModule {
     fun provideTmdbOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         val authedHeader = TmdbApiKeyInterceptor(
-            "1fb9e261bd10339f78c0737494452323"
+            "1fb9e261bd10339f78c0737494452323",
         )
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         return OkHttpClient.Builder().addInterceptor(logging).addInterceptor(authedHeader).build()
@@ -102,7 +102,7 @@ object DataModule {
     @Provides
     @Named("authedTraktRetrofit")
     fun provideAuthedTraktRetrofit(
-        @Named("authedOkHttpClient") okHttpClient: OkHttpClient
+        @Named("authedOkHttpClient") okHttpClient: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder().baseUrl("https://api.trakt.tv")
             .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
@@ -112,7 +112,7 @@ object DataModule {
     @Provides
     @Named("loginAuthedTraktRetrofit")
     fun provideLoginAuthedTraktRetrofit(
-        @Named("loginAuthedOkHttpClient") okHttpClient: OkHttpClient
+        @Named("loginAuthedOkHttpClient") okHttpClient: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder().baseUrl("https://api.trakt.tv")
             .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
@@ -131,7 +131,7 @@ object DataModule {
     @Named("movieRemoteDataSource")
     fun provideMovieRemoteDataSource(
         tmdbApiService: TmdbApiService,
-        @Named("authedTraktApiService") traktApiService: TraktApiService
+        @Named("authedTraktApiService") traktApiService: TraktApiService,
     ): MovieRemoteDataSource {
         return MovieRemoteDataSource(traktApiService, tmdbApiService)
     }
@@ -141,7 +141,7 @@ object DataModule {
     @Named("loginMovieRemoteDataSource")
     fun provideLoginMovieRemoteDataSource(
         tmdbApiService: TmdbApiService,
-        @Named("loginAuthedTraktApiService") traktApiService: TraktApiService
+        @Named("loginAuthedTraktApiService") traktApiService: TraktApiService,
     ): MovieRemoteDataSource {
         return MovieRemoteDataSource(traktApiService, tmdbApiService)
     }
@@ -149,7 +149,7 @@ object DataModule {
     @Singleton
     @Provides
     fun provideAuthRemoteDataSource(
-        @Named("traktApiService") traktApiService: TraktApiService
+        @Named("traktApiService") traktApiService: TraktApiService,
     ): AuthRemoteDataSource {
         return AuthRemoteDataSource(traktApiService)
     }
@@ -165,7 +165,7 @@ object DataModule {
     fun provideMovieRepository(
         @Named("movieRemoteDataSource") movieRemoteDataSource: MovieRemoteDataSource,
         @Named("loginMovieRemoteDataSource") loginMovieRemoteDataSource: MovieRemoteDataSource,
-        @Named("authedTraktApiService") traktApiService: TraktApiService
+        @Named("authedTraktApiService") traktApiService: TraktApiService,
     ): MovieRepository {
         return MovieRepository(movieRemoteDataSource, loginMovieRemoteDataSource, traktApiService)
     }
@@ -174,7 +174,7 @@ object DataModule {
     @Provides
     fun provideAuthRepository(
         authRemoteDataSource: AuthRemoteDataSource,
-        authLocalDataSource: AuthLocalDataSource
+        authLocalDataSource: AuthLocalDataSource,
     ): AuthRepository {
         return AuthRepository(authRemoteDataSource, authLocalDataSource)
     }

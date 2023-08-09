@@ -34,7 +34,7 @@ import kotlinx.coroutines.flow.Flow
 class MovieRepository(
     private val remoteDataSource: MovieRemoteDataSource,
     private val loginRemoteDataSource: MovieRemoteDataSource,
-    private val traktApiService: TraktApiService
+    private val traktApiService: TraktApiService,
 ) {
 
     suspend fun getTrendingMovieList(): List<UnifyMovieTrendingItem> {
@@ -172,20 +172,20 @@ class MovieRepository(
 
     fun getTraktReviewPageList(
         traktMovieId: String,
-        sortType: String
+        sortType: String,
     ): Flow<PagingData<TraktReview>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
-                enablePlaceholders = false
+                enablePlaceholders = false,
             ),
             pagingSourceFactory = {
                 TraktReviewPagingSource(
                     traktApiService,
                     traktMovieId,
-                    sortType
+                    sortType,
                 )
-            }
+            },
         ).flow
     }
 }

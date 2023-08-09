@@ -6,19 +6,19 @@ import com.oldautumn.movie.data.api.model.DeviceCode
 import com.oldautumn.movie.data.auth.AuthRepository
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
 
 @HiltViewModel
 class MeViewModel @Inject constructor(
     private val repository: AuthRepository,
-    private val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -27,8 +27,8 @@ class MeViewModel @Inject constructor(
             "",
             false,
             null,
-            DeviceCode("", "", "", 0, 0)
-        )
+            DeviceCode("", "", "", 0, 0),
+        ),
     )
     val uiState: StateFlow<MeUiState> = _uiState.asStateFlow()
 
@@ -63,7 +63,7 @@ class MeViewModel @Inject constructor(
                 val userInfo = movieRepository.getUserInfo(token)
                 _uiState.value = _uiState.value.copy(userSettings = userInfo)
             } catch (
-                ioe: IOException
+                ioe: IOException,
             ) {
                 // Handle the error and notify the UI when appropriate.
                 _uiState.value = _uiState.value.copy(isAuthed = false, userSettings = null)
@@ -72,7 +72,7 @@ class MeViewModel @Inject constructor(
                     _uiState.value = _uiState.value.copy(
                         isAuthed = false,
                         userSettings = null,
-                        deviceCode = DeviceCode("", "", "", 0, 0)
+                        deviceCode = DeviceCode("", "", "", 0, 0),
                     )
                 }
             }

@@ -244,34 +244,34 @@ data class TmdbTvDetail(
     val tagline: String,
     val vote_average: Double,
     val vote_count: Int,
-    val external_ids: ExternalIds
+    val external_ids: ExternalIds,
 )
 
 data class Creator(
     /*
-    * "id": 9813,
+     * "id": 9813,
       "credit_id": "5256c8c219c2956ff604858a",
       "name": "David Benioff",
       "gender": 2,
       "profile_path": "/xvNN5huL0X8yJ7h3IZfGG4O2zBD.jpg"
-    * */
+     * */
     val id: Int,
     val credit_id: String,
     val name: String,
     val gender: Int,
-    val profile_path: String
+    val profile_path: String,
 )
 
 data class Genre(
     /*
-    * "id": 9813,
+     * "id": 9813,
       "credit_id": "5256c8c219c2956ff604858a",
       "name": "David Benioff",
       "gender": 2,
       "profile_path": "/xvNN5huL0X8yJ7h3IZfGG4O2zBD.jpg"
-    * */
+     * */
     val id: Int,
-    val name: String
+    val name: String,
 )
 
 data class Episode(
@@ -286,7 +286,7 @@ data class Episode(
     "still_path": "/3x8tJon5jXFa1ziAM93hPKNyW7i.jpg",
     "vote_average": 4.8,
     "vote_count": 172
-    * */
+     * */
     val air_date: String,
     val episode_number: Int,
     val id: Int,
@@ -299,26 +299,26 @@ data class Episode(
     val season_number: Int,
     val still_path: String,
     val vote_average: Double,
-    val vote_count: Int
+    val vote_count: Int,
 )
 
 data class Network(
     val name: String,
     val id: Int,
     val logo_path: String,
-    val origin_country: String
+    val origin_country: String,
 )
 
 data class Company(
     val name: String,
     val id: Int,
     val logo_path: String,
-    val origin_country: String
+    val origin_country: String,
 )
 
 data class Country(
     val iso_3166_1: String,
-    val name: String
+    val name: String,
 )
 
 data class Season(
@@ -328,11 +328,11 @@ data class Season(
     val name: String,
     val overview: String,
     val poster_path: String?,
-    val season_number: Int
+    val season_number: Int,
 )
 
 data class SpokenLanguage(
     val iso_639_1: String,
     val name: String,
-    val english_name: String
+    val english_name: String,
 )

@@ -37,5 +37,5 @@ data class TmdbSimpleTvItem(
     val overview: String,
     val popularity: Double,
     val genre_ids: List<Int>,
-    val origin_country: List<String>
+    val origin_country: List<String>,
 )

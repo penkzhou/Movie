@@ -27,5 +27,5 @@ package com.oldautumn.movie.data.api.model
  */
 data class TmdbPeopleImage(
     val id: Int,
-    val profiles: List<TmdbImageItem> = listOf()
+    val profiles: List<TmdbImageItem> = listOf(),
 )

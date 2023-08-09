@@ -40,7 +40,7 @@ class TraktReviewActivity : AppCompatActivity() {
         binding.reviewSpinner.adapter = ArrayAdapter.createFromResource(
             this,
             R.array.sort_type_array,
-            android.R.layout.simple_spinner_item
+            android.R.layout.simple_spinner_item,
         )
         binding.reviewSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -50,7 +50,7 @@ class TraktReviewActivity : AppCompatActivity() {
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
-                id: Long
+                id: Long,
             ) {
                 val lines = resources.getStringArray(R.array.sort_type_array).toList()
                 val sortType = lines[position]

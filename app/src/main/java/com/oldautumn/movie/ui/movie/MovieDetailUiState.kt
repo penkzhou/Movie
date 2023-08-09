@@ -16,5 +16,5 @@ data class MovieDetailUiState(
     val recommendMovieList: TmdbSimpleItemListModel<TmdbSimpleMovieItem>? = null,
     val similarMovieList: TmdbSimpleItemListModel<TmdbSimpleMovieItem>? = null,
     val movieVideo: MovieVideo? = null,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
 )

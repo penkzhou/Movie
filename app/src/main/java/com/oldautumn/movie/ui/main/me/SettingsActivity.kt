@@ -30,7 +30,7 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
-            savedInstanceState: Bundle?
+            savedInstanceState: Bundle?,
         ): View? {
             val root = inflater.inflate(R.layout.modal_bottom_sheet_content, container, false)
 

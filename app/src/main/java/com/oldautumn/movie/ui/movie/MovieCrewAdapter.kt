@@ -15,7 +15,7 @@ import com.oldautumn.movie.utils.Utils
 
 class MovieCrewAdapter(
     private val popularList: MutableList<TmdbCrew>,
-    private val onItemClick: (TmdbCrew) -> Unit
+    private val onItemClick: (TmdbCrew) -> Unit,
 ) :
     RecyclerView.Adapter<MovieCrewAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
@@ -64,7 +64,7 @@ class MovieCrewAdapter(
                 profileDefaultName.visibility = View.GONE
                 moviePoster.load(Utils.getImageFullUrl(crew.profile_path)) {
                     transformations(
-                        CircleCropTransformation()
+                        CircleCropTransformation(),
                     )
                 }
             } else {

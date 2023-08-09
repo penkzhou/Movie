@@ -11,7 +11,7 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     val list: MutableList<T>,
     private val bindingClass: (LayoutInflater, ViewGroup, Boolean) -> VIEW_BINDING,
     private val onItemClick: (T) -> Unit,
-    private val bindHolder: View.(VIEW_BINDING?, T) -> Unit
+    private val bindHolder: View.(VIEW_BINDING?, T) -> Unit,
 ) :
     RecyclerView.Adapter<ItemClickBaseAdapter.ItemViewHolder<T>>() {
 
@@ -68,7 +68,7 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     }
 
     class ItemViewHolder<T>(view: View, onItemClick: (Int) -> Unit) : RecyclerView.ViewHolder(
-        view
+        view,
     ) {
 
         init {
@@ -84,7 +84,7 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
 
 internal class DiffUtilCallback<ITEM>(
     private val oldItems: List<ITEM>,
-    private val newItems: List<ITEM>
+    private val newItems: List<ITEM>,
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldItems.size

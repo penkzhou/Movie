@@ -34,7 +34,7 @@ package com.oldautumn.movie.data.api.model
  */
 data class MovieVideo(
     val id: Long,
-    val results: List<MovieVideoItem>
+    val results: List<MovieVideoItem>,
 )
 
 data class MovieVideoItem(
@@ -47,5 +47,5 @@ data class MovieVideoItem(
     val type: String,
     val official: Boolean,
     val published_at: String,
-    val id: String
+    val id: String,
 )

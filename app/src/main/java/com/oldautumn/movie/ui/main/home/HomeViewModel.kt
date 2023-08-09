@@ -4,18 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: MovieRepository
+    private val repository: MovieRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -23,8 +23,8 @@ class HomeViewModel @Inject constructor(
             mutableListOf(),
             mutableListOf(),
             mutableListOf(),
-            ""
-        )
+            "",
+        ),
     )
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
@@ -38,7 +38,7 @@ class HomeViewModel @Inject constructor(
             try {
                 val popularMovieList = repository.getPopularMovieList()
                 _uiState.value = _uiState.value.copy(
-                    popularMovieList = popularMovieList
+                    popularMovieList = popularMovieList,
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
@@ -55,7 +55,7 @@ class HomeViewModel @Inject constructor(
             try {
                 val boxOfficeMovieList = repository.getTraktBoxOffice()
                 _uiState.value = _uiState.value.copy(
-                    revenueMovieList = boxOfficeMovieList
+                    revenueMovieList = boxOfficeMovieList,
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
@@ -72,7 +72,7 @@ class HomeViewModel @Inject constructor(
             try {
                 val trendingMovieList = repository.getTrendingMovieList()
                 _uiState.value = _uiState.value.copy(
-                    trendingMovieList = trendingMovieList
+                    trendingMovieList = trendingMovieList,
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.

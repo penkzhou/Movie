@@ -121,7 +121,7 @@ data class TmdbMovieDetail(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int,
-    val external_ids: ExternalIds
+    val external_ids: ExternalIds,
 )
 
 data class ExternalIds(
@@ -130,12 +130,12 @@ data class ExternalIds(
     val tvrage_id: Int?,
     val facebook_id: String?,
     val instagram_id: String?,
-    val twitter_id: String?
+    val twitter_id: String?,
 )
 
 data class Collection(
     val id: Int,
     val name: String,
     val poster_path: String,
-    val backdrop_path: String
+    val backdrop_path: String,
 )

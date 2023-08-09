@@ -11,7 +11,7 @@ import com.oldautumn.movie.utils.Utils
 
 class MovieTraktReviewAdapter(
     private val reviewList: MutableList<TraktReview>,
-    private val onItemClickListener: OnItemClickListener?
+    private val onItemClickListener: OnItemClickListener?,
 ) :
     RecyclerView.Adapter<MovieTraktReviewAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {

@@ -15,5 +15,5 @@ data class PeopleDetailUiState(
     val peopleTvCrew: List<TmdbCombinedCrew>? = listOf(),
     val peopleImageList: List<TmdbImageItem>? = listOf(),
     val peopleImageSize: Int = 0,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
 )

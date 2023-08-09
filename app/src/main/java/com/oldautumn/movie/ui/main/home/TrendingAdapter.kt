@@ -13,7 +13,7 @@ import com.oldautumn.movie.utils.Utils
 
 class TrendingAdapter(
     private val popularList: MutableList<UnifyMovieTrendingItem>,
-    private val onItemClick: (item: UnifyMovieTrendingItem) -> Unit
+    private val onItemClick: (item: UnifyMovieTrendingItem) -> Unit,
 ) :
     RecyclerView.Adapter<TrendingAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {

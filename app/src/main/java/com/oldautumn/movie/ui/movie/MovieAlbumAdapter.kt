@@ -14,7 +14,7 @@ import com.oldautumn.movie.utils.Utils
 
 class MovieAlbumAdapter(
     private val popularList: MutableList<TmdbImageItem>,
-    private val onItemClick: (TmdbImageItem) -> Unit
+    private val onItemClick: (TmdbImageItem) -> Unit,
 ) :
     RecyclerView.Adapter<MovieAlbumAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
@@ -50,7 +50,7 @@ class MovieAlbumAdapter(
     }
 
     class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
-        view
+        view,
     ) {
 
         private val binding = ItemMoviePosterBinding.bind(itemView)
@@ -61,7 +61,7 @@ class MovieAlbumAdapter(
                 moviePoster.visibility = View.VISIBLE
                 moviePoster.load(Utils.getImageFullUrl(cast.file_path)) {
                     transformations(
-                        RoundedCornersTransformation(16f)
+                        RoundedCornersTransformation(16f),
                     )
                 }
             } else {

@@ -35,5 +35,5 @@ data class TmdbPeople(
     val profile_path: String?,
     val adult: Boolean,
     val imdb_id: String,
-    val homepage: String?
+    val homepage: String?,
 )

@@ -5,25 +5,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
 
 @HiltViewModel
 class TvDetailViewModel @Inject constructor(
     private val repository: MovieRepository,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val tvId = savedStateHandle.get("tvId") ?: 0
 
     private val _uiState = MutableStateFlow(
-        TvDetailUiState()
+        TvDetailUiState(),
 
     )
     val uiState: StateFlow<TvDetailUiState> = _uiState.asStateFlow()
@@ -52,15 +52,15 @@ class TvDetailViewModel @Inject constructor(
             try {
                 val rating = repository.getTraktTvRating(tvImdbId)
                 _uiState.value = _uiState.value.copy(
-                    traktRating = rating
+                    traktRating = rating,
                 )
             } catch (e: IOException) {
                 _uiState.value = _uiState.value.copy(
-                    errorMessage = e.message
+                    errorMessage = e.message,
                 )
             } catch (e: HttpException) {
                 _uiState.value = _uiState.value.copy(
-                    errorMessage = e.message
+                    errorMessage = e.message,
                 )
             }
         }

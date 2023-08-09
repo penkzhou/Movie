@@ -29,7 +29,7 @@ import com.oldautumn.movie.data.api.model.UserSettings
 
 class MovieRemoteDataSource(
     private val traktApiService: TraktApiService,
-    private val tmdbApiService: TmdbApiService
+    private val tmdbApiService: TmdbApiService,
 ) {
     suspend fun getTrendingMovieList(): List<MovieTrendingItem> =
         traktApiService.fetchTrendingMovieList()

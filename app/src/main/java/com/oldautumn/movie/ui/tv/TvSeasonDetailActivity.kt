@@ -91,8 +91,8 @@ class TvSeasonDetailActivity : AppCompatActivity() {
                         }
                         binding.tvPoster.load(
                             Utils.getImageFullUrl(
-                                it.tvSeasonDetail.poster_path ?: ""
-                            )
+                                it.tvSeasonDetail.poster_path ?: "",
+                            ),
                         ) {
                             transformations(RoundedCornersTransformation(12f))
                         }

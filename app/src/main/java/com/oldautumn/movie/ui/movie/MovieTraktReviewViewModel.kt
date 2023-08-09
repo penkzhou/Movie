@@ -4,22 +4,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
 
 @HiltViewModel
 class MovieTraktReviewViewModel @Inject constructor(
-    private val repository: MovieRepository
+    private val repository: MovieRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
-        TraktReviewUiState(mutableListOf(), null)
+        TraktReviewUiState(mutableListOf(), null),
 
     )
     val uiState: StateFlow<TraktReviewUiState> = _uiState.asStateFlow()

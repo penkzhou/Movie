@@ -6,9 +6,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
 import javax.inject.Named
 import javax.inject.Singleton
-import retrofit2.Retrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -17,7 +17,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideTmdbApiService(
-        @Named("tmdbRetrofit") retrofit: Retrofit
+        @Named("tmdbRetrofit") retrofit: Retrofit,
     ): TmdbApiService {
         return retrofit.create(TmdbApiService::class.java)
     }
@@ -26,7 +26,7 @@ object NetworkModule {
     @Provides
     @Named("authedTraktApiService")
     fun provideAuthedTraktApiService(
-        @Named("authedTraktRetrofit") retrofit: Retrofit
+        @Named("authedTraktRetrofit") retrofit: Retrofit,
     ): TraktApiService {
         return retrofit.create(TraktApiService::class.java)
     }
@@ -35,7 +35,7 @@ object NetworkModule {
     @Provides
     @Named("loginAuthedTraktApiService")
     fun provideLoginAuthedTraktApiService(
-        @Named("loginAuthedTraktRetrofit") retrofit: Retrofit
+        @Named("loginAuthedTraktRetrofit") retrofit: Retrofit,
     ): TraktApiService {
         return retrofit.create(TraktApiService::class.java)
     }
@@ -44,7 +44,7 @@ object NetworkModule {
     @Provides
     @Named("traktApiService")
     fun provideTraktApiService(
-        @Named("traktRetrofit") retrofit: Retrofit
+        @Named("traktRetrofit") retrofit: Retrofit,
     ): TraktApiService {
         return retrofit.create(TraktApiService::class.java)
     }

@@ -4,26 +4,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
 
 @HiltViewModel
 class ExploreViewModel @Inject constructor(
-    private val repository: MovieRepository
+    private val repository: MovieRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
         ExploreUiState(
             mutableListOf(),
             mutableListOf(),
-            ""
-        )
+            "",
+        ),
     )
     val uiState: StateFlow<ExploreUiState> = _uiState.asStateFlow()
 
@@ -36,7 +36,7 @@ class ExploreViewModel @Inject constructor(
             try {
                 val popularMovieList = repository.getTraktPopularCollection()
                 _uiState.value = _uiState.value.copy(
-                    popularCollectionList = popularMovieList
+                    popularCollectionList = popularMovieList,
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
@@ -53,7 +53,7 @@ class ExploreViewModel @Inject constructor(
             try {
                 val trendingMovieList = repository.getTraktTrendingCollection()
                 _uiState.value = _uiState.value.copy(
-                    trendingCollectionList = trendingMovieList
+                    trendingCollectionList = trendingMovieList,
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.

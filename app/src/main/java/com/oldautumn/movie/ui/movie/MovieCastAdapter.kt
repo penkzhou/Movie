@@ -15,7 +15,7 @@ import com.oldautumn.movie.utils.Utils
 
 class MovieCastAdapter(
     private val popularList: MutableList<TmdbCast>,
-    private val onItemClick: (TmdbCast) -> Unit
+    private val onItemClick: (TmdbCast) -> Unit,
 ) :
     RecyclerView.Adapter<MovieCastAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
@@ -55,7 +55,7 @@ class MovieCastAdapter(
     }
 
     class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
-        view
+        view,
     ) {
 
         private val binding = ItemMovieCastBinding.bind(itemView)
@@ -70,7 +70,7 @@ class MovieCastAdapter(
                 profileDefaultName.visibility = View.GONE
                 moviePoster.load(Utils.getImageFullUrl(cast.profile_path)) {
                     transformations(
-                        CircleCropTransformation()
+                        CircleCropTransformation(),
                     )
                 }
             } else {

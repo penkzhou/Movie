@@ -14,5 +14,5 @@ data class TvDetailUiState(
     val traktRating: TraktRating? = null,
     val recommendTvList: TmdbSimpleItemListModel<TmdbSimpleTvItem>? = null,
     val similarTvList: TmdbSimpleItemListModel<TmdbSimpleTvItem>? = null,
-    val errorMessage: String? = null
+    val errorMessage: String? = null,
 )

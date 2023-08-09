@@ -15,7 +15,7 @@ import java.text.DecimalFormat
 
 class TvRecommendAdapter(
     private val recommendList: MutableList<TmdbSimpleTvItem>,
-    private val onItemClickListener: OnItemClickListener?
+    private val onItemClickListener: OnItemClickListener?,
 ) :
     RecyclerView.Adapter<TvRecommendAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {

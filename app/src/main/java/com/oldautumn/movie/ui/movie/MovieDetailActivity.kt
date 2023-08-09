@@ -21,9 +21,9 @@ import com.oldautumn.movie.ui.people.PeopleDetailActivity
 import com.oldautumn.movie.utils.Utils
 import com.oldautumn.movie.utils.Utils.loadWithPalette
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.NumberFormat
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
@@ -86,12 +86,12 @@ class MovieDetailActivity : AppCompatActivity() {
                     val intent =
                         Intent(
                             this@MovieDetailActivity,
-                            MovieDetailActivity::class.java
+                            MovieDetailActivity::class.java,
                         )
                     intent.putExtra("movieId", movieItem.id)
                     startActivity(intent)
                 }
-            }
+            },
         )
 
         binding.movieRecommendList.layoutManager =
@@ -106,12 +106,12 @@ class MovieDetailActivity : AppCompatActivity() {
                     val intent =
                         Intent(
                             this@MovieDetailActivity,
-                            MovieDetailActivity::class.java
+                            MovieDetailActivity::class.java,
                         )
                     intent.putExtra("movieId", movie.id)
                     startActivity(intent)
                 }
-            }
+            },
         )
         binding.movieSimilarList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -124,7 +124,7 @@ class MovieDetailActivity : AppCompatActivity() {
                     if (it.movieDetail != null) {
                         binding.backdrop.loadWithPalette(
                             Utils.getImageFullUrl(
-                                it.movieDetail.backdrop_path ?: ""
+                                it.movieDetail.backdrop_path ?: "",
                             ),
                             paletteCallback = { palette ->
                                 val swatch = palette.vibrantSwatch
@@ -133,7 +133,7 @@ class MovieDetailActivity : AppCompatActivity() {
                                     binding.title.setTextColor(swatch.titleTextColor)
                                     binding.home.setColorFilter(
                                         swatch.titleTextColor,
-                                        android.graphics.PorterDuff.Mode.MULTIPLY
+                                        android.graphics.PorterDuff.Mode.MULTIPLY,
                                     )
                                     updateStatusBarBg(swatch.rgb)
                                     chipColor = swatch.rgb
@@ -143,13 +143,13 @@ class MovieDetailActivity : AppCompatActivity() {
                                         }
                                     }
                                 }
-                            }
+                            },
                         )
 
                         binding.moviePoster.load(
                             Utils.getImageFullUrl(
-                                it.movieDetail.poster_path ?: ""
-                            )
+                                it.movieDetail.poster_path ?: "",
+                            ),
                         ) {
                             transformations(RoundedCornersTransformation(12f))
                         }
@@ -159,9 +159,7 @@ class MovieDetailActivity : AppCompatActivity() {
                                 binding.movieGenre.addView(
                                     Chip(this@MovieDetailActivity).apply {
                                         text = it.name
-//                                        chipBackgroundColor = getColorStateList(chipColor)
-//                                        setChipBackgroundColorResource(chipColor)
-                                    }
+                                    },
                                 )
                             }
                         }
@@ -213,7 +211,7 @@ class MovieDetailActivity : AppCompatActivity() {
                             val intent =
                                 Intent(
                                     this@MovieDetailActivity,
-                                    MovieReviewActivity::class.java
+                                    MovieReviewActivity::class.java,
                                 )
                             intent.putExtra("traktMovieId", traktMovieIds.toString())
                             intent.putExtra("traktMovieTitle", movieTitle)
@@ -261,7 +259,7 @@ class MovieDetailActivity : AppCompatActivity() {
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.setFlags(
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
         )
         // finally change the color
 //        window.setStatusBarColor(ContextCompat.getColor(this, customStatusBarColor))

@@ -4,18 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.oldautumn.movie.data.media.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
 
 @HiltViewModel
 class TvMainViewModel @Inject constructor(
-    private val repository: MovieRepository
+    private val repository: MovieRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -24,8 +24,8 @@ class TvMainViewModel @Inject constructor(
             mutableListOf(),
             mutableListOf(),
             mutableListOf(),
-            ""
-        )
+            "",
+        ),
     )
     val uiState: StateFlow<TvMainUiState> = _uiState.asStateFlow()
 
@@ -40,7 +40,7 @@ class TvMainViewModel @Inject constructor(
             try {
                 val popularMovieList = repository.getPopularShowList()
                 _uiState.value = _uiState.value.copy(
-                    popularShowList = popularMovieList
+                    popularShowList = popularMovieList,
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
@@ -57,7 +57,7 @@ class TvMainViewModel @Inject constructor(
             try {
                 val trendingMovieList = repository.getTrendingShowList()
                 _uiState.value = _uiState.value.copy(
-                    trendingShowList = trendingMovieList
+                    trendingShowList = trendingMovieList,
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
@@ -74,7 +74,7 @@ class TvMainViewModel @Inject constructor(
             try {
                 val mostRecommendShowList = repository.getMostRecommendShowList(period)
                 _uiState.value = _uiState.value.copy(
-                    mostRecommendShowList = mostRecommendShowList
+                    mostRecommendShowList = mostRecommendShowList,
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.
@@ -91,7 +91,7 @@ class TvMainViewModel @Inject constructor(
             try {
                 val mostPlayedShowList = repository.getMostPlayedShowList(period)
                 _uiState.value = _uiState.value.copy(
-                    mostPlayedShowList = mostPlayedShowList
+                    mostPlayedShowList = mostPlayedShowList,
                 )
             } catch (ioe: IOException) {
                 // Handle the error and notify the UI when appropriate.

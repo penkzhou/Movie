@@ -15,7 +15,7 @@ import java.text.NumberFormat
 
 class MovieBoxofficeAdapter(
     private val popularList: MutableList<UnifyMovieRevenueItem>,
-    private val onItemClick: (item: UnifyMovieRevenueItem) -> Unit
+    private val onItemClick: (item: UnifyMovieRevenueItem) -> Unit,
 ) :
     RecyclerView.Adapter<MovieBoxofficeAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {

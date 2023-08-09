@@ -14,17 +14,17 @@ import com.oldautumn.movie.databinding.ItemTvEpisodeBinding
 import com.oldautumn.movie.utils.Utils
 
 class TvEpisodeAdapter(
-    private val onDetailClick: () -> Unit
+    private val onDetailClick: () -> Unit,
 ) : RecyclerView.Adapter<TvEpisodeAdapter.EpisodeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         val root = LayoutInflater.from(parent.context).inflate(
             R.layout.item_tv_episode,
             parent,
-            false
+            false,
         )
         return EpisodeViewHolder(
             root,
-            onDetailClick
+            onDetailClick,
         )
     }
 
@@ -58,7 +58,7 @@ class TvEpisodeAdapter(
 
     class EpisodeViewHolder(itemView: View, private val onDetailClick: () -> Unit) :
         RecyclerView.ViewHolder(
-            itemView
+            itemView,
         ) {
 
         private val binding = ItemTvEpisodeBinding.bind(itemView)

@@ -13,7 +13,7 @@ import com.oldautumn.movie.utils.Utils
 
 class MoviePopularAdapter(
     private val popularList: MutableList<MediaWithImage>,
-    private val onItemClick: (item: MediaWithImage) -> Unit
+    private val onItemClick: (item: MediaWithImage) -> Unit,
 ) :
     RecyclerView.Adapter<MoviePopularAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
