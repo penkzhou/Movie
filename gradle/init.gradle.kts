@@ -1,4 +1,4 @@
-val ktlintVersion = "0.48.1"
+val ktlintVersion = "0.50.0"
 
 initscript {
     println("initscript start")
