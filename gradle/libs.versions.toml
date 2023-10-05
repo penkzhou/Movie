@@ -6,19 +6,19 @@ androidxEspresso = "3.5.1"
 androidxTest = "1.1.5"
 androidGradlePlugin = "7.3.1"
 appCompat = "1.6.1"
-googleServices = "4.3.15"
-gradle = "8.1.1"
+googleServices = "4.4.0"
+gradle = "8.1.2"
 kotlinGradlePlugin = "1.9.10"
 lifecycle = "2.6.2"
 constraintlayout = "2.1.4"
 datastore = "1.0.0"
-navigation = "2.6.0"
+navigation = "2.7.4"
 perfPlugin = "1.4.2"
 preference = "1.2.1"
 paging = "3.2.1"
 palette = "1.0.0"
 material = "1.9.0"
-hiltdagger = "2.48"
+hiltdagger = "2.48.1"
 dotsindicator = "5.0"
 retrofit2 = "2.9.0"
 logging-interceptor= "4.11.0"
@@ -58,7 +58,7 @@ retrofit2-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi",
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "logging-interceptor" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 
-deps_firebase_bom = "com.google.firebase:firebase-bom:32.2.3"
+deps_firebase_bom = "com.google.firebase:firebase-bom:32.3.1"
 deps_firebase_crashlytics = { module  ="com.google.firebase:firebase-crashlytics-ktx" }
 deps_firebase_analytics = { module  ="com.google.firebase:firebase-analytics-ktx" }
 deps_firebase_perf = { module  ="com.google.firebase:firebase-perf-ktx" }

@@ -1,0 +1,47 @@
+name: Generate dependency diff
+
+on:
+  pull_request:
+
+jobs:
+  generate-diff:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: set up JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: 17
+        
+    - name: Cache
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: dependencies
+
+    - id: dependency-diff
+      name: Generate dependency diff
+      uses: usefulness/dependency-tree-diff-action@v1
+
+    - uses: peter-evans/find-comment@v2
+      id: find_comment
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body-includes: Dependency diff
+
+    - uses: peter-evans/create-or-update-comment@v3
+      if: ${{ steps.dependency-diff.outputs.text-diff != null || steps.find_comment.outputs.comment-id != null }}
+      with:
+        body: |
+          Dependency diff (customize your message here): 
+            ```diff
+            ${{ steps.dependency-diff.outputs.text-diff }}
+            ```
+        edit-mode: replace
+        comment-id: ${{ steps.find_comment.outputs.comment-id }}
+        issue-number: ${{ github.event.pull_request.number }}
+        token: ${{ secrets.GITHUB_TOKEN }}
