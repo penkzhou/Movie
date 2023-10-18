@@ -90,6 +90,6 @@ dependencies {
 
 ktlint {
     outputColorName.set("RED")
-    version.set("0.50.0")
+    version.set("1.0.1")
     debug.set(true)
 }
