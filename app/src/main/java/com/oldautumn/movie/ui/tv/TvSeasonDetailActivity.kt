@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.tv
 
 import android.content.Intent
@@ -21,7 +36,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TvSeasonDetailActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityTvSeasonDetailBinding
 
     private val viewModel: TvSeasonDetailViewModel by viewModels()
@@ -43,30 +57,33 @@ class TvSeasonDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val castAdapter = MovieCastAdapter(mutableListOf()) {
-            val intent = Intent(this, PeopleDetailActivity::class.java)
-            intent.putExtra("peopleId", it.id)
-            startActivity(intent)
-        }
+        val castAdapter =
+            MovieCastAdapter(mutableListOf()) {
+                val intent = Intent(this, PeopleDetailActivity::class.java)
+                intent.putExtra("peopleId", it.id)
+                startActivity(intent)
+            }
         binding.tvCastList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCastList.adapter = castAdapter
 
-        val crewAdapter = MovieCrewAdapter(mutableListOf()) {
-            val intent = Intent(this, PeopleDetailActivity::class.java)
-            intent.putExtra("peopleId", it.id)
-            startActivity(intent)
-        }
+        val crewAdapter =
+            MovieCrewAdapter(mutableListOf()) {
+                val intent = Intent(this, PeopleDetailActivity::class.java)
+                intent.putExtra("peopleId", it.id)
+                startActivity(intent)
+            }
         binding.tvCrewList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCrewList.adapter = crewAdapter
 
-        val episodeAdapter = TvEpisodeAdapter({
+        val episodeAdapter =
+            TvEpisodeAdapter({
 //            val intent = Intent(this, TvSeasonDetailActivity::class.java)
 //            intent.putExtra("seasonId", it.id)
 //            intent.putExtra("tvId", it.tvId)
 //            startActivity(intent)
-        })
+            })
         binding.tvEpisodeList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvEpisodeList.adapter = episodeAdapter

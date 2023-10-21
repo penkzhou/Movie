@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.people
 
 import android.view.LayoutInflater
@@ -18,18 +33,25 @@ class PeopleCrewAdapter(
     private val onItemClick: (TmdbCombinedCrew) -> Unit,
 ) :
     RecyclerView.Adapter<PeopleCrewAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_people_credit, parent, false)
 
-        val holder = PopularViewHolder(rootView) {
-            onItemClick(list[it])
-        }
+        val holder =
+            PopularViewHolder(rootView) {
+                onItemClick(list[it])
+            }
         return holder
     }
 
-    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: PopularViewHolder,
+        position: Int,
+    ) {
         if (position < 0 || position >= list.size) {
             return
         }
@@ -50,7 +72,6 @@ class PeopleCrewAdapter(
     class PopularViewHolder(view: View, onItemClick: (Int) -> Unit) : RecyclerView.ViewHolder(
         view,
     ) {
-
         init {
             itemView.setOnClickListener {
                 onItemClick(bindingAdapterPosition)

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.main.home
 
 import android.view.LayoutInflater
@@ -18,7 +33,10 @@ class MoviePopularPagerAdapter(
     private val onItemClick: (item: MediaWithImage) -> Unit,
 ) :
     RecyclerView.Adapter<MoviePopularPagerAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_popular_pager_movie, parent, false)
@@ -34,7 +52,10 @@ class MoviePopularPagerAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: PopularViewHolder,
+        position: Int,
+    ) {
         if (position < 0 || position >= differ.currentList.size) {
             return
         }
@@ -42,15 +63,22 @@ class MoviePopularPagerAdapter(
         holder.updateViewWithItem(movieTrendingItem)
     }
 
-    private val differCallback = object : DiffUtil.ItemCallback<MediaWithImage>() {
-        override fun areItemsTheSame(oldItem: MediaWithImage, newItem: MediaWithImage): Boolean {
-            return oldItem.content.ids.trakt == newItem.content.ids.trakt
-        }
+    private val differCallback =
+        object : DiffUtil.ItemCallback<MediaWithImage>() {
+            override fun areItemsTheSame(
+                oldItem: MediaWithImage,
+                newItem: MediaWithImage,
+            ): Boolean {
+                return oldItem.content.ids.trakt == newItem.content.ids.trakt
+            }
 
-        override fun areContentsTheSame(oldItem: MediaWithImage, newItem: MediaWithImage): Boolean {
-            return oldItem.equals(newItem)
+            override fun areContentsTheSame(
+                oldItem: MediaWithImage,
+                newItem: MediaWithImage,
+            ): Boolean {
+                return oldItem.equals(newItem)
+            }
         }
-    }
 
     val differ = AsyncListDiffer(this, differCallback)
 

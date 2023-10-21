@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.movie
 
 import android.content.Intent
@@ -27,7 +42,6 @@ import java.text.NumberFormat
 
 @AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMovieDetailBinding
 
     private val viewModel: MovieDetailViewModel by viewModels()
@@ -54,65 +68,70 @@ class MovieDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieCastList.adapter = castAdapter
 
-        val crewAdapter = MovieCrewAdapter(mutableListOf()) {
-            val intent = Intent(this, PeopleDetailActivity::class.java)
-            intent.putExtra("peopleId", it.id)
-            startActivity(intent)
-        }
+        val crewAdapter =
+            MovieCrewAdapter(mutableListOf()) {
+                val intent = Intent(this, PeopleDetailActivity::class.java)
+                intent.putExtra("peopleId", it.id)
+                startActivity(intent)
+            }
         binding.movieCrewList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieCrewList.adapter = crewAdapter
 
-        val movieAlbumAdapter = MovieAlbumAdapter(mutableListOf()) {
-        }
+        val movieAlbumAdapter =
+            MovieAlbumAdapter(mutableListOf()) {
+            }
 
         binding.movieAlbumList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         binding.movieAlbumList.adapter = movieAlbumAdapter
 
-        val movieBackdropAdapter = MovieAlbumAdapter(mutableListOf()) {
-        }
+        val movieBackdropAdapter =
+            MovieAlbumAdapter(mutableListOf()) {
+            }
 
         binding.movieBackdropList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieBackdropList.adapter = movieBackdropAdapter
 
-        val recommendAdapter = MovieRecommendAdapter(
-            mutableListOf(),
-            object :
-                MovieRecommendAdapter.OnItemClickListener {
-                override fun onItemClick(movieItem: TmdbSimpleMovieItem) {
-                    val intent =
-                        Intent(
-                            this@MovieDetailActivity,
-                            MovieDetailActivity::class.java,
-                        )
-                    intent.putExtra("movieId", movieItem.id)
-                    startActivity(intent)
-                }
-            },
-        )
+        val recommendAdapter =
+            MovieRecommendAdapter(
+                mutableListOf(),
+                object :
+                    MovieRecommendAdapter.OnItemClickListener {
+                    override fun onItemClick(movieItem: TmdbSimpleMovieItem) {
+                        val intent =
+                            Intent(
+                                this@MovieDetailActivity,
+                                MovieDetailActivity::class.java,
+                            )
+                        intent.putExtra("movieId", movieItem.id)
+                        startActivity(intent)
+                    }
+                },
+            )
 
         binding.movieRecommendList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieRecommendList.adapter = recommendAdapter
 
-        val similarAdapter = MovieRecommendAdapter(
-            mutableListOf(),
-            object :
-                MovieRecommendAdapter.OnItemClickListener {
-                override fun onItemClick(movie: TmdbSimpleMovieItem) {
-                    val intent =
-                        Intent(
-                            this@MovieDetailActivity,
-                            MovieDetailActivity::class.java,
-                        )
-                    intent.putExtra("movieId", movie.id)
-                    startActivity(intent)
-                }
-            },
-        )
+        val similarAdapter =
+            MovieRecommendAdapter(
+                mutableListOf(),
+                object :
+                    MovieRecommendAdapter.OnItemClickListener {
+                    override fun onItemClick(movie: TmdbSimpleMovieItem) {
+                        val intent =
+                            Intent(
+                                this@MovieDetailActivity,
+                                MovieDetailActivity::class.java,
+                            )
+                        intent.putExtra("movieId", movie.id)
+                        startActivity(intent)
+                    }
+                },
+            )
         binding.movieSimilarList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.movieSimilarList.adapter = similarAdapter

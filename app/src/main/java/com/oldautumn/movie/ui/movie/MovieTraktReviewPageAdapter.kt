@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.movie
 
 import android.view.LayoutInflater
@@ -21,7 +36,10 @@ class MovieTraktReviewPageAdapter :
     PagingDataAdapter<TraktReview, MovieTraktReviewPageAdapter.MovieTraktReviewViewHolder>(
         TraktReviewComparator,
     ) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieTraktReviewViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): MovieTraktReviewViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_trakt_review, parent, false)
@@ -29,7 +47,10 @@ class MovieTraktReviewPageAdapter :
         return MovieTraktReviewViewHolder(rootView)
     }
 
-    override fun onBindViewHolder(holder: MovieTraktReviewViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: MovieTraktReviewViewHolder,
+        position: Int,
+    ) {
         val movieTrendingItem = getItem(position)
         holder.updateViewWithItem(movieTrendingItem)
     }
@@ -61,16 +82,17 @@ class MovieTraktReviewPageAdapter :
         parent: ViewGroup,
         retry: () -> Unit,
     ) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_load_state, parent, false),
-    ) {
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_load_state, parent, false),
+        ) {
         private val binding = ItemLoadStateBinding.bind(itemView)
         private val progressBar: ProgressBar = binding.loadingItem
         private val errorMsg: TextView = binding.loadErrorMsg
-        private val retry: Button = binding.retryButton
-            .also {
-                it.setOnClickListener { retry() }
-            }
+        private val retry: Button =
+            binding.retryButton
+                .also {
+                    it.setOnClickListener { retry() }
+                }
 
         fun bind(loadState: LoadState) {
             if (loadState is LoadState.Error) {
@@ -86,7 +108,6 @@ class MovieTraktReviewPageAdapter :
     class ReviewLoadStateAdapter(
         private val retry: () -> Unit,
     ) : LoadStateAdapter<LoadStateViewHolder>() {
-
         override fun onCreateViewHolder(
             parent: ViewGroup,
             loadState: LoadState,
@@ -99,12 +120,18 @@ class MovieTraktReviewPageAdapter :
     }
 
     object TraktReviewComparator : DiffUtil.ItemCallback<TraktReview>() {
-        override fun areItemsTheSame(oldItem: TraktReview, newItem: TraktReview): Boolean {
+        override fun areItemsTheSame(
+            oldItem: TraktReview,
+            newItem: TraktReview,
+        ): Boolean {
             // Id is unique.
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: TraktReview, newItem: TraktReview): Boolean {
+        override fun areContentsTheSame(
+            oldItem: TraktReview,
+            newItem: TraktReview,
+        ): Boolean {
             return oldItem == newItem
         }
     }

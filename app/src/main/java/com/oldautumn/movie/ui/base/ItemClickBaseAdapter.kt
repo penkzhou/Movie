@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.base
 
 import android.view.LayoutInflater
@@ -14,7 +29,6 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     private val bindHolder: View.(VIEW_BINDING?, T) -> Unit,
 ) :
     RecyclerView.Adapter<ItemClickBaseAdapter.ItemViewHolder<T>>() {
-
     var binding: VIEW_BINDING? = null
 
     init {
@@ -22,12 +36,16 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder<T> {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ItemViewHolder<T> {
         this.binding = parent.viewBinding(bindingClass)
 
-        val holder = ItemViewHolder<T>(binding!!.root) {
-            onItemClick(list[it])
-        }
+        val holder =
+            ItemViewHolder<T>(binding!!.root) {
+                onItemClick(list[it])
+            }
         return holder
     }
 
@@ -55,7 +73,10 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
         notifyItemRemoved(position)
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder<T>, position: Int) {
+    override fun onBindViewHolder(
+        holder: ItemViewHolder<T>,
+        position: Int,
+    ) {
         val item = list[position]
         holder.itemView.bind(item)
 //        if (position == holder.bindingAdapterPosition) {
@@ -70,7 +91,6 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     class ItemViewHolder<T>(view: View, onItemClick: (Int) -> Unit) : RecyclerView.ViewHolder(
         view,
     ) {
-
         init {
             itemView.setOnClickListener {
                 onItemClick(bindingAdapterPosition)
@@ -79,6 +99,7 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     }
 
     protected open fun View.bind(item: T) {}
+
     protected open fun onViewRecycled(itemView: View) {}
 }
 
@@ -86,14 +107,21 @@ internal class DiffUtilCallback<ITEM>(
     private val oldItems: List<ITEM>,
     private val newItems: List<ITEM>,
 ) : DiffUtil.Callback() {
-
     override fun getOldListSize(): Int = oldItems.size
+
     override fun getNewListSize(): Int = newItems.size
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+
+    override fun areItemsTheSame(
+        oldItemPosition: Int,
+        newItemPosition: Int,
+    ): Boolean {
         return oldItems[oldItemPosition] == newItems[newItemPosition]
     }
 
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+    override fun areContentsTheSame(
+        oldItemPosition: Int,
+        newItemPosition: Int,
+    ): Boolean {
         return oldItems[oldItemPosition] == newItems[newItemPosition]
     }
 }

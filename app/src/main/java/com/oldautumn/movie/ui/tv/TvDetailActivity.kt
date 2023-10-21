@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.tv
 
 import android.content.Intent
@@ -33,7 +48,6 @@ import java.text.DecimalFormat
 
 @AndroidEntryPoint
 class TvDetailActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityTvDetailBinding
 
     private val viewModel: TvDetailViewModel by viewModels()
@@ -58,49 +72,53 @@ class TvDetailActivity : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
-        val castAdapter = MovieCastAdapter(mutableListOf()) {
-            val intent = Intent(this, PeopleDetailActivity::class.java)
-            intent.putExtra("peopleId", it.id)
-            startActivity(intent)
-        }
+        val castAdapter =
+            MovieCastAdapter(mutableListOf()) {
+                val intent = Intent(this, PeopleDetailActivity::class.java)
+                intent.putExtra("peopleId", it.id)
+                startActivity(intent)
+            }
         binding.tvCastList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCastList.adapter = castAdapter
 
-        val crewAdapter = MovieCrewAdapter(mutableListOf()) {
-            val intent = Intent(this, PeopleDetailActivity::class.java)
-            intent.putExtra("peopleId", it.id)
-            startActivity(intent)
-        }
+        val crewAdapter =
+            MovieCrewAdapter(mutableListOf()) {
+                val intent = Intent(this, PeopleDetailActivity::class.java)
+                intent.putExtra("peopleId", it.id)
+                startActivity(intent)
+            }
         binding.tvCrewList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvCrewList.adapter = crewAdapter
 
-        val seasonAdapter = TvSeasonAdapter {
-            val intent = Intent(this, TvSeasonDetailActivity::class.java)
-            intent.putExtra("seasonNumber", it.season_number)
-            intent.putExtra("tvId", viewModel.currentTvId())
-            startActivity(intent)
-        }
+        val seasonAdapter =
+            TvSeasonAdapter {
+                val intent = Intent(this, TvSeasonDetailActivity::class.java)
+                intent.putExtra("seasonNumber", it.season_number)
+                intent.putExtra("tvId", viewModel.currentTvId())
+                startActivity(intent)
+            }
         binding.tvSeasonList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvSeasonList.adapter = seasonAdapter
 
-        val recommendAdapter = TvRecommendAdapter(
-            mutableListOf(),
-            object :
-                TvRecommendAdapter.OnItemClickListener {
-                override fun onItemClick(tvItem: TmdbSimpleTvItem) {
-                    val intent =
-                        Intent(
-                            this@TvDetailActivity,
-                            TvDetailActivity::class.java,
-                        )
-                    intent.putExtra("tvId", tvItem.id)
-                    startActivity(intent)
-                }
-            },
-        )
+        val recommendAdapter =
+            TvRecommendAdapter(
+                mutableListOf(),
+                object :
+                    TvRecommendAdapter.OnItemClickListener {
+                    override fun onItemClick(tvItem: TmdbSimpleTvItem) {
+                        val intent =
+                            Intent(
+                                this@TvDetailActivity,
+                                TvDetailActivity::class.java,
+                            )
+                        intent.putExtra("tvId", tvItem.id)
+                        startActivity(intent)
+                    }
+                },
+            )
         val companyAdapter = ProductCompanyAdapter(mutableListOf()) {}
         binding.tvProductCompanyList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -109,21 +127,22 @@ class TvDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvRecommendList.adapter = recommendAdapter
 
-        val similarAdapter = TvRecommendAdapter(
-            mutableListOf(),
-            object :
-                TvRecommendAdapter.OnItemClickListener {
-                override fun onItemClick(tvItem: TmdbSimpleTvItem) {
-                    val intent =
-                        Intent(
-                            this@TvDetailActivity,
-                            TvDetailActivity::class.java,
-                        )
-                    intent.putExtra("tvId", tvItem.id)
-                    startActivity(intent)
-                }
-            },
-        )
+        val similarAdapter =
+            TvRecommendAdapter(
+                mutableListOf(),
+                object :
+                    TvRecommendAdapter.OnItemClickListener {
+                    override fun onItemClick(tvItem: TmdbSimpleTvItem) {
+                        val intent =
+                            Intent(
+                                this@TvDetailActivity,
+                                TvDetailActivity::class.java,
+                            )
+                        intent.putExtra("tvId", tvItem.id)
+                        startActivity(intent)
+                    }
+                },
+            )
         binding.tvSimilarList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.tvSimilarList.adapter = similarAdapter

@@ -8,6 +8,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
     id 'org.jlleitschuh.gradle.ktlint' version "11.6.0"
+    id("com.diffplug.spotless") version "6.22.0"
 }
 
 android {
@@ -88,8 +89,18 @@ dependencies {
     androidTestImplementation libs.androidxEspresso
 }
 
-ktlint {
-    outputColorName.set("RED")
-    version.set("0.50.0")
-    debug.set(true)
+spotless { // if you are using build.gradle.kts, instead of 'spotless {' use:
+    // configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    kotlin {
+        // by default the target is every '.kt' and '.kts` file in the java sourcesets
+
+        target("src/**/*.kt")
+        ktlint("1.0.1")   // has its own section below
+        licenseHeaderFile(rootProject.file("spotless/Copyright.kt"))
+    }
+    kotlinGradle {
+        target("*.kts")
+        ktlint("1.0.1")
+        licenseHeaderFile(rootProject.file("spotless/Copyright.kts"), "(^(?![\\/ ]\\**).*\$)")
+    }
 }

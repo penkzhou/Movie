@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.main.home
 
 import androidx.lifecycle.ViewModel
@@ -14,72 +29,80 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val repository: MovieRepository,
-) : ViewModel() {
+class HomeViewModel
+    @Inject
+    constructor(
+        private val repository: MovieRepository,
+    ) : ViewModel() {
+        private val _uiState =
+            MutableStateFlow(
+                HomeUiState(
+                    mutableListOf(),
+                    mutableListOf(),
+                    mutableListOf(),
+                    "",
+                ),
+            )
+        val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
-    private val _uiState = MutableStateFlow(
-        HomeUiState(
-            mutableListOf(),
-            mutableListOf(),
-            mutableListOf(),
-            "",
-        ),
-    )
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+        private var fetchTrendingMovieListJob: Job? = null
+        private var fetchPopularMovieListJob: Job? = null
+        private var fetchBoxOfficeMovieListJob: Job? = null
 
-    private var fetchTrendingMovieListJob: Job? = null
-    private var fetchPopularMovieListJob: Job? = null
-    private var fetchBoxOfficeMovieListJob: Job? = null
+        fun fetchPopularMovie() {
+            fetchPopularMovieListJob?.cancel()
+            fetchPopularMovieListJob =
+                viewModelScope.launch {
+                    try {
+                        val popularMovieList = repository.getPopularMovieList()
+                        _uiState.value =
+                            _uiState.value.copy(
+                                popularMovieList = popularMovieList,
+                            )
+                    } catch (ioe: IOException) {
+                        // Handle the error and notify the UI when appropriate.
+                        _uiState.value = _uiState.value.copy(errorMessage = "数据解析异常")
+                    } catch (he: HttpException) {
+                        _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
+                    }
+                }
+        }
 
-    fun fetchPopularMovie() {
-        fetchPopularMovieListJob?.cancel()
-        fetchPopularMovieListJob = viewModelScope.launch {
-            try {
-                val popularMovieList = repository.getPopularMovieList()
-                _uiState.value = _uiState.value.copy(
-                    popularMovieList = popularMovieList,
-                )
-            } catch (ioe: IOException) {
-                // Handle the error and notify the UI when appropriate.
-                _uiState.value = _uiState.value.copy(errorMessage = "数据解析异常")
-            } catch (he: HttpException) {
-                _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
-            }
+        fun fetchBoxOfficeMovieList() {
+            fetchBoxOfficeMovieListJob?.cancel()
+            fetchBoxOfficeMovieListJob =
+                viewModelScope.launch {
+                    try {
+                        val boxOfficeMovieList = repository.getTraktBoxOffice()
+                        _uiState.value =
+                            _uiState.value.copy(
+                                revenueMovieList = boxOfficeMovieList,
+                            )
+                    } catch (ioe: IOException) {
+                        // Handle the error and notify the UI when appropriate.
+                        _uiState.value = _uiState.value.copy(errorMessage = "数据解析异常")
+                    } catch (he: HttpException) {
+                        _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
+                    }
+                }
+        }
+
+        fun fetchMovieData() {
+            fetchTrendingMovieListJob?.cancel()
+            fetchTrendingMovieListJob =
+                viewModelScope.launch {
+                    try {
+                        val trendingMovieList = repository.getTrendingMovieList()
+                        _uiState.value =
+                            _uiState.value.copy(
+                                trendingMovieList = trendingMovieList,
+                            )
+                    } catch (ioe: IOException) {
+                        // Handle the error and notify the UI when appropriate.
+                        _uiState.value = _uiState.value.copy(errorMessage = "数据解析异常")
+                    } catch (he: HttpException) {
+                        _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
+                    }
+                }
         }
     }
-
-    fun fetchBoxOfficeMovieList() {
-        fetchBoxOfficeMovieListJob?.cancel()
-        fetchBoxOfficeMovieListJob = viewModelScope.launch {
-            try {
-                val boxOfficeMovieList = repository.getTraktBoxOffice()
-                _uiState.value = _uiState.value.copy(
-                    revenueMovieList = boxOfficeMovieList,
-                )
-            } catch (ioe: IOException) {
-                // Handle the error and notify the UI when appropriate.
-                _uiState.value = _uiState.value.copy(errorMessage = "数据解析异常")
-            } catch (he: HttpException) {
-                _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
-            }
-        }
-    }
-
-    fun fetchMovieData() {
-        fetchTrendingMovieListJob?.cancel()
-        fetchTrendingMovieListJob = viewModelScope.launch {
-            try {
-                val trendingMovieList = repository.getTrendingMovieList()
-                _uiState.value = _uiState.value.copy(
-                    trendingMovieList = trendingMovieList,
-                )
-            } catch (ioe: IOException) {
-                // Handle the error and notify the UI when appropriate.
-                _uiState.value = _uiState.value.copy(errorMessage = "数据解析异常")
-            } catch (he: HttpException) {
-                _uiState.value = _uiState.value.copy(errorMessage = "网络异常")
-            }
-        }
-    }
-}

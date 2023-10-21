@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.movie
 
 import androidx.lifecycle.ViewModel
@@ -14,29 +29,34 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieTraktReviewViewModel @Inject constructor(
-    private val repository: MovieRepository,
-) : ViewModel() {
+class MovieTraktReviewViewModel
+    @Inject
+    constructor(
+        private val repository: MovieRepository,
+    ) : ViewModel() {
+        private val _uiState =
+            MutableStateFlow(
+                TraktReviewUiState(mutableListOf(), null),
+            )
+        val uiState: StateFlow<TraktReviewUiState> = _uiState.asStateFlow()
 
-    private val _uiState = MutableStateFlow(
-        TraktReviewUiState(mutableListOf(), null),
+        private var fetchTraktReviewListJob: Job? = null
 
-    )
-    val uiState: StateFlow<TraktReviewUiState> = _uiState.asStateFlow()
-
-    private var fetchTraktReviewListJob: Job? = null
-
-    fun fetchTraktReviewList(traktMovieId: String, sortType: String = "newest") {
-        fetchTraktReviewListJob?.cancel()
-        fetchTraktReviewListJob = viewModelScope.launch {
-            try {
-                val traktReviewList = repository.getTraktReviewList(traktMovieId, sortType)
-                _uiState.value = _uiState.value.copy(traktReviewList = traktReviewList)
-            } catch (e: IOException) {
-                _uiState.value = _uiState.value.copy(errorMessage = e.message)
-            } catch (hoe: HttpException) {
-                _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
-            }
+        fun fetchTraktReviewList(
+            traktMovieId: String,
+            sortType: String = "newest",
+        ) {
+            fetchTraktReviewListJob?.cancel()
+            fetchTraktReviewListJob =
+                viewModelScope.launch {
+                    try {
+                        val traktReviewList = repository.getTraktReviewList(traktMovieId, sortType)
+                        _uiState.value = _uiState.value.copy(traktReviewList = traktReviewList)
+                    } catch (e: IOException) {
+                        _uiState.value = _uiState.value.copy(errorMessage = e.message)
+                    } catch (hoe: HttpException) {
+                        _uiState.value = _uiState.value.copy(errorMessage = hoe.message)
+                    }
+                }
         }
     }
-}

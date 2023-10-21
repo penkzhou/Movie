@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.data.api
 
 import com.oldautumn.movie.data.api.model.DeviceCode
@@ -23,10 +38,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TraktApiService {
-
     @FormUrlEncoded
     @POST("/oauth/device/code")
-    suspend fun fetchDeviceCode(@Field("client_id") client_id: String): DeviceCode
+    suspend fun fetchDeviceCode(
+        @Field("client_id") client_id: String,
+    ): DeviceCode
 
     @FormUrlEncoded
     @POST("/oauth/device/token")
@@ -40,16 +56,22 @@ interface TraktApiService {
     suspend fun fetchTrendingMovieList(): List<MovieTrendingItem>
 
     @GET("/users/settings")
-    suspend fun fetchUserInfo(@HeaderMap headers: Map<String, String>): UserSettings
+    suspend fun fetchUserInfo(
+        @HeaderMap headers: Map<String, String>,
+    ): UserSettings
 
     @GET("/shows/trending")
     suspend fun fetchTrendingShowList(): List<ShowTrendingItem>
 
     @GET("/shows/recommended/{period}")
-    suspend fun fetchMostRecommendShowList(@Path("period") period: String): List<ShowRecommendItem>
+    suspend fun fetchMostRecommendShowList(
+        @Path("period") period: String,
+    ): List<ShowRecommendItem>
 
     @GET("/shows/played/{period}")
-    suspend fun fetchMostPlayedShowList(@Path("period") period: String): List<ShowPlayedItem>
+    suspend fun fetchMostPlayedShowList(
+        @Path("period") period: String,
+    ): List<ShowPlayedItem>
 
     @GET("/movies/watched/weekly")
     suspend fun fetchWeeklyWatchedMovieList(): List<MovieTrendingItem>
@@ -64,10 +86,14 @@ interface TraktApiService {
     suspend fun fetchPopularShowList(): List<TraktSimpleContentItem>
 
     @GET("/movies/{movie_id}?extended=full")
-    suspend fun fetchTraktMovieDetail(@Path("movie_id") movieId: String): TraktMovieDetail
+    suspend fun fetchTraktMovieDetail(
+        @Path("movie_id") movieId: String,
+    ): TraktMovieDetail
 
     @GET("/shows/{tv_id}?extended=full")
-    suspend fun fetchTraktTvDetail(@Path("tv_id") tvId: String): TraktShowDetail
+    suspend fun fetchTraktTvDetail(
+        @Path("tv_id") tvId: String,
+    ): TraktShowDetail
 
     @GET("movies/{movie_id}/comments/{sort_type}")
     suspend fun fetchTraktMovieReviewList(

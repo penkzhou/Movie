@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.tv
 
 import android.view.LayoutInflater
@@ -17,7 +32,10 @@ class TvSeasonAdapter(
     private val onDetailClick: (Season) -> Unit,
 ) :
     RecyclerView.Adapter<TvSeasonAdapter.SeasonViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): SeasonViewHolder {
         val root =
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_tv_season,
@@ -27,7 +45,10 @@ class TvSeasonAdapter(
         return SeasonViewHolder(root, onDetailClick)
     }
 
-    override fun onBindViewHolder(holder: SeasonViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: SeasonViewHolder,
+        position: Int,
+    ) {
         if (position < 0 || position >= differ.currentList.size) {
             return
         }
@@ -43,15 +64,22 @@ class TvSeasonAdapter(
         this.differ.submitList(seasonList)
     }
 
-    private val differCallback = object : DiffUtil.ItemCallback<Season>() {
-        override fun areItemsTheSame(oldItem: Season, newItem: Season): Boolean {
-            return oldItem.id == newItem.id
-        }
+    private val differCallback =
+        object : DiffUtil.ItemCallback<Season>() {
+            override fun areItemsTheSame(
+                oldItem: Season,
+                newItem: Season,
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-        override fun areContentsTheSame(oldItem: Season, newItem: Season): Boolean {
-            return oldItem.equals(newItem)
+            override fun areContentsTheSame(
+                oldItem: Season,
+                newItem: Season,
+            ): Boolean {
+                return oldItem.equals(newItem)
+            }
         }
-    }
 
     private val differ = AsyncListDiffer(this, differCallback)
 
@@ -59,7 +87,6 @@ class TvSeasonAdapter(
         RecyclerView.ViewHolder(
             itemView,
         ) {
-
         private val binding = ItemTvSeasonBinding.bind(itemView)
 
         fun bind(season: Season) {

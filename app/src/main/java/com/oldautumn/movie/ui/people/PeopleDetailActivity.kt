@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.people
 
 import android.content.Intent
@@ -25,7 +40,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PeopleDetailActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityPeopleDetailBinding
 
     private val viewModel: PeopleDetailViewModel by viewModels()
@@ -39,87 +53,90 @@ class PeopleDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val movieCastAdapter = TvCastInAdapter(mutableListOf(), false) {
-            val intent =
-                Intent(
-                    this@PeopleDetailActivity,
-                    MovieDetailActivity::class.java,
-                )
-            intent.putExtra("movieId", it.id)
-            startActivity(intent)
-        }
+        val movieCastAdapter =
+            TvCastInAdapter(mutableListOf(), false) {
+                val intent =
+                    Intent(
+                        this@PeopleDetailActivity,
+                        MovieDetailActivity::class.java,
+                    )
+                intent.putExtra("movieId", it.id)
+                startActivity(intent)
+            }
         binding.peopleCastInMovieList.adapter = movieCastAdapter
         binding.peopleCastInMovieList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        val movieCrewAdapter = TvCrewInAdapter(mutableListOf()) {
-            val intent =
-                Intent(
-                    this@PeopleDetailActivity,
-                    MovieDetailActivity::class.java,
-                )
-            intent.putExtra("movieId", it.id)
-            startActivity(intent)
-        }
+        val movieCrewAdapter =
+            TvCrewInAdapter(mutableListOf()) {
+                val intent =
+                    Intent(
+                        this@PeopleDetailActivity,
+                        MovieDetailActivity::class.java,
+                    )
+                intent.putExtra("movieId", it.id)
+                startActivity(intent)
+            }
         binding.peopleCrewInMovieList.adapter = movieCrewAdapter
         binding.peopleCrewInMovieList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        val tvCastAdapter = TvCastInAdapter(mutableListOf(), true) {
-            val intent =
-                Intent(
-                    this@PeopleDetailActivity,
-                    TvDetailActivity::class.java,
-                )
-            intent.putExtra("tvId", it.id)
-            startActivity(intent)
-        }
+        val tvCastAdapter =
+            TvCastInAdapter(mutableListOf(), true) {
+                val intent =
+                    Intent(
+                        this@PeopleDetailActivity,
+                        TvDetailActivity::class.java,
+                    )
+                intent.putExtra("tvId", it.id)
+                startActivity(intent)
+            }
 
         binding.peopleCastInTvList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.peopleCastInTvList.adapter = tvCastAdapter
 
-        val tvCrewAdapter = PeopleCrewAdapter(
-            mutableListOf(),
-            object : (TmdbCombinedCrew) -> Unit {
-                override fun invoke(p1: TmdbCombinedCrew) {
-                    val intent =
-                        Intent(
-                            this@PeopleDetailActivity,
-                            TvDetailActivity::class.java,
-                        )
-                    intent.putExtra("tvId", p1.id)
-                    startActivity(intent)
-                }
-            },
-        )
+        val tvCrewAdapter =
+            PeopleCrewAdapter(
+                mutableListOf(),
+                object : (TmdbCombinedCrew) -> Unit {
+                    override fun invoke(p1: TmdbCombinedCrew) {
+                        val intent =
+                            Intent(
+                                this@PeopleDetailActivity,
+                                TvDetailActivity::class.java,
+                            )
+                        intent.putExtra("tvId", p1.id)
+                        startActivity(intent)
+                    }
+                },
+            )
         binding.peopleCrewInTvList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.peopleCrewInTvList.adapter = tvCrewAdapter
 
         // 人物相册
-        val peopleImageAdapter = binding.peopleImageList.setup(
-            mutableListOf<TmdbImageItem>(),
-            ItemPeopleImageBinding::inflate,
-            onItemClick = {
+        val peopleImageAdapter =
+            binding.peopleImageList.setup(
+                mutableListOf<TmdbImageItem>(),
+                ItemPeopleImageBinding::inflate,
+                onItemClick = {
 //                val intent = Intent(this@PeopleDetailActivity, TvDetailActivity::class.java)
 //                intent.putExtra("tvId", it.id)
 //                startActivity(intent)
-            },
-            { binding, imageItem ->
-                if (imageItem.file_path != null && imageItem.file_path.isNotEmpty()) {
-                    binding?.peopleImage?.load(Utils.getImageFullUrl(imageItem.file_path)) {
-                        transformations(
-                            RoundedCornersTransformation(16f),
-                        )
+                },
+                { binding, imageItem ->
+                    if (imageItem.file_path != null && imageItem.file_path.isNotEmpty()) {
+                        binding?.peopleImage?.load(Utils.getImageFullUrl(imageItem.file_path)) {
+                            transformations(
+                                RoundedCornersTransformation(16f),
+                            )
+                        }
                     }
-                }
-            },
-
-            manager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
-
-        )
+                },
+                manager =
+                    LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
+            )
 
         binding.peopleImageList.adapter = peopleImageAdapter
 

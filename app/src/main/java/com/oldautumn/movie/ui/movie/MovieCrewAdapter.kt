@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 The Old Autumn Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.oldautumn.movie.ui.movie
 
 import android.view.LayoutInflater
@@ -18,9 +33,13 @@ class MovieCrewAdapter(
     private val onItemClick: (TmdbCrew) -> Unit,
 ) :
     RecyclerView.Adapter<MovieCrewAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-        val rootView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_movie_cast, parent, false) as ViewGroup
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): PopularViewHolder {
+        val rootView =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_movie_cast, parent, false) as ViewGroup
         val holder = PopularViewHolder(rootView)
         rootView.setOnClickListener {
             val position = holder.bindingAdapterPosition
@@ -32,7 +51,10 @@ class MovieCrewAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: PopularViewHolder,
+        position: Int,
+    ) {
         if (position < 0 || position >= popularList.size) {
             return
         }
@@ -51,7 +73,6 @@ class MovieCrewAdapter(
     }
 
     class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(view) {
-
         private val binding = ItemMovieCastBinding.bind(itemView)
         private val moviePoster: ImageView = binding.movieCastPoster
         private val crewName: TextView = binding.movieCastName
