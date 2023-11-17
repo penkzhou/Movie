@@ -52,8 +52,6 @@ class TvDetailActivity : AppCompatActivity() {
 
     private val viewModel: TvDetailViewModel by viewModels()
 
-    private var chipColor: Int = R.color.purple_200
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -171,7 +169,6 @@ class TvDetailActivity : AppCompatActivity() {
                                             swatch.titleTextColor,
                                             android.graphics.PorterDuff.Mode.MULTIPLY,
                                         )
-                                        chipColor = swatch.rgb
                                         binding.tvGenre.children?.forEach { chip ->
                                             if (chip is Chip) {
                                                 chip.setBackgroundColor(swatch.rgb)

@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
-import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.TmdbSimpleMovieItem
 import com.oldautumn.movie.databinding.ActivityMovieDetailBinding
 import com.oldautumn.movie.ui.people.PeopleDetailActivity
@@ -45,8 +44,6 @@ class MovieDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieDetailBinding
 
     private val viewModel: MovieDetailViewModel by viewModels()
-
-    private var chipColor: Int = R.color.purple_200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -155,7 +152,6 @@ class MovieDetailActivity : AppCompatActivity() {
                                         android.graphics.PorterDuff.Mode.MULTIPLY,
                                     )
                                     updateStatusBarBg(swatch.rgb)
-                                    chipColor = swatch.rgb
                                     binding.movieGenre.children?.forEach { chip ->
                                         if (chip is Chip) {
                                             chip.setBackgroundColor(swatch.rgb)
