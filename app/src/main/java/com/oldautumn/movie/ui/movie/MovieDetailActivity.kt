@@ -46,7 +46,6 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private val viewModel: MovieDetailViewModel by viewModels()
 
-    private var chipColor: Int = R.color.purple_200
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -155,7 +154,6 @@ class MovieDetailActivity : AppCompatActivity() {
                                         android.graphics.PorterDuff.Mode.MULTIPLY,
                                     )
                                     updateStatusBarBg(swatch.rgb)
-                                    chipColor = swatch.rgb
                                     binding.movieGenre.children?.forEach { chip ->
                                         if (chip is Chip) {
                                             chip.setBackgroundColor(swatch.rgb)
