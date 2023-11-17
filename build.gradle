@@ -2,18 +2,16 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        gradlePluginPortal()
         google()
     }
     dependencies {
         classpath libs.gradle
         classpath libs.kotlin.gradle.plugin
+        classpath libs.hilt.android.gradle.plugin
         classpath libs.google.services
         classpath libs.firebase.crashlytics.gradle
         classpath libs.perf.plugin
-        classpath libs.hilt.android.gradle.plugin
     }
 }
 
