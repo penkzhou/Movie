@@ -52,7 +52,6 @@ class TvDetailActivity : AppCompatActivity() {
 
     private val viewModel: TvDetailViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
