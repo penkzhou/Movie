@@ -89,6 +89,17 @@ dependencies {
     androidTestImplementation libs.androidxEspresso
 }
 
+
+gradleEnterprise {
+    if (System.getenv("CI") != null) {
+        buildScan {
+            publishAlways()
+            termsOfServiceUrl = "https://gradle.com/terms-of-service"
+            termsOfServiceAgree = "yes"
+        }
+    }
+}
+
 spotless { // if you are using build.gradle.kts, instead of 'spotless {' use:
     // configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
@@ -104,3 +115,4 @@ spotless { // if you are using build.gradle.kts, instead of 'spotless {' use:
         licenseHeaderFile(rootProject.file("spotless/Copyright.kts"), "(^(?![\\/ ]\\**).*\$)")
     }
 }
+
