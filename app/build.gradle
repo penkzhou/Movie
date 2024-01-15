@@ -7,7 +7,7 @@ plugins {
     id 'com.google.firebase.crashlytics'
     id 'com.google.firebase.firebase-perf'
     id 'dagger.hilt.android.plugin'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
     id("com.diffplug.spotless") version "6.23.3"
 }
 
@@ -78,7 +78,7 @@ dependencies {
     implementation libs.material
 
     implementation libs.hiltdagger
-    kapt libs.hiltdagger.compiler
+    ksp libs.hiltdagger.compiler
 
     implementation libs.dotsindicator
     implementation libs.retrofit2.converter.moshi
