@@ -24,8 +24,9 @@ jobs:
         arguments: dependencies
 
     - id: dependency-diff
-      name: Generate dependency diff
-      uses: usefulness/dependency-tree-diff-action@v1
+      name: Dependency tree diff for Gradle
+      uses: usefulness/dependency-tree-diff-action@v1.2.4
+            
 
     - uses: peter-evans/find-comment@v2
       id: find_comment
