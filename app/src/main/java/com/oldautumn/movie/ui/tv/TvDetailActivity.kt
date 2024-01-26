@@ -169,7 +169,7 @@ class TvDetailActivity : AppCompatActivity() {
                                             swatch.titleTextColor,
                                             android.graphics.PorterDuff.Mode.MULTIPLY,
                                         )
-                                        binding.tvGenre.children?.forEach { chip ->
+                                        binding.tvGenre.children.forEach { chip ->
                                             if (chip is Chip) {
                                                 chip.setBackgroundColor(swatch.rgb)
                                                 chip.setTextColor(swatch.titleTextColor)

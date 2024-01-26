@@ -152,7 +152,7 @@ class MovieDetailActivity : AppCompatActivity() {
                                         android.graphics.PorterDuff.Mode.MULTIPLY,
                                     )
                                     updateStatusBarBg(swatch.rgb)
-                                    binding.movieGenre.children?.forEach { chip ->
+                                    binding.movieGenre.children.forEach { chip ->
                                         if (chip is Chip) {
                                             chip.setBackgroundColor(swatch.rgb)
                                         }
@@ -186,8 +186,7 @@ class MovieDetailActivity : AppCompatActivity() {
                         binding.title.text = it.movieDetail.title
                         binding.movieOverview.text = it.movieDetail.overview
                         binding.movieReleaseCountry.text =
-                            it.movieDetail.production_countries?.joinToString(",") {
-                                    country ->
+                            it.movieDetail.production_countries.joinToString(",") { country ->
                                 country.name
                             }
                         binding.movieTmdbRatingValue.text =
