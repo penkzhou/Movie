@@ -17,7 +17,7 @@ buildscript {
 
 plugins {
     id("com.google.devtools.ksp") version "2.0.0-Beta4-1.0.17" apply false
-    id 'com.google.dagger.hilt.android' version '2.50' apply false
+    id 'com.google.dagger.hilt.android' version '2.51' apply false
 }
 
 
