@@ -23,5 +23,5 @@ data class HomeUiState(
     val trendingMovieList: List<UnifyMovieTrendingItem>,
     val popularMovieList: List<MediaWithImage>,
     val revenueMovieList: List<UnifyMovieRevenueItem>,
-    val errorMessage: String,
+    val errorMessage: String
 )

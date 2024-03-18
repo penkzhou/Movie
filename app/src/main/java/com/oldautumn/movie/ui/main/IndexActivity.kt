@@ -45,8 +45,8 @@ class IndexActivity : AppCompatActivity() {
                     R.id.navigation_movie,
                     R.id.navigation_tv,
                     R.id.navigation_discovery,
-                    R.id.navigation_me,
-                ),
+                    R.id.navigation_me
+                )
             )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

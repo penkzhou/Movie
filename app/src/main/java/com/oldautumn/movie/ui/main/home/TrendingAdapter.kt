@@ -28,13 +28,10 @@ import com.oldautumn.movie.utils.Utils
 
 class TrendingAdapter(
     private val popularList: MutableList<UnifyMovieTrendingItem>,
-    private val onItemClick: (item: UnifyMovieTrendingItem) -> Unit,
+    private val onItemClick: (item: UnifyMovieTrendingItem) -> Unit
 ) :
     RecyclerView.Adapter<TrendingAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): PopularViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_popular_movie, parent, false)
         val holder = PopularViewHolder(rootView)
@@ -48,10 +45,7 @@ class TrendingAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: PopularViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
         if (position < 0 || position >= popularList.size) {
             return
         }

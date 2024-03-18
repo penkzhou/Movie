@@ -38,8 +38,8 @@ import com.oldautumn.movie.ui.movie.MovieDetailActivity
 import com.oldautumn.movie.utils.Utils.launchAndRepeatWithViewLifecycle
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
                         intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
                         startActivity(intent)
                     }
-                },
+                }
             )
 
         val popularPagerAdapter =
@@ -84,7 +84,7 @@ class HomeFragment : Fragment() {
                         intent.putExtra("movieSlug", movie.content.ids.slug)
                         startActivity(intent)
                     }
-                },
+                }
             )
         val revenueAdapter =
             MovieBoxofficeAdapter(
@@ -96,7 +96,7 @@ class HomeFragment : Fragment() {
                         intent.putExtra("movieSlug", movie.movie.movie.ids.slug)
                         startActivity(intent)
                     }
-                },
+                }
             )
         trendingListView.layoutManager =
             LinearLayoutManager(context, HORIZONTAL, false)

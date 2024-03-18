@@ -49,7 +49,7 @@ import kotlinx.coroutines.flow.Flow
 class MovieRepository(
     private val remoteDataSource: MovieRemoteDataSource,
     private val loginRemoteDataSource: MovieRemoteDataSource,
-    private val traktApiService: TraktApiService,
+    private val traktApiService: TraktApiService
 ) {
     suspend fun getTrendingMovieList(): List<UnifyMovieTrendingItem> {
         val movieTrendingList = remoteDataSource.getTrendingMovieList()
@@ -109,10 +109,7 @@ class MovieRepository(
         return remoteDataSource.getTvDetail(showId)
     }
 
-    suspend fun getShowSeasonDetail(
-        showId: Int,
-        seasonNumber: Int,
-    ): TvSeasonDetail {
+    suspend fun getShowSeasonDetail(showId: Int, seasonNumber: Int): TvSeasonDetail {
         return remoteDataSource.getTvSeasonDetail(showId, seasonNumber)
     }
 
@@ -156,10 +153,7 @@ class MovieRepository(
         return remoteDataSource.getTraktTvDetail(tvId)
     }
 
-    suspend fun getTraktReviewList(
-        traktMovieId: String,
-        sortType: String,
-    ): List<TraktReview> {
+    suspend fun getTraktReviewList(traktMovieId: String, sortType: String): List<TraktReview> {
         return remoteDataSource.getTraktReviewList(traktMovieId, sortType)
     }
 
@@ -192,21 +186,21 @@ class MovieRepository(
 
     fun getTraktReviewPageList(
         traktMovieId: String,
-        sortType: String,
+        sortType: String
     ): Flow<PagingData<TraktReview>> {
         return Pager(
             config =
-                PagingConfig(
-                    pageSize = 10,
-                    enablePlaceholders = false,
-                ),
+            PagingConfig(
+                pageSize = 10,
+                enablePlaceholders = false
+            ),
             pagingSourceFactory = {
                 TraktReviewPagingSource(
                     traktApiService,
                     traktMovieId,
-                    sortType,
+                    sortType
                 )
-            },
+            }
         ).flow
     }
 }

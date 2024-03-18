@@ -58,7 +58,7 @@ class PeopleDetailActivity : AppCompatActivity() {
                 val intent =
                     Intent(
                         this@PeopleDetailActivity,
-                        MovieDetailActivity::class.java,
+                        MovieDetailActivity::class.java
                     )
                 intent.putExtra("movieId", it.id)
                 startActivity(intent)
@@ -72,7 +72,7 @@ class PeopleDetailActivity : AppCompatActivity() {
                 val intent =
                     Intent(
                         this@PeopleDetailActivity,
-                        MovieDetailActivity::class.java,
+                        MovieDetailActivity::class.java
                     )
                 intent.putExtra("movieId", it.id)
                 startActivity(intent)
@@ -86,7 +86,7 @@ class PeopleDetailActivity : AppCompatActivity() {
                 val intent =
                     Intent(
                         this@PeopleDetailActivity,
-                        TvDetailActivity::class.java,
+                        TvDetailActivity::class.java
                     )
                 intent.putExtra("tvId", it.id)
                 startActivity(intent)
@@ -104,12 +104,12 @@ class PeopleDetailActivity : AppCompatActivity() {
                         val intent =
                             Intent(
                                 this@PeopleDetailActivity,
-                                TvDetailActivity::class.java,
+                                TvDetailActivity::class.java
                             )
                         intent.putExtra("tvId", p1.id)
                         startActivity(intent)
                     }
-                },
+                }
             )
         binding.peopleCrewInTvList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -129,13 +129,13 @@ class PeopleDetailActivity : AppCompatActivity() {
                     if (imageItem.file_path != null && imageItem.file_path.isNotEmpty()) {
                         binding?.peopleImage?.load(Utils.getImageFullUrl(imageItem.file_path)) {
                             transformations(
-                                RoundedCornersTransformation(16f),
+                                RoundedCornersTransformation(16f)
                             )
                         }
                     }
                 },
                 manager =
-                    LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false),
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             )
 
         binding.peopleImageList.adapter = peopleImageAdapter
@@ -160,8 +160,8 @@ class PeopleDetailActivity : AppCompatActivity() {
                         title = it.peopleDetail.name
                         binding.peoplePoster.load(
                             Utils.getImageFullUrl(
-                                it.peopleDetail.profile_path ?: "",
-                            ),
+                                it.peopleDetail.profile_path ?: ""
+                            )
                         ) {
                             transformations(RoundedCornersTransformation(12f))
                         }

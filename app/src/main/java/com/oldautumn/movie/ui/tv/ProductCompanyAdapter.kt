@@ -30,13 +30,10 @@ import com.oldautumn.movie.utils.Utils
 
 class ProductCompanyAdapter(
     private val popularList: MutableList<Company>,
-    private val onItemClick: (Company) -> Unit,
+    private val onItemClick: (Company) -> Unit
 ) :
     RecyclerView.Adapter<ProductCompanyAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): PopularViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_season_company, parent, false) as ViewGroup
@@ -51,10 +48,7 @@ class ProductCompanyAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: PopularViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
         if (position < 0 || position >= popularList.size) {
             return
         }
@@ -77,7 +71,7 @@ class ProductCompanyAdapter(
     }
 
     class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
-        view,
+        view
     ) {
         private val binding = ItemSeasonCompanyBinding.bind(itemView)
         private val companyPoster: ImageView = binding.productCompanyPoster
@@ -90,7 +84,7 @@ class ProductCompanyAdapter(
                 companyPosterName.visibility = View.GONE
                 companyPoster.load(Utils.getImageFullUrl(cast.logo_path)) {
                     transformations(
-                        CircleCropTransformation(),
+                        CircleCropTransformation()
                     )
                 }
             } else {

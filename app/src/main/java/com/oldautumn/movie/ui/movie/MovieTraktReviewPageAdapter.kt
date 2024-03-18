@@ -34,12 +34,9 @@ import com.oldautumn.movie.utils.Utils
 
 class MovieTraktReviewPageAdapter :
     PagingDataAdapter<TraktReview, MovieTraktReviewPageAdapter.MovieTraktReviewViewHolder>(
-        TraktReviewComparator,
+        TraktReviewComparator
     ) {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): MovieTraktReviewViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieTraktReviewViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_trakt_review, parent, false)
@@ -47,10 +44,7 @@ class MovieTraktReviewPageAdapter :
         return MovieTraktReviewViewHolder(rootView)
     }
 
-    override fun onBindViewHolder(
-        holder: MovieTraktReviewViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: MovieTraktReviewViewHolder, position: Int) {
         val movieTrendingItem = getItem(position)
         holder.updateViewWithItem(movieTrendingItem)
     }
@@ -80,11 +74,11 @@ class MovieTraktReviewPageAdapter :
 
     class LoadStateViewHolder(
         parent: ViewGroup,
-        retry: () -> Unit,
+        retry: () -> Unit
     ) : RecyclerView.ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_load_state, parent, false),
-        ) {
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_load_state, parent, false)
+    ) {
         private val binding = ItemLoadStateBinding.bind(itemView)
         private val progressBar: ProgressBar = binding.loadingItem
         private val errorMsg: TextView = binding.loadErrorMsg
@@ -106,32 +100,22 @@ class MovieTraktReviewPageAdapter :
     }
 
     class ReviewLoadStateAdapter(
-        private val retry: () -> Unit,
+        private val retry: () -> Unit
     ) : LoadStateAdapter<LoadStateViewHolder>() {
-        override fun onCreateViewHolder(
-            parent: ViewGroup,
-            loadState: LoadState,
-        ) = LoadStateViewHolder(parent, retry)
+        override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState) =
+            LoadStateViewHolder(parent, retry)
 
-        override fun onBindViewHolder(
-            holder: LoadStateViewHolder,
-            loadState: LoadState,
-        ) = holder.bind(loadState)
+        override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) =
+            holder.bind(loadState)
     }
 
     object TraktReviewComparator : DiffUtil.ItemCallback<TraktReview>() {
-        override fun areItemsTheSame(
-            oldItem: TraktReview,
-            newItem: TraktReview,
-        ): Boolean {
+        override fun areItemsTheSame(oldItem: TraktReview, newItem: TraktReview): Boolean {
             // Id is unique.
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(
-            oldItem: TraktReview,
-            newItem: TraktReview,
-        ): Boolean {
+        override fun areContentsTheSame(oldItem: TraktReview, newItem: TraktReview): Boolean {
             return oldItem == newItem
         }
     }

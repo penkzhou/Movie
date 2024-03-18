@@ -24,5 +24,5 @@ data class DeviceCode(
     val user_code: String,
     val verification_url: String,
     val expires_in: Int,
-    val internal: Int,
+    val internal: Int
 ) : Parcelable

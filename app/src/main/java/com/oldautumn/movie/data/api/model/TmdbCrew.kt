@@ -45,5 +45,5 @@ data class TmdbCrew(
     val credit_id: String,
     val department: String,
     val job: String,
-    val order: Int,
+    val order: Int
 )

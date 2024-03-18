@@ -26,13 +26,10 @@ import com.oldautumn.movie.utils.Utils
 
 class MovieTraktCollectionAdapter(
     private val itemList: MutableList<TraktCollection>,
-    private val onItemClick: (TraktCollection) -> Unit,
+    private val onItemClick: (TraktCollection) -> Unit
 ) :
     RecyclerView.Adapter<MovieTraktCollectionAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): PopularViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_trakt_collection, parent, false)
@@ -48,10 +45,7 @@ class MovieTraktCollectionAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: PopularViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
         if (position < 0 || position >= itemList.size) {
             return
         }

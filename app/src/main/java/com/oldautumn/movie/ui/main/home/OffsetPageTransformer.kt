@@ -25,12 +25,9 @@ import androidx.viewpager2.widget.ViewPager2
 
 class OffsetPageTransformer(
     @Px private val offsetPx: Int,
-    @Px private val pageMarginPx: Int,
+    @Px private val pageMarginPx: Int
 ) : ViewPager2.PageTransformer {
-    override fun transformPage(
-        page: View,
-        position: Float,
-    ) {
+    override fun transformPage(page: View, position: Float) {
         val viewPager = requireViewPager(page)
         val offset = position * (-(2 * offsetPx + pageMarginPx))
         val totalMargin = offsetPx + pageMarginPx
@@ -64,7 +61,7 @@ class OffsetPageTransformer(
             return parentParent
         }
         throw IllegalStateException(
-            "Expected the page view to be managed by a ViewPager2 instance.",
+            "Expected the page view to be managed by a ViewPager2 instance."
         )
     }
 }

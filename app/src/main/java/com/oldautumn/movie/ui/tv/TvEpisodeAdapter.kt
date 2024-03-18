@@ -29,28 +29,22 @@ import com.oldautumn.movie.databinding.ItemTvEpisodeBinding
 import com.oldautumn.movie.utils.Utils
 
 class TvEpisodeAdapter(
-    private val onDetailClick: () -> Unit,
+    private val onDetailClick: () -> Unit
 ) : RecyclerView.Adapter<TvEpisodeAdapter.EpisodeViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): EpisodeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         val root =
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_tv_episode,
                 parent,
-                false,
+                false
             )
         return EpisodeViewHolder(
             root,
-            onDetailClick,
+            onDetailClick
         )
     }
 
-    override fun onBindViewHolder(
-        holder: EpisodeViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: EpisodeViewHolder, position: Int) {
         if (position < 0 || position >= differ.currentList.size) {
             return
         }
@@ -68,17 +62,11 @@ class TvEpisodeAdapter(
 
     private val differCallback =
         object : DiffUtil.ItemCallback<Episode>() {
-            override fun areItemsTheSame(
-                oldItem: Episode,
-                newItem: Episode,
-            ): Boolean {
+            override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(
-                oldItem: Episode,
-                newItem: Episode,
-            ): Boolean {
+            override fun areContentsTheSame(oldItem: Episode, newItem: Episode): Boolean {
                 return oldItem.equals(newItem)
             }
         }
@@ -87,7 +75,7 @@ class TvEpisodeAdapter(
 
     class EpisodeViewHolder(itemView: View, private val onDetailClick: () -> Unit) :
         RecyclerView.ViewHolder(
-            itemView,
+            itemView
         ) {
         private val binding = ItemTvEpisodeBinding.bind(itemView)
 

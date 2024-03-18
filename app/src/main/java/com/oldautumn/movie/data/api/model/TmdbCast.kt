@@ -45,5 +45,5 @@ data class TmdbCast(
     val credit_id: String,
     val order: Int,
     val popularity: Double,
-    val cast_id: Int,
+    val cast_id: Int
 )

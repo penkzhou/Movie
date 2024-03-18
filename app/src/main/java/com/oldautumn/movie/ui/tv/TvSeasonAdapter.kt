@@ -29,26 +29,20 @@ import com.oldautumn.movie.databinding.ItemTvSeasonBinding
 import com.oldautumn.movie.utils.Utils
 
 class TvSeasonAdapter(
-    private val onDetailClick: (Season) -> Unit,
+    private val onDetailClick: (Season) -> Unit
 ) :
     RecyclerView.Adapter<TvSeasonAdapter.SeasonViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): SeasonViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
         val root =
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_tv_season,
                 parent,
-                false,
+                false
             )
         return SeasonViewHolder(root, onDetailClick)
     }
 
-    override fun onBindViewHolder(
-        holder: SeasonViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: SeasonViewHolder, position: Int) {
         if (position < 0 || position >= differ.currentList.size) {
             return
         }
@@ -66,17 +60,11 @@ class TvSeasonAdapter(
 
     private val differCallback =
         object : DiffUtil.ItemCallback<Season>() {
-            override fun areItemsTheSame(
-                oldItem: Season,
-                newItem: Season,
-            ): Boolean {
+            override fun areItemsTheSame(oldItem: Season, newItem: Season): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(
-                oldItem: Season,
-                newItem: Season,
-            ): Boolean {
+            override fun areContentsTheSame(oldItem: Season, newItem: Season): Boolean {
                 return oldItem.equals(newItem)
             }
         }
@@ -85,7 +73,7 @@ class TvSeasonAdapter(
 
     class SeasonViewHolder(itemView: View, private val onDetailClick: (Season) -> Unit) :
         RecyclerView.ViewHolder(
-            itemView,
+            itemView
         ) {
         private val binding = ItemTvSeasonBinding.bind(itemView)
 

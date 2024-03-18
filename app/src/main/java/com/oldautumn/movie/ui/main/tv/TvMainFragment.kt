@@ -51,7 +51,7 @@ class TvMainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTvHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -66,7 +66,7 @@ class TvMainFragment : Fragment() {
                         intent.putExtra("tvId", movieWithImage.show.show.ids.tmdb)
                         startActivity(intent)
                     }
-                },
+                }
             )
 
         val tvMostPlayedAdapter =
@@ -78,7 +78,7 @@ class TvMainFragment : Fragment() {
                         intent.putExtra("tvId", movieWithImage.show.show.ids.tmdb)
                         startActivity(intent)
                     }
-                },
+                }
             )
 
         val tvMostRecommendAdapter =
@@ -90,7 +90,7 @@ class TvMainFragment : Fragment() {
                         intent.putExtra("tvId", movieWithImage.show.show.ids.tmdb)
                         startActivity(intent)
                     }
-                },
+                }
             )
 
         val popularPagerAdapter =
@@ -101,7 +101,7 @@ class TvMainFragment : Fragment() {
                         intent.putExtra("tvId", trendingItem.show.show.ids.tmdb)
                         startActivity(intent)
                     }
-                },
+                }
             )
         binding.tvRecommendList.layoutManager =
             LinearLayoutManager(context, HORIZONTAL, false)

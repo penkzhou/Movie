@@ -78,7 +78,7 @@ data class UserSettings(
     val account: Account,
     val connections: Connections,
     val sharing_text: SharingText,
-    val limits: Limits,
+    val limits: Limits
 )
 
 data class User(
@@ -95,27 +95,27 @@ data class User(
     val age: Int?,
     val images: Images,
     val vip_og: Boolean,
-    val vip_years: Int,
+    val vip_years: Int
 )
 
 data class Ids(
     val slug: String,
-    val uuid: String,
+    val uuid: String
 )
 
 data class Images(
-    val avatar: Avatar,
+    val avatar: Avatar
 )
 
 data class Avatar(
-    val full: String,
+    val full: String
 )
 
 data class Account(
     val timezone: String,
     val date_format: String,
     val time_24hr: Boolean,
-    val cover_image: String,
+    val cover_image: String
 )
 
 data class Connections(
@@ -125,30 +125,30 @@ data class Connections(
     val tumblr: Boolean,
     val medium: Boolean,
     val slack: Boolean,
-    val apple: Boolean,
+    val apple: Boolean
 )
 
 data class SharingText(
     val watching: String,
     val watched: String,
-    val rated: String,
+    val rated: String
 )
 
 data class Limits(
     val list: CommonList,
     val watchlist: Watchlist,
-    val recommendations: Recommendations,
+    val recommendations: Recommendations
 )
 
 data class CommonList(
     val count: Int,
-    val item_count: Int,
+    val item_count: Int
 )
 
 data class Watchlist(
-    val item_count: Int,
+    val item_count: Int
 )
 
 data class Recommendations(
-    val item_count: Int,
+    val item_count: Int
 )

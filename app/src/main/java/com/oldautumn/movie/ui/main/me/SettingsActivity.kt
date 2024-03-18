@@ -43,7 +43,7 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
-            savedInstanceState: Bundle?,
+            savedInstanceState: Bundle?
         ): View? {
             val root = inflater.inflate(R.layout.modal_bottom_sheet_content, container, false)
 
@@ -56,10 +56,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(
-            savedInstanceState: Bundle?,
-            rootKey: String?,
-        ) {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
             val preference = findPreference<Preference>("about")
             preference?.title = "Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
