@@ -39,5 +39,5 @@ data class ShowPlayedItem(
     val play_count: Int,
     val collected_count: Int,
     val collector_count: Int,
-    val show: TraktSimpleContentItem,
+    val show: TraktSimpleContentItem
 )

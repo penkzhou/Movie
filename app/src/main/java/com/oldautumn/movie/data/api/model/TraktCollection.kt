@@ -53,7 +53,7 @@ package com.oldautumn.movie.data.api.model
 data class TraktCollection(
     val like_count: Int,
     val comment_count: Int,
-    val list: TraktCollectionItem,
+    val list: TraktCollectionItem
 )
 
 data class TraktCollectionItem(
@@ -70,5 +70,5 @@ data class TraktCollectionItem(
     val comment_count: Int,
     val likes: Int,
     val ids: MovieIds,
-    val user: TraktUser,
+    val user: TraktUser
 )

@@ -30,13 +30,10 @@ import java.text.NumberFormat
 
 class MovieBoxofficeAdapter(
     private val popularList: MutableList<UnifyMovieRevenueItem>,
-    private val onItemClick: (item: UnifyMovieRevenueItem) -> Unit,
+    private val onItemClick: (item: UnifyMovieRevenueItem) -> Unit
 ) :
     RecyclerView.Adapter<MovieBoxofficeAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): PopularViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_boxoffice, parent, false)
@@ -52,10 +49,7 @@ class MovieBoxofficeAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: PopularViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
         if (position < 0 || position >= popularList.size) {
             return
         }

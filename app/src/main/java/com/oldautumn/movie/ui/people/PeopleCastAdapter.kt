@@ -30,13 +30,10 @@ import com.oldautumn.movie.utils.Utils
 
 class PeopleCastAdapter(
     private val popularList: MutableList<TmdbCombinedCast>,
-    private val onItemClick: (TmdbCombinedCast) -> Unit,
+    private val onItemClick: (TmdbCombinedCast) -> Unit
 ) :
     RecyclerView.Adapter<PeopleCastAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): PopularViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_people_credit, parent, false) as ViewGroup
@@ -51,10 +48,7 @@ class PeopleCastAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: PopularViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
         if (position < 0 || position >= popularList.size) {
             return
         }
@@ -73,7 +67,7 @@ class PeopleCastAdapter(
     }
 
     class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
-        view,
+        view
     ) {
         private val binding = ItemPeopleCreditBinding.bind(itemView)
         private val moviePoster: ImageView = binding.peopleCreditPoster
@@ -86,7 +80,7 @@ class PeopleCastAdapter(
                 postName.visibility = View.GONE
                 moviePoster.load(Utils.getImageFullUrl(cast.poster_path)) {
                     transformations(
-                        RoundedCornersTransformation(16f),
+                        RoundedCornersTransformation(16f)
                     )
                 }
             } else {

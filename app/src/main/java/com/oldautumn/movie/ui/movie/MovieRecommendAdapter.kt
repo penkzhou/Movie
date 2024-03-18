@@ -30,13 +30,10 @@ import java.text.DecimalFormat
 
 class MovieRecommendAdapter(
     private val recommendList: MutableList<TmdbSimpleMovieItem>,
-    private val onItemClickListener: OnItemClickListener?,
+    private val onItemClickListener: OnItemClickListener?
 ) :
     RecyclerView.Adapter<MovieRecommendAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): PopularViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_recommend, parent, false)
@@ -52,10 +49,7 @@ class MovieRecommendAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: PopularViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
         if (position < 0 || position >= recommendList.size) {
             return
         }

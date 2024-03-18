@@ -24,12 +24,12 @@ import com.oldautumn.movie.ui.base.viewBinding
 class BaseAdapter<T, VIEW_BINDING : ViewBinding>(
     private val bindingClass: (LayoutInflater, ViewGroup, Boolean) -> VIEW_BINDING,
     private val dataList: MutableList<T>,
-    private val onItemClick: (item: T) -> Unit,
+    private val onItemClick: (item: T) -> Unit
 ) :
     RecyclerView.Adapter<BaseAdapter.BaseItemViewHolder<T, VIEW_BINDING>>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int,
+        viewType: Int
     ): BaseItemViewHolder<T, VIEW_BINDING> {
         var bindView = parent.viewBinding(bindingClass)
 
@@ -43,10 +43,7 @@ class BaseAdapter<T, VIEW_BINDING : ViewBinding>(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: BaseItemViewHolder<T, VIEW_BINDING>,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: BaseItemViewHolder<T, VIEW_BINDING>, position: Int) {
         if (position < 0 || position >= dataList.size) {
             return
         }

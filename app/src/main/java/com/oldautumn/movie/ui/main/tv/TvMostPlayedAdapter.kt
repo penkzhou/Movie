@@ -29,18 +29,15 @@ import com.oldautumn.movie.utils.Utils
 
 class TvMostPlayedAdapter(
     private val dataList: MutableList<ModelWithImage<ShowPlayedItem>>,
-    private val onItemClick: (item: ModelWithImage<ShowPlayedItem>) -> Unit,
+    private val onItemClick: (item: ModelWithImage<ShowPlayedItem>) -> Unit
 ) :
     RecyclerView.Adapter<TvMostPlayedAdapter.TvRecommendViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): TvRecommendViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvRecommendViewHolder {
         var bindView =
             ItemShowWithInfoBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false,
+                false
             )
 
         val holder = TvRecommendViewHolder(bindView)
@@ -53,10 +50,7 @@ class TvMostPlayedAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: TvRecommendViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: TvRecommendViewHolder, position: Int) {
         if (position < 0 || position >= dataList.size) {
             return
         }
@@ -89,7 +83,7 @@ class TvMostPlayedAdapter(
                         R.drawable.play_count,
                         0,
                         0,
-                        0,
+                        0
                     )
                     tvInfo.visibility = View.VISIBLE
                 } else {

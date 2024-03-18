@@ -54,13 +54,13 @@ data class TraktReview(
     val replies: Int,
     val likes: Int,
     val user_stats: TraktUserStats,
-    val user: TraktUser,
+    val user: TraktUser
 )
 
 data class TraktUserStats(
     val rating: Int?,
     val play_count: Int,
-    val completed_count: Int,
+    val completed_count: Int
 )
 
 data class TraktUser(
@@ -69,9 +69,9 @@ data class TraktUser(
     val name: String,
     val vip: Boolean,
     val vip_ep: Boolean,
-    val ids: TraktUserIds,
+    val ids: TraktUserIds
 )
 
 data class TraktUserIds(
-    val slug: String,
+    val slug: String
 )

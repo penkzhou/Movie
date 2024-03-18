@@ -94,11 +94,11 @@ data class TraktShowDetail(
     val language: String,
     val available_translations: List<String>,
     val genres: List<String>,
-    val aired_episodes: Int,
+    val aired_episodes: Int
 )
 
 data class Airs(
     val day: String,
     val time: String,
-    val timezone: String,
+    val timezone: String
 )

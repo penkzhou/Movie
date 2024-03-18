@@ -60,7 +60,7 @@ class MeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -102,17 +102,11 @@ class MeFragment : Fragment() {
         return root
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         menuHost.addMenuProvider(
             object : MenuProvider {
-                override fun onCreateMenu(
-                    menu: Menu,
-                    menuInflater: MenuInflater,
-                ) {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     // Add menu items here
                     menuInflater.inflate(R.menu.menu_me, menu)
                 }
@@ -130,7 +124,7 @@ class MeFragment : Fragment() {
                 }
             },
             viewLifecycleOwner,
-            Lifecycle.State.RESUMED,
+            Lifecycle.State.RESUMED
         )
     }
 

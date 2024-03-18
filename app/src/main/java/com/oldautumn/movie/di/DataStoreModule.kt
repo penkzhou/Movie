@@ -32,7 +32,7 @@ object DataStoreModule {
     @Singleton
     @Provides
     fun providePreferencesDataStore(
-        @ApplicationContext appContext: Context,
+        @ApplicationContext appContext: Context
     ): DataStore<Preferences> {
         return appContext.authDataStore
     }

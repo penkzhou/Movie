@@ -113,12 +113,12 @@ spotless { // if you are using build.gradle.kts, instead of 'spotless {' use:
         // by default the target is every '.kt' and '.kts` file in the java sourcesets
 
         target("src/**/*.kt")
-        ktlint("1.0.1")   // has its own section below
+        ktlint("1.2.1")   // has its own section below
         licenseHeaderFile(rootProject.file("spotless/Copyright.kt"))
     }
     kotlinGradle {
         target("*.kts")
-        ktlint("1.0.1")
+        ktlint("1.2.1")
         licenseHeaderFile(rootProject.file("spotless/Copyright.kts"), "(^(?![\\/ ]\\**).*\$)")
     }
 }

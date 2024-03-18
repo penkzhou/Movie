@@ -23,5 +23,5 @@ data class MeUiState(
     val authString: String,
     val isDeviceAuthed: Boolean,
     val userSettings: UserSettings? = null,
-    val deviceCode: DeviceCode,
+    val deviceCode: DeviceCode
 )

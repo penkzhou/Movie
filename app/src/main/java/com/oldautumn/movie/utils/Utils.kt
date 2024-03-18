@@ -29,17 +29,14 @@ import coil.request.Disposable
 import coil.request.ImageRequest
 import coil.size.Size
 import coil.transform.Transformation
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 object Utils {
-    fun getImageFullUrl(
-        imagePath: String,
-        width: Int = 500,
-    ): String {
+    fun getImageFullUrl(imagePath: String, width: Int = 500): String {
         return "https://image.tmdb.org/t/p/w$width$imagePath"
     }
 
@@ -47,7 +44,7 @@ object Utils {
         data: Any?,
         imageLoader: ImageLoader = context.imageLoader,
         builder: ImageRequest.Builder.() -> Unit = {},
-        crossinline paletteCallback: (Palette) -> Unit,
+        crossinline paletteCallback: (Palette) -> Unit
     ): Disposable {
         val request =
             ImageRequest.Builder(context)
@@ -59,15 +56,12 @@ object Utils {
                         override val cacheKey: String
                             get() = "paletteTransformer"
 
-                        override suspend fun transform(
-                            input: Bitmap,
-                            size: Size,
-                        ): Bitmap {
+                        override suspend fun transform(input: Bitmap, size: Size): Bitmap {
                             val p = Palette.from(input).generate()
                             paletteCallback(p)
                             return input
                         }
-                    },
+                    }
                 )
                 .build()
         return imageLoader.enqueue(request)
@@ -77,7 +71,7 @@ object Utils {
         val format =
             SimpleDateFormat(
                 "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-                Locale.US,
+                Locale.US
             )
         var date: Date? = null
         try {
@@ -104,7 +98,7 @@ object Utils {
     // copy from:https://github.com/google/iosched/blob/main/mobile/src/main/java/com/google/samples/apps/iosched/util/UiUtils.kt#L60
     inline fun Fragment.launchAndRepeatWithViewLifecycle(
         minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-        crossinline block: suspend CoroutineScope.() -> Unit,
+        crossinline block: suspend CoroutineScope.() -> Unit
     ) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(minActiveState) {

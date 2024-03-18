@@ -23,5 +23,5 @@ data class TvSeasonDetail(
     val overview: String,
     val id: Int,
     val poster_path: String,
-    val season_number: Int,
+    val season_number: Int
 )

@@ -29,18 +29,15 @@ import com.oldautumn.movie.utils.Utils
 
 class TvMostRecommendAdapter(
     private val dataList: MutableList<ModelWithImage<ShowRecommendItem>>,
-    private val onItemClick: (item: ModelWithImage<ShowRecommendItem>) -> Unit,
+    private val onItemClick: (item: ModelWithImage<ShowRecommendItem>) -> Unit
 ) :
     RecyclerView.Adapter<TvMostRecommendAdapter.TvRecommendViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): TvRecommendViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvRecommendViewHolder {
         var bindView =
             ItemShowWithInfoBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false,
+                false
             )
 
         val holder = TvRecommendViewHolder(bindView)
@@ -53,10 +50,7 @@ class TvMostRecommendAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: TvRecommendViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: TvRecommendViewHolder, position: Int) {
         if (position < 0 || position >= dataList.size) {
             return
         }
@@ -89,7 +83,7 @@ class TvMostRecommendAdapter(
                         R.drawable.recommend_tv,
                         0,
                         0,
-                        0,
+                        0
                     )
                     tvInfo.visibility = View.VISIBLE
                 } else {

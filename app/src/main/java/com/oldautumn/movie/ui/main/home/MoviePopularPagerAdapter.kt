@@ -30,13 +30,10 @@ import com.oldautumn.movie.data.api.model.MediaWithImage
 import com.oldautumn.movie.utils.Utils
 
 class MoviePopularPagerAdapter(
-    private val onItemClick: (item: MediaWithImage) -> Unit,
+    private val onItemClick: (item: MediaWithImage) -> Unit
 ) :
     RecyclerView.Adapter<MoviePopularPagerAdapter.PopularViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): PopularViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_popular_pager_movie, parent, false)
@@ -52,10 +49,7 @@ class MoviePopularPagerAdapter(
         return holder
     }
 
-    override fun onBindViewHolder(
-        holder: PopularViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
         if (position < 0 || position >= differ.currentList.size) {
             return
         }
@@ -67,14 +61,14 @@ class MoviePopularPagerAdapter(
         object : DiffUtil.ItemCallback<MediaWithImage>() {
             override fun areItemsTheSame(
                 oldItem: MediaWithImage,
-                newItem: MediaWithImage,
+                newItem: MediaWithImage
             ): Boolean {
                 return oldItem.content.ids.trakt == newItem.content.ids.trakt
             }
 
             override fun areContentsTheSame(
                 oldItem: MediaWithImage,
-                newItem: MediaWithImage,
+                newItem: MediaWithImage
             ): Boolean {
                 return oldItem.equals(newItem)
             }

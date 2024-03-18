@@ -54,11 +54,11 @@ class MovieReviewActivity : AppCompatActivity() {
             ArrayAdapter.createFromResource(
                 this,
                 R.array.sort_type_array,
-                android.R.layout.simple_spinner_item,
+                android.R.layout.simple_spinner_item
             )
         bindState(
             pagingData = viewModel.pagingDataFlow,
-            uiActions = viewModel.accept,
+            uiActions = viewModel.accept
         )
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -73,12 +73,12 @@ class MovieReviewActivity : AppCompatActivity() {
 
     private fun bindState(
         pagingData: Flow<PagingData<TraktReview>>,
-        uiActions: (MovieReviewViewModel.UiAction) -> Unit,
+        uiActions: (MovieReviewViewModel.UiAction) -> Unit
     ) {
         val reviewAdapter = MovieTraktReviewPageAdapter()
         binding.reviewList.adapter =
             reviewAdapter.withLoadStateFooter(
-                MovieTraktReviewPageAdapter.ReviewLoadStateAdapter { reviewAdapter.retry() },
+                MovieTraktReviewPageAdapter.ReviewLoadStateAdapter { reviewAdapter.retry() }
             )
 
         binding.reviewSpinner.onItemSelectedListener =
@@ -90,7 +90,7 @@ class MovieReviewActivity : AppCompatActivity() {
                     parent: AdapterView<*>?,
                     view: View?,
                     position: Int,
-                    id: Long,
+                    id: Long
                 ) {
                     val lines = resources.getStringArray(R.array.sort_type_array).toList()
                     val sortType = lines[position]

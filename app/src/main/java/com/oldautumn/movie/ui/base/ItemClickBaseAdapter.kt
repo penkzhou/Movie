@@ -26,7 +26,7 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     val list: MutableList<T>,
     private val bindingClass: (LayoutInflater, ViewGroup, Boolean) -> VIEW_BINDING,
     private val onItemClick: (T) -> Unit,
-    private val bindHolder: View.(VIEW_BINDING?, T) -> Unit,
+    private val bindHolder: View.(VIEW_BINDING?, T) -> Unit
 ) :
     RecyclerView.Adapter<ItemClickBaseAdapter.ItemViewHolder<T>>() {
     var binding: VIEW_BINDING? = null
@@ -36,10 +36,7 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): ItemViewHolder<T> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder<T> {
         this.binding = parent.viewBinding(bindingClass)
 
         val holder =
@@ -73,10 +70,7 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
         notifyItemRemoved(position)
     }
 
-    override fun onBindViewHolder(
-        holder: ItemViewHolder<T>,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: ItemViewHolder<T>, position: Int) {
         val item = list[position]
         holder.itemView.bind(item)
 //        if (position == holder.bindingAdapterPosition) {
@@ -89,7 +83,7 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     }
 
     class ItemViewHolder<T>(view: View, onItemClick: (Int) -> Unit) : RecyclerView.ViewHolder(
-        view,
+        view
     ) {
         init {
             itemView.setOnClickListener {
@@ -105,23 +99,17 @@ class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
 
 internal class DiffUtilCallback<ITEM>(
     private val oldItems: List<ITEM>,
-    private val newItems: List<ITEM>,
+    private val newItems: List<ITEM>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldItems.size
 
     override fun getNewListSize(): Int = newItems.size
 
-    override fun areItemsTheSame(
-        oldItemPosition: Int,
-        newItemPosition: Int,
-    ): Boolean {
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldItems[oldItemPosition] == newItems[newItemPosition]
     }
 
-    override fun areContentsTheSame(
-        oldItemPosition: Int,
-        newItemPosition: Int,
-    ): Boolean {
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return oldItems[oldItemPosition] == newItems[newItemPosition]
     }
 }

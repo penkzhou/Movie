@@ -26,5 +26,5 @@ data class TvMainUiState(
     val popularShowList: List<MediaWithImage>,
     val mostRecommendShowList: List<ModelWithImage<ShowRecommendItem>>,
     val mostPlayedShowList: List<ModelWithImage<ShowPlayedItem>>,
-    val errorMessage: String,
+    val errorMessage: String
 )
