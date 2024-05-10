@@ -20,12 +20,6 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Run bitrise cache setup
-      run: |
-         chmod +x bitrise.sh
-         ./bitrise.sh
-      shell: bash
-
     - name: Gradle Build Action
       uses: gradle/gradle-build-action@v3-beta
 
