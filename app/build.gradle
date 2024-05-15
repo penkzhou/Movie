@@ -58,6 +58,12 @@ android {
 
 }
 
+project.afterEvaluate {
+  tasks.withType<GoogleServicesTask> {
+    gmpAppId.set(project.buildDir.resolve("$name-gmpAppId.txt"))
+  }
+}
+
 dependencies {
 
 
@@ -116,16 +122,5 @@ spotless { // if you are using build.gradle.kts, instead of 'spotless {' use:
         ktlint("1.2.1")
         licenseHeaderFile(rootProject.file("spotless/Copyright.kts"), "(^(?![\\/ ]\\**).*\$)")
     }
-}
-
-androidComponents {
-    onVariants(selector().all(), { variant ->
-        afterEvaluate {
-            // reference: https://github.com/firebase/firebase-android-sdk/issues/5962
-            project.tasks.withType<GoogleServicesTask> {
-                gmpAppId.set(project.buildDir.resolve("$name-gmpAppId.txt"))
-            }
-        }
-    })
 }
 
