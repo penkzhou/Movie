@@ -20,6 +20,18 @@ plugins {
     id 'com.google.dagger.hilt.android' version '2.51.1' apply false
 }
 
+import com.google.gms.googleservices.GoogleServicesTask
+
+project.afterEvaluate {
+  tasks.withType<GoogleServicesTask> {
+    gmpAppId.set(project.buildDir.resolve("$name-gmpAppId.txt"))
+  }
+}
+
+dependencies {
+  compileOnly("com.google.gms:google-services:4.4.1")
+}
+
 
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
