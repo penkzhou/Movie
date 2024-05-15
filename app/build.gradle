@@ -1,3 +1,6 @@
+import com.google.gms.googleservices.GoogleServicesTask
+
+
 plugins {
     id 'com.android.application'
     id 'org.gradle.android.cache-fix' version '3.0.1'
@@ -91,6 +94,9 @@ dependencies {
 
     implementation libs.coil
 
+    
+    compileOnly("com.google.gms:google-services:4.4.1")
+
     testImplementation libs.junit
     androidTestImplementation libs.androidxTest
     androidTestImplementation libs.androidxEspresso
@@ -111,4 +117,14 @@ spotless { // if you are using build.gradle.kts, instead of 'spotless {' use:
         licenseHeaderFile(rootProject.file("spotless/Copyright.kts"), "(^(?![\\/ ]\\**).*\$)")
     }
 }
+
+androidComponents {
+    onVariants(selector().all(), { variant ->
+        afterEvaluate {
+            // reference: https://github.com/firebase/firebase-android-sdk/issues/5962
+            project.tasks.withType<GoogleServicesTask> {
+                gmpAppId.set(project.buildDir.resolve("$name-gmpAppId.txt"))
+            }
+        }
+    })
 
