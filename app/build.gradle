@@ -59,8 +59,8 @@ android {
 }
 
 project.afterEvaluate {
-  tasks.withType<GoogleServicesTask> {
-    gmpAppId.set(project.buildDir.resolve("$name-gmpAppId.txt"))
+  tasks.withType(GoogleServicesTask).configureEach {
+    gmpAppId.set(project.buildDir.resolve("${name}-gmpAppId.txt"))
   }
 }
 
