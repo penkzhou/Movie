@@ -1,3 +1,6 @@
+import com.google.gms.googleservices.GoogleServicesTask
+
+
 plugins {
     id 'com.android.application'
     id 'org.gradle.android.cache-fix' version '3.0.1'
@@ -55,6 +58,12 @@ android {
 
 }
 
+project.afterEvaluate {
+  tasks.withType(GoogleServicesTask).configureEach {
+    gmpAppId.set(new File(project.buildDir, "${name}-gmpAppId.txt"))
+  }
+}
+
 dependencies {
 
 
@@ -90,6 +99,9 @@ dependencies {
     implementation libs.deps.firebase.perf
 
     implementation libs.coil
+
+    
+    compileOnly("com.google.gms:google-services:4.4.1")
 
     testImplementation libs.junit
     androidTestImplementation libs.androidxTest
