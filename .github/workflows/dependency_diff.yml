@@ -18,10 +18,11 @@ jobs:
         distribution: 'temurin'
         java-version: 17
         
-    - name: setup gradle
+    - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
-      with:
-        arguments: dependencies
+
+    - name: Fetch project dependencies
+      run: ./gradlew dependencies
 
     - id: dependency-diff
       name: Dependency tree diff for Gradle
