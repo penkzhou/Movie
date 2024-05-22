@@ -103,6 +103,8 @@ dependencies {
     
     compileOnly("com.google.gms:google-services:4.4.1")
 
+    debugImplementation libs.leakcanary.android
+
     testImplementation libs.junit
     androidTestImplementation libs.androidxTest
     androidTestImplementation libs.androidxEspresso
