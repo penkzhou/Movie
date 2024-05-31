@@ -1,4 +1,4 @@
-import com.google.gms.googleservices.GoogleServicesTask
+
 
 
 plugins {
@@ -56,12 +56,6 @@ android {
         unitTests.returnDefaultValues = true
     }
 
-}
-
-project.afterEvaluate {
-  tasks.withType(GoogleServicesTask).configureEach {
-    gmpAppId.set(new File(project.buildDir, "${name}-gmpAppId.txt"))
-  }
 }
 
 dependencies {
