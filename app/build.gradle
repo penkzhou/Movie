@@ -95,7 +95,7 @@ dependencies {
     implementation libs.coil
 
     
-    compileOnly("com.google.gms:google-services:4.4.2")
+    compileOnly(libs.google.services)
 
     debugImplementation libs.leakcanary.android
 
@@ -104,10 +104,8 @@ dependencies {
     androidTestImplementation libs.androidxEspresso
 }
 
-spotless { // if you are using build.gradle.kts, instead of 'spotless {' use:
-    // configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+spotless {
     kotlin {
-        // by default the target is every '.kt' and '.kts` file in the java sourcesets
 
         target("src/**/*.kt")
         ktlint("1.2.1")   // has its own section below
