@@ -72,13 +72,11 @@ class MovieTraktReviewPageAdapter :
         }
     }
 
-    class LoadStateViewHolder(
-        parent: ViewGroup,
-        retry: () -> Unit
-    ) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_load_state, parent, false)
-    ) {
+    class LoadStateViewHolder(parent: ViewGroup, retry: () -> Unit) :
+        RecyclerView.ViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_load_state, parent, false)
+        ) {
         private val binding = ItemLoadStateBinding.bind(itemView)
         private val progressBar: ProgressBar = binding.loadingItem
         private val errorMsg: TextView = binding.loadErrorMsg
@@ -99,9 +97,8 @@ class MovieTraktReviewPageAdapter :
         }
     }
 
-    class ReviewLoadStateAdapter(
-        private val retry: () -> Unit
-    ) : LoadStateAdapter<LoadStateViewHolder>() {
+    class ReviewLoadStateAdapter(private val retry: () -> Unit) :
+        LoadStateAdapter<LoadStateViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState) =
             LoadStateViewHolder(parent, retry)
 
@@ -115,8 +112,7 @@ class MovieTraktReviewPageAdapter :
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: TraktReview, newItem: TraktReview): Boolean {
-            return oldItem == newItem
-        }
+        override fun areContentsTheSame(oldItem: TraktReview, newItem: TraktReview): Boolean =
+            oldItem == newItem
     }
 }

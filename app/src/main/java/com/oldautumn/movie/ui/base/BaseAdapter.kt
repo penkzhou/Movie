@@ -21,10 +21,8 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<T>(
-    val list: List<T> = listOf(),
-    val onItemClick: (T) -> Unit
-) : RecyclerView.Adapter<BaseAdapter.BaseViewHolder<T>>() {
+abstract class BaseAdapter<T>(val list: List<T> = listOf(), val onItemClick: (T) -> Unit) :
+    RecyclerView.Adapter<BaseAdapter.BaseViewHolder<T>>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
         val rootView = LayoutInflater.from(parent.context).inflate(getItemLayoutId(), parent, false)
         val viewHolder = BaseViewHolder(rootView, onItemClick)
@@ -48,9 +46,10 @@ abstract class BaseAdapter<T>(
     @LayoutRes
     abstract fun getItemLayoutId(): Int
 
-    class BaseViewHolder<T>(view: View, onItemClick: (T) -> Unit) : RecyclerView.ViewHolder(
-        view
-    ) {
+    class BaseViewHolder<T>(view: View, onItemClick: (T) -> Unit) :
+        RecyclerView.ViewHolder(
+            view
+        ) {
         init {
             itemView.setOnClickListener {
                 onItemClick

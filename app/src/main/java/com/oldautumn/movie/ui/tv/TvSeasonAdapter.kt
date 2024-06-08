@@ -28,9 +28,7 @@ import com.oldautumn.movie.data.api.model.Season
 import com.oldautumn.movie.databinding.ItemTvSeasonBinding
 import com.oldautumn.movie.utils.Utils
 
-class TvSeasonAdapter(
-    private val onDetailClick: (Season) -> Unit
-) :
+class TvSeasonAdapter(private val onDetailClick: (Season) -> Unit) :
     RecyclerView.Adapter<TvSeasonAdapter.SeasonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeasonViewHolder {
         val root =
@@ -50,9 +48,7 @@ class TvSeasonAdapter(
         holder.bind(movieTrendingItem)
     }
 
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
+    override fun getItemCount(): Int = differ.currentList.size
 
     fun updateData(seasonList: List<Season>) {
         this.differ.submitList(seasonList)
@@ -60,13 +56,11 @@ class TvSeasonAdapter(
 
     private val differCallback =
         object : DiffUtil.ItemCallback<Season>() {
-            override fun areItemsTheSame(oldItem: Season, newItem: Season): Boolean {
-                return oldItem.id == newItem.id
-            }
+            override fun areItemsTheSame(oldItem: Season, newItem: Season): Boolean =
+                oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Season, newItem: Season): Boolean {
-                return oldItem.equals(newItem)
-            }
+            override fun areContentsTheSame(oldItem: Season, newItem: Season): Boolean =
+                oldItem.equals(newItem)
         }
 
     private val differ = AsyncListDiffer(this, differCallback)

@@ -31,9 +31,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class SplashViewModel
 @Inject
-constructor(
-    private val repository: AuthRepository
-) : ViewModel() {
+constructor(private val repository: AuthRepository) : ViewModel() {
     private val _uiState =
         MutableStateFlow(
             SplashUiState(

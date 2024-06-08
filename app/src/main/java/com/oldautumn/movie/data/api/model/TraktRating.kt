@@ -35,8 +35,4 @@ package com.oldautumn.movie.data.api.model
 }
 
 * */
-data class TraktRating(
-    val rating: Double,
-    val votes: Int,
-    val distribution: Map<String, Int>
-)
+data class TraktRating(val rating: Double, val votes: Int, val distribution: Map<String, Int>)

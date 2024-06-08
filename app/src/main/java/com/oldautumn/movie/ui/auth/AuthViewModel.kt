@@ -31,9 +31,7 @@ import retrofit2.HttpException
 @HiltViewModel
 class AuthViewModel
 @Inject
-constructor(
-    private val repository: AuthRepository
-) : ViewModel() {
+constructor(private val repository: AuthRepository) : ViewModel() {
     private val _uiState =
         MutableStateFlow(
             AuthUiState(

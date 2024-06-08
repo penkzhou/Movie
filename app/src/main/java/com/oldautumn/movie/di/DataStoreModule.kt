@@ -33,7 +33,5 @@ object DataStoreModule {
     @Provides
     fun providePreferencesDataStore(
         @ApplicationContext appContext: Context
-    ): DataStore<Preferences> {
-        return appContext.authDataStore
-    }
+    ): DataStore<Preferences> = appContext.authDataStore
 }

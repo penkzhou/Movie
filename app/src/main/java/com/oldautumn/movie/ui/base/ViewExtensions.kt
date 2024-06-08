@@ -27,9 +27,7 @@ import androidx.viewbinding.ViewBinding
  */
 inline fun <T : ViewBinding> ViewGroup.viewBinding(
     binding: (LayoutInflater, ViewGroup, Boolean) -> T
-): T {
-    return binding(LayoutInflater.from(context), this, false)
-}
+): T = binding(LayoutInflater.from(context), this, false)
 
 fun <T, VIEW_BINDING : ViewBinding> RecyclerView.setup(
     items: MutableList<T>,

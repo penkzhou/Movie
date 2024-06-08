@@ -47,10 +47,7 @@ package com.oldautumn.movie.data.api.model
 ]
 }
  */
-data class MovieVideo(
-    val id: Long,
-    val results: List<MovieVideoItem>
-)
+data class MovieVideo(val id: Long, val results: List<MovieVideoItem>)
 
 data class MovieVideoItem(
     val iso_639_1: String,

@@ -29,8 +29,7 @@ import com.oldautumn.movie.utils.Utils
 class TvPopularAdapter(
     private val popularList: MutableList<MediaWithImage>,
     private val onItemClick: (item: MediaWithImage) -> Unit
-) :
-    RecyclerView.Adapter<TvPopularAdapter.TvPopularViewHolder>() {
+) : RecyclerView.Adapter<TvPopularAdapter.TvPopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvPopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_popular_movie, parent, false)
@@ -58,9 +57,7 @@ class TvPopularAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return popularList.size
-    }
+    override fun getItemCount(): Int = popularList.size
 
     class TvPopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)

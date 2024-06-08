@@ -31,9 +31,7 @@ import retrofit2.HttpException
 @HiltViewModel
 class HomeViewModel
 @Inject
-constructor(
-    private val repository: MovieRepository
-) : ViewModel() {
+constructor(private val repository: MovieRepository) : ViewModel() {
     private val _uiState =
         MutableStateFlow(
             HomeUiState(

@@ -98,18 +98,11 @@ data class User(
     val vip_years: Int
 )
 
-data class Ids(
-    val slug: String,
-    val uuid: String
-)
+data class Ids(val slug: String, val uuid: String)
 
-data class Images(
-    val avatar: Avatar
-)
+data class Images(val avatar: Avatar)
 
-data class Avatar(
-    val full: String
-)
+data class Avatar(val full: String)
 
 data class Account(
     val timezone: String,
@@ -128,11 +121,7 @@ data class Connections(
     val apple: Boolean
 )
 
-data class SharingText(
-    val watching: String,
-    val watched: String,
-    val rated: String
-)
+data class SharingText(val watching: String, val watched: String, val rated: String)
 
 data class Limits(
     val list: CommonList,
@@ -140,15 +129,8 @@ data class Limits(
     val recommendations: Recommendations
 )
 
-data class CommonList(
-    val count: Int,
-    val item_count: Int
-)
+data class CommonList(val count: Int, val item_count: Int)
 
-data class Watchlist(
-    val item_count: Int
-)
+data class Watchlist(val item_count: Int)
 
-data class Recommendations(
-    val item_count: Int
-)
+data class Recommendations(val item_count: Int)

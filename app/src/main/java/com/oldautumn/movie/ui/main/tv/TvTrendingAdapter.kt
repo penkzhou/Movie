@@ -29,8 +29,7 @@ import com.oldautumn.movie.utils.Utils
 class TvTrendingAdapter(
     private val trendingList: MutableList<UnifyTvTrendingItem>,
     private val onItemClick: (item: UnifyTvTrendingItem) -> Unit
-) :
-    RecyclerView.Adapter<TvTrendingAdapter.TvTrendingViewHolder>() {
+) : RecyclerView.Adapter<TvTrendingAdapter.TvTrendingViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvTrendingViewHolder {
         val rootView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_popular_movie, parent, false)
@@ -58,9 +57,7 @@ class TvTrendingAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return trendingList.size
-    }
+    override fun getItemCount(): Int = trendingList.size
 
     class TvTrendingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)

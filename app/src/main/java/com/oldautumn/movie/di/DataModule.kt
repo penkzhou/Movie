@@ -111,38 +111,32 @@ object DataModule {
     @Singleton
     @Provides
     @Named("traktRetrofit")
-    fun provideTraktRetrofit(@Named("normalOkhttpClient") okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder().baseUrl("https://api.trakt.tv")
+    fun provideTraktRetrofit(@Named("normalOkhttpClient") okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder().baseUrl("https://api.trakt.tv")
             .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
-    }
 
     @Singleton
     @Provides
     @Named("authedTraktRetrofit")
     fun provideAuthedTraktRetrofit(
         @Named("authedOkHttpClient") okHttpClient: OkHttpClient
-    ): Retrofit {
-        return Retrofit.Builder().baseUrl("https://api.trakt.tv")
-            .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
-    }
+    ): Retrofit = Retrofit.Builder().baseUrl("https://api.trakt.tv")
+        .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
 
     @Singleton
     @Provides
     @Named("loginAuthedTraktRetrofit")
     fun provideLoginAuthedTraktRetrofit(
         @Named("loginAuthedOkHttpClient") okHttpClient: OkHttpClient
-    ): Retrofit {
-        return Retrofit.Builder().baseUrl("https://api.trakt.tv")
-            .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
-    }
+    ): Retrofit = Retrofit.Builder().baseUrl("https://api.trakt.tv")
+        .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
 
     @Singleton
     @Provides
     @Named("tmdbRetrofit")
-    fun provideTmdbRetrofit(@Named("tmdbOkHttpClient") okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder().baseUrl("https://api.themoviedb.org")
+    fun provideTmdbRetrofit(@Named("tmdbOkHttpClient") okHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder().baseUrl("https://api.themoviedb.org")
             .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
-    }
 
     @Singleton
     @Provides
@@ -150,9 +144,7 @@ object DataModule {
     fun provideMovieRemoteDataSource(
         tmdbApiService: TmdbApiService,
         @Named("authedTraktApiService") traktApiService: TraktApiService
-    ): MovieRemoteDataSource {
-        return MovieRemoteDataSource(traktApiService, tmdbApiService)
-    }
+    ): MovieRemoteDataSource = MovieRemoteDataSource(traktApiService, tmdbApiService)
 
     @Singleton
     @Provides
@@ -160,23 +152,18 @@ object DataModule {
     fun provideLoginMovieRemoteDataSource(
         tmdbApiService: TmdbApiService,
         @Named("loginAuthedTraktApiService") traktApiService: TraktApiService
-    ): MovieRemoteDataSource {
-        return MovieRemoteDataSource(traktApiService, tmdbApiService)
-    }
+    ): MovieRemoteDataSource = MovieRemoteDataSource(traktApiService, tmdbApiService)
 
     @Singleton
     @Provides
     fun provideAuthRemoteDataSource(
         @Named("traktApiService") traktApiService: TraktApiService
-    ): AuthRemoteDataSource {
-        return AuthRemoteDataSource(traktApiService)
-    }
+    ): AuthRemoteDataSource = AuthRemoteDataSource(traktApiService)
 
     @Singleton
     @Provides
-    fun provideAuthLocalDataSource(@ApplicationContext context: Context): AuthLocalDataSource {
-        return AuthLocalDataSource(context)
-    }
+    fun provideAuthLocalDataSource(@ApplicationContext context: Context): AuthLocalDataSource =
+        AuthLocalDataSource(context)
 
     @Singleton
     @Provides
@@ -184,16 +171,13 @@ object DataModule {
         @Named("movieRemoteDataSource") movieRemoteDataSource: MovieRemoteDataSource,
         @Named("loginMovieRemoteDataSource") loginMovieRemoteDataSource: MovieRemoteDataSource,
         @Named("authedTraktApiService") traktApiService: TraktApiService
-    ): MovieRepository {
-        return MovieRepository(movieRemoteDataSource, loginMovieRemoteDataSource, traktApiService)
-    }
+    ): MovieRepository =
+        MovieRepository(movieRemoteDataSource, loginMovieRemoteDataSource, traktApiService)
 
     @Singleton
     @Provides
     fun provideAuthRepository(
         authRemoteDataSource: AuthRemoteDataSource,
         authLocalDataSource: AuthLocalDataSource
-    ): AuthRepository {
-        return AuthRepository(authRemoteDataSource, authLocalDataSource)
-    }
+    ): AuthRepository = AuthRepository(authRemoteDataSource, authLocalDataSource)
 }

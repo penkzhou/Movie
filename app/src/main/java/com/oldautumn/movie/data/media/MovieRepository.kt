@@ -93,69 +93,50 @@ class MovieRepository(
         }
     }
 
-    suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail {
-        return remoteDataSource.getMovieDetail(movieId)
-    }
+    suspend fun getMovieDetail(movieId: Int): TmdbMovieDetail =
+        remoteDataSource.getMovieDetail(movieId)
 
-    suspend fun getMovieVideo(movieId: Int): MovieVideo {
-        return remoteDataSource.getMovieVideo(movieId)
-    }
+    suspend fun getMovieVideo(movieId: Int): MovieVideo = remoteDataSource.getMovieVideo(movieId)
 
-    suspend fun getUserInfo(token: String): UserSettings {
-        return loginRemoteDataSource.getUserSettings(token)
-    }
+    suspend fun getUserInfo(token: String): UserSettings =
+        loginRemoteDataSource.getUserSettings(token)
 
-    suspend fun getShowDetail(showId: Int): TmdbTvDetail {
-        return remoteDataSource.getTvDetail(showId)
-    }
+    suspend fun getShowDetail(showId: Int): TmdbTvDetail = remoteDataSource.getTvDetail(showId)
 
-    suspend fun getShowSeasonDetail(showId: Int, seasonNumber: Int): TvSeasonDetail {
-        return remoteDataSource.getTvSeasonDetail(showId, seasonNumber)
-    }
+    suspend fun getShowSeasonDetail(showId: Int, seasonNumber: Int): TvSeasonDetail =
+        remoteDataSource.getTvSeasonDetail(showId, seasonNumber)
 
-    suspend fun getMovieCredits(movieId: Int): TmdbCreditList {
-        return remoteDataSource.getMovieCast(movieId)
-    }
+    suspend fun getMovieCredits(movieId: Int): TmdbCreditList =
+        remoteDataSource.getMovieCast(movieId)
 
-    suspend fun getMovieAlbum(movieId: Int): TmdbImageModel {
-        return remoteDataSource.getMovieImage(movieId)
-    }
+    suspend fun getMovieAlbum(movieId: Int): TmdbImageModel =
+        remoteDataSource.getMovieImage(movieId)
 
-    suspend fun getShowCredits(showId: Int): TmdbCreditList {
-        return remoteDataSource.getTvCast(showId)
-    }
+    suspend fun getShowCredits(showId: Int): TmdbCreditList = remoteDataSource.getTvCast(showId)
 
-    suspend fun getTraktMovieDetail(movieSlug: String): TraktMovieDetail {
-        return remoteDataSource.getTraktMovieDetail(movieSlug)
-    }
+    suspend fun getTraktMovieDetail(movieSlug: String): TraktMovieDetail =
+        remoteDataSource.getTraktMovieDetail(movieSlug)
 
-    suspend fun getRecommendMovieList(movieId: Int): TmdbSimpleItemListModel<TmdbSimpleMovieItem> {
-        return remoteDataSource.getRecommendMovieList(movieId)
-    }
+    suspend fun getRecommendMovieList(movieId: Int): TmdbSimpleItemListModel<TmdbSimpleMovieItem> =
+        remoteDataSource.getRecommendMovieList(movieId)
 
-    suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleItemListModel<TmdbSimpleMovieItem> {
-        return remoteDataSource.getSimilarMovieList(movieId)
-    }
+    suspend fun getSimilarMovieList(movieId: Int): TmdbSimpleItemListModel<TmdbSimpleMovieItem> =
+        remoteDataSource.getSimilarMovieList(movieId)
 
-    suspend fun getRecommendTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> {
-        return remoteDataSource.getRecommendTvList(tvId)
-    }
+    suspend fun getRecommendTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> =
+        remoteDataSource.getRecommendTvList(tvId)
 
-    suspend fun getSimilarTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> {
-        return remoteDataSource.getSimilarTvList(tvId)
-    }
+    suspend fun getSimilarTvList(tvId: Int): TmdbSimpleItemListModel<TmdbSimpleTvItem> =
+        remoteDataSource.getSimilarTvList(tvId)
 
-    suspend fun getTraktTvRating(tvId: String): TraktRating {
-        return remoteDataSource.getTraktShowRate(tvId)
-    }
+    suspend fun getTraktTvRating(tvId: String): TraktRating =
+        remoteDataSource.getTraktShowRate(tvId)
 
-    suspend fun getTraktTvDetail(tvId: String): TraktShowDetail {
-        return remoteDataSource.getTraktTvDetail(tvId)
-    }
+    suspend fun getTraktTvDetail(tvId: String): TraktShowDetail =
+        remoteDataSource.getTraktTvDetail(tvId)
 
-    suspend fun getTraktReviewList(traktMovieId: String, sortType: String): List<TraktReview> {
-        return remoteDataSource.getTraktReviewList(traktMovieId, sortType)
-    }
+    suspend fun getTraktReviewList(traktMovieId: String, sortType: String): List<TraktReview> =
+        remoteDataSource.getTraktReviewList(traktMovieId, sortType)
 
     suspend fun getTraktBoxOffice(): List<UnifyMovieRevenueItem> {
         val revenueList = remoteDataSource.getTraktMovieBoxOffice()
@@ -164,43 +145,36 @@ class MovieRepository(
         }
     }
 
-    suspend fun getTraktPopularCollection(): List<TraktCollection> {
-        return remoteDataSource.getTraktPopularCollection()
-    }
+    suspend fun getTraktPopularCollection(): List<TraktCollection> =
+        remoteDataSource.getTraktPopularCollection()
 
-    suspend fun getTraktTrendingCollection(): List<TraktCollection> {
-        return remoteDataSource.getTraktTrendingCollection()
-    }
+    suspend fun getTraktTrendingCollection(): List<TraktCollection> =
+        remoteDataSource.getTraktTrendingCollection()
 
-    suspend fun getPeopleDetail(peopleId: Int): TmdbPeople {
-        return remoteDataSource.getPeopleDetail(peopleId)
-    }
+    suspend fun getPeopleDetail(peopleId: Int): TmdbPeople =
+        remoteDataSource.getPeopleDetail(peopleId)
 
-    suspend fun getPeopleCredit(peopleId: Int): TmdbCombinedCredit {
-        return remoteDataSource.getPeopleCredit(peopleId)
-    }
+    suspend fun getPeopleCredit(peopleId: Int): TmdbCombinedCredit =
+        remoteDataSource.getPeopleCredit(peopleId)
 
-    suspend fun getPeopleImage(peopleId: Int): TmdbPeopleImage {
-        return remoteDataSource.getPeopleImage(peopleId)
-    }
+    suspend fun getPeopleImage(peopleId: Int): TmdbPeopleImage =
+        remoteDataSource.getPeopleImage(peopleId)
 
     fun getTraktReviewPageList(
         traktMovieId: String,
         sortType: String
-    ): Flow<PagingData<TraktReview>> {
-        return Pager(
-            config =
-            PagingConfig(
-                pageSize = 10,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = {
-                TraktReviewPagingSource(
-                    traktApiService,
-                    traktMovieId,
-                    sortType
-                )
-            }
-        ).flow
-    }
+    ): Flow<PagingData<TraktReview>> = Pager(
+        config =
+        PagingConfig(
+            pageSize = 10,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = {
+            TraktReviewPagingSource(
+                traktApiService,
+                traktMovieId,
+                sortType
+            )
+        }
+    ).flow
 }

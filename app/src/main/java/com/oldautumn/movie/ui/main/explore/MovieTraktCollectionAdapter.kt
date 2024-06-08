@@ -27,8 +27,7 @@ import com.oldautumn.movie.utils.Utils
 class MovieTraktCollectionAdapter(
     private val itemList: MutableList<TraktCollection>,
     private val onItemClick: (TraktCollection) -> Unit
-) :
-    RecyclerView.Adapter<MovieTraktCollectionAdapter.PopularViewHolder>() {
+) : RecyclerView.Adapter<MovieTraktCollectionAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
@@ -59,9 +58,7 @@ class MovieTraktCollectionAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
+    override fun getItemCount(): Int = itemList.size
 
     class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemMovieTraktCollectionBinding.bind(view)

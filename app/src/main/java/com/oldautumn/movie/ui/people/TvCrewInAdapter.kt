@@ -31,8 +31,7 @@ import com.oldautumn.movie.utils.Utils
 class TvCrewInAdapter(
     private val popularList: MutableList<TmdbCombinedCrew>,
     private val onItemClick: (TmdbCombinedCrew) -> Unit
-) :
-    RecyclerView.Adapter<TvCrewInAdapter.PopularViewHolder>() {
+) : RecyclerView.Adapter<TvCrewInAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
@@ -62,17 +61,16 @@ class TvCrewInAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return popularList.size
-    }
+    override fun getItemCount(): Int = popularList.size
 
     interface OnItemClickListener {
         fun onItemClick(cast: TmdbCombinedCrew)
     }
 
-    class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
-        view
-    ) {
+    class PopularViewHolder(view: ViewGroup) :
+        RecyclerView.ViewHolder(
+            view
+        ) {
         private val binding = ItemPeopleCreditBinding.bind(itemView)
         private val moviePoster: ImageView = binding.peopleCreditPoster
         private val castName: TextView = binding.peopleCreditPosterName

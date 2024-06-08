@@ -23,10 +23,8 @@ import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 
-class OffsetPageTransformer(
-    @Px private val offsetPx: Int,
-    @Px private val pageMarginPx: Int
-) : ViewPager2.PageTransformer {
+class OffsetPageTransformer(@Px private val offsetPx: Int, @Px private val pageMarginPx: Int) :
+    ViewPager2.PageTransformer {
     override fun transformPage(page: View, position: Float) {
         val viewPager = requireViewPager(page)
         val offset = position * (-(2 * offsetPx + pageMarginPx))

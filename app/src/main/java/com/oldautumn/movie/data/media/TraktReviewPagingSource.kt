@@ -27,12 +27,11 @@ class TraktReviewPagingSource(
     val query: String,
     val sortType: String
 ) : PagingSource<Int, TraktReview>() {
-    override fun getRefreshKey(state: PagingState<Int, TraktReview>): Int? {
-        return state.anchorPosition?.let { anchorPosition ->
+    override fun getRefreshKey(state: PagingState<Int, TraktReview>): Int? =
+        state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
-    }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TraktReview> {
         try {

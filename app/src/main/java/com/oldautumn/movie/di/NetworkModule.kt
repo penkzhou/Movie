@@ -30,32 +30,26 @@ import retrofit2.Retrofit
 object NetworkModule {
     @Provides
     @Singleton
-    fun provideTmdbApiService(@Named("tmdbRetrofit") retrofit: Retrofit): TmdbApiService {
-        return retrofit.create(TmdbApiService::class.java)
-    }
+    fun provideTmdbApiService(@Named("tmdbRetrofit") retrofit: Retrofit): TmdbApiService =
+        retrofit.create(TmdbApiService::class.java)
 
     @Singleton
     @Provides
     @Named("authedTraktApiService")
     fun provideAuthedTraktApiService(
         @Named("authedTraktRetrofit") retrofit: Retrofit
-    ): TraktApiService {
-        return retrofit.create(TraktApiService::class.java)
-    }
+    ): TraktApiService = retrofit.create(TraktApiService::class.java)
 
     @Singleton
     @Provides
     @Named("loginAuthedTraktApiService")
     fun provideLoginAuthedTraktApiService(
         @Named("loginAuthedTraktRetrofit") retrofit: Retrofit
-    ): TraktApiService {
-        return retrofit.create(TraktApiService::class.java)
-    }
+    ): TraktApiService = retrofit.create(TraktApiService::class.java)
 
     @Singleton
     @Provides
     @Named("traktApiService")
-    fun provideTraktApiService(@Named("traktRetrofit") retrofit: Retrofit): TraktApiService {
-        return retrofit.create(TraktApiService::class.java)
-    }
+    fun provideTraktApiService(@Named("traktRetrofit") retrofit: Retrofit): TraktApiService =
+        retrofit.create(TraktApiService::class.java)
 }

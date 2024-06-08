@@ -29,9 +29,7 @@ import com.oldautumn.movie.R
 import com.oldautumn.movie.data.api.model.MediaWithImage
 import com.oldautumn.movie.utils.Utils
 
-class MoviePopularPagerAdapter(
-    private val onItemClick: (item: MediaWithImage) -> Unit
-) :
+class MoviePopularPagerAdapter(private val onItemClick: (item: MediaWithImage) -> Unit) :
     RecyclerView.Adapter<MoviePopularPagerAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
@@ -62,23 +60,17 @@ class MoviePopularPagerAdapter(
             override fun areItemsTheSame(
                 oldItem: MediaWithImage,
                 newItem: MediaWithImage
-            ): Boolean {
-                return oldItem.content.ids.trakt == newItem.content.ids.trakt
-            }
+            ): Boolean = oldItem.content.ids.trakt == newItem.content.ids.trakt
 
             override fun areContentsTheSame(
                 oldItem: MediaWithImage,
                 newItem: MediaWithImage
-            ): Boolean {
-                return oldItem.equals(newItem)
-            }
+            ): Boolean = oldItem.equals(newItem)
         }
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
+    override fun getItemCount(): Int = differ.currentList.size
 
     interface OnItemClickListener {
         fun onItemClick(movie: MediaWithImage)

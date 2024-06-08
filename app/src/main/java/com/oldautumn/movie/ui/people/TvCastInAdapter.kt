@@ -32,8 +32,7 @@ class TvCastInAdapter(
     private val popularList: MutableList<TmdbCombinedCast>,
     private val isTv: Boolean,
     private val onItemClick: (TmdbCombinedCast) -> Unit
-) :
-    RecyclerView.Adapter<TvCastInAdapter.PopularViewHolder>() {
+) : RecyclerView.Adapter<TvCastInAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
@@ -63,17 +62,16 @@ class TvCastInAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return popularList.size
-    }
+    override fun getItemCount(): Int = popularList.size
 
     interface OnItemClickListener {
         fun onItemClick(cast: TmdbCombinedCast)
     }
 
-    class PopularViewHolder(view: ViewGroup, isTv: Boolean) : RecyclerView.ViewHolder(
-        view
-    ) {
+    class PopularViewHolder(view: ViewGroup, isTv: Boolean) :
+        RecyclerView.ViewHolder(
+            view
+        ) {
         private val isTv = isTv
 
         private val binding = ItemPeopleCreditBinding.bind(itemView)

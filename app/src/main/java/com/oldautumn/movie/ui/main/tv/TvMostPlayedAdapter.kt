@@ -30,8 +30,7 @@ import com.oldautumn.movie.utils.Utils
 class TvMostPlayedAdapter(
     private val dataList: MutableList<ModelWithImage<ShowPlayedItem>>,
     private val onItemClick: (item: ModelWithImage<ShowPlayedItem>) -> Unit
-) :
-    RecyclerView.Adapter<TvMostPlayedAdapter.TvRecommendViewHolder>() {
+) : RecyclerView.Adapter<TvMostPlayedAdapter.TvRecommendViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvRecommendViewHolder {
         var bindView =
             ItemShowWithInfoBinding.inflate(
@@ -64,9 +63,7 @@ class TvMostPlayedAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
+    override fun getItemCount(): Int = dataList.size
 
     class TvRecommendViewHolder(private val viewBinding: ItemShowWithInfoBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {

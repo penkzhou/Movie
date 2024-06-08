@@ -28,9 +28,8 @@ import com.oldautumn.movie.data.api.model.Episode
 import com.oldautumn.movie.databinding.ItemTvEpisodeBinding
 import com.oldautumn.movie.utils.Utils
 
-class TvEpisodeAdapter(
-    private val onDetailClick: () -> Unit
-) : RecyclerView.Adapter<TvEpisodeAdapter.EpisodeViewHolder>() {
+class TvEpisodeAdapter(private val onDetailClick: () -> Unit) :
+    RecyclerView.Adapter<TvEpisodeAdapter.EpisodeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         val root =
             LayoutInflater.from(parent.context).inflate(
@@ -52,9 +51,7 @@ class TvEpisodeAdapter(
         holder.bind(movieTrendingItem)
     }
 
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
+    override fun getItemCount(): Int = differ.currentList.size
 
     fun updateData(seasonList: List<Episode>) {
         this.differ.submitList(seasonList)
@@ -62,13 +59,11 @@ class TvEpisodeAdapter(
 
     private val differCallback =
         object : DiffUtil.ItemCallback<Episode>() {
-            override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean {
-                return oldItem.id == newItem.id
-            }
+            override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean =
+                oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Episode, newItem: Episode): Boolean {
-                return oldItem.equals(newItem)
-            }
+            override fun areContentsTheSame(oldItem: Episode, newItem: Episode): Boolean =
+                oldItem.equals(newItem)
         }
 
     private val differ = AsyncListDiffer(this, differCallback)

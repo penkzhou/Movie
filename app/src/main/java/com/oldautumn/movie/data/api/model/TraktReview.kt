@@ -57,11 +57,7 @@ data class TraktReview(
     val user: TraktUser
 )
 
-data class TraktUserStats(
-    val rating: Int?,
-    val play_count: Int,
-    val completed_count: Int
-)
+data class TraktUserStats(val rating: Int?, val play_count: Int, val completed_count: Int)
 
 data class TraktUser(
     val username: String,
@@ -72,6 +68,4 @@ data class TraktUser(
     val ids: TraktUserIds
 )
 
-data class TraktUserIds(
-    val slug: String
-)
+data class TraktUserIds(val slug: String)

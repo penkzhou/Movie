@@ -316,24 +316,11 @@ data class Episode(
     val vote_count: Int
 )
 
-data class Network(
-    val name: String,
-    val id: Int,
-    val logo_path: String,
-    val origin_country: String
-)
+data class Network(val name: String, val id: Int, val logo_path: String, val origin_country: String)
 
-data class Company(
-    val name: String,
-    val id: Int,
-    val logo_path: String,
-    val origin_country: String
-)
+data class Company(val name: String, val id: Int, val logo_path: String, val origin_country: String)
 
-data class Country(
-    val iso_3166_1: String,
-    val name: String
-)
+data class Country(val iso_3166_1: String, val name: String)
 
 data class Season(
     val air_date: String,
@@ -345,8 +332,4 @@ data class Season(
     val season_number: Int
 )
 
-data class SpokenLanguage(
-    val iso_639_1: String,
-    val name: String,
-    val english_name: String
-)
+data class SpokenLanguage(val iso_639_1: String, val name: String, val english_name: String)

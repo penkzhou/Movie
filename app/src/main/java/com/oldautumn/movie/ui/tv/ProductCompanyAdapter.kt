@@ -31,8 +31,7 @@ import com.oldautumn.movie.utils.Utils
 class ProductCompanyAdapter(
     private val popularList: MutableList<Company>,
     private val onItemClick: (Company) -> Unit
-) :
-    RecyclerView.Adapter<ProductCompanyAdapter.PopularViewHolder>() {
+) : RecyclerView.Adapter<ProductCompanyAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
@@ -62,17 +61,16 @@ class ProductCompanyAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return popularList.size
-    }
+    override fun getItemCount(): Int = popularList.size
 
     interface OnItemClickListener {
         fun onItemClick(cast: Company)
     }
 
-    class PopularViewHolder(view: ViewGroup) : RecyclerView.ViewHolder(
-        view
-    ) {
+    class PopularViewHolder(view: ViewGroup) :
+        RecyclerView.ViewHolder(
+            view
+        ) {
         private val binding = ItemSeasonCompanyBinding.bind(itemView)
         private val companyPoster: ImageView = binding.productCompanyPoster
         private val companyPosterName: TextView = binding.productCompanyPosterName

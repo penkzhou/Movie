@@ -36,9 +36,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 object Utils {
-    fun getImageFullUrl(imagePath: String, width: Int = 500): String {
-        return "https://image.tmdb.org/t/p/w$width$imagePath"
-    }
+    fun getImageFullUrl(imagePath: String, width: Int = 500): String =
+        "https://image.tmdb.org/t/p/w$width$imagePath"
 
     inline fun ImageView.loadWithPalette(
         data: Any?,

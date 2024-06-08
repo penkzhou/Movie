@@ -25,8 +25,7 @@ class BaseAdapter<T, VIEW_BINDING : ViewBinding>(
     private val bindingClass: (LayoutInflater, ViewGroup, Boolean) -> VIEW_BINDING,
     private val dataList: MutableList<T>,
     private val onItemClick: (item: T) -> Unit
-) :
-    RecyclerView.Adapter<BaseAdapter.BaseItemViewHolder<T, VIEW_BINDING>>() {
+) : RecyclerView.Adapter<BaseAdapter.BaseItemViewHolder<T, VIEW_BINDING>>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -57,9 +56,7 @@ class BaseAdapter<T, VIEW_BINDING : ViewBinding>(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
+    override fun getItemCount(): Int = dataList.size
 
     class BaseItemViewHolder<T, VIEW_BINDING : ViewBinding>(private val viewBinding: VIEW_BINDING) :
         RecyclerView.ViewHolder(viewBinding.root) {

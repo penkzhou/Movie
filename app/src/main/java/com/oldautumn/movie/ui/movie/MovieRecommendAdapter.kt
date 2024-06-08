@@ -31,8 +31,7 @@ import java.text.DecimalFormat
 class MovieRecommendAdapter(
     private val recommendList: MutableList<TmdbSimpleMovieItem>,
     private val onItemClickListener: OnItemClickListener?
-) :
-    RecyclerView.Adapter<MovieRecommendAdapter.PopularViewHolder>() {
+) : RecyclerView.Adapter<MovieRecommendAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
@@ -63,9 +62,7 @@ class MovieRecommendAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return recommendList.size
-    }
+    override fun getItemCount(): Int = recommendList.size
 
     interface OnItemClickListener {
         fun onItemClick(movieItem: TmdbSimpleMovieItem)

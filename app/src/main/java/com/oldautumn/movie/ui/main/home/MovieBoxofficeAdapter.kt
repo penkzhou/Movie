@@ -31,8 +31,7 @@ import java.text.NumberFormat
 class MovieBoxofficeAdapter(
     private val popularList: MutableList<UnifyMovieRevenueItem>,
     private val onItemClick: (item: UnifyMovieRevenueItem) -> Unit
-) :
-    RecyclerView.Adapter<MovieBoxofficeAdapter.PopularViewHolder>() {
+) : RecyclerView.Adapter<MovieBoxofficeAdapter.PopularViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
         val rootView =
             LayoutInflater.from(parent.context)
@@ -63,9 +62,7 @@ class MovieBoxofficeAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int {
-        return popularList.size
-    }
+    override fun getItemCount(): Int = popularList.size
 
     class PopularViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val moviePoster: ImageView = view.findViewById(R.id.movie_poster)
