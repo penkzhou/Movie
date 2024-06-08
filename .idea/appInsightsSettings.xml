@@ -7,12 +7,9 @@
           <value>
             <InsightsFilterSettings>
               <option name="connection">
-                <ConnectionSetting />
-              </option>
-              <option name="failureTypes">
-                <list>
-                  <option value="FATAL" />
-                </list>
+                <ConnectionSetting>
+                  <option name="appId" value="com.oldautumn.app.swissarmyknife.swiss_army_knife" />
+                </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
               <option name="timeIntervalDays" value="SEVEN_DAYS" />
