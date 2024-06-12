@@ -77,7 +77,7 @@ class ProductCompanyAdapter(
         private val companyName: TextView = binding.productCompanyName
 
         fun updateViewWithItem(cast: Company) {
-            if (cast.logo_path.isNotEmpty() == true) {
+            if (cast.logo_path?.isNotEmpty() == true) {
                 companyPoster.visibility = View.VISIBLE
                 companyPosterName.visibility = View.GONE
                 companyPoster.load(Utils.getImageFullUrl(cast.logo_path)) {

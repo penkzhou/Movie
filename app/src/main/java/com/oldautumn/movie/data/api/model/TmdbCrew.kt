@@ -39,11 +39,11 @@ data class TmdbCrew(
     val known_for_department: String,
     val id: Int,
     val name: String,
-    val original_name: String,
+    val original_name: String?,
     val popularity: Double,
     val profile_path: String?,
-    val credit_id: String,
+    val credit_id: String?,
     val department: String,
-    val job: String,
-    val order: Int
+    val job: String?,
+    val order: Int?
 )
