@@ -15,6 +15,8 @@
  */
 package com.oldautumn.movie.data.api.model
 
+import com.squareup.moshi.Json
+
 /*
 {
   "adult": false,
@@ -256,9 +258,12 @@ data class TmdbTvDetail(
     val status: String,
     val type: String,
     val tagline: String,
-    val vote_average: Double,
-    val vote_count: Int,
-    val external_ids: ExternalIds
+    @Json(name = "vote_average")
+    val voteAverage: Double,
+    @Json(name = "vote_count")
+    val voteCount: Int,
+    @Json(name = "external_ids")
+    val externalIds: ExternalIds
 )
 
 data class Creator(

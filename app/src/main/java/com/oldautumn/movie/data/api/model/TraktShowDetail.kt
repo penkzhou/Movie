@@ -15,6 +15,8 @@
  */
 package com.oldautumn.movie.data.api.model
 
+import com.squareup.moshi.Json
+
 /*
 *
 {
@@ -90,7 +92,8 @@ data class TraktShowDetail(
     val status: String,
     val rating: Double,
     val votes: Int,
-    val comment_count: Int,
+    @Json(name = "comment_count")
+    val commentCount: Int,
     val language: String,
     val available_translations: List<String>,
     val genres: List<String>,

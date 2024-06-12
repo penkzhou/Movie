@@ -54,42 +54,42 @@ class MovieRepository(
     suspend fun getTrendingMovieList(): List<UnifyMovieTrendingItem> {
         val movieTrendingList = remoteDataSource.getTrendingMovieList()
         return movieTrendingList.map {
-            UnifyMovieTrendingItem(remoteDataSource.getMovieImage(it.movie.ids.tmdb), it)
+            UnifyMovieTrendingItem(remoteDataSource.getMovieImage(it.movie.ids.tmdb ?: -1), it)
         }
     }
 
     suspend fun getTrendingShowList(): List<UnifyTvTrendingItem> {
         val movieTrendingList = remoteDataSource.getTrendingShowList()
         return movieTrendingList.map {
-            UnifyTvTrendingItem(remoteDataSource.getTvImage(it.show.ids.tmdb), it)
+            UnifyTvTrendingItem(remoteDataSource.getTvImage(it.show.ids.tmdb ?: -1), it)
         }
     }
 
     suspend fun getMostRecommendShowList(period: String): List<ModelWithImage<ShowRecommendItem>> {
         val mostRecommendShowList = remoteDataSource.getMostRecommendShowList(period)
         return mostRecommendShowList.map {
-            ModelWithImage(remoteDataSource.getTvImage(it.show.ids.tmdb), it)
+            ModelWithImage(remoteDataSource.getTvImage(it.show.ids.tmdb ?: -1), it)
         }
     }
 
     suspend fun getMostPlayedShowList(period: String): List<ModelWithImage<ShowPlayedItem>> {
         val mostPlayedShowList = remoteDataSource.getMostPlayedShowList(period)
         return mostPlayedShowList.map {
-            ModelWithImage(remoteDataSource.getTvImage(it.show.ids.tmdb), it)
+            ModelWithImage(remoteDataSource.getTvImage(it.show.ids.tmdb ?: -1), it)
         }
     }
 
     suspend fun getPopularMovieList(): List<MediaWithImage> {
         val movieTrendingList = remoteDataSource.fetchPopularMovieList()
         return movieTrendingList.map {
-            MediaWithImage(it, remoteDataSource.getMovieImage(it.ids.tmdb))
+            MediaWithImage(it, remoteDataSource.getMovieImage(it.ids.tmdb ?: -1))
         }
     }
 
     suspend fun getPopularShowList(): List<MediaWithImage> {
         val movieTrendingList = remoteDataSource.fetchPopularShowList()
         return movieTrendingList.map {
-            MediaWithImage(it, remoteDataSource.getTvImage(it.ids.tmdb))
+            MediaWithImage(it, remoteDataSource.getTvImage(it.ids.tmdb ?: -1))
         }
     }
 
@@ -141,7 +141,7 @@ class MovieRepository(
     suspend fun getTraktBoxOffice(): List<UnifyMovieRevenueItem> {
         val revenueList = remoteDataSource.getTraktMovieBoxOffice()
         return revenueList.map {
-            UnifyMovieRevenueItem(remoteDataSource.getMovieImage(it.movie.ids.tmdb), it)
+            UnifyMovieRevenueItem(remoteDataSource.getMovieImage(it.movie.ids.tmdb ?: -1), it)
         }
     }
 

@@ -93,9 +93,9 @@ constructor(
                 try {
                     val tvDetail = repository.getShowDetail(tvId)
                     _uiState.value = _uiState.value.copy(tvDetail = tvDetail)
-                    if (tvDetail.external_ids.imdb_id != null) {
-                        fetchTraktTvDetail(tvDetail.external_ids.imdb_id)
-                        fetchTraktTvRating(tvDetail.external_ids.imdb_id)
+                    if (tvDetail.externalIds.imdb_id != null) {
+                        fetchTraktTvDetail(tvDetail.externalIds.imdb_id)
+                        fetchTraktTvRating(tvDetail.externalIds.imdb_id)
                     }
                 } catch (e: IOException) {
                     _uiState.value = _uiState.value.copy(errorMessage = e.message)

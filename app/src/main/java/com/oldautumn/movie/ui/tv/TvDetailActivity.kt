@@ -233,7 +233,7 @@ class TvDetailActivity : AppCompatActivity() {
                         binding.title.text = it.tvDetail.original_name
                         binding.tvOverview.text = it.tvDetail.overview
                         binding.tvTmdbRatingValue.text =
-                            "${it.tvDetail.vote_average}\n${it.tvDetail.vote_count}人评分"
+                            "${it.tvDetail.voteAverage}\n${it.tvDetail.voteCount}人评分"
                     }
                     if (it.tvCreditList != null) {
                         if (it.tvCreditList.cast.isNotEmpty()) {
