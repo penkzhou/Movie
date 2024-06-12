@@ -2,16 +2,16 @@
 
 
 plugins {
-    id 'com.android.application'
-    id 'org.gradle.android.cache-fix' version '3.0.1'
-    id 'kotlin-android'
-    id 'kotlin-parcelize'
-    id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
-    id 'com.google.firebase.firebase-perf'
-    id 'dagger.hilt.android.plugin'
-    id 'com.google.devtools.ksp'
-    id("com.diffplug.spotless") version "6.25.0"
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.cacheFixPlugin)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.gms.googleServices)
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.firebase.perf)
+    alias(libs.plugins.hilt.plugin)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.spotless)
 }
 
 android {
@@ -19,7 +19,7 @@ android {
 
     defaultConfig {
         applicationId "com.oldautumn.movie"
-        minSdk 22
+        minSdk 23
         targetSdk 34
         versionCode 2
         versionName "0.0.1"
@@ -94,8 +94,7 @@ dependencies {
 
     implementation libs.coil
 
-    
-    compileOnly(libs.google.services)
+
 
     debugImplementation libs.leakcanary.android
 
