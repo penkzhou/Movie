@@ -67,5 +67,5 @@ data class TraktMovieDetail(
     val language: String,
     val available_translations: List<String>,
     val genres: List<String>,
-    val certification: String
+    val certification: String?
 )

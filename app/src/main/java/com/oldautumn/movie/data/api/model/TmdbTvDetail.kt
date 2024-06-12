@@ -232,7 +232,7 @@ data class TmdbTvDetail(
     val genres: List<Genre>,
     val first_air_date: String?,
     val episode_run_time: List<Int>?,
-    val homepage: String,
+    val homepage: String?,
     val id: Int,
     val in_production: Boolean,
     val languages: List<String>,
