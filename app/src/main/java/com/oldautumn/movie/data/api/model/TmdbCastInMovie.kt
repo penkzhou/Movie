@@ -41,17 +41,17 @@ package com.oldautumn.movie.data.api.model
 
 * */
 data class TmdbCastInMovie(
-    val character: String,
-    val credit_id: String,
-    val release_date: String,
+    val character: String?,
+    val credit_id: String?,
+    val release_date: String?,
     val vote_count: Int,
-    val video: Boolean,
+    val video: Boolean?,
     val adult: Boolean,
     val vote_average: Double,
-    val title: String,
+    val title: String?,
     val genre_ids: List<Int>,
     val original_language: String,
-    val original_title: String,
+    val original_title: String?,
     val popularity: Double,
     val id: Int,
     val backdrop_path: String?,

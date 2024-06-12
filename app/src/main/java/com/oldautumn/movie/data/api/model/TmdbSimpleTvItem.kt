@@ -45,12 +45,12 @@ data class TmdbSimpleTvItem(
     val vote_average: Double,
     val vote_count: Int,
     val poster_path: String?,
-    val backdrop_path: String,
-    val first_air_date: String,
+    val backdrop_path: String?,
+    val first_air_date: String?,
     val original_language: String,
-    val original_name: String,
+    val original_name: String?,
     val overview: String,
     val popularity: Double,
     val genre_ids: List<Int>,
-    val origin_country: List<String>
+    val origin_country: List<String>?
 )

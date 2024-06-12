@@ -74,7 +74,7 @@ package com.oldautumn.movie.data.api.model
 }
 * */
 data class TraktShowDetail(
-    val title: String,
+    val title: String?,
     val year: Int?,
     val ids: MovieIds,
     val overview: String,

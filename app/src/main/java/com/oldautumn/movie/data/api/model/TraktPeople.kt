@@ -40,11 +40,11 @@ package com.oldautumn.movie.data.api.model
 }
  * */
 data class TraktPeople(
-    val name: String,
+    val name: String?,
     val ids: MovieIds,
     val social_ids: SocialIds,
     val biography: String,
-    val birthday: String,
+    val birthday: String?,
     val death: String?,
     val birthplace: String,
     val homepage: String?,

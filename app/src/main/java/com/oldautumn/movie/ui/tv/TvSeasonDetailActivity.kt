@@ -96,12 +96,12 @@ class TvSeasonDetailActivity : AppCompatActivity() {
                         if (it.tvSeasonDetail.episodes.isNotEmpty()) {
                             episodeAdapter.updateData(it.tvSeasonDetail.episodes)
                             it.tvSeasonDetail.episodes.map { episode ->
-                                episode.crew
+                                episode.crew ?: emptyList()
                             }.flatten().toSet().toList().let { crew ->
                                 crewAdapter.updateData(crew)
                             }
                             it.tvSeasonDetail.episodes.map { episode ->
-                                episode.guest_stars
+                                episode.guest_stars ?: emptyList()
                             }.flatten().toSet().toList().let { cast ->
                                 castAdapter.updateData(cast)
                             }

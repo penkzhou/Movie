@@ -29,6 +29,8 @@ import com.oldautumn.movie.data.auth.AuthRemoteDataSource
 import com.oldautumn.movie.data.auth.AuthRepository
 import com.oldautumn.movie.data.media.MovieRemoteDataSource
 import com.oldautumn.movie.data.media.MovieRepository
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,6 +43,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -55,6 +58,17 @@ object DataModule {
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
         return OkHttpClient.Builder().addInterceptor(logging).build()
     }
+
+    /**
+     * provide a ConverterFactory for retrofit
+     */
+    @Singleton
+    @Provides
+    fun provideConverterFactory(): Converter.Factory = MoshiConverterFactory.create(
+        Moshi.Builder().add(
+            KotlinJsonAdapterFactory()
+        ).build()
+    )
 
     @Singleton
     @Provides
@@ -111,32 +125,38 @@ object DataModule {
     @Singleton
     @Provides
     @Named("traktRetrofit")
-    fun provideTraktRetrofit(@Named("normalOkhttpClient") okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder().baseUrl("https://api.trakt.tv")
-            .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
+    fun provideTraktRetrofit(
+        @Named("normalOkhttpClient") okHttpClient: OkHttpClient,
+        converterFactory: Converter.Factory
+    ): Retrofit = Retrofit.Builder().baseUrl("https://api.trakt.tv")
+        .addConverterFactory(converterFactory).client(okHttpClient).build()
 
     @Singleton
     @Provides
     @Named("authedTraktRetrofit")
     fun provideAuthedTraktRetrofit(
-        @Named("authedOkHttpClient") okHttpClient: OkHttpClient
+        @Named("authedOkHttpClient") okHttpClient: OkHttpClient,
+        converterFactory: Converter.Factory
     ): Retrofit = Retrofit.Builder().baseUrl("https://api.trakt.tv")
-        .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
+        .addConverterFactory(converterFactory).client(okHttpClient).build()
 
     @Singleton
     @Provides
     @Named("loginAuthedTraktRetrofit")
     fun provideLoginAuthedTraktRetrofit(
-        @Named("loginAuthedOkHttpClient") okHttpClient: OkHttpClient
+        @Named("loginAuthedOkHttpClient") okHttpClient: OkHttpClient,
+        converterFactory: Converter.Factory
     ): Retrofit = Retrofit.Builder().baseUrl("https://api.trakt.tv")
-        .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
+        .addConverterFactory(converterFactory).client(okHttpClient).build()
 
     @Singleton
     @Provides
     @Named("tmdbRetrofit")
-    fun provideTmdbRetrofit(@Named("tmdbOkHttpClient") okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder().baseUrl("https://api.themoviedb.org")
-            .addConverterFactory(MoshiConverterFactory.create()).client(okHttpClient).build()
+    fun provideTmdbRetrofit(
+        @Named("tmdbOkHttpClient") okHttpClient: OkHttpClient,
+        converterFactory: Converter.Factory
+    ): Retrofit = Retrofit.Builder().baseUrl("https://api.themoviedb.org")
+        .addConverterFactory(converterFactory).client(okHttpClient).build()
 
     @Singleton
     @Provides

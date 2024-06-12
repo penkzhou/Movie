@@ -230,7 +230,7 @@ data class TmdbTvDetail(
     val backdrop_path: String?,
     val created_by: List<Creator>,
     val genres: List<Genre>,
-    val first_air_date: String,
+    val first_air_date: String?,
     val episode_run_time: List<Int>?,
     val homepage: String,
     val id: Int,
@@ -243,9 +243,9 @@ data class TmdbTvDetail(
     val networks: List<Network>,
     val number_of_episodes: Int,
     val number_of_seasons: Int,
-    val origin_country: List<String>,
+    val origin_country: List<String>?,
     val original_language: String,
-    val original_name: String,
+    val original_name: String?,
     val overview: String,
     val popularity: Double,
     val poster_path: String?,
@@ -270,10 +270,10 @@ data class Creator(
       "profile_path": "/xvNN5huL0X8yJ7h3IZfGG4O2zBD.jpg"
      * */
     val id: Int,
-    val credit_id: String,
+    val credit_id: String?,
     val name: String,
     val gender: Int,
-    val profile_path: String
+    val profile_path: String?
 )
 
 data class Genre(
@@ -307,24 +307,34 @@ data class Episode(
     val name: String,
     val runtime: Int?,
     val overview: String,
-    val crew: List<TmdbCrew>,
-    val guest_stars: List<TmdbCast>,
+    val crew: List<TmdbCrew>?,
+    val guest_stars: List<TmdbCast>?,
     val production_code: String,
     val season_number: Int,
-    val still_path: String,
+    val still_path: String?,
     val vote_average: Double,
     val vote_count: Int
 )
 
-data class Network(val name: String, val id: Int, val logo_path: String, val origin_country: String)
+data class Network(
+    val name: String,
+    val id: Int,
+    val logo_path: String?,
+    val origin_country: String
+)
 
-data class Company(val name: String, val id: Int, val logo_path: String, val origin_country: String)
+data class Company(
+    val name: String,
+    val id: Int,
+    val logo_path: String?,
+    val origin_country: String
+)
 
 data class Country(val iso_3166_1: String, val name: String)
 
 data class Season(
     val air_date: String,
-    val episode_count: Int,
+    val episode_count: Int?,
     val id: Int,
     val name: String,
     val overview: String,

@@ -25,7 +25,7 @@ data class TmdbImageItem(
     val aspect_ratio: Double,
     val file_path: String,
     val height: Int,
-    val widtb: Int,
+    val width: Int,
     val vote_average: Double,
     val vote_count: Int,
     val iso_639_1: String?

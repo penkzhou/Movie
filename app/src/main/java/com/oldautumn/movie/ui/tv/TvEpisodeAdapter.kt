@@ -75,7 +75,7 @@ class TvEpisodeAdapter(private val onDetailClick: () -> Unit) :
         private val binding = ItemTvEpisodeBinding.bind(itemView)
 
         fun bind(season: Episode) {
-            if (season.still_path.isNotEmpty() == true) {
+            if (season.still_path?.isNotEmpty() == true) {
                 binding.tvEpisodePoster.load(Utils.getImageFullUrl(season.still_path)) {
                     transformations(RoundedCornersTransformation(24f))
                 }

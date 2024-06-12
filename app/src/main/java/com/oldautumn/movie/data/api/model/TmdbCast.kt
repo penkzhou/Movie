@@ -38,12 +38,12 @@ data class TmdbCast(
     val gender: Int?,
     val known_for_department: String,
     val id: Int,
-    val name: String,
-    val original_name: String,
+    val name: String?,
+    val original_name: String?,
     val profile_path: String?,
-    val character: String,
-    val credit_id: String,
+    val character: String?,
+    val credit_id: String?,
     val order: Int,
     val popularity: Double,
-    val cast_id: Int
+    val cast_id: Int?
 )
