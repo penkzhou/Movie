@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 
-class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
+open class ItemClickBaseAdapter<T, VIEW_BINDING : ViewBinding>(
     val list: MutableList<T>,
     private val bindingClass: (LayoutInflater, ViewGroup, Boolean) -> VIEW_BINDING,
     private val onItemClick: (T) -> Unit,

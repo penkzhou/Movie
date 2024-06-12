@@ -126,7 +126,7 @@ class PeopleDetailActivity : AppCompatActivity() {
 //                startActivity(intent)
                 },
                 { binding, imageItem ->
-                    if (imageItem.file_path != null && imageItem.file_path.isNotEmpty()) {
+                    if (imageItem.file_path.isNotEmpty()) {
                         binding?.peopleImage?.load(Utils.getImageFullUrl(imageItem.file_path)) {
                             transformations(
                                 RoundedCornersTransformation(16f)
@@ -202,7 +202,7 @@ class PeopleDetailActivity : AppCompatActivity() {
                         binding.peopleCrewInTvList.visibility = View.GONE
                     }
 
-                    if (it.peopleTvCast != null && it.peopleTvCast.isNotEmpty()) {
+                    if (!it.peopleTvCast.isNullOrEmpty()) {
                         tvCastAdapter.updateData(it.peopleTvCast)
                         binding.peopleCastInTvTitle.visibility = View.VISIBLE
                         binding.peopleCastInTvList.visibility = View.VISIBLE
@@ -211,7 +211,7 @@ class PeopleDetailActivity : AppCompatActivity() {
                         binding.peopleCastInTvList.visibility = View.GONE
                     }
 
-                    if (it.peopleImageList != null && it.peopleImageList.isNotEmpty()) {
+                    if (!it.peopleImageList.isNullOrEmpty()) {
                         peopleImageAdapter.update(it.peopleImageList)
                     }
                     if (it.peopleImageSize > 0) {
@@ -225,7 +225,7 @@ class PeopleDetailActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 }
