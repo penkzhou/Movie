@@ -316,9 +316,19 @@ data class Episode(
     val vote_count: Int
 )
 
-data class Network(val name: String, val id: Int, val logo_path: String?, val origin_country: String)
+data class Network(
+    val name: String,
+    val id: Int,
+    val logo_path: String?,
+    val origin_country: String
+)
 
-data class Company(val name: String, val id: Int, val logo_path: String?, val origin_country: String)
+data class Company(
+    val name: String,
+    val id: Int,
+    val logo_path: String?,
+    val origin_country: String
+)
 
 data class Country(val iso_3166_1: String, val name: String)
 

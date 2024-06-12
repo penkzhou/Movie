@@ -128,9 +128,8 @@ object DataModule {
     fun provideTraktRetrofit(
         @Named("normalOkhttpClient") okHttpClient: OkHttpClient,
         converterFactory: Converter.Factory
-    ): Retrofit =
-        Retrofit.Builder().baseUrl("https://api.trakt.tv")
-            .addConverterFactory(converterFactory).client(okHttpClient).build()
+    ): Retrofit = Retrofit.Builder().baseUrl("https://api.trakt.tv")
+        .addConverterFactory(converterFactory).client(okHttpClient).build()
 
     @Singleton
     @Provides
@@ -156,9 +155,8 @@ object DataModule {
     fun provideTmdbRetrofit(
         @Named("tmdbOkHttpClient") okHttpClient: OkHttpClient,
         converterFactory: Converter.Factory
-    ): Retrofit =
-        Retrofit.Builder().baseUrl("https://api.themoviedb.org")
-            .addConverterFactory(converterFactory).client(okHttpClient).build()
+    ): Retrofit = Retrofit.Builder().baseUrl("https://api.themoviedb.org")
+        .addConverterFactory(converterFactory).client(okHttpClient).build()
 
     @Singleton
     @Provides
