@@ -24,4 +24,4 @@ jobs:
       uses: gradle/gradle-build-action@v3-beta
 
     - name: Run build with Gradle Wrapper
-      run: ./gradlew build
+      run: ./gradlew build -Ddevelocity.deprecation.captureOrigin=true
