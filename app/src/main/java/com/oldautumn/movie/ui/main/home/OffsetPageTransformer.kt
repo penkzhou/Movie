@@ -18,7 +18,6 @@ package com.oldautumn.movie.ui.main.home
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Px
-import androidx.core.view.ViewCompat
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -37,7 +36,7 @@ class OffsetPageTransformer(@Px private val offsetPx: Int, @Px private val pageM
             }
 
             page.translationX =
-                if (ViewCompat.getLayoutDirection(viewPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                if (viewPager.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
                     -offset
                 } else {
                     offset
