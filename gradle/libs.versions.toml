@@ -61,7 +61,7 @@ okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-intercepto
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
 
-deps_firebase_bom = "com.google.firebase:firebase-bom:33.5.0"
+deps_firebase_bom = "com.google.firebase:firebase-bom:33.5.1"
 deps_firebase_crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 deps_firebase_analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 deps_firebase_perf = { module = "com.google.firebase:firebase-perf-ktx" }
