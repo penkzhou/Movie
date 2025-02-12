@@ -1,6 +1,6 @@
 [versions]
 firebaseCrashlyticsGradle = "3.0.3"
-fragment = "1.8.5"
+fragment = "1.8.6"
 androidxCore = "1.15.0"
 androidxEspresso = "3.6.1"
 androidxTest = "1.2.1"
