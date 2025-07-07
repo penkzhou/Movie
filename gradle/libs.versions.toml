@@ -25,7 +25,7 @@ coil = "2.7.0"
 leakcanary = "3.0-alpha-8"
 junit = "4.13.2"
 ksp = "2.2.0-2.0.2"
-spotless = "7.0.4"
+spotless = "7.1.0"
 moshi = "1.15.2"
 
 [libraries]
