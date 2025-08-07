@@ -1,5 +1,5 @@
 [versions]
-firebaseCrashlyticsGradle = "3.0.5"
+firebaseCrashlyticsGradle = "3.0.6"
 fragment = "1.8.8"
 androidxCore = "1.16.0"
 androidxEspresso = "3.7.0"
